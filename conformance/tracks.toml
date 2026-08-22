@@ -1,0 +1,16 @@
+[tracks.python_pure]
+command = ["uv", "run", "--project", "python_pure", "volarb-py"]
+
+[tracks.python_cpp]
+command = ["uv", "run", "--project", "python_cpp", "volarb-cpp"]
+
+[tracks.cpp_pure]
+command = ["cpp_pure/build/release/volarb-native"]
+
+[verbs.price-options]
+input_schema = "pricing_request/v1"
+output_schema = "pricing_result/v1"
+
+[verbs.invert-implied-volatility]
+input_schema = "implied_volatility_request/v1"
+output_schema = "implied_volatility_result/v1"
