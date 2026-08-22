@@ -1,0 +1,5837 @@
+{
+  "schema": "implied_volatility_request/v1",
+  "records": [
+    {
+      "id": "k60_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 3.539624386207588e-209,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.1590212314903525e-94,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.5513479253168404e-50,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 6.5672352592533705e-21,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 39.50617265563302,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 6.556330271392625e-07,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.171345538967012e-110,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.893914833582938e-50,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.6426173005837739e-23,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 39.50617200000054,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.483844370319916e-13,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 39.50618086306979,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.863069786253824e-06,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 39.5568152230065,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.050643223006495444,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.8309517520996615e-38,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.419832952125416e-18,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 39.50617200790983,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.90982534397493e-09,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506218304646445,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.630464645596322e-05,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 39.531961443310976,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.025789443310977656,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 40.63482962939762,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.1286576293976323,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.009288967103985e-20,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 39.50617200089294,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 8.929423940886072e-10,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 39.50623742986688,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.542986687179135e-05,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 39.51373727496978,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.007565274969781513,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 39.80809148386847,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.30191948386847556,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 43.05102305614129,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.5448510561412956,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506172000078315,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.830884687648672e-11,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506192346677366,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.0346677358860372e-05,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.51536212817649,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.009190128176489499,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.64977303502317,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.1436010350231714,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 40.948765666055856,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 1.4425936660558516,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 47.64417549845742,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 8.138003498457433,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.506177571675714,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 5.571675710268144e-06,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.51094504491134,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.004773044911346632,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.66754261014813,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.1613706101481353,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 40.39406141723516,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.8878894172351546,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 43.72385700518903,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.217685005189024,
+      "option_type": "put"
+    },
+    {
+      "id": "k60_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 54.901128587135744,
+      "option_type": "call"
+    },
+    {
+      "id": "k60_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 60.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 15.394956587135743,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 7.718242963205579e-92,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.2503112753753624e-42,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.2001159490131105e-20,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.75308600002619,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.6187859468749175e-11,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753116819442937,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 3.081944293594069e-05,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.804896965393507,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.051810965393508705,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.503188236206487e-23,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.75308600002685,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.686045940030186e-11,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753094544122135,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.544122127965594e-06,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.75483897761712,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0017529776171144068,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.856541513640334,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.10345551364033057,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 21.250052821358487,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.4969668213584792,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086007249205,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.249207059522449e-09,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753212848882136,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.00012684888213801028,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.770054069487642,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.01696806948763357,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.916467641628365,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.16338164162836047,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 20.924374383219195,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.171288383219185,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 25.33293033708033,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.579844337080332,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753131552188037,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.55521880300237e-05,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 19.763055123141715,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.009969123141701518,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 19.933233933167042,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.18014793316703623,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 20.52094007030661,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.7678540703066135,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 22.797680801197284,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.044594801197276,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 30.040565431336972,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 10.28747943133697,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 19.758657409885,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.005571409884986622,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 19.882992804676007,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.12990680467601826,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 20.572682458418015,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.8195964584180265,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.990705834457327,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.2376198344573233,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 26.065365890075828,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.312279890075823,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 36.94587215330718,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 17.192786153307164,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 19.844332779482958,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.09124677948295408,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 20.41265121929162,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.6595652192916115,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 22.098482280338345,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.345396280338356,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 24.716806772578487,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.963720772578503,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 31.145065072656546,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 11.39197907265655,
+      "option_type": "put"
+    },
+    {
+      "id": "k80_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 46.51485443445086,
+      "option_type": "call"
+    },
+    {
+      "id": "k80_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 80.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 26.761768434450875,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.938271889032028,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 3.8903203212281697e-07,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.938720264283284,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0004487642832893559,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.95570145036082,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.017429950360820803,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 5.040114072481961,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.10184257248194864,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 5.448677569186105,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.5104060691861015,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 6.9335786489441364,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.9953071489441405,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.9485014166497985,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.01022991664980144,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.040367719839104,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.1020962198391014,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.365233015095165,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.42696151509516705,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.912602715990971,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9743312159909782,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 7.332411400279953,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.394139900279946,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 11.001269578913877,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 6.06299807891387,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.120244938579849,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.18197343857984394,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.567722350849229,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.629450850849239,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 6.47157078246877,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.53329928246877,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.665925575061137,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.72765407506114,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 10.389669965567139,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.451398465567138,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 16.923591370956128,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 11.985319870956129,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 5.47831291294842,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.5400414129484195,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.30533373998974,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 1.3670622399897576,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 7.746350407965568,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.808078907965575,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 9.534182357554526,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.595910857554533,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 13.475264249282278,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 8.536992749282271,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 22.698298089960904,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 17.760026589960912,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.151925659518831,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 1.213654159518831,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.490357596025666,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.552086096025662,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.652485408641947,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.71421390864194,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 12.248169314404945,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.309897814404945,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 17.857606195447605,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 12.919334695447613,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 30.683115553329998,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 25.74484405332999,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.251538782062517,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.3132672820625104,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.27524859233924,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.336977092339234,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 12.41829139162715,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.480019891627151,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 16.121506085497913,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 11.183234585497921,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 24.000322480003675,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 19.062050980003676,
+      "option_type": "put"
+    },
+    {
+      "id": "k95_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 41.42547350332557,
+      "option_type": "call"
+    },
+    {
+      "id": "k95_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 36.48720200332557,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.0955647031602964,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.10791040316028941,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.2609692148726992,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.27331491487270965,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.549432896761973,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.5617785967619732,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.9078552361130845,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9202009361130845,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.700881726083101,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.713227426083101,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.582957324281949,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 3.595303024281957,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.4836019256847355,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.49594762568473555,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.9085987121993258,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9209444121993188,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.5687037320750967,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.5810494320750967,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 3.3499365523072395,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.362282252307246,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.035380861665138,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.047726561665138,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.97441725627575,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 7.986762956275758,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.111141820679613,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.1234875206796129,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.878664401992787,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.8910101019927874,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.043014329942922,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 3.0553600299429156,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.4070262629743535,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.4193719629743535,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 8.33156650432573,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.343912204325738,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 15.115085576230047,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 14.127431276230046,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.746180076361655,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 1.758525776361662,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.842744599898184,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.8550902998981913,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 5.495921105214531,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.508266805214531,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 7.426444380124329,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.438790080124329,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 11.552668133594365,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 10.56501383359437,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 21.04776089441936,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 20.06010659441936,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.6540644759820866,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.6664101759820795,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 5.212030303058534,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.224376003058527,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.5521101756726825,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.564455875672668,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 10.277394602773612,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.28974030277361,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 16.076636248614673,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 15.08898194861468,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 29.22496237920076,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 28.23730807920077,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.944429269572013,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.9567749695720202,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.150731543610041,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.163077243610041,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 10.454547866492113,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.46689356649212,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 14.28843858538706,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 13.300784285387067,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 22.382530392830095,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.394876092830096,
+      "option_type": "put"
+    },
+    {
+      "id": "k99_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 40.20866543579233,
+      "option_type": "call"
+    },
+    {
+      "id": "k99_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 99.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.22101113579233,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.4365203028208635,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.4365203028208635,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.6547762684793151,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.6547762684793151,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9821502760702123,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9821502760702123,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.3640647972102227,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.3640647972102227,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.1823336540264444,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.1823336540264444,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.0905600425123625,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.0905600425123625,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9099213792727465,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9099213792727465,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.3648441572917676,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.3648441572917676,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.047138294624392,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.047138294624392,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.8429505284331955,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.8429505284331955,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.547181656411487,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.547181656411487,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.514070282426362,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.514070282426362,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.5759631698494572,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.5759631698494572,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.3637477846568133,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.3637477846568133,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 3.544957064845286,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 3.544957064845286,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.922008592542557,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.922008592542557,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.8672269492716005,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.8672269492716005,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 14.68951833592618,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 14.68951833592618,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.2285999222071786,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.2285999222071786,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.3423428763071095,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.3423428763071095,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 5.011635331905861,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 5.011635331905861,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.9562445655019856,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.9562445655019856,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 11.107448259599794,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 11.107448259599794,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 20.65359729537038,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 20.65359729537038,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.1512961014953467,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.1512961014953467,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.725369312742806,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.725369312742806,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.082744063846664,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.082744063846664,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.824834325565547,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.824834325565547,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 15.656238568856134,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 15.656238568856141,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 28.873039716862454,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 28.873039716862454,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.455417796198882,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.455417796198882,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.67867584754069,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.67867584754069,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 10.003021408633504,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 10.003021408633504,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 13.858390303171808,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 13.8583903031718,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.995316985486266,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.995316985486266,
+      "option_type": "put"
+    },
+    {
+      "id": "k100_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.91278033060128,
+      "option_type": "call"
+    },
+    {
+      "id": "k100_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.91278033060128,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.11081497746870231,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.0984692774686953,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.27877829802115933,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.2664325980211557,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.5708407553456579,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.558495055345665,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9332843086178694,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.9209386086178692,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.7346981141647304,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.7223524141647233,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 3.6360196301347707,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.62367393013477,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.5042325543866394,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.4918868543866464,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.9340358834770934,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.9216901834770934,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.6011452707992588,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.588799570799259,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.3904402451976634,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 3.3780945451976634,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.093028359174755,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.080682659174748,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 8.071813240463719,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 9.059467540463713,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.138762323487453,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.126416623487446,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.914321634574184,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.901975934574177,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 3.0905915878024266,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.078245887802426,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 4.468434994160094,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.456089294160094,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.422486517797429,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 8.410140817797428,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 14.274274846308225,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 15.261929146308232,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 1.7804663404079766,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.7681206404079837,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.888282554277462,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.875936854277455,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.558228918542778,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 5.545883218542771,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.50824159932258,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 7.495895899322573,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 10.676019374747009,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 11.66367367474701,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 20.26660670401164,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 21.254261004011646,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.6976780213016713,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.6853323213016713,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.271466094704625,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 5.259120394704611,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.635174388808614,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.622828688808607,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.387910483720983,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 10.375564783720984,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 15.24549606285961,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 16.233150362859604,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 28.526013992100943,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 29.513668292100935,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.001155624890718,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.988809924890731,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.22974842616511,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.217402726165103,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.566847038918635,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 10.554501338918634,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 13.439313338459469,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 14.42696763845947,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.614795802885745,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 22.602450102885758,
+      "option_type": "put"
+    },
+    {
+      "id": "k101_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 39.62012280125646,
+      "option_type": "call"
+    },
+    {
+      "id": "k101_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 101.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 40.60777710125646,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 1.2402615313289068e-06,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.938272740261519,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0008044056115776462,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.93907590561158,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.023996671861736173,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.96226817186173,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.125867724395828,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 5.064139224395816,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.582993998276277,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 5.52126549827627,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.177455296235911,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 7.115726796235914,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.01459579326447183,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.952867293264474,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.1261637455335922,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.064435245533592,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.4913678469146309,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.429639346914631,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 1.0861346685437898,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 6.024406168543786,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.6011547141601223,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 7.539426214160122,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 6.477531227110815,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 11.415802727110822,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.21803343025493097,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.156304930254934,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.7129504327111229,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.65122193271113,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.6851930348117914,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 6.623464534811777,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.9548387291332414,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 7.893110229133241,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 5.832684786233709,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 10.770956286233694,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 12.713364873418966,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 17.65163637341896,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.6154206678567066,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 5.553692167856703,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 1.5075358514055288,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.445807351405529,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 3.0400588702211278,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 7.978330370221127,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.9301062620336324,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 9.868377762033626,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 9.083802917383519,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 14.022074417383518,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 18.788228399015132,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 23.726499899015145,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 1.3432526040702906,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 6.281524104070287,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.7687137471289893,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.70698524712899,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 5.0549705995668095,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.99324209956681,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.791452433240875,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 12.729723933240868,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 13.696128986088736,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 18.634400486088737,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 27.18543555932819,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 32.12370705932819,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.51531298686114,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.453584486861147,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 4.656746345401928,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.595017845401935,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.970656697004129,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 12.908928197004128,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 11.869323547627996,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 16.807595047627995,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 20.15763781204325,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 25.09590931204325,
+      "option_type": "put"
+    },
+    {
+      "id": "k105_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 38.48082274709034,
+      "option_type": "call"
+    },
+    {
+      "id": "k105_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 105.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 43.41909424709034,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.708348684602267e-62,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.2374810217027975e-29,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.611161257380516e-14,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086000000042,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.647120633351893e-08,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086046471207,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0007878800627803263,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753873880062773,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.17915018053456083,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 19.932236180534563,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.465133656458264e-16,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.7289078498187536e-08,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753086047289077,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.00031736930114934967,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753403369301143,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.014410571612314111,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 19.76749657161231,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.30470529234030125,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 20.05779129234029,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 2.603577300669976,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 22.356663300669982,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.2574676953993707e-06,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.753088257467684,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.002161584543353432,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.75524758454335,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.07707251845136508,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 19.83015851845137,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.4347007544586643,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 20.18778675445867,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.1207889036523984,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 21.873874903652396,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 8.126739719290667,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 27.87982571929066,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0010403569942148568,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 19.754126356994213,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.05182312062520882,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 19.804909120625204,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.469243759880754,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 20.222329759880765,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 1.4967991652328272,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 21.249885165232826,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.770997802985457,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 24.524083802985448,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 14.136584890873975,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 33.889670890873965,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.03367271856673069,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 19.786758718566738,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.3635477063315746,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 20.116633706331566,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 1.5789929313329847,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.332078931332973,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.6601313650803533,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 23.413217365080367,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 9.074661248667157,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 28.82774724866715,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 22.771619496936754,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 42.52470549693677,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.2765357569167827,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 20.029621756916764,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 1.322060025013425,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 21.075146025013424,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.810461105447726,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 23.563547105447736,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.32354988837931,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 27.076635888379315,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 15.52715004415746,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 35.28023604415747,
+      "option_type": "put"
+    },
+    {
+      "id": "k120_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 34.614107756201925,
+      "option_type": "call"
+    },
+    {
+      "id": "k120_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 120.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 54.36719375620193,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.019178_v0.08_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.019178_v0.08_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.019178_v0.12_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.075098539841122e-177,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.019178_v0.12_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.019178_v0.18_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.194379609569808e-80,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.019178_v0.18_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.019178_v0.25_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 8.805059580690851e-43,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.019178_v0.25_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.019178_v0.4_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 8.582733565004773e-18,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.019178_v0.4_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.019178_v0.75_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 7.950130688691933e-06,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.019178_v0.75_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25926595013068,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.083333_v0.08_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 3.1571719172897145e-93,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.083333_v0.08_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.083333_v0.12_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 9.798614416604316e-43,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.083333_v0.12_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.083333_v0.18_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 5.233268931715193e-20,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.083333_v0.18_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.083333_v0.25_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 4.8936887429239226e-11,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.083333_v0.25_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25925800004892,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.083333_v0.4_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 7.517326033733549e-05,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.083333_v0.4_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25933317326033,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.083333_v0.75_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 0.14288474004836701,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.083333_v0.75_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.083333,
+      "discount_factor": 0.9876543,
+      "option_price": 59.40214274004837,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.25_v0.08_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.4787839467982637e-32,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.25_v0.08_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.25_v0.12_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.202419030236398e-15,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.25_v0.12_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25925799999999,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.25_v0.18_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 1.7818711299231648e-07,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.25_v0.18_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25925817818712,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.25_v0.25_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.000314294004725717,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.25_v0.25_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25957229400475,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.25_v0.4_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 0.07861486051763869,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.25_v0.4_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 59.33787286051764,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.25_v0.75_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 2.3253407669592407,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.25_v0.75_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 61.58459876695923,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.5_v0.08_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 4.00639847725326e-17,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.5_v0.08_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25925800000001,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.5_v0.12_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 2.743282129674528e-08,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.5_v0.12_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25925802743283,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.5_v0.18_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0004240988957712607,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.5_v0.18_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 59.25968209889578,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.5_v0.25_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.026686244412991836,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.5_v0.25_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 59.285944244413,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.5_v0.4_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.7037188279532033,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.5_v0.4_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 59.962976827953206,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t0.5_v0.75_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 6.678779186575119,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t0.5_v0.75_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 65.93803718657513,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t1_v0.08_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 3.4097474273335288e-09,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t1_v0.08_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259258003409734,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t1_v0.12_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.0001542173256601488,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t1_v0.12_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259412217325675,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t1_v0.18_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.031662769582938226,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t1_v0.18_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.29092076958294,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t1_v0.25_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.36140406661763685,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t1_v0.25_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.62066206661765,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t1_v0.4_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 2.9111085033000914,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t1_v0.4_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 62.170366503300095,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t1_v0.75_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 14.562535321271262,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t1_v0.75_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 1.0,
+      "discount_factor": 0.9876543,
+      "option_price": 73.82179332127127,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t2_v0.08_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 5.033926597118518e-05,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t2_v0.08_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.259308339265985,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t2_v0.12_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.017812498336140625,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t2_v0.12_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.277070498336144,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t2_v0.18_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 0.40114640691074915,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t2_v0.18_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 59.66040440691076,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t2_v0.25_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 1.8681540867518422,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t2_v0.25_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 61.127412086751825,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t2_v0.4_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 7.85329564224982,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t2_v0.4_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 67.11255364224981,
+      "option_type": "put"
+    },
+    {
+      "id": "k160_t2_v0.75_call",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 26.714469922056875,
+      "option_type": "call"
+    },
+    {
+      "id": "k160_t2_v0.75_put",
+      "forward": 100.0,
+      "strike": 160.0,
+      "years_to_expiry": 2.0,
+      "discount_factor": 0.9876543,
+      "option_price": 85.9737279220569,
+      "option_type": "put"
+    }
+  ]
+}

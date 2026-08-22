@@ -1,0 +1,165 @@
+{
+  "schema": "implied_volatility_result/v1",
+  "records": [
+    {
+      "id": "expired_in_the_money_call",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "expired_in_the_money_put",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "expired_out_of_the_money_call",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "expired_out_of_the_money_put",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "expired_at_the_kink_call",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "expired_at_the_kink_put",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "zero_volatility_in_the_money_call",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "zero_volatility_in_the_money_put",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "zero_volatility_out_of_the_money_call",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "zero_volatility_out_of_the_money_put",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "zero_volatility_at_the_kink_call",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "zero_volatility_at_the_kink_put",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "one_day_at_the_money_call",
+      "volatility": 0.20000000000000462,
+      "status": "converged",
+      "iterations": 28,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": 5.338766045939198e-15
+    },
+    {
+      "id": "one_day_at_the_money_put",
+      "volatility": 0.20000000000000462,
+      "status": "converged",
+      "iterations": 28,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": 5.338766045939198e-15
+    },
+    {
+      "id": "very_low_volatility_call",
+      "volatility": 0.0009999999999997444,
+      "status": "converged",
+      "iterations": 2,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": 2.7840269956534844e-16
+    },
+    {
+      "id": "very_low_volatility_put",
+      "volatility": 0.0009999999999995666,
+      "status": "converged",
+      "iterations": 2,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": 2.7840269956534844e-16
+    },
+    {
+      "id": "very_high_volatility_call",
+      "volatility": 4.000000000002732,
+      "status": "converged",
+      "iterations": 49,
+      "absolute_price_error": 1.4736656339664478e-11,
+      "volatility_uncertainty": 4.0190623520734915e-15
+    },
+    {
+      "id": "very_high_volatility_put",
+      "volatility": 4.000000000002732,
+      "status": "converged",
+      "iterations": 49,
+      "absolute_price_error": 1.4736656339664478e-11,
+      "volatility_uncertainty": 4.0190623520734915e-15
+    },
+    {
+      "id": "long_dated_call",
+      "volatility": 0.3000000000002756,
+      "status": "converged",
+      "iterations": 50,
+      "absolute_price_error": 3.1093350116861984e-11,
+      "volatility_uncertainty": 1.34403133062701e-16
+    },
+    {
+      "id": "long_dated_put",
+      "volatility": 0.3000000000002756,
+      "status": "converged",
+      "iterations": 50,
+      "absolute_price_error": 3.1093350116861984e-11,
+      "volatility_uncertainty": 1.34403133062701e-16
+    }
+  ]
+}

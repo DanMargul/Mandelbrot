@@ -1,0 +1,185 @@
+{
+  "schema": "pricing_request/v1",
+  "records": [
+    {
+      "id": "expired_in_the_money_call",
+      "forward": 100.0,
+      "strike": 90.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "expired_in_the_money_put",
+      "forward": 100.0,
+      "strike": 90.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "expired_out_of_the_money_call",
+      "forward": 100.0,
+      "strike": 110.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "expired_out_of_the_money_put",
+      "forward": 100.0,
+      "strike": 110.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "expired_at_the_kink_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "expired_at_the_kink_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "zero_volatility_in_the_money_call",
+      "forward": 100.0,
+      "strike": 90.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "zero_volatility_in_the_money_put",
+      "forward": 100.0,
+      "strike": 90.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "zero_volatility_out_of_the_money_call",
+      "forward": 100.0,
+      "strike": 110.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "zero_volatility_out_of_the_money_put",
+      "forward": 100.0,
+      "strike": 110.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "zero_volatility_at_the_kink_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "zero_volatility_at_the_kink_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "one_day_at_the_money_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.00274,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "one_day_at_the_money_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 0.00274,
+      "volatility": 0.2,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "very_low_volatility_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.001,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "very_low_volatility_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.001,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "very_high_volatility_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 4.0,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "very_high_volatility_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 4.0,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    },
+    {
+      "id": "long_dated_call",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 10.0,
+      "volatility": 0.3,
+      "discount_factor": 0.9876543,
+      "option_type": "call"
+    },
+    {
+      "id": "long_dated_put",
+      "forward": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 10.0,
+      "volatility": 0.3,
+      "discount_factor": 0.9876543,
+      "option_type": "put"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "pricing_result/v1",
+  "records": [
+    {
+      "id": "deep_out_of_the_money_call",
+      "price": 3.783159547590379e-20,
+      "delta_with_respect_to_forward": 2.402643767664211e-20,
+      "gamma_with_respect_to_forward": 1.485409800888042e-20,
+      "vega_with_respect_to_volatility": 1.1140573506660316e-17,
+      "theta_with_respect_to_time": -6.6843441039961895e-18
+    },
+    {
+      "id": "deep_out_of_the_money_put",
+      "price": 9.457898868982985e-21,
+      "delta_with_respect_to_forward": -5.912030430470838e-21,
+      "gamma_with_respect_to_forward": 3.7135245022201445e-21,
+      "vega_with_respect_to_volatility": 2.7851433766651083e-18,
+      "theta_with_respect_to_time": -1.671086025999065e-18
+    },
+    {
+      "id": "deep_in_the_money_call",
+      "price": 74.0740725,
+      "delta_with_respect_to_forward": 0.9876543,
+      "gamma_with_respect_to_forward": 3.7135245022201445e-21,
+      "vega_with_respect_to_volatility": 2.7851433766651083e-18,
+      "theta_with_respect_to_time": -1.671086025999065e-18
+    },
+    {
+      "id": "deep_in_the_money_put",
+      "price": 296.29629,
+      "delta_with_respect_to_forward": -0.9876543,
+      "gamma_with_respect_to_forward": 1.485409800888042e-20,
+      "vega_with_respect_to_volatility": 1.1140573506660316e-17,
+      "theta_with_respect_to_time": -6.6843441039961895e-18
+    },
+    {
+      "id": "far_wing_short_dated_call",
+      "price": 4.938521761120396e-17,
+      "delta_with_respect_to_forward": 5.1197066485134904e-17,
+      "gamma_with_respect_to_forward": 5.186638665085934e-17,
+      "vega_with_respect_to_volatility": 5.968161379141082e-15,
+      "theta_with_respect_to_time": -9.33594959715468e-14
+    },
+    {
+      "id": "far_wing_short_dated_put",
+      "price": 2.469260880560198e-17,
+      "delta_with_respect_to_forward": -2.5351607154511432e-17,
+      "gamma_with_respect_to_forward": 2.5933193325429617e-17,
+      "vega_with_respect_to_volatility": 2.9840806895705355e-15,
+      "theta_with_respect_to_time": -4.6679747985773314e-14
+    },
+    {
+      "id": "low_forward_low_strike_call",
+      "price": 0.5933023685997273,
+      "delta_with_respect_to_forward": 0.7952670140013028,
+      "gamma_with_respect_to_forward": 0.34208702226121224,
+      "vega_with_respect_to_volatility": 0.4810598750548298,
+      "theta_with_respect_to_time": -0.21647694377467339
+    },
+    {
+      "id": "high_forward_high_strike_put",
+      "price": 373.0598182886753,
+      "delta_with_respect_to_forward": -0.5872360396397122,
+      "gamma_with_respect_to_forward": 0.0005848227925140351,
+      "vega_with_respect_to_volatility": 1790.6104261194725,
+      "theta_with_respect_to_time": -167.1236397711508
+    }
+  ]
+}

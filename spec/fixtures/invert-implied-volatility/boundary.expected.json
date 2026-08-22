@@ -1,0 +1,69 @@
+{
+  "schema": "implied_volatility_result/v1",
+  "records": [
+    {
+      "id": "price_below_intrinsic",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "price_exactly_intrinsic",
+      "volatility": 0.0,
+      "status": "below_intrinsic",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "price_above_forward",
+      "volatility": 0.0,
+      "status": "above_no_arbitrage_bound",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "put_price_above_strike",
+      "volatility": 0.0,
+      "status": "above_no_arbitrage_bound",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "expired_option",
+      "volatility": 0.0,
+      "status": "degenerate_expiry",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "negligible_time_value",
+      "volatility": 0.0,
+      "status": "below_volatility_floor",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "volatility_above_ceiling",
+      "volatility": 0.0,
+      "status": "above_volatility_ceiling",
+      "iterations": 0,
+      "absolute_price_error": 0.0,
+      "volatility_uncertainty": null
+    },
+    {
+      "id": "ordinary_at_the_money",
+      "volatility": 0.19983918087141583,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 8.881784197001252e-15,
+      "volatility_uncertainty": 3.0194492719097984e-16
+    }
+  ]
+}

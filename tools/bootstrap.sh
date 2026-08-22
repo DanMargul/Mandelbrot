@@ -40,8 +40,10 @@ ensure_vcpkg
 
 echo
 echo "== python tracks =="
-uv sync --project python_pure
-uv sync --project python_cpp
+uv python install
+uv sync --python-preference only-managed
+uv sync --project python_pure --python-preference only-managed
+uv sync --project python_cpp --python-preference only-managed
 
 echo
 echo "== c++ configure =="

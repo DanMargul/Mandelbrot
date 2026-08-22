@@ -1,0 +1,165 @@
+{
+  "schema": "pricing_result/v1",
+  "records": [
+    {
+      "id": "expired_in_the_money_call",
+      "price": 9.876543,
+      "delta_with_respect_to_forward": 0.9876543,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "expired_in_the_money_put",
+      "price": 0.0,
+      "delta_with_respect_to_forward": 0.0,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "expired_out_of_the_money_call",
+      "price": 0.0,
+      "delta_with_respect_to_forward": 0.0,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "expired_out_of_the_money_put",
+      "price": 9.876543,
+      "delta_with_respect_to_forward": -0.9876543,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "expired_at_the_kink_call",
+      "price": 0.0,
+      "delta_with_respect_to_forward": 0.0,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "expired_at_the_kink_put",
+      "price": 0.0,
+      "delta_with_respect_to_forward": -0.9876543,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "zero_volatility_in_the_money_call",
+      "price": 9.876543,
+      "delta_with_respect_to_forward": 0.9876543,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "zero_volatility_in_the_money_put",
+      "price": 0.0,
+      "delta_with_respect_to_forward": 0.0,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "zero_volatility_out_of_the_money_call",
+      "price": 0.0,
+      "delta_with_respect_to_forward": 0.0,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "zero_volatility_out_of_the_money_put",
+      "price": 9.876543,
+      "delta_with_respect_to_forward": -0.9876543,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "zero_volatility_at_the_kink_call",
+      "price": 0.0,
+      "delta_with_respect_to_forward": 0.0,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "zero_volatility_at_the_kink_put",
+      "price": 0.0,
+      "delta_with_respect_to_forward": -0.9876543,
+      "gamma_with_respect_to_forward": 0.0,
+      "vega_with_respect_to_volatility": 0.0,
+      "theta_with_respect_to_time": 0.0
+    },
+    {
+      "id": "one_day_at_the_money_call",
+      "price": 0.41249464840770184,
+      "delta_with_respect_to_forward": 0.4958896232420385,
+      "gamma_with_respect_to_forward": 0.3763602928561536,
+      "vega_with_respect_to_volatility": 2.0624544048517217,
+      "theta_with_respect_to_time": -75.27205857123073
+    },
+    {
+      "id": "one_day_at_the_money_put",
+      "price": 0.41249464840770184,
+      "delta_with_respect_to_forward": -0.4917646767579614,
+      "gamma_with_respect_to_forward": 0.3763602928561536,
+      "vega_with_respect_to_volatility": 2.0624544048517217,
+      "theta_with_respect_to_time": -75.27205857123073
+    },
+    {
+      "id": "very_low_volatility_call",
+      "price": 0.039401704227281655,
+      "delta_with_respect_to_forward": 0.49402415852113635,
+      "gamma_with_respect_to_forward": 3.9401700943815148,
+      "vega_with_respect_to_volatility": 39.40170094381515,
+      "theta_with_respect_to_time": -0.019700850471907574
+    },
+    {
+      "id": "very_low_volatility_put",
+      "price": 0.039401704227281655,
+      "delta_with_respect_to_forward": -0.4936301414788636,
+      "gamma_with_respect_to_forward": 3.9401700943815148,
+      "vega_with_respect_to_volatility": 39.40170094381515,
+      "theta_with_respect_to_time": -0.019700850471907574
+    },
+    {
+      "id": "very_high_volatility_call",
+      "price": 94.2715768711627,
+      "delta_with_respect_to_forward": 0.9651850343558134,
+      "gamma_with_respect_to_forward": 0.00013331102559476548,
+      "vega_with_respect_to_volatility": 5.3324410237906195,
+      "theta_with_respect_to_time": -10.664882047581239
+    },
+    {
+      "id": "very_high_volatility_put",
+      "price": 94.2715768711627,
+      "delta_with_respect_to_forward": -0.022469265644186578,
+      "gamma_with_respect_to_forward": 0.00013331102559476548,
+      "vega_with_respect_to_volatility": 5.3324410237906195,
+      "theta_with_respect_to_time": -10.664882047581239
+    },
+    {
+      "id": "long_dated_call",
+      "price": 36.02406876562447,
+      "delta_with_respect_to_forward": 0.6739474938281224,
+      "gamma_with_respect_to_forward": 0.003711381860360185,
+      "vega_with_respect_to_volatility": 111.34145581080556,
+      "theta_with_respect_to_time": -1.6701218371620832
+    },
+    {
+      "id": "long_dated_put",
+      "price": 36.02406876562447,
+      "delta_with_respect_to_forward": -0.3137068061718776,
+      "gamma_with_respect_to_forward": 0.003711381860360185,
+      "vega_with_respect_to_volatility": 111.34145581080556,
+      "theta_with_respect_to_time": -1.6701218371620832
+    }
+  ]
+}

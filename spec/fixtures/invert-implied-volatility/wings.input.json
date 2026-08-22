@@ -1,0 +1,77 @@
+{
+  "schema": "implied_volatility_request/v1",
+  "records": [
+    {
+      "id": "deep_out_of_the_money_call",
+      "forward": 100.0,
+      "strike": 400.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 3.783159547590379e-20,
+      "option_type": "call"
+    },
+    {
+      "id": "deep_out_of_the_money_put",
+      "forward": 100.0,
+      "strike": 25.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 9.457898868982985e-21,
+      "option_type": "put"
+    },
+    {
+      "id": "deep_in_the_money_call",
+      "forward": 100.0,
+      "strike": 25.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 74.0740725,
+      "option_type": "call"
+    },
+    {
+      "id": "deep_in_the_money_put",
+      "forward": 100.0,
+      "strike": 400.0,
+      "years_to_expiry": 0.25,
+      "discount_factor": 0.9876543,
+      "option_price": 296.29629,
+      "option_type": "put"
+    },
+    {
+      "id": "far_wing_short_dated_call",
+      "forward": 100.0,
+      "strike": 200.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 4.938521761120396e-17,
+      "option_type": "call"
+    },
+    {
+      "id": "far_wing_short_dated_put",
+      "forward": 100.0,
+      "strike": 50.0,
+      "years_to_expiry": 0.019178,
+      "discount_factor": 0.9876543,
+      "option_price": 2.469260880560198e-17,
+      "option_type": "put"
+    },
+    {
+      "id": "low_forward_low_strike_call",
+      "forward": 2.5,
+      "strike": 2.0,
+      "years_to_expiry": 0.5,
+      "discount_factor": 0.9876543,
+      "option_price": 0.5933023685997273,
+      "option_type": "call"
+    },
+    {
+      "id": "high_forward_high_strike_put",
+      "forward": 5400.0,
+      "strike": 5600.0,
+      "years_to_expiry": 0.75,
+      "discount_factor": 0.9876543,
+      "option_price": 373.0598182886753,
+      "option_type": "put"
+    }
+  ]
+}

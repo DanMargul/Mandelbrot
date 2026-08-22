@@ -49,11 +49,17 @@ stated.
 
 ```
 delta_call = DF * N(d1)
-delta_put  = DF * (N(d1) - 1)
+delta_put  = -DF * N(-d1)
 gamma      = DF * n(d1) / (F * sigma * sqrt(T))
 vega       = DF * F * n(d1) * sqrt(T)
 theta      = -DF * F * n(d1) * sigma / (2 * sqrt(T))
 ```
+
+The put delta is written as `-DF * N(-d1)` rather than the algebraically identical
+`DF * (N(d1) - 1)`. On a deep out-of-the-money put `N(d1)` rounds to exactly `1.0`, and the
+subtraction returns zero for a delta whose true value may be `1e-49`. Evaluating the tail
+directly costs nothing and keeps full relative precision. The same reasoning is why the put
+price uses `N(-d2)` and `N(-d1)` rather than being derived from the call by parity.
 
 Vega is per unit of volatility, not per volatility point. Theta is per year, not per day.
 Both are scaled at the reporting layer and nowhere else.
@@ -73,32 +79,89 @@ delta = DF * 1{F > K}        for a call
 gamma = vega = theta = 0
 ```
 
-At the kink `F == K` the delta is defined as `0` for both. This is a convention, not a
-limit; it is chosen so that a call and a put on the same strike satisfy the parity relation
-`delta_call - delta_put = DF` at every point including the kink.
+At the kink `F == K` the indicator is `0`, so the call delta is `0` and the put delta is
+`-DF`. This is a convention rather than a limit, chosen so that a call and a put on the same
+strike satisfy `delta_call - delta_put = DF` at every point including the kink.
 
 ## Implied volatility inversion
 
-`invert_black_implied_volatility` solves `black_price(sigma) = target` by bracketed Newton
-with a bisection safeguard. The algorithm is fixed in every detail so that all three tracks
-follow the identical iteration path.
+### Always invert the out-of-the-money option
 
-1. Undiscount the target price: `p = target / DF`.
-2. If the option is a put, convert to the equivalent call by parity: `c = p + F - K`.
-3. Reject prices outside the no-arbitrage bounds `max(F - K, 0) < c < F`, returning a
-   typed failure rather than a sentinel.
-4. Bracket `sigma` in `[1e-9, 10.0]`.
-5. Seed with the Brenner-Subrahmanyam approximation `sqrt(2 * pi / T) * c / F`, clamped
-   into the bracket.
+The strike selects the option type: `strike < forward` uses the put, otherwise the call.
+An in-the-money quote is first converted to its out-of-the-money equivalent by put-call
+parity; the conversion is never made in the other direction.
+
+The reason is numerical rather than stylistic. Consider a one-year 80 strike call on a
+forward of 100 at 3% volatility. It is worth about 20.6, of which the entire volatility
+content is roughly `1e-9`. Converting the out-of-the-money 80 put into that call, or
+inverting the call directly, requires resolving a `1e-9` quantity inside a number of
+magnitude 20. A double carries about `4e-15` of absolute resolution there, so only about
+six significant digits of the time value survive, and the recovered volatility inherits the
+loss.
+
+Measured over 3121 converged cases spanning strikes from a quarter to four times the
+forward, expiries from 0.7 days to five years and volatilities from 3% to 300%: inverting a
+resolvable out-of-the-money quote natively recovers the volatility to `1.13e-12` relative,
+while applying the identical solver after a parity conversion degrades to as much as
+`9.2e-2`. The solver is not the limiting factor in either case.
+
+### The solver
+
+`invert_black_implied_volatility` solves `black_price(sigma) = target` by bracketed Newton
+with a bisection safeguard, fixed in every detail so that all three tracks follow the
+identical iteration path.
+
+1. Reject `T <= 0` as `degenerate_expiry`.
+2. Select the out-of-the-money type and convert the quote to it by parity.
+3. Reject a target at or below zero as `below_intrinsic`, and one at or above the
+   no-arbitrage ceiling (`F` for a call, `K` for a put) as `above_no_arbitrage_bound`.
+4. Evaluate the price at both ends of the volatility bracket `[1e-9, 10.0]` and reject a
+   target outside it as `below_volatility_floor` or `above_volatility_ceiling`.
+5. Seed with the Brenner-Subrahmanyam approximation `sqrt(2 * pi / T) * target / F`,
+   clamped into the bracket.
 6. Iterate at most 100 times. Each step tightens the bracket from the sign of the price
    error, then takes a Newton step using vega. The step is rejected in favour of a
    bisection when it falls outside the bracket or when vega is below `1e-12`.
-7. Converged when the absolute price error is at or below `1e-14 * F`, or when the bracket
-   is narrower than `1e-14`.
+7. Stop when the volatility step falls to `1e-12` relative.
 
-The bisection safeguard is what makes this reproducible across languages. Unguarded Newton
-takes wildly different paths from tiny differences in the seed when vega is small, and the
-tracks then disagree in the fifth digit on deep wings.
+Two details are worth stating because they are easy to get wrong.
+
+The endpoint checks in step 4 cost two extra price evaluations but remove every edge case
+from the loop. Once they pass, the price function is continuous and strictly increasing
+across a bracket that is known to contain the root, so bisection alone guarantees
+termination well inside 100 iterations and the loop needs no special handling for a root
+that escapes the bracket.
+
+Convergence is measured on the volatility, not on the price. A price-based criterion scaled
+by the forward is far too loose on the wings, where the entire option price can be smaller
+than the tolerance and any volatility across a wide band appears to converge. The bisection
+safeguard is what makes the iteration reproducible across languages: unguarded Newton takes
+a wildly different path from a tiny difference in the seed when vega is small, and the
+tracks then disagree in the fifth digit.
+
+### Reported uncertainty
+
+```
+volatility_uncertainty = DBL_EPSILON * max(largest_price_term, quoted_price) / vega
+```
+
+`largest_price_term` is the larger of the two additive terms in the Black formula at the
+solution, which is the source of the formula's own cancellation error. `quoted_price` is
+the undiscounted input, which dominates when an in-the-money quote has been converted by
+parity. One expression, both sources, no tuned constant.
+
+Using `max(F, K)` instead would be conservative but useless: it reports the same figure for
+the in-the-money and out-of-the-money option on a strike, when the whole point is to tell
+them apart. On a one-year 80 strike at 5% volatility the two forms differ by 55,000x.
+
+This is what downstream modules filter on, in place of a moneyness or strike-range rule. It
+expresses the same idea in units that matter and degrades smoothly rather than cutting at a
+threshold that would need re-justifying for every expiry.
+
+It is an estimate, not a guaranteed bound. It is first order in the price error, while vega
+can vary by orders of magnitude across the resulting interval on a steep wing, which is
+exactly where the estimate is largest. Across the grid it contains 97.3% of realized errors;
+the 99th percentile overshoot is 3.1x and the worst observed is 27x. Apply a safety factor.
 
 ## Pseudo-random numbers
 

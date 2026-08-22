@@ -10,6 +10,13 @@ Installs `cmake` and `ninja` via Homebrew, clones and bootstraps vcpkg into `~/v
 `VCPKG_ROOT` is unset, syncs both `uv` projects, and configures the CMake release preset.
 It is idempotent; rerun it whenever dependencies change.
 
+Every environment is built on the uv-managed CPython pinned in `.python-version`, never on
+whatever interpreter happens to be first on the path. This is not tidiness. A Miniconda base
+interpreter on this machine silently does not process `.pth` files, so editable installs
+resolve at install time and then fail to import with no diagnostic beyond
+`ModuleNotFoundError`. The failure looks exactly like a packaging mistake and costs an hour
+to trace. `--python-preference only-managed` removes the class of problem.
+
 ## Everything at once
 
 ```sh

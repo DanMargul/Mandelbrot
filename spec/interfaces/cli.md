@@ -15,9 +15,18 @@ Every track exposes the same command line. The runner name differs; nothing else
 Exit status is `0` on success and `1` on any failure. Failures print a single line to
 stderr in the form `error: <message>` and write no output file.
 
-Records are processed independently. A record that cannot be processed does not abort the
-run; it appears in the output with `"status"` set to a failure reason. Only a malformed
-request document, an unreadable input, or an unknown verb is a run-level failure.
+Records are processed independently and in order, and the output carries one record per
+input record.
+
+Where a result schema has a `status` field, a record that cannot be processed is reported
+through it rather than aborting the run. That covers the conditions that legitimately arise
+from real quotes: a price below intrinsic, or one outside the invertible volatility range.
+
+Everything else is a run-level failure that writes no output: a malformed document, a
+schema mismatch, an unreadable input, an unknown verb, or a record whose values violate a
+precondition in `spec/schemas/` such as a negative time to expiry. Those are defects in the
+caller, not market conditions, and silently carrying them into an output record would let a
+bad pipeline look like a partially successful one.
 
 ## Verbs
 
@@ -29,8 +38,13 @@ forward measure and returns the greeks defined in `docs/math.md`.
 ### `invert-implied-volatility`
 
 Input `implied_volatility_request/v1`, output `implied_volatility_result/v1`. Inverts the
-Black formula for volatility, returning both the volatility and the iteration count so that
-conformance can detect algorithmic divergence even when the answers happen to agree.
+Black formula for volatility on the out-of-the-money side of each strike.
+
+The result carries the iteration count, so conformance detects algorithmic divergence even
+when the answers happen to agree, and `volatility_uncertainty`, so consumers can tell a
+volatility that is pinned to twelve digits from one that is barely determined by the quote.
+Non-finite floats are written as JSON `null`, since `Infinity` is not valid JSON and the
+tracks would otherwise disagree on the encoding rather than on the number.
 
 ## Document envelope
 

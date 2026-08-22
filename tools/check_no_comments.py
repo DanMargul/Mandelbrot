@@ -12,8 +12,18 @@ from pathlib import Path
 PYTHON_SUFFIXES = frozenset({".py"})
 CPP_SUFFIXES = frozenset({".cpp", ".cc", ".cxx", ".hpp", ".h", ".ipp"})
 IGNORED_DIRECTORY_NAMES = frozenset(
-    {".git", ".venv", "build", "__pycache__", ".mypy_cache", ".ruff_cache",
-     ".pytest_cache", "vcpkg_installed", "node_modules", "data"}
+    {
+        ".git",
+        ".venv",
+        "build",
+        "__pycache__",
+        ".mypy_cache",
+        ".ruff_cache",
+        ".pytest_cache",
+        "vcpkg_installed",
+        "node_modules",
+        "data",
+    }
 )
 ALLOWED_COMMENT_PREFIXES = ("# noqa", "# type:", "# pragma", "# SPDX", "#!")
 
@@ -46,9 +56,15 @@ def find_python_comment_violations(path: Path, source: str) -> list[Violation]:
     return violations
 
 
-def docstring_nodes(tree: ast.Module) -> list[ast.AST]:
-    documentable = (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)
-    return [node for node in ast.walk(tree) if isinstance(node, documentable)]
+DocumentableNode = ast.Module | ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef
+
+
+def docstring_nodes(tree: ast.Module) -> list[DocumentableNode]:
+    return [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Module | ast.ClassDef | ast.FunctionDef | ast.AsyncFunctionDef)
+    ]
 
 
 def find_python_docstring_violations(path: Path, source: str) -> list[Violation]:
