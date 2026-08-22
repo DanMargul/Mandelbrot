@@ -1,0 +1,30 @@
+[project]
+name = "volarb-cpp"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+volarb-cpp = "volarb_cpp.cli:entry_point"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13",
+    "ruff>=0.8",
+    "pytest>=8.3",
+    "jsonschema>=4.23",
+]
+
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11>=2.13"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+cmake.source-dir = "."
+cmake.version = ">=3.25"
+wheel.packages = ["src/volarb_cpp"]
+build-dir = "build/{wheel_tag}"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
