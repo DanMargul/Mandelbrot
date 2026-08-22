@@ -1,0 +1,37 @@
+[defaults]
+relative = 1e-12
+absolute = 1e-14
+
+["pricing_result/v1".price]
+relative = 1e-12
+absolute = 1e-14
+
+["pricing_result/v1".delta_with_respect_to_forward]
+relative = 1e-12
+absolute = 1e-14
+
+["pricing_result/v1".gamma_with_respect_to_forward]
+relative = 1e-11
+absolute = 1e-16
+
+["pricing_result/v1".vega_with_respect_to_volatility]
+relative = 1e-12
+absolute = 1e-14
+
+["pricing_result/v1".theta_with_respect_to_time]
+relative = 1e-12
+absolute = 1e-14
+
+["implied_volatility_result/v1".volatility]
+relative = 1e-10
+absolute = 1e-12
+
+["implied_volatility_result/v1".absolute_price_error]
+relative = 1.0
+absolute = 1e-12
+
+["implied_volatility_result/v1".status]
+exact = true
+
+["implied_volatility_result/v1".iterations]
+exact = true

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pricing_result/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "pricing_result/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "price", "delta_with_respect_to_forward", "gamma_with_respect_to_forward", "vega_with_respect_to_volatility", "theta_with_respect_to_time"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "price": { "type": "number" },
+          "delta_with_respect_to_forward": { "type": "number" },
+          "gamma_with_respect_to_forward": { "type": "number" },
+          "vega_with_respect_to_volatility": { "type": "number" },
+          "theta_with_respect_to_time": { "type": "number" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "implied_volatility_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "implied_volatility_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "forward", "strike", "years_to_expiry", "discount_factor", "option_price", "option_type"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "forward": { "type": "number", "exclusiveMinimum": 0 },
+          "strike": { "type": "number", "exclusiveMinimum": 0 },
+          "years_to_expiry": { "type": "number", "minimum": 0 },
+          "discount_factor": { "type": "number", "exclusiveMinimum": 0 },
+          "option_price": { "type": "number", "minimum": 0 },
+          "option_type": { "enum": ["call", "put"] }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "implied_volatility_result/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "implied_volatility_result/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "volatility", "status", "iterations", "absolute_price_error"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "volatility": { "type": "number", "minimum": 0 },
+          "status": { "enum": ["converged", "below_intrinsic", "above_forward", "not_converged", "degenerate_expiry"] },
+          "iterations": { "type": "integer", "minimum": 0 },
+          "absolute_price_error": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  }
+}
