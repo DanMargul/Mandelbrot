@@ -10,6 +10,8 @@ convention linter. All three tracks build and pass an empty conformance run.
 
 ## Phase 1 — Pricing and implied volatility (done)
 
+Complete. All three tracks conformant over 1352 fixture records.
+
 Black-Scholes price and greeks in the forward measure, robust implied volatility inversion.
 Fixtures cover deep in and out of the money, near-zero volatility, near-expiry, and
 zero-vega degenerate cases, cross-checked against `mpmath` at 50 digits.
@@ -22,6 +24,15 @@ conformance target: pure functions, no state, no data dependencies.
 Polygon ingestion to canonical Parquet; Parquet readers in all three tracks; expiry
 calendar; forward and discount curves **implied from put-call parity** rather than assumed
 from a rate and a dividend forecast.
+
+This phase also moves the bulk data path off JSON. The phase 1 benchmarks showed that over
+half the wall clock of a 400,000 option pricing run is spent converting text to numbers and
+back, in every track, which makes the end-to-end timings a measurement of the JSON library
+rather than of anything interesting. JSON stays for the conformance fixtures, where small
+readable documents and reviewable diffs are the whole point. See `docs/benchmarks.md`.
+
+Adding `arrow` to `vcpkg.json` belongs here rather than earlier; it is a slow port to
+build and phase 1 had no use for it.
 
 That choice is the correctness lever for the whole project. If the forward is wrong, every
 surface residual downstream is a curve misspecification wearing the costume of an edge.
@@ -65,4 +76,6 @@ trading sign-off recorded in `docs/runbook.md`.
 ## Cross-cutting
 
 `benchmarks/` gains a timed workload for every module from Phase 1 onward, run identically
-across all three tracks and reported as a tracked table.
+across all three tracks and reported as a tracked table. Results and their interpretation
+live in `docs/benchmarks.md`; the interpretation is not optional, since a ratio quoted
+without it has already been misleading once.

@@ -21,6 +21,7 @@ tracks over the same fixtures and diffs the results.
 - [`docs/math.md`](docs/math.md) — model definitions, greek conventions, algorithms
 - [`docs/roadmap.md`](docs/roadmap.md) — phased delivery and exit criteria
 - [`docs/runbook.md`](docs/runbook.md) — how to build, test, and run everything
+- [`docs/benchmarks.md`](docs/benchmarks.md) — cross-track timings and how to read them
 
 ## Quick start
 
@@ -31,6 +32,23 @@ tools/check_all.sh
 
 ## Status
 
-Phase 1 of 7. Pricing and implied volatility are implemented and conformant across all
-three tracks. No live venue connectivity exists, and none will be wired until the paper
-trading gate in `docs/runbook.md` is signed off.
+**Phase 1 of 7 complete.** Pricing and implied volatility are implemented in all three
+tracks and pass conformance: 35 comparisons over 1352 golden fixture records, each track
+against the golden documents and each against the others. The fixtures themselves are
+verified against an independent `mpmath` oracle at 50 decimal digits.
+
+Agreement is exact, not merely within tolerance. A one-year at-the-money option prices to
+`7.8672269492716005` in every track, inverts to `0.20000000000000026` in every track, and
+takes 31 solver iterations in every track.
+
+| gate | result |
+|---|---|
+| `python_pure` tests | 2308 passed |
+| `python_cpp` tests | 348 passed |
+| C++ tests (Catch2) | 19 passed |
+| conformance | 35 comparisons, all tracks agree |
+| `mypy --strict` | clean |
+| convention linter | clean |
+
+No live venue connectivity exists, and none will be wired until the paper trading gate in
+[`docs/runbook.md`](docs/runbook.md) is signed off. That gate is **not started**.
