@@ -10,7 +10,7 @@ Every track exposes the same command line. The runner name differs; nothing else
 |---|---|
 | `python_pure` | `uv run --project python_pure volarb-py` |
 | `python_cpp` | `uv run --project python_cpp volarb-cpp` |
-| `cpp_pure` | `cpp_pure/build/release/volarb-native` |
+| `cpp_pure` | `build/release/cpp_pure/volarb-native` |
 
 Exit status is `0` on success and `1` on any failure. Failures print a single line to
 stderr in the form `error: <message>` and write no output file.

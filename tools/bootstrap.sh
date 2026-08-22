@@ -27,6 +27,7 @@ ensure_vcpkg() {
     if [[ ! -x "$default_root/vcpkg" ]]; then
         "$default_root/bootstrap-vcpkg.sh" -disableMetrics
     fi
+    export VCPKG_ROOT="$default_root"
     echo "ok      vcpkg at $default_root"
     echo
     echo "Add this to your shell profile:"
@@ -41,9 +42,7 @@ ensure_vcpkg
 echo
 echo "== python tracks =="
 uv python install
-uv sync --python-preference only-managed
-uv sync --project python_pure --python-preference only-managed
-uv sync --project python_cpp --python-preference only-managed
+tools/sync_python_tracks.sh python_pure:volarb-py python_cpp:volarb-cpp
 
 echo
 echo "== c++ configure =="

@@ -10,12 +10,39 @@ Installs `cmake` and `ninja` via Homebrew, clones and bootstraps vcpkg into `~/v
 `VCPKG_ROOT` is unset, syncs both `uv` projects, and configures the CMake release preset.
 It is idempotent; rerun it whenever dependencies change.
 
-Every environment is built on the uv-managed CPython pinned in `.python-version`, never on
-whatever interpreter happens to be first on the path. This is not tidiness. A Miniconda base
-interpreter on this machine silently does not process `.pth` files, so editable installs
-resolve at install time and then fail to import with no diagnostic beyond
-`ModuleNotFoundError`. The failure looks exactly like a packaging mistake and costs an hour
-to trace. `--python-preference only-managed` removes the class of problem.
+### Why the Python tracks are installed non-editable
+
+`tools/sync_python_tracks.sh` installs each track with `--no-editable` and an explicit
+`--reinstall-package`, and everything downstream runs `uv run --no-sync`. That combination
+looks fussy, so it is worth recording why each piece is there.
+
+An editable install works through a `.pth` file in `site-packages`. On macOS, uv marks
+those files with the `UF_HIDDEN` flag, and CPython 3.13 skips `.pth` files that are hidden.
+The result is an editable install that is present and correct on disk and simply never
+takes effect. The only symptom is `ModuleNotFoundError` from the console script, which
+looks exactly like a packaging mistake and leads nowhere:
+
+```sh
+ls -lO .venv/lib/python3.13/site-packages/*.pth   # shows the "hidden" flag
+python -X importtime -c pass 2>&1 | grep pth      # "Skipping hidden .pth file"
+```
+
+Clearing the flag with `chflags nohidden` fixes it until the next `uv` invocation quietly
+reapplies it, so the workaround does not hold. `--no-editable` avoids `.pth` entirely by
+copying the package into `site-packages`.
+
+That introduces the opposite hazard: `uv sync` does not notice a source edit, so a plain
+sync leaves the old code installed and the whole suite then verifies a stale artifact. That
+failure is far more dangerous than the one being fixed, because it is green. Forcing
+`--reinstall-package` on every sync closes it, at a cost of roughly half a second.
+
+`--no-sync` on every `uv run` keeps the environment from being rebuilt underneath a running
+comparison. Conformance should measure the environment that `sync_python_tracks.sh`
+prepared, not one that changes halfway through the run.
+
+Every environment is also built on the uv-managed CPython pinned in `.python-version`
+rather than on whatever interpreter is first on the path, so the toolchain does not depend
+on a Homebrew or Miniconda installation that another machine will not have.
 
 ## Everything at once
 
@@ -65,7 +92,7 @@ All three tracks take the same command line.
 ```sh
 uv run --project python_pure volarb-py     price-options --input in.json --output out.json
 uv run --project python_cpp  volarb-cpp    price-options --input in.json --output out.json
-cpp_pure/build/release/volarb-native       price-options --input in.json --output out.json
+build/release/cpp_pure/volarb-native       price-options --input in.json --output out.json
 ```
 
 ## Live trading gate

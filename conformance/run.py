@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -27,6 +26,7 @@ RUN_TIMEOUT_SECONDS: Final[float] = 300.0
 class Track:
     name: str
     command: list[str]
+    built_when_present: Path
 
 
 @dataclass(frozen=True)
@@ -38,6 +38,13 @@ class Fixture:
 
 
 @dataclass(frozen=True)
+class TrackState:
+    track: Track
+    condition: str
+    failure: str | None
+
+
+@dataclass(frozen=True)
 class ComparisonSettings:
     schema: str
     tolerances: dict[str, Any]
@@ -46,8 +53,8 @@ class ComparisonSettings:
 
 @dataclass
 class Report:
-    available_tracks: list[str] = field(default_factory=list)
-    unavailable_tracks: list[str] = field(default_factory=list)
+    ready_tracks: list[str] = field(default_factory=list)
+    missing_tracks: list[str] = field(default_factory=list)
     checks_run: int = 0
     failures: list[str] = field(default_factory=list)
 
@@ -55,17 +62,14 @@ class Report:
 def load_configuration() -> tuple[dict[str, Track], dict[str, dict[str, str]]]:
     with TRACKS_PATH.open("rb") as handle:
         configuration = tomllib.load(handle)
-    tracks = {name: Track(name, entry["command"]) for name, entry in configuration["tracks"].items()}
+    tracks = {
+        name: Track(name, entry["command"], REPOSITORY_ROOT / entry["built_when_present"])
+        for name, entry in configuration["tracks"].items()
+    }
     return tracks, configuration["verbs"]
 
 
-def track_is_available(track: Track) -> bool:
-    executable = track.command[0]
-    if shutil.which(executable) is None and not (REPOSITORY_ROOT / executable).exists():
-        return False
-    if len(track.command) == 1:
-        return True
-    entry_point = track.command[-1]
+def probe_track(track: Track) -> str | None:
     probe = subprocess.run(
         [*track.command, "--help"],
         cwd=REPOSITORY_ROOT,
@@ -73,7 +77,21 @@ def track_is_available(track: Track) -> bool:
         timeout=RUN_TIMEOUT_SECONDS,
         check=False,
     )
-    return probe.returncode == 0 and entry_point.encode() in probe.stdout
+    if probe.returncode != 0:
+        return probe.stderr.decode().strip().splitlines()[-1] if probe.stderr else "probe exited non-zero"
+    expected_name = Path(track.command[-1]).name.encode()
+    if expected_name not in probe.stdout:
+        return f"probe output does not mention {expected_name.decode()}"
+    return None
+
+
+def classify_track(track: Track) -> TrackState:
+    if not track.built_when_present.exists():
+        return TrackState(track, "missing", None)
+    failure = probe_track(track)
+    if failure is not None:
+        return TrackState(track, "broken", failure)
+    return TrackState(track, "ready", None)
 
 
 def discover_fixtures(verbs: dict[str, dict[str, str]], selected_verb: str | None) -> list[Fixture]:
@@ -178,12 +196,14 @@ def main() -> int:
     report = Report()
     runnable: list[Track] = []
     for name in selected:
-        track = all_tracks[name]
-        if track_is_available(track):
-            runnable.append(track)
-            report.available_tracks.append(name)
+        state = classify_track(all_tracks[name])
+        if state.condition == "ready":
+            runnable.append(state.track)
+            report.ready_tracks.append(name)
+        elif state.condition == "missing":
+            report.missing_tracks.append(name)
         else:
-            report.unavailable_tracks.append(name)
+            report.failures.append(f"{name}: present but not runnable: {state.failure}")
 
     fixtures = discover_fixtures(verbs, arguments.verb)
     for fixture in fixtures:
@@ -194,9 +214,9 @@ def main() -> int:
         )
         check_fixture(fixture, runnable, settings, report)
 
-    print(f"tracks available:   {', '.join(report.available_tracks) or 'none'}")
-    if report.unavailable_tracks:
-        print(f"tracks not built:   {', '.join(report.unavailable_tracks)}")
+    print(f"tracks ready:       {', '.join(report.ready_tracks) or 'none'}")
+    if report.missing_tracks:
+        print(f"tracks not built:   {', '.join(report.missing_tracks)}")
     print(f"fixtures:           {len(fixtures)}")
     print(f"comparisons:        {report.checks_run}")
 

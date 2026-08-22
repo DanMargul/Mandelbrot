@@ -1,11 +1,14 @@
 [tracks.python_pure]
-command = ["uv", "run", "--project", "python_pure", "volarb-py"]
+command = ["uv", "run", "--no-sync", "--project", "python_pure", "volarb-py"]
+built_when_present = "python_pure/pyproject.toml"
 
 [tracks.python_cpp]
-command = ["uv", "run", "--project", "python_cpp", "volarb-cpp"]
+command = ["uv", "run", "--no-sync", "--project", "python_cpp", "volarb-cpp"]
+built_when_present = "python_cpp/pyproject.toml"
 
 [tracks.cpp_pure]
-command = ["cpp_pure/build/release/volarb-native"]
+command = ["build/release/cpp_pure/volarb-native"]
+built_when_present = "build/release/cpp_pure/volarb-native"
 
 [verbs.price-options]
 input_schema = "pricing_request/v1"
