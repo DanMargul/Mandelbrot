@@ -1,0 +1,68 @@
+# Roadmap
+
+A phase is complete only when all three tracks pass conformance on that phase's fixtures.
+Partial completion in one track is not progress; it is drift.
+
+## Phase 0 — Skeleton (done)
+
+Repository layout, bootstrap, three build systems, spec format, conformance runner,
+convention linter. All three tracks build and pass an empty conformance run.
+
+## Phase 1 — Pricing and implied volatility (done)
+
+Black-Scholes price and greeks in the forward measure, robust implied volatility inversion.
+Fixtures cover deep in and out of the money, near-zero volatility, near-expiry, and
+zero-vega degenerate cases, cross-checked against `mpmath` at 50 digits.
+
+This is first because it is the largest expected native speedup and the cleanest possible
+conformance target: pure functions, no state, no data dependencies.
+
+## Phase 2 — Data and instruments
+
+Polygon ingestion to canonical Parquet; Parquet readers in all three tracks; expiry
+calendar; forward and discount curves **implied from put-call parity** rather than assumed
+from a rate and a dividend forecast.
+
+That choice is the correctness lever for the whole project. If the forward is wrong, every
+surface residual downstream is a curve misspecification wearing the costume of an edge.
+Start on SPX, which is European and cash settled, to defer American exercise; add
+Bjerksund-Stensland and CRR for single names at the end of the phase.
+
+## Phase 3 — Surface
+
+SVI raw parameterization, slice calibration under the Durrleman butterfly condition, SSVI
+global fit with calendar-monotone total variance, interpolation and controlled wing
+extrapolation. Fixtures assert the no-arbitrage invariants directly, not only the parameter
+values, so a refactor that happens to reproduce the numbers but breaks the constraint still
+fails.
+
+## Phase 4 — Arbitrage detection and signals
+
+Static bound violations on raw quotes first: butterfly, calendar and vertical spread
+bounds. These are forecast-free, cheap, and make an excellent conformance test because the
+answer is a discrete set rather than a float.
+
+Then fitted residuals to z-scores to ranked candidate spreads, vega-neutral by construction.
+
+## Phase 5 — Backtest and paper portfolio
+
+Snapshot event loop, delta-band hedging, spread-crossing and slippage cost model,
+`PaperBroker`. Costs are modelled from the first backtest rather than added later. A
+surface relative-value result computed at mid is not a result; the edge in this strategy
+family is frequently smaller than the spread being crossed to capture it.
+
+## Phase 6 — Reporting
+
+P&L attribution decomposed into delta, gamma, vega, theta and residual, so an apparent edge
+can be traced to the vega it was supposed to come from rather than to unhedged delta that
+happened to point the right way over the sample.
+
+## Phase 7 — Live interface (stub only)
+
+Broker interface, risk limits, kill switches. Not wired to any venue. Gated on the paper
+trading sign-off recorded in `docs/runbook.md`.
+
+## Cross-cutting
+
+`benchmarks/` gains a timed workload for every module from Phase 1 onward, run identically
+across all three tracks and reported as a tracked table.
