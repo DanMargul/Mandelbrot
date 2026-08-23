@@ -20,6 +20,7 @@ from volarb_py.documents import (
     required_string,
     write_document,
 )
+from volarb_py.forward_curve import ForwardCurvePoint, imply_forward_curve
 from volarb_py.implied_vol import ImpliedVolatilityInputs, invert_black_implied_volatility
 from volarb_py.market_data import (
     AsOfChainReader,
@@ -138,6 +139,56 @@ def read_chain_as_of_records(records: list[JsonRecord]) -> list[JsonRecord]:
     return snapshots
 
 
+def forward_curve_record(query_id: str, underlying_symbol: str, point: ForwardCurvePoint) -> JsonRecord:
+    return {
+        "id": f"{query_id}|{format_canonical_date(point.expiry_date)}",
+        "query_id": query_id,
+        "underlying_symbol": underlying_symbol,
+        "expiry_date": format_canonical_date(point.expiry_date),
+        "years_to_expiry": point.years_to_expiry,
+        "spot_price": point.spot_price,
+        "forward": point.forward,
+        "forward_standard_error": point.forward_standard_error,
+        "discount_factor": point.discount_factor,
+        "discount_factor_standard_error": point.discount_factor_standard_error,
+        "implied_zero_rate": point.implied_zero_rate,
+        "implied_carry_rate": point.implied_carry_rate,
+        "parity_pair_count": point.parity_pair_count,
+        "active_pair_count": point.active_pair_count,
+        "chi_square_per_degree_of_freedom": point.chi_square_per_degree_of_freedom,
+        "discount_factor_is_monotone_in_expiry": point.discount_factor_is_monotone_in_expiry,
+        "status": point.status,
+    }
+
+
+def imply_forward_curve_records(records: list[JsonRecord]) -> list[JsonRecord]:
+    readers: dict[tuple[str, str], AsOfChainReader] = {}
+    curve: list[JsonRecord] = []
+    for record in records:
+        dataset_root = required_string(record, "dataset_root")
+        horizon_text = required_string(record, "knowledge_horizon")
+        cache_key = (dataset_root, horizon_text)
+        if cache_key not in readers:
+            readers[cache_key] = open_chain_dataset(
+                Path(dataset_root), KnowledgeHorizon(parse_canonical_timestamp(horizon_text))
+            )
+        observation_time = parse_canonical_timestamp(required_string(record, "observation_time"))
+        underlying_symbol = required_string(record, "underlying_symbol")
+        quotes = readers[cache_key].chain_as_of(
+            ChainQuery(
+                underlying_symbol=underlying_symbol,
+                observation_time=observation_time,
+                include_adjusted_contracts=optional_boolean(record, "include_adjusted_contracts", False),
+            )
+        )
+        query_id = required_string(record, "id")
+        curve.extend(
+            forward_curve_record(query_id, underlying_symbol, point)
+            for point in imply_forward_curve(quotes, observation_time)
+        )
+    return curve
+
+
 VERBS: Final[dict[str, Verb]] = {
     "price-options": Verb(
         name="price-options",
@@ -156,6 +207,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="chain_query/v1",
         output_schema="chain_snapshot/v1",
         transform_records=read_chain_as_of_records,
+    ),
+    "imply-forward-curve": Verb(
+        name="imply-forward-curve",
+        input_schema="chain_query/v1",
+        output_schema="forward_curve/v1",
+        transform_records=imply_forward_curve_records,
     ),
 }
 

@@ -10,6 +10,7 @@ DISCOUNT_FACTOR = 0.9876543
 STRIKES = (60.0, 90.0, 99.0, 100.0, 101.0, 130.0, 250.0)
 EXPIRIES = (0.019178, 0.25, 1.0, 5.0)
 VOLATILITIES = (0.05, 0.15, 0.35, 1.2)
+SPX_EXPIRY_COUNT = 2
 
 
 def pricing_inputs(strike: float, years: float, volatility: float, option_type: str) -> object:
@@ -112,3 +113,34 @@ def test_failed_inversions_report_infinite_uncertainty() -> None:
     assert result.status == "below_intrinsic"
     assert result.volatility == 0.0
     assert math.isinf(result.volatility_uncertainty)
+
+
+def test_the_forward_curve_is_reachable_through_the_bindings() -> None:
+    reader = core.open_chain_dataset("spec/fixtures/datasets/synthetic_chain", "2026-08-21T17:00:00.000000Z")
+    quotes = reader.chain_as_of(
+        underlying_symbol="SPX",
+        observation_time="2026-08-21T17:00:00.000000Z",
+        include_adjusted_contracts=False,
+    )
+    points = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z")
+    assert len(points) == SPX_EXPIRY_COUNT
+    for point in points:
+        assert point.status == "converged"
+        assert point.forward > 0.0
+        assert 0.0 < point.discount_factor <= 1.0
+        assert point.forward_standard_error is not None
+        assert point.active_pair_count < point.parity_pair_count
+
+
+def test_a_failed_curve_point_reports_none_rather_than_a_number() -> None:
+    reader = core.open_chain_dataset("spec/fixtures/datasets/synthetic_chain", "2026-08-21T17:00:00.000000Z")
+    quotes = reader.chain_as_of(
+        underlying_symbol="THIN",
+        observation_time="2026-08-21T17:00:00.000000Z",
+        include_adjusted_contracts=False,
+    )
+    points = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z")
+    assert len(points) == 1
+    assert points[0].status == "too_few_pairs"
+    assert points[0].forward_standard_error is None
+    assert points[0].implied_zero_rate is None

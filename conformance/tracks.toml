@@ -14,6 +14,10 @@ built_when_present = "build/release/cpp_pure/volarb-native"
 input_schema = "chain_query/v1"
 output_schema = "chain_snapshot/v1"
 
+[verbs.imply-forward-curve]
+input_schema = "chain_query/v1"
+output_schema = "forward_curve/v1"
+
 [verbs.price-options]
 input_schema = "pricing_request/v1"
 output_schema = "pricing_result/v1"

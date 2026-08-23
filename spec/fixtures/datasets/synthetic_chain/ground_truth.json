@@ -1,0 +1,16 @@
+{
+  "schema": "synthetic_ground_truth/v1",
+  "risk_free_rate": 0.0425,
+  "expiry_settlement_hour_utc": 21,
+  "underlyings": {
+    "SPX": {
+      "carry_rate": 0.0135
+    },
+    "THIN": {
+      "carry_rate": 0.0
+    },
+    "AAPL": {
+      "carry_rate": 0.087
+    }
+  }
+}

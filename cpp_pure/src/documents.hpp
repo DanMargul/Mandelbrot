@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include <filesystem>
+#include <optional>
 #include <stdexcept>
 #include <string>
 
@@ -28,5 +29,6 @@ double required_number(const nlohmann::json& record, const std::string& field);
 OptionType required_option_type(const nlohmann::json& record, const std::string& field);
 bool optional_boolean(const nlohmann::json& record, const std::string& field, bool fallback);
 nlohmann::json json_safe_number(double value);
+nlohmann::json json_optional_number(const std::optional<double>& value);
 
 }

@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import math
+import random
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any, Final
@@ -16,6 +17,14 @@ SYNTHETIC_SOURCE: Final[str] = "synthetic"
 QUOTE_MINIMUM_SPREAD: Final[float] = 0.05
 QUOTE_PROPORTIONAL_SPREAD: Final[float] = 0.02
 DAYS_PER_YEAR: Final[float] = 365.0
+
+QUOTE_NOISE_SEED: Final[int] = 20260821
+QUOTE_NOISE_FRACTION_OF_HALF_SPREAD: Final[float] = 0.30
+STALE_QUOTE_WIDENING: Final[float] = 12.0
+STALE_QUOTE_MID_SHIFT: Final[float] = 0.9
+
+RISK_FREE_RATE: Final[float] = 0.0425
+EXPIRY_SETTLEMENT_HOUR_UTC: Final[int] = 21
 
 BASE_VOLATILITY: Final[float] = 0.18
 VOLATILITY_SKEW: Final[float] = -0.35
@@ -38,8 +47,10 @@ class SyntheticContract:
 class SyntheticUnderlying:
     symbol: str
     reference_price: float
+    carry_rate: float
     expiries: tuple[date, ...]
     strike_offsets: tuple[float, ...]
+    stale_strike_offset: float
 
 
 OBSERVATION_TIMES: Final[tuple[datetime, ...]] = (
@@ -56,14 +67,26 @@ UNDERLYINGS: Final[tuple[SyntheticUnderlying, ...]] = (
     SyntheticUnderlying(
         symbol="SPX",
         reference_price=4800.0,
+        carry_rate=0.0135,
         expiries=(date(2026, 9, 18), date(2026, 12, 18)),
-        strike_offsets=(-0.10, -0.05, -0.02, 0.0, 0.02, 0.05, 0.10),
+        strike_offsets=(-0.10, -0.07, -0.05, -0.02, 0.0, 0.02, 0.05, 0.07, 0.10),
+        stale_strike_offset=-0.07,
+    ),
+    SyntheticUnderlying(
+        symbol="THIN",
+        reference_price=50.0,
+        carry_rate=0.0,
+        expiries=(date(2026, 9, 18),),
+        strike_offsets=(-0.05, 0.05),
+        stale_strike_offset=99.0,
     ),
     SyntheticUnderlying(
         symbol="AAPL",
         reference_price=225.0,
+        carry_rate=0.0870,
         expiries=(date(2026, 9, 18),),
-        strike_offsets=(-0.05, 0.0, 0.05),
+        strike_offsets=(-0.08, -0.05, -0.02, 0.0, 0.02, 0.05, 0.08),
+        stale_strike_offset=0.05,
     ),
 )
 
@@ -86,13 +109,23 @@ def synthetic_volatility(strike: float, forward: float, years_to_expiry: float) 
 
 
 def years_between(moment: datetime, expiry: date) -> float:
-    expiry_moment = datetime(expiry.year, expiry.month, expiry.day, 21, 0, 0, tzinfo=UTC)
+    expiry_moment = datetime(
+        expiry.year, expiry.month, expiry.day, EXPIRY_SETTLEMENT_HOUR_UTC, 0, 0, tzinfo=UTC
+    )
     return max((expiry_moment - moment).total_seconds() / (DAYS_PER_YEAR * 86400.0), 1.0 / DAYS_PER_YEAR)
 
 
 def underlying_price_at(underlying: SyntheticUnderlying, observation_time: datetime) -> float:
     minutes_elapsed = (observation_time - OBSERVATION_TIMES[0]).total_seconds() / 60.0
     return underlying.reference_price * (1.0 + 0.0004 * math.sin(minutes_elapsed / 37.0))
+
+
+def discount_factor_for(years_to_expiry: float) -> float:
+    return math.exp(-RISK_FREE_RATE * years_to_expiry)
+
+
+def forward_for(spot_price: float, carry_rate: float, years_to_expiry: float) -> float:
+    return spot_price * math.exp((RISK_FREE_RATE - carry_rate) * years_to_expiry)
 
 
 def contracts_for(underlying: SyntheticUnderlying) -> list[SyntheticContract]:
@@ -143,30 +176,38 @@ class QuoteRevision:
     observation_time: datetime
     knowledge_time: datetime
     ingest_sequence: int
-    underlying_price: float
+    spot_price: float
+    carry_rate: float
     price_multiplier: float
     open_interest: int | None
+    is_stale: bool
 
 
-def quote_row(contract: SyntheticContract, revision: QuoteRevision) -> dict[str, Any]:
+def quote_row(contract: SyntheticContract, revision: QuoteRevision, noise: random.Random) -> dict[str, Any]:
     observation_time = revision.observation_time
-    underlying_price = revision.underlying_price
+    spot_price = revision.spot_price
     years = years_between(observation_time, contract.expiry_date)
-    volatility = synthetic_volatility(contract.strike, underlying_price, years)
+    discount_factor = discount_factor_for(years)
+    forward = forward_for(spot_price, revision.carry_rate, years)
+    volatility = synthetic_volatility(contract.strike, forward, years)
     fair_value = (
         black_scholes_price(
             BlackScholesInputs(
-                forward=underlying_price,
+                forward=forward,
                 strike=contract.strike,
                 years_to_expiry=years,
                 volatility=volatility,
-                discount_factor=1.0,
+                discount_factor=discount_factor,
                 option_type=contract.option_type,
             )
         )
         * revision.price_multiplier
     )
     half_spread = 0.5 * max(QUOTE_MINIMUM_SPREAD, QUOTE_PROPORTIONAL_SPREAD * fair_value)
+    if revision.is_stale:
+        half_spread *= STALE_QUOTE_WIDENING
+        fair_value += STALE_QUOTE_MID_SHIFT * half_spread
+    fair_value += QUOTE_NOISE_FRACTION_OF_HALF_SPREAD * half_spread * noise.uniform(-1.0, 1.0)
     return {
         "underlying_symbol": contract.underlying_symbol,
         "contract_symbol": occ_contract_symbol(
@@ -180,7 +221,7 @@ def quote_row(contract: SyntheticContract, revision: QuoteRevision) -> dict[str,
         "event_time": observation_time,
         "knowledge_time": revision.knowledge_time,
         "ingest_sequence": revision.ingest_sequence,
-        "underlying_price": underlying_price,
+        "underlying_price": spot_price,
         "bid_price": round(max(fair_value - half_spread, 0.0), 4),
         "ask_price": round(fair_value + half_spread, 4),
         "bid_size": 25,
@@ -201,35 +242,50 @@ def corrected_contract_symbol(underlying: SyntheticUnderlying) -> str:
     )
 
 
+def stale_strike_for(underlying: SyntheticUnderlying) -> float:
+    return round(underlying.reference_price * (1.0 + underlying.stale_strike_offset), 2)
+
+
 def synthetic_rows() -> list[dict[str, Any]]:
+    noise = random.Random(QUOTE_NOISE_SEED)
     rows: list[dict[str, Any]] = []
     sequence = 0
     for underlying in UNDERLYINGS:
         correction_target = corrected_contract_symbol(underlying)
+        stale_strike = stale_strike_for(underlying)
         for contract in contracts_for(underlying):
             symbol = occ_contract_symbol(
                 contract.underlying_symbol, contract.expiry_date, contract.option_type, contract.strike
             )
+            is_stale = contract.strike == stale_strike and contract.option_type == "call"
             for observation_time in OBSERVATION_TIMES:
                 if observation_time < contract.listed_from:
                     continue
-                price = underlying_price_at(underlying, observation_time)
-                rows.append(
-                    quote_row(
-                        contract,
-                        QuoteRevision(observation_time, observation_time, sequence, price, 1.0, None),
-                    )
+                spot_price = underlying_price_at(underlying, observation_time)
+                base = QuoteRevision(
+                    observation_time=observation_time,
+                    knowledge_time=observation_time,
+                    ingest_sequence=sequence,
+                    spot_price=spot_price,
+                    carry_rate=underlying.carry_rate,
+                    price_multiplier=1.0,
+                    open_interest=None,
+                    is_stale=is_stale,
                 )
+                rows.append(quote_row(contract, base, noise))
                 sequence += 1
 
-                is_correction_point = symbol == correction_target and observation_time == OBSERVATION_TIMES[1]
-                if is_correction_point:
+                if symbol == correction_target and observation_time == OBSERVATION_TIMES[1]:
                     rows.append(
                         quote_row(
                             contract,
-                            QuoteRevision(
-                                observation_time, CORRECTION_KNOWLEDGE_TIME, sequence, price, 1.05, None
+                            replace(
+                                base,
+                                knowledge_time=CORRECTION_KNOWLEDGE_TIME,
+                                ingest_sequence=sequence,
+                                price_multiplier=1.05,
                             ),
+                            noise,
                         )
                     )
                     sequence += 1
@@ -238,9 +294,13 @@ def synthetic_rows() -> list[dict[str, Any]]:
                     rows.append(
                         quote_row(
                             contract,
-                            QuoteRevision(
-                                observation_time, SETTLEMENT_KNOWLEDGE_TIME, sequence, price, 1.0, 4321
+                            replace(
+                                base,
+                                knowledge_time=SETTLEMENT_KNOWLEDGE_TIME,
+                                ingest_sequence=sequence,
+                                open_interest=4321,
                             ),
+                            noise,
                         )
                     )
                     sequence += 1

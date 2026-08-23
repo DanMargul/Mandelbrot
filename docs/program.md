@@ -30,23 +30,34 @@ either handled or excluded by an explicit flag, never silently mixed in.
 
 ## 2. Forwards, discounts, and borrow implied from the options themselves
 
-*Extends Phase 2. The correctness lever for everything downstream.*
+*Extends Phase 2. **Done.** See `spec/interfaces/forward_curve.md`.*
 
 For each underlying and expiry, `C - P = DF * (F - K)`, so regressing the call-put
 difference on strike gives `-DF` as slope and `DF * F` as intercept. Robust regression, not
 least squares, because the wings are noisy.
 
-The weights come from Phase 1: `volatility_uncertainty` already says which quotes resolve
-anything, so the regression can weight by measured resolution rather than by a moneyness
-rule. This is the first place that field earns its keep.
+The weights were going to come from Phase 1, on the reasoning that
+`volatility_uncertainty` already says which quotes resolve anything. **That was wrong, and
+the implementation found it.** That quantity needs a vega, a vega needs a forward, and the
+forward is what this step computes; the dependency is circular. The weight is instead the
+inverse variance of the measured difference, `1 / (call_half_spread^2 + put_half_spread^2)`,
+which is model-free like parity itself.
 
 From the forward term structure, back out implied borrow and implied dividends. A forward
 below the no-borrow forward means expensive borrow, which is simultaneously a data-quality
 flag and a tradeable signal.
 
-**Done when** the implied discount term structure sits within a stated basis-point band of
-OIS, implied dividends reproduce announced schedules for names that have them, and
-hard-to-borrow names are flagged rather than silently producing garbage surfaces.
+The measured outcome changed the plan for what comes after. The forward is recovered to a
+few parts in `1e5`; the discount factor only to about `1e-3`, which is two percentage points
+of zero rate at a four-week expiry. A discount factor error is a per-slice level shift that a
+surface fit largely absorbs, so within-expiry relative value is close to immune, but it does
+not cancel across expiries. **Calendar and term-structure signals therefore need a real rate
+curve and cannot use rates implied from parity.** That is now a prerequisite of step 5 rather
+than an assumption inside it.
+
+**Done when** the forward and discount factor recover synthetic ground truth inside their own
+reported standard errors, a deliberately stale quote is trimmed, and hard-to-borrow names are
+flagged rather than silently producing garbage surfaces.
 
 ---
 

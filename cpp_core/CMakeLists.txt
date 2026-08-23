@@ -10,6 +10,7 @@ add_library(volarb_core STATIC
     src/pricing.cpp
     src/implied_vol.cpp
     src/market_data.cpp
+    src/forward_curve.cpp
 )
 
 target_include_directories(volarb_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -28,6 +29,7 @@ if(VOLARB_CORE_BUILD_TESTS)
         tests/test_pricing.cpp
         tests/test_implied_vol.cpp
         tests/test_market_data.cpp
+        tests/test_forward_curve.cpp
     )
     target_link_libraries(volarb_core_tests PRIVATE volarb_core volarb_warnings Catch2::Catch2WithMain)
     target_compile_definitions(volarb_core_tests PRIVATE

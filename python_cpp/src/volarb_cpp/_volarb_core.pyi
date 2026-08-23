@@ -45,6 +45,31 @@ class AsOfChainReader:
 
 def open_chain_dataset(dataset_root: str, knowledge_horizon: str) -> AsOfChainReader: ...
 
+ForwardCurveStatus = Literal[
+    "converged",
+    "too_few_pairs",
+    "degenerate_strike_range",
+    "non_positive_discount_factor",
+]
+
+class ForwardCurvePoint:
+    expiry_date: str
+    years_to_expiry: float
+    spot_price: float
+    forward: float
+    forward_standard_error: float | None
+    discount_factor: float
+    discount_factor_standard_error: float | None
+    implied_zero_rate: float | None
+    implied_carry_rate: float | None
+    parity_pair_count: int
+    active_pair_count: int
+    chi_square_per_degree_of_freedom: float | None
+    discount_factor_is_monotone_in_expiry: bool
+    status: ForwardCurveStatus
+
+def imply_forward_curve(quotes: list[ContractQuote], observation_time: str) -> list[ForwardCurvePoint]: ...
+
 class BlackScholesInputs:
     forward: float
     strike: float

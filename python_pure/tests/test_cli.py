@@ -7,7 +7,7 @@ from typing import Any
 
 import jsonschema
 import pytest
-from conftest import FIXTURE_ROOT, SCHEMA_ROOT, fixture_families, load_json
+from conftest import FIXTURE_ROOT, SCHEMA_ROOT, field_tolerance, fixture_families, load_json
 from volarb_py.cli import VERBS, main
 
 VERB_NAMES = sorted(VERBS)
@@ -40,14 +40,17 @@ def load_schema(schema_id: str) -> dict[str, Any]:
     return load_json(SCHEMA_ROOT / filename)
 
 
-def assert_numerically_equal(actual: Any, expected: Any, context: str) -> None:
-    if expected is None or isinstance(expected, str | bool):
+def assert_matches_within_specified_tolerance(
+    actual: Any, expected: Any, schema: str, field: str, context: str
+) -> None:
+    relative, absolute, exact = field_tolerance(schema, field)
+    if exact or expected is None or isinstance(expected, str | bool):
         assert actual == expected, context
         return
-    if math.isinf(expected) or expected == 0.0:
+    if math.isinf(expected):
         assert actual == expected, context
         return
-    assert actual == pytest.approx(expected, rel=1e-15, abs=1e-300), context
+    assert actual == pytest.approx(expected, rel=relative, abs=absolute), context
 
 
 @pytest.mark.parametrize(("verb", "family"), every_fixture())
@@ -74,10 +77,9 @@ def test_track_reproduces_the_golden_fixture(verb: str, family: str) -> None:
         assert actual_record["id"] == expected_record["id"]
         for field, expected_value in expected_record.items():
             context = f"{verb}/{family} {expected_record['id']} field {field}"
-            if field in EXACT_FIELDS:
-                assert actual_record[field] == expected_value, context
-            else:
-                assert_numerically_equal(actual_record[field], expected_value, context)
+            assert_matches_within_specified_tolerance(
+                actual_record[field], expected_value, specification.output_schema, field, context
+            )
 
 
 @pytest.mark.parametrize(("verb", "family"), every_fixture())

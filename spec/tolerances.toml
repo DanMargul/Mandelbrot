@@ -88,3 +88,60 @@ exact = true
 
 ["chain_snapshot/v1".ask_size]
 exact = true
+
+["forward_curve/v1".query_id]
+exact = true
+
+["forward_curve/v1".underlying_symbol]
+exact = true
+
+["forward_curve/v1".expiry_date]
+exact = true
+
+["forward_curve/v1".status]
+exact = true
+
+["forward_curve/v1".parity_pair_count]
+exact = true
+
+["forward_curve/v1".active_pair_count]
+exact = true
+
+["forward_curve/v1".discount_factor_is_monotone_in_expiry]
+exact = true
+
+["forward_curve/v1".years_to_expiry]
+relative = 1e-14
+absolute = 1e-16
+
+["forward_curve/v1".spot_price]
+relative = 1e-15
+absolute = 1e-15
+
+["forward_curve/v1".forward]
+relative = 1e-12
+absolute = 1e-12
+
+["forward_curve/v1".forward_standard_error]
+relative = 1e-10
+absolute = 1e-14
+
+["forward_curve/v1".discount_factor]
+relative = 1e-13
+absolute = 1e-15
+
+["forward_curve/v1".discount_factor_standard_error]
+relative = 1e-10
+absolute = 1e-16
+
+["forward_curve/v1".implied_zero_rate]
+relative = 1e-11
+absolute = 1e-14
+
+["forward_curve/v1".implied_carry_rate]
+relative = 1e-11
+absolute = 1e-14
+
+["forward_curve/v1".chi_square_per_degree_of_freedom]
+relative = 1e-10
+absolute = 1e-14

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -17,7 +18,13 @@ from polygon import (
     rows_from_snapshot_pages,
     snapshot_pages,
 )
-from synthetic import SYNTHETIC_SOURCE, synthetic_rows
+from synthetic import (
+    EXPIRY_SETTLEMENT_HOUR_UTC,
+    RISK_FREE_RATE,
+    SYNTHETIC_SOURCE,
+    UNDERLYINGS,
+    synthetic_rows,
+)
 from writer import write_dataset
 
 REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
@@ -71,6 +78,18 @@ def collect_rows(arguments: argparse.Namespace) -> tuple[list[dict[str, Any]], s
     return rows_from_polygon(arguments.underlying, arguments.record_to), POLYGON_SOURCE
 
 
+def write_ground_truth(dataset_root: Path) -> None:
+    payload = {
+        "schema": "synthetic_ground_truth/v1",
+        "risk_free_rate": RISK_FREE_RATE,
+        "expiry_settlement_hour_utc": EXPIRY_SETTLEMENT_HOUR_UTC,
+        "underlyings": {
+            underlying.symbol: {"carry_rate": underlying.carry_rate} for underlying in UNDERLYINGS
+        },
+    }
+    (dataset_root / "ground_truth.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     arguments = parse_arguments()
     rows, source = collect_rows(arguments)
@@ -78,6 +97,8 @@ def main() -> int:
         print("error: no rows ingested", file=sys.stderr)
         return 1
     partitions = write_dataset(arguments.dataset_root, rows, source, creation_time_for(source, rows))
+    if source == SYNTHETIC_SOURCE:
+        write_ground_truth(arguments.dataset_root)
     total_rows = sum(partition.row_count for partition in partitions)
     print(f"{arguments.dataset_root}: {total_rows} rows across {len(partitions)} partitions")
     for partition in partitions:

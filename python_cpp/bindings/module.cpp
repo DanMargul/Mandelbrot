@@ -1,3 +1,4 @@
+#include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
 #include "volarb/pricing.hpp"
@@ -36,6 +37,9 @@ using volarb::KnowledgeHorizon;
 using volarb::LookaheadRequestedError;
 using volarb::open_chain_dataset;
 using volarb::parse_canonical_timestamp;
+using volarb::ForwardCurvePoint;
+using volarb::imply_forward_curve;
+using volarb::name_of_forward_curve_status;
 
 namespace {
 
@@ -85,6 +89,11 @@ std::vector<ContractQuote> chain_as_of_from_strings(const AsOfChainReader& reade
                                                     bool include_adjusted_contracts) {
     return reader.chain_as_of(ChainQuery{underlying_symbol, parse_canonical_timestamp(observation_time),
                                          include_adjusted_contracts});
+}
+
+std::vector<ForwardCurvePoint> imply_forward_curve_from_strings(
+    const std::vector<ContractQuote>& quotes, const std::string& observation_time) {
+    return imply_forward_curve(quotes, parse_canonical_timestamp(observation_time));
 }
 
 }
@@ -180,6 +189,32 @@ PYBIND11_MODULE(_volarb_core, module) {
 
     module.def("open_chain_dataset", &open_chain_dataset_from_strings, py::arg("dataset_root"),
                py::arg("knowledge_horizon"));
+
+    py::class_<ForwardCurvePoint>(module, "ForwardCurvePoint")
+        .def_readonly("years_to_expiry", &ForwardCurvePoint::years_to_expiry)
+        .def_readonly("spot_price", &ForwardCurvePoint::spot_price)
+        .def_readonly("forward", &ForwardCurvePoint::forward)
+        .def_readonly("forward_standard_error", &ForwardCurvePoint::forward_standard_error)
+        .def_readonly("discount_factor", &ForwardCurvePoint::discount_factor)
+        .def_readonly("discount_factor_standard_error",
+                      &ForwardCurvePoint::discount_factor_standard_error)
+        .def_readonly("implied_zero_rate", &ForwardCurvePoint::implied_zero_rate)
+        .def_readonly("implied_carry_rate", &ForwardCurvePoint::implied_carry_rate)
+        .def_readonly("parity_pair_count", &ForwardCurvePoint::parity_pair_count)
+        .def_readonly("active_pair_count", &ForwardCurvePoint::active_pair_count)
+        .def_readonly("chi_square_per_degree_of_freedom",
+                      &ForwardCurvePoint::chi_square_per_degree_of_freedom)
+        .def_readonly("discount_factor_is_monotone_in_expiry",
+                      &ForwardCurvePoint::discount_factor_is_monotone_in_expiry)
+        .def_property_readonly(
+            "expiry_date",
+            [](const ForwardCurvePoint& point) { return format_canonical_date(point.expiry_date); })
+        .def_property_readonly("status", [](const ForwardCurvePoint& point) {
+            return name_of_forward_curve_status(point.status);
+        });
+
+    module.def("imply_forward_curve", &imply_forward_curve_from_strings, py::arg("quotes"),
+               py::arg("observation_time"));
 
     module.def(
         "out_of_the_money_option_type",

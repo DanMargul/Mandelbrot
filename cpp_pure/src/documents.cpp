@@ -80,6 +80,13 @@ OptionType required_option_type(const nlohmann::json& record, const std::string&
     return option_type_from_name(required_string(record, field));
 }
 
+nlohmann::json json_optional_number(const std::optional<double>& value) {
+    if (!value.has_value()) {
+        return nullptr;
+    }
+    return json_safe_number(*value);
+}
+
 nlohmann::json json_safe_number(double value) {
     if (!std::isfinite(value)) {
         return nullptr;

@@ -163,6 +163,62 @@ can vary by orders of magnitude across the resulting interval on a steep wing, w
 exactly where the estimate is largest. Across the grid it contains 97.3% of realized errors;
 the 99th percentile overshoot is 3.1x and the worst observed is 27x. Apply a safety factor.
 
+## The forward and discount factor from put-call parity
+
+Undiscounted parity is model-free:
+
+```
+C - P = DF * (F - K)
+```
+
+Regressing the mid difference `C - P` on strike gives `-DF` as the slope and `DF * F` as
+the intercept, so both quantities come out of the quotes themselves without a rate curve or
+a dividend forecast. The dividend in particular is worth taking from the market rather than
+from a forecast, because the options market prices it more accurately than a forecast does,
+and because a wrong dividend puts a bias in the forward that reappears downstream as a
+mispricing that is not there.
+
+`spec/interfaces/forward_curve.md` carries the estimator in full: weights, trimming,
+centring, and the measured accuracy. Three consequences belong here because they constrain
+what the rest of the platform may assume.
+
+### The weight cannot be `volatility_uncertainty`
+
+It would be natural to weight the regression by the quantity `implied_vol` already produces
+for exactly this purpose. It is not available: `volatility_uncertainty` needs a vega, a vega
+needs a forward, and the forward is what this regression computes. The dependency is
+circular.
+
+The weight used instead is `1 / (call_half_spread^2 + put_half_spread^2)`, the inverse
+variance of the measured difference under the assumption that a mid is uncertain by about
+its half spread. It is model-free, which is the same property that makes parity worth using
+in the first place.
+
+### The forward is well determined and the discount factor is not
+
+Measured against known ground truth, the forward comes out to a few parts in `1e5` while
+the discount factor is uncertain at the `1e-3` level. Since `DF = exp(-r T)`, a `1e-3`
+uncertainty is a **two percentage point** uncertainty in the zero rate at a four-week
+expiry, and the rate error scales as `1/T`.
+
+This is a property of the data, not of the estimator. The slope of `C - P` against `K` is
+close to `-1` for any short-dated chain, and no strike range available in practice pins the
+small deviation from it.
+
+### What a discount factor error does downstream
+
+An error in `DF` scales every option price in that expiry by the same factor. Converted to
+implied volatility it is close to a uniform level shift of the whole smile.
+
+That shift is **largely absorbed by a surface fit**, so relative value within an expiry, the
+strategy family this platform is built for, is close to immune to it. It is **not** absorbed
+across expiries, because each expiry has its own independent discount factor error. Calendar
+structure and any term-structure signal therefore need a real rate curve, and cannot rely on
+rates implied from parity.
+
+That is the dividing line to remember: parity gives a forward good enough for everything,
+and a rate good enough only for diagnostics.
+
 ## Pseudo-random numbers
 
 Not used before Phase 5. When introduced, both languages use PCG64 with the seed sequence
