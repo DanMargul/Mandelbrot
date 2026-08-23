@@ -1,9 +1,11 @@
 #include "volarb/implied_vol.hpp"
+#include "volarb/market_data.hpp"
 #include "volarb/pricing.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
+#include <filesystem>
 #include <string>
 #include <vector>
 
@@ -23,6 +25,17 @@ using volarb::option_type_from_name;
 using volarb::out_of_the_money_option_type;
 using volarb::standard_normal_cumulative_distribution;
 using volarb::standard_normal_probability_density;
+using volarb::AsOfChainReader;
+using volarb::ChainDatasetError;
+using volarb::ChainQuery;
+using volarb::ContractQuote;
+using volarb::CorruptDatasetError;
+using volarb::format_canonical_date;
+using volarb::format_canonical_timestamp;
+using volarb::KnowledgeHorizon;
+using volarb::LookaheadRequestedError;
+using volarb::open_chain_dataset;
+using volarb::parse_canonical_timestamp;
 
 namespace {
 
@@ -58,6 +71,20 @@ std::vector<ImpliedVolatilityResult> invert_black_implied_volatility_batch(
         results.push_back(invert_black_implied_volatility(inputs));
     }
     return results;
+}
+
+AsOfChainReader open_chain_dataset_from_strings(const std::string& dataset_root,
+                                                const std::string& knowledge_horizon) {
+    return open_chain_dataset(std::filesystem::path(dataset_root),
+                              KnowledgeHorizon{parse_canonical_timestamp(knowledge_horizon)});
+}
+
+std::vector<ContractQuote> chain_as_of_from_strings(const AsOfChainReader& reader,
+                                                    const std::string& underlying_symbol,
+                                                    const std::string& observation_time,
+                                                    bool include_adjusted_contracts) {
+    return reader.chain_as_of(ChainQuery{underlying_symbol, parse_canonical_timestamp(observation_time),
+                                         include_adjusted_contracts});
 }
 
 }
@@ -117,6 +144,43 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("invert_black_implied_volatility", &invert_black_implied_volatility, py::arg("inputs"));
     module.def("invert_black_implied_volatility_batch", &invert_black_implied_volatility_batch,
                py::arg("batch"));
+    py::register_exception<ChainDatasetError>(module, "ChainDatasetError", PyExc_ValueError);
+    py::register_exception<LookaheadRequestedError>(module, "LookaheadRequestedError", PyExc_ValueError);
+    py::register_exception<CorruptDatasetError>(module, "CorruptDatasetError", PyExc_ValueError);
+
+    py::class_<ContractQuote>(module, "ContractQuote")
+        .def_readonly("contract_symbol", &ContractQuote::contract_symbol)
+        .def_readonly("strike", &ContractQuote::strike)
+        .def_readonly("contract_multiplier", &ContractQuote::contract_multiplier)
+        .def_readonly("is_standard_deliverable", &ContractQuote::is_standard_deliverable)
+        .def_readonly("ingest_sequence", &ContractQuote::ingest_sequence)
+        .def_readonly("underlying_price", &ContractQuote::underlying_price)
+        .def_readonly("bid_price", &ContractQuote::bid_price)
+        .def_readonly("ask_price", &ContractQuote::ask_price)
+        .def_readonly("bid_size", &ContractQuote::bid_size)
+        .def_readonly("ask_size", &ContractQuote::ask_size)
+        .def_property_readonly(
+            "expiry_date", [](const ContractQuote& quote) { return format_canonical_date(quote.expiry_date); })
+        .def_property_readonly(
+            "option_type", [](const ContractQuote& quote) { return name_of_option_type(quote.option_type); })
+        .def_property_readonly(
+            "event_time",
+            [](const ContractQuote& quote) { return format_canonical_timestamp(quote.event_time); })
+        .def_property_readonly("knowledge_time", [](const ContractQuote& quote) {
+            return format_canonical_timestamp(quote.knowledge_time);
+        });
+
+    py::class_<AsOfChainReader>(module, "AsOfChainReader")
+        .def("chain_as_of", &chain_as_of_from_strings, py::arg("underlying_symbol"),
+             py::arg("observation_time"), py::arg("include_adjusted_contracts"))
+        .def_property_readonly("dataset_digest", &AsOfChainReader::dataset_digest)
+        .def_property_readonly("knowledge_horizon", [](const AsOfChainReader& reader) {
+            return format_canonical_timestamp(reader.knowledge_horizon());
+        });
+
+    module.def("open_chain_dataset", &open_chain_dataset_from_strings, py::arg("dataset_root"),
+               py::arg("knowledge_horizon"));
+
     module.def(
         "out_of_the_money_option_type",
         [](double forward, double strike) {

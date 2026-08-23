@@ -39,7 +39,9 @@ void require_fields_agree(const nlohmann::json& produced, const nlohmann::json& 
         REQUIRE(produced.contains(field));
         const nlohmann::json& actual_value = produced.at(field);
 
-        if (exactly_compared_fields.contains(field) || expected_value.is_string() || expected_value.is_null()) {
+        const bool compare_exactly = exactly_compared_fields.contains(field) || expected_value.is_string() ||
+                                     expected_value.is_null() || expected_value.is_boolean();
+        if (compare_exactly) {
             REQUIRE(actual_value == expected_value);
             continue;
         }
@@ -64,10 +66,10 @@ TEST_CASE("every golden fixture is reproduced", "[verbs]") {
                 read_document(fixture_root / verb_name / (family + ".input.json"), verb.input_schema);
             const Document expected =
                 read_document(fixture_root / verb_name / (family + ".expected.json"), verb.output_schema);
-            REQUIRE(request.records.size() == expected.records.size());
-
+            const nlohmann::json produced_records = verb.transform_records(request.records);
+            REQUIRE(produced_records.size() == expected.records.size());
             for (std::size_t index = 0; index < request.records.size(); ++index) {
-                const nlohmann::json produced = verb.transform_record(request.records[index]);
+                const nlohmann::json& produced = produced_records[index];
                 const std::string context = verb_name + "/" + family + " record " + std::to_string(index);
                 require_fields_agree(produced, expected.records[index], context);
                 ++compared_records;

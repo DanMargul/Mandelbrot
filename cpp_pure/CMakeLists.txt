@@ -22,4 +22,4 @@ target_compile_definitions(volarb_native_cli_tests PRIVATE
 )
 
 include(Catch)
-catch_discover_tests(volarb_native_cli_tests)
+catch_discover_tests(volarb_native_cli_tests WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

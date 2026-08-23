@@ -63,6 +63,13 @@ def required_float(record: JsonRecord, field: str) -> float:
     return float(value)
 
 
+def optional_boolean(record: JsonRecord, field: str, fallback: bool) -> bool:
+    value = record.get(field, fallback)
+    if not isinstance(value, bool):
+        raise DocumentError(f"field {field!r} must be a boolean, found {value!r}")
+    return value
+
+
 def required_option_type(record: JsonRecord, field: str) -> OptionType:
     value = required_string(record, field)
     if value == "call":

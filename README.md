@@ -23,6 +23,7 @@ tracks over the same fixtures and diffs the results.
 - [`docs/program.md`](docs/program.md) — the ten-step program beyond the roadmap
 - [`docs/runbook.md`](docs/runbook.md) — how to build, test, and run everything
 - [`docs/benchmarks.md`](docs/benchmarks.md) — cross-track timings and how to read them
+- [`docs/data.md`](docs/data.md) — the bitemporal data spine and as-of query semantics
 
 ## Quick start
 
@@ -33,8 +34,9 @@ tools/check_all.sh
 
 ## Status
 
-**Phase 1 of 7 complete.** Pricing and implied volatility are implemented in all three
-tracks and pass conformance: 35 comparisons over 1352 golden fixture records, each track
+**Phase 1 complete; step 1 of [`docs/program.md`](docs/program.md) complete.** Pricing,
+implied volatility, and the point-in-time data spine are implemented in all three tracks
+and pass conformance: 35 comparisons over 1352 golden fixture records, each track
 against the golden documents and each against the others. The fixtures themselves are
 verified against an independent `mpmath` oracle at 50 decimal digits.
 
@@ -44,10 +46,11 @@ takes 31 solver iterations in every track.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2308 passed |
-| `python_cpp` tests | 348 passed |
-| C++ tests (Catch2) | 19 passed |
-| conformance | 35 comparisons, all tracks agree |
+| `python_pure` tests | 2325 passed |
+| `python_cpp` tests | 351 passed |
+| C++ tests (Catch2) | 28 passed |
+| conformance | 40 comparisons, all tracks agree |
+| ingestion tests | 13 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |
 

@@ -6,9 +6,35 @@
 tools/bootstrap.sh
 ```
 
-Installs `cmake` and `ninja` via Homebrew, clones and bootstraps vcpkg into `~/vcpkg` if
-`VCPKG_ROOT` is unset, syncs both `uv` projects, and configures the CMake release preset.
-It is idempotent; rerun it whenever dependencies change.
+Installs the native toolchain via Homebrew, syncs both `uv` projects, and configures the
+CMake release preset. It is idempotent; rerun it whenever dependencies change.
+
+### Why Homebrew and not vcpkg
+
+The native dependencies are `cmake`, `ninja`, `apache-arrow`, `nlohmann-json` and `catch2`,
+all from Homebrew. The project was originally set up with a vcpkg manifest, and that was
+reversed after vcpkg failed to build two required ports on this platform:
+
+| port | pulled in by | failure |
+|---|---|---|
+| `libb2` | `pybind11` | build error on `arm64-osx` |
+| `thrift` | `arrow` | build error on `arm64-osx` |
+
+Neither failure is in a port we control, and both are in transitive dependencies of
+libraries the project cannot do without. The choice was between vendoring patches for other
+people's ports and using prebuilt bottles, and bottles win: the whole native stack installs
+in about a minute, against roughly forty for a from-source Arrow that then does not link.
+
+The cost is that Homebrew pins less precisely than a vcpkg manifest. That is a real
+reproducibility loss and it is accepted knowingly. The mitigating factor is that the C++
+dependency surface is deliberately small: Arrow and Parquet for the data spine,
+nlohmann-json for the document layer, Catch2 for tests, and nothing else. `pybind11` comes
+from the Python environment, which is the correct source for it in any case, since the
+extension must match the interpreter it will be loaded into.
+
+`cmake/volarb_native_dependencies.cmake` resolves the Homebrew prefix by asking `brew`
+rather than hardcoding `/opt/homebrew`, so the same build works on Intel macOS and under a
+non-default prefix.
 
 ### Why the Python tracks are installed non-editable
 
@@ -57,8 +83,9 @@ Any failure stops the script.
 ## Individual steps
 
 ```sh
-uv run --project python_pure pytest
-uv run --project python_cpp  pytest
+uv run --no-sync pytest ingestion/tests
+uv run --no-sync --project python_pure pytest python_pure
+uv run --no-sync --project python_cpp  pytest python_cpp
 
 cmake --preset release
 cmake --build --preset release
@@ -72,6 +99,27 @@ uv run --project python_pure mypy --strict src
 
 uv run benchmarks/run.py
 ```
+
+## Building a dataset
+
+```sh
+uv run --no-sync ingestion/run.py --source synthetic \
+    --dataset-root spec/fixtures/datasets/synthetic_chain
+
+uv run --no-sync ingestion/run.py --source recorded --underlying SPXTEST \
+    --dataset-root data/recorded_chain
+
+export POLYGON_API_KEY=...
+uv run --no-sync ingestion/run.py --source polygon --underlying SPX \
+    --dataset-root data/spx --record-to spec/fixtures/recorded
+```
+
+The synthetic dataset is byte-reproducible and is committed, so the whole stack is testable
+with no key and no network. `--record-to` captures live responses for later offline replay,
+which is how the Polygon mapping gets test coverage without a key.
+
+The API key is read from `POLYGON_API_KEY` and is never accepted on the command line or in
+configuration, so it cannot end up in a shell history or a committed config file.
 
 ## Regenerating fixtures
 

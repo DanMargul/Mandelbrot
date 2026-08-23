@@ -14,6 +14,7 @@ from volarb_cpp.documents import (
     DocumentError,
     JsonRecord,
     json_safe_float,
+    optional_boolean,
     read_document,
     required_float,
     required_option_type,
@@ -27,7 +28,16 @@ class Verb:
     name: str
     input_schema: str
     output_schema: str
-    transform_record: Callable[[JsonRecord], JsonRecord]
+    transform_records: Callable[[list[JsonRecord]], list[JsonRecord]]
+
+
+def mapped_over_records(
+    transform: Callable[[JsonRecord], JsonRecord],
+) -> Callable[[list[JsonRecord]], list[JsonRecord]]:
+    def apply_to_each(records: list[JsonRecord]) -> list[JsonRecord]:
+        return [transform(record) for record in records]
+
+    return apply_to_each
 
 
 def price_option_record(record: JsonRecord) -> JsonRecord:
@@ -72,18 +82,64 @@ def invert_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def chain_snapshot_record(query_id: str, quote: _volarb_core.ContractQuote) -> JsonRecord:
+    return {
+        "id": f"{query_id}|{quote.contract_symbol}",
+        "query_id": query_id,
+        "contract_symbol": quote.contract_symbol,
+        "expiry_date": quote.expiry_date,
+        "strike": quote.strike,
+        "option_type": quote.option_type,
+        "contract_multiplier": quote.contract_multiplier,
+        "is_standard_deliverable": quote.is_standard_deliverable,
+        "event_time": quote.event_time,
+        "knowledge_time": quote.knowledge_time,
+        "ingest_sequence": quote.ingest_sequence,
+        "underlying_price": quote.underlying_price,
+        "bid_price": quote.bid_price,
+        "ask_price": quote.ask_price,
+        "bid_size": quote.bid_size,
+        "ask_size": quote.ask_size,
+    }
+
+
+def read_chain_as_of_records(records: list[JsonRecord]) -> list[JsonRecord]:
+    readers: dict[tuple[str, str], _volarb_core.AsOfChainReader] = {}
+    snapshots: list[JsonRecord] = []
+    for record in records:
+        dataset_root = required_string(record, "dataset_root")
+        horizon_text = required_string(record, "knowledge_horizon")
+        cache_key = (dataset_root, horizon_text)
+        if cache_key not in readers:
+            readers[cache_key] = _volarb_core.open_chain_dataset(dataset_root, horizon_text)
+        quotes = readers[cache_key].chain_as_of(
+            underlying_symbol=required_string(record, "underlying_symbol"),
+            observation_time=required_string(record, "observation_time"),
+            include_adjusted_contracts=optional_boolean(record, "include_adjusted_contracts", False),
+        )
+        query_id = required_string(record, "id")
+        snapshots.extend(chain_snapshot_record(query_id, quote) for quote in quotes)
+    return snapshots
+
+
 VERBS: Final[dict[str, Verb]] = {
     "price-options": Verb(
         name="price-options",
         input_schema="pricing_request/v1",
         output_schema="pricing_result/v1",
-        transform_record=price_option_record,
+        transform_records=mapped_over_records(price_option_record),
     ),
     "invert-implied-volatility": Verb(
         name="invert-implied-volatility",
         input_schema="implied_volatility_request/v1",
         output_schema="implied_volatility_result/v1",
-        transform_record=invert_implied_volatility_record,
+        transform_records=mapped_over_records(invert_implied_volatility_record),
+    ),
+    "read-chain-as-of": Verb(
+        name="read-chain-as-of",
+        input_schema="chain_query/v1",
+        output_schema="chain_snapshot/v1",
+        transform_records=read_chain_as_of_records,
     ),
 }
 
@@ -99,7 +155,7 @@ def parse_arguments(argv: Sequence[str]) -> argparse.Namespace:
 
 def run_verb(verb: Verb, input_path: Path, output_path: Path) -> None:
     document = read_document(input_path, verb.input_schema)
-    records = [verb.transform_record(record) for record in document.records]
+    records = verb.transform_records(document.records)
     write_document(output_path, Document(schema=verb.output_schema, records=records))
 
 

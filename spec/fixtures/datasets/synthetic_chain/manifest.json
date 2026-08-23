@@ -1,0 +1,28 @@
+{
+  "schema": "chain_dataset_manifest/v1",
+  "source": "synthetic",
+  "created_at": "2026-08-22T12:00:00.000000Z",
+  "dataset_digest": "e1f1976b8df0cf8168d10a2dc3fe939e7618cb3f22f2546df7940190353fc8d3",
+  "partitions": [
+    {
+      "relative_path": "underlying=AAPL/observation_date=2026-08-21/part-00000.parquet",
+      "underlying_symbol": "AAPL",
+      "row_count": 31,
+      "content_hash": "d93b35cb368ab4db7d2f2cb0c33a09d758235fb3acf72eca7d081b02c96116dd",
+      "minimum_event_time": "2026-08-21T15:00:00.000000Z",
+      "maximum_event_time": "2026-08-21T17:00:00.000000Z",
+      "minimum_knowledge_time": "2026-08-21T15:00:00.000000Z",
+      "maximum_knowledge_time": "2026-08-22T12:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=SPX/observation_date=2026-08-21/part-00000.parquet",
+      "underlying_symbol": "SPX",
+      "row_count": 119,
+      "content_hash": "033dd3c06446a0fd88ec7e3a8da2f3221eabd11d7247ca170ce8a92f8664ec80",
+      "minimum_event_time": "2026-08-21T15:00:00.000000Z",
+      "maximum_event_time": "2026-08-21T17:00:00.000000Z",
+      "minimum_knowledge_time": "2026-08-21T15:00:00.000000Z",
+      "maximum_knowledge_time": "2026-08-22T12:00:00.000000Z"
+    }
+  ]
+}

@@ -12,11 +12,12 @@ struct Verb {
     std::string name;
     std::string input_schema;
     std::string output_schema;
-    std::function<nlohmann::json(const nlohmann::json&)> transform_record;
+    std::function<nlohmann::json(const nlohmann::json&)> transform_records;
 };
 
 nlohmann::json price_option_record(const nlohmann::json& record);
 nlohmann::json invert_implied_volatility_record(const nlohmann::json& record);
+nlohmann::json read_chain_as_of_records(const nlohmann::json& records);
 
 const std::map<std::string, Verb>& supported_verbs();
 

@@ -12,6 +12,38 @@ InversionStatus = Literal[
 ]
 
 class InvalidOptionInputsError(ValueError): ...
+class ChainDatasetError(ValueError): ...
+class LookaheadRequestedError(ChainDatasetError): ...
+class CorruptDatasetError(ChainDatasetError): ...
+
+class ContractQuote:
+    contract_symbol: str
+    expiry_date: str
+    strike: float
+    option_type: OptionType
+    contract_multiplier: int
+    is_standard_deliverable: bool
+    event_time: str
+    knowledge_time: str
+    ingest_sequence: int
+    underlying_price: float
+    bid_price: float
+    ask_price: float
+    bid_size: int
+    ask_size: int
+
+class AsOfChainReader:
+    dataset_digest: str
+    knowledge_horizon: str
+    def chain_as_of(
+        self,
+        *,
+        underlying_symbol: str,
+        observation_time: str,
+        include_adjusted_contracts: bool,
+    ) -> list[ContractQuote]: ...
+
+def open_chain_dataset(dataset_root: str, knowledge_horizon: str) -> AsOfChainReader: ...
 
 class BlackScholesInputs:
     forward: float

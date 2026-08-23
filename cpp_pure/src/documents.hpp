@@ -26,6 +26,7 @@ void write_document(const std::filesystem::path& path, const Document& document)
 std::string required_string(const nlohmann::json& record, const std::string& field);
 double required_number(const nlohmann::json& record, const std::string& field);
 OptionType required_option_type(const nlohmann::json& record, const std::string& field);
+bool optional_boolean(const nlohmann::json& record, const std::string& field, bool fallback);
 nlohmann::json json_safe_number(double value);
 
 }

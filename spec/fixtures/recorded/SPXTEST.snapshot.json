@@ -1,0 +1,50 @@
+{
+  "underlying_symbol": "SPXTEST",
+  "pages": [
+    {
+      "status": "OK",
+      "results": [
+        {
+          "details": {
+            "ticker": "O:SPXTEST260918C04800000",
+            "underlying_ticker": "SPXTEST",
+            "expiration_date": "2026-09-18",
+            "strike_price": 4800,
+            "contract_type": "call",
+            "shares_per_contract": 100
+          },
+          "last_quote": { "bid": 101.2, "ask": 103.4, "bid_size": 12, "ask_size": 30, "last_updated": 1787000400000000000 },
+          "last_trade": { "price": 102.15 },
+          "day": { "volume": 812 },
+          "open_interest": 4210,
+          "underlying_asset": { "price": 4801.25 }
+        },
+        {
+          "details": {
+            "ticker": "O:SPXTEST260918P04800000",
+            "underlying_ticker": "SPXTEST",
+            "expiration_date": "2026-09-18",
+            "strike_price": 4800,
+            "contract_type": "put",
+            "shares_per_contract": 125
+          },
+          "last_quote": { "bid": 88.1, "ask": 90.6, "bid_size": 5, "ask_size": 9, "last_updated": 1787000400000000000 },
+          "day": { "volume": 44 },
+          "open_interest": 190,
+          "underlying_asset": { "price": 4801.25 }
+        },
+        {
+          "details": {
+            "ticker": "O:SPXTEST260918C05000000",
+            "underlying_ticker": "SPXTEST",
+            "expiration_date": "2026-09-18",
+            "strike_price": 5000,
+            "contract_type": "call",
+            "shares_per_contract": 100
+          },
+          "underlying_asset": { "price": 4801.25 }
+        }
+      ]
+    }
+  ]
+}

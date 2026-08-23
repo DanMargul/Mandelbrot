@@ -11,7 +11,24 @@ from conftest import FIXTURE_ROOT, SCHEMA_ROOT, fixture_families, load_json
 from volarb_py.cli import VERBS, main
 
 VERB_NAMES = sorted(VERBS)
-EXACT_FIELDS = frozenset({"id", "status", "iterations"})
+EXACT_FIELDS = frozenset(
+    {
+        "id",
+        "status",
+        "iterations",
+        "query_id",
+        "contract_symbol",
+        "expiry_date",
+        "option_type",
+        "contract_multiplier",
+        "is_standard_deliverable",
+        "event_time",
+        "knowledge_time",
+        "ingest_sequence",
+        "bid_size",
+        "ask_size",
+    }
+)
 
 
 def every_fixture() -> list[tuple[str, str]]:
@@ -50,7 +67,7 @@ def test_track_reproduces_the_golden_fixture(verb: str, family: str) -> None:
     request = load_json(FIXTURE_ROOT / verb / f"{family}.input.json")
     expected = load_json(FIXTURE_ROOT / verb / f"{family}.expected.json")
 
-    produced = [specification.transform_record(record) for record in request["records"]]
+    produced = specification.transform_records(request["records"])
     assert len(produced) == len(expected["records"])
 
     for actual_record, expected_record in zip(produced, expected["records"], strict=True):

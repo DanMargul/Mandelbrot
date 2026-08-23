@@ -1,0 +1,62 @@
+{
+  "schema": "chain_query/v1",
+  "records": [
+    {
+      "id": "spx_1500_horizon_1500",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "SPX",
+      "observation_time": "2026-08-21T15:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T15:00:00.000000Z"
+    },
+    {
+      "id": "spx_1600_horizon_1700_before_correction",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "SPX",
+      "observation_time": "2026-08-21T16:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
+    },
+    {
+      "id": "spx_1600_horizon_1800_after_correction",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "SPX",
+      "observation_time": "2026-08-21T16:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T18:00:00.000000Z"
+    },
+    {
+      "id": "spx_1700_horizon_1700_late_listing_visible",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "SPX",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
+    },
+    {
+      "id": "spx_1700_horizon_next_morning_settlement",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "SPX",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-22T12:00:00.000000Z"
+    },
+    {
+      "id": "spx_1700_including_adjusted_contracts",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "SPX",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z",
+      "include_adjusted_contracts": true
+    },
+    {
+      "id": "aapl_1700_horizon_1700",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "AAPL",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
+    },
+    {
+      "id": "absent_underlying_is_empty_not_an_error",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "NVDA",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
+    }
+  ]
+}

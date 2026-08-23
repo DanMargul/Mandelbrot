@@ -65,6 +65,17 @@ double required_number(const nlohmann::json& record, const std::string& field) {
     return entry->get<double>();
 }
 
+bool optional_boolean(const nlohmann::json& record, const std::string& field, bool fallback) {
+    const auto entry = record.find(field);
+    if (entry == record.end()) {
+        return fallback;
+    }
+    if (!entry->is_boolean()) {
+        throw DocumentError("field '" + field + "' must be a boolean");
+    }
+    return entry->get<bool>();
+}
+
 OptionType required_option_type(const nlohmann::json& record, const std::string& field) {
     return option_type_from_name(required_string(record, field));
 }

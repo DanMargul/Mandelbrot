@@ -10,7 +10,7 @@ The steps are dependency-ordered, with one deliberate exception noted at step 7.
 
 ## 1. A point-in-time data spine that cannot leak the future
 
-*Extends Phase 2.*
+*Extends Phase 2. **Done.** See `docs/data.md` and `spec/interfaces/market_data.md`.*
 
 Polygon ingestion into partitioned Parquet, with every row carrying both an event time and
 a knowledge time. Corporate actions handled explicitly: splits, special dividends, symbol

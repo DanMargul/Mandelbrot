@@ -75,11 +75,7 @@ Arguments parse_arguments(std::span<const std::string> arguments) {
 
 void run_verb(const Verb& verb, const Arguments& arguments) {
     const Document request = read_document(arguments.input, verb.input_schema);
-    nlohmann::json records = nlohmann::json::array();
-    for (const nlohmann::json& record : request.records) {
-        records.push_back(verb.transform_record(record));
-    }
-    write_document(arguments.output, Document{verb.output_schema, records});
+    write_document(arguments.output, Document{verb.output_schema, verb.transform_records(request.records)});
 }
 
 }
