@@ -85,18 +85,57 @@ three tracks.
 | `risk` | Position and greek limits, kill switches |
 | `reporting` | P&L attribution into delta, gamma, vega, theta and residual |
 
-## The one sanctioned divergence
+## The parity boundary
 
-The Polygon HTTP client is **Python only**. It writes a canonical, schema-validated Parquet
-snapshot which all three tracks then read.
+Full parity across three tracks is not the default. It is a decision made per module,
+recorded here, and enforced by whether a module appears in `spec/interfaces/`.
 
-Reimplementing REST authentication, pagination, retry and rate-limit handling in C++ would
-cost real effort and produce no research signal, because none of it is on any hot path. The
-boundary is drawn at the normalized Parquet file, which is part of `spec/schemas/`, so the
-three tracks remain fully at parity for everything downstream of ingestion.
+Phase 1 could afford parity everywhere because it was pure functions with no state and no
+I/O. Everything after it has all three, and ten roadmap steps times three tracks is thirty
+implementations. Left undeclared, the discipline collapses somewhere in the middle of the
+program, and it collapses unevenly: the guarantee is lost on the numerics while the cost is
+still paid on the plumbing. So the line is drawn explicitly instead.
 
-This is the only place where the tracks are permitted to differ. Any further exception needs
-a corresponding entry in this section.
+### Below the line: three tracks, conformance tested
+
+| module | reason |
+|---|---|
+| `pricing` | hot path, and a silent disagreement corrupts every downstream number |
+| `implied_vol` | hot path, iterative, the largest measured interpreted-versus-native gap |
+| `american` | numerical pricer inside an inversion loop |
+| `surface` | calibration is the most expensive per-snapshot work in the pipeline |
+| `local_volatility` | dense-grid evaluation, and the arbitrage-free acceptance test |
+| `factors` | decomposition over the full history |
+| `portfolio` | constrained optimization |
+| `hedging` | control problem solved per path |
+| `market_data` reader | the as-of resolution is on the backtest inner loop |
+
+These are the modules where the arithmetic is the product. A disagreement between tracks is
+a defect in one of them, and conformance is what finds it.
+
+### Above the line: Python only, by declaration
+
+| module | reason |
+|---|---|
+| `ingestion` (Polygon HTTP client) | REST, auth, pagination, retry, rate limits; no hot path |
+| `manifest` writing | runs once per ingest, not once per backtest step |
+| `experiment` registry | orchestration and bookkeeping |
+| `reporting` and attribution | presentation, run once per result |
+| plotting | presentation |
+
+Reimplementing any of these in C++ costs real effort and produces no comparison worth
+reading. They are excluded deliberately, not by neglect.
+
+### Where the boundary is crossed
+
+The handoff is the canonical Parquet dataset described in `data.md`. Ingestion writes it;
+everything below the line reads it. That file format is part of `spec/schemas/`, so the
+tracks stay at parity for everything downstream of the boundary even though only one of
+them can produce the data.
+
+Adding a module to the upper table requires an entry here saying why. Adding one to the
+lower table requires an interface file in `spec/interfaces/` and fixtures in
+`spec/fixtures/`.
 
 ## Determinism
 

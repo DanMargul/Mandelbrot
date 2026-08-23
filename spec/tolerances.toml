@@ -39,3 +39,52 @@ exact = true
 
 ["implied_volatility_result/v1".iterations]
 exact = true
+
+["chain_snapshot/v1".query_id]
+exact = true
+
+["chain_snapshot/v1".contract_symbol]
+exact = true
+
+["chain_snapshot/v1".expiry_date]
+exact = true
+
+["chain_snapshot/v1".option_type]
+exact = true
+
+["chain_snapshot/v1".contract_multiplier]
+exact = true
+
+["chain_snapshot/v1".is_standard_deliverable]
+exact = true
+
+["chain_snapshot/v1".event_time]
+exact = true
+
+["chain_snapshot/v1".knowledge_time]
+exact = true
+
+["chain_snapshot/v1".ingest_sequence]
+exact = true
+
+["chain_snapshot/v1".strike]
+relative = 1e-15
+absolute = 1e-15
+
+["chain_snapshot/v1".underlying_price]
+relative = 1e-15
+absolute = 1e-15
+
+["chain_snapshot/v1".bid_price]
+relative = 1e-15
+absolute = 1e-15
+
+["chain_snapshot/v1".ask_price]
+relative = 1e-15
+absolute = 1e-15
+
+["chain_snapshot/v1".bid_size]
+exact = true
+
+["chain_snapshot/v1".ask_size]
+exact = true

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chain_snapshot/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "chain_snapshot/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "query_id", "contract_symbol", "expiry_date", "strike", "option_type",
+          "contract_multiplier", "is_standard_deliverable", "event_time", "knowledge_time",
+          "ingest_sequence", "underlying_price", "bid_price", "ask_price", "bid_size", "ask_size"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "query_id": { "type": "string", "minLength": 1 },
+          "contract_symbol": { "type": "string", "minLength": 1 },
+          "expiry_date": { "type": "string", "format": "date" },
+          "strike": { "type": "number", "exclusiveMinimum": 0 },
+          "option_type": { "enum": ["call", "put"] },
+          "contract_multiplier": { "type": "integer", "exclusiveMinimum": 0 },
+          "is_standard_deliverable": { "type": "boolean" },
+          "event_time": { "type": "string", "format": "date-time" },
+          "knowledge_time": { "type": "string", "format": "date-time" },
+          "ingest_sequence": { "type": "integer", "minimum": 0 },
+          "underlying_price": { "type": "number", "exclusiveMinimum": 0 },
+          "bid_price": { "type": "number", "minimum": 0 },
+          "ask_price": { "type": "number", "minimum": 0 },
+          "bid_size": { "type": "integer", "minimum": 0 },
+          "ask_size": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}
