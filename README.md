@@ -20,6 +20,7 @@ tracks over the same fixtures and diffs the results.
 - [`docs/conventions.md`](docs/conventions.md) — naming and style rules, and why they are enforced
 - [`docs/math.md`](docs/math.md) — model definitions, greek conventions, algorithms
 - [`docs/roadmap.md`](docs/roadmap.md) — phased delivery and exit criteria
+- [`docs/program.md`](docs/program.md) — the ten-step program beyond the roadmap
 - [`docs/runbook.md`](docs/runbook.md) — how to build, test, and run everything
 - [`docs/benchmarks.md`](docs/benchmarks.md) — cross-track timings and how to read them
 

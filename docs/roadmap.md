@@ -1,5 +1,9 @@
 # Roadmap
 
+This document is the table stakes: the phases that must exist before anything can be
+claimed. [`program.md`](program.md) describes the ten-step program that subsumes and
+extends it, and states which of these phases each step reaches past.
+
 A phase is complete only when all three tracks pass conformance on that phase's fixtures.
 Partial completion in one track is not progress; it is drift.
 
