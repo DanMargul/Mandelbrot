@@ -76,6 +76,10 @@ bool optional_boolean(const nlohmann::json& record, const std::string& field, bo
     return entry->get<bool>();
 }
 
+ExerciseStyle required_exercise_style(const nlohmann::json& record, const std::string& field) {
+    return exercise_style_from_name(required_string(record, field));
+}
+
 OptionType required_option_type(const nlohmann::json& record, const std::string& field) {
     return option_type_from_name(required_string(record, field));
 }

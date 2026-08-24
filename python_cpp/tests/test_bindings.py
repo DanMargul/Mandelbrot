@@ -11,6 +11,7 @@ STRIKES = (60.0, 90.0, 99.0, 100.0, 101.0, 130.0, 250.0)
 EXPIRIES = (0.019178, 0.25, 1.0, 5.0)
 VOLATILITIES = (0.05, 0.15, 0.35, 1.2)
 SPX_EXPIRY_COUNT = 2
+RICHARDSON_BASE_STEPS = 128
 
 
 def pricing_inputs(strike: float, years: float, volatility: float, option_type: str) -> object:
@@ -144,3 +145,44 @@ def test_a_failed_curve_point_reports_none_rather_than_a_number() -> None:
     assert points[0].status == "too_few_pairs"
     assert points[0].forward_standard_error is None
     assert points[0].implied_zero_rate is None
+
+
+AMERICAN_BASE_ARGUMENTS = {
+    "spot_price": 100.0,
+    "strike": 100.0,
+    "years_to_expiry": 1.0,
+    "volatility": 0.25,
+    "zero_rate": 0.0425,
+    "carry_rate": 0.02,
+    "option_type": "call",
+    "exercise_style": "american",
+}
+
+
+def lattice_inputs(**overrides: object) -> object:
+    return core.LatticeInputs(**{**AMERICAN_BASE_ARGUMENTS, **overrides})
+
+
+def test_the_american_lattice_is_reachable_through_the_bindings() -> None:
+    inputs = lattice_inputs(carry_rate=0.06)
+    american = core.richardson_extrapolated_price(inputs)
+    european = core.european_price(inputs)
+    assert american > european
+    assert core.early_exercise_premium(inputs) == pytest.approx(american - european, rel=1e-14)
+
+
+def test_an_american_call_on_a_zero_carry_underlying_has_exactly_no_premium() -> None:
+    assert core.early_exercise_premium(lattice_inputs(carry_rate=0.0)) == 0.0
+
+
+def test_a_european_contract_reports_no_premium() -> None:
+    assert core.early_exercise_premium(lattice_inputs(exercise_style="european")) == 0.0
+
+
+def test_an_unknown_exercise_style_raises_a_value_error() -> None:
+    with pytest.raises(ValueError, match="exercise_style"):
+        lattice_inputs(exercise_style="bermudan")
+
+
+def test_the_lattice_step_count_is_exposed_as_a_contract_constant() -> None:
+    assert core.RICHARDSON_BASE_STEPS == RICHARDSON_BASE_STEPS

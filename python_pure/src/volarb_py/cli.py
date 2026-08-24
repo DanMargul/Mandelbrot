@@ -8,6 +8,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
+from volarb_py.american import (
+    RICHARDSON_BASE_STEPS,
+    ExerciseStyle,
+    LatticeInputs,
+    early_exercise_premium,
+    european_counterpart,
+    richardson_extrapolated_price,
+)
 from volarb_py.documents import (
     Document,
     DocumentError,
@@ -92,6 +100,35 @@ def invert_implied_volatility_record(record: JsonRecord) -> JsonRecord:
         "iterations": result.iterations,
         "absolute_price_error": result.absolute_price_error,
         "volatility_uncertainty": json_safe_float(result.volatility_uncertainty),
+    }
+
+
+def required_exercise_style(record: JsonRecord, field: str) -> ExerciseStyle:
+    value = required_string(record, field)
+    if value == "european":
+        return "european"
+    if value == "american":
+        return "american"
+    raise DocumentError(f"field {field!r} must be 'european' or 'american', found {value!r}")
+
+
+def price_american_option_record(record: JsonRecord) -> JsonRecord:
+    inputs = LatticeInputs(
+        spot_price=required_float(record, "spot_price"),
+        strike=required_float(record, "strike"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+        volatility=required_float(record, "volatility"),
+        zero_rate=required_float(record, "zero_rate"),
+        carry_rate=required_float(record, "carry_rate"),
+        option_type=required_option_type(record, "option_type"),
+        exercise_style=required_exercise_style(record, "exercise_style"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "price": richardson_extrapolated_price(inputs, RICHARDSON_BASE_STEPS),
+        "european_price": richardson_extrapolated_price(european_counterpart(inputs), RICHARDSON_BASE_STEPS),
+        "early_exercise_premium": early_exercise_premium(inputs, RICHARDSON_BASE_STEPS),
+        "lattice_steps": RICHARDSON_BASE_STEPS,
     }
 
 
@@ -207,6 +244,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="chain_query/v1",
         output_schema="chain_snapshot/v1",
         transform_records=read_chain_as_of_records,
+    ),
+    "price-american-options": Verb(
+        name="price-american-options",
+        input_schema="american_pricing_request/v1",
+        output_schema="american_pricing_result/v1",
+        transform_records=mapped_over_records(price_american_option_record),
     ),
     "imply-forward-curve": Verb(
         name="imply-forward-curve",

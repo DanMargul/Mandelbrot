@@ -1,5 +1,6 @@
 #pragma once
 
+#include "volarb/american.hpp"
 #include "volarb/pricing.hpp"
 
 #include <nlohmann/json.hpp>
@@ -28,6 +29,7 @@ std::string required_string(const nlohmann::json& record, const std::string& fie
 double required_number(const nlohmann::json& record, const std::string& field);
 OptionType required_option_type(const nlohmann::json& record, const std::string& field);
 bool optional_boolean(const nlohmann::json& record, const std::string& field, bool fallback);
+ExerciseStyle required_exercise_style(const nlohmann::json& record, const std::string& field);
 nlohmann::json json_safe_number(double value);
 nlohmann::json json_optional_number(const std::optional<double>& value);
 

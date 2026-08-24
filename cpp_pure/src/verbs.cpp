@@ -1,5 +1,6 @@
 #include "verbs.hpp"
 
+#include "volarb/american.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -86,6 +87,28 @@ std::function<nlohmann::json(const nlohmann::json&)> mapped_over_records(
     };
 }
 
+}
+
+nlohmann::json price_american_option_record(const nlohmann::json& record) {
+    const LatticeInputs inputs{
+        required_number(record, "spot_price"),
+        required_number(record, "strike"),
+        required_number(record, "years_to_expiry"),
+        required_number(record, "volatility"),
+        required_number(record, "zero_rate"),
+        required_number(record, "carry_rate"),
+        required_option_type(record, "option_type"),
+        required_exercise_style(record, "exercise_style"),
+    };
+
+    nlohmann::json result;
+    result["id"] = required_string(record, "id");
+    result["price"] = richardson_extrapolated_price(inputs, richardson_base_steps);
+    result["european_price"] =
+        richardson_extrapolated_price(european_counterpart(inputs), richardson_base_steps);
+    result["early_exercise_premium"] = early_exercise_premium(inputs, richardson_base_steps);
+    result["lattice_steps"] = richardson_base_steps;
+    return result;
 }
 
 nlohmann::json read_chain_as_of_records(const nlohmann::json& records) {
@@ -179,6 +202,9 @@ const std::map<std::string, Verb>& supported_verbs() {
          Verb{"read-chain-as-of", "chain_query/v1", "chain_snapshot/v1", read_chain_as_of_records}},
         {"imply-forward-curve",
          Verb{"imply-forward-curve", "chain_query/v1", "forward_curve/v1", imply_forward_curve_records}},
+        {"price-american-options",
+         Verb{"price-american-options", "american_pricing_request/v1", "american_pricing_result/v1",
+              mapped_over_records(price_american_option_record)}},
     };
     return verbs;
 }

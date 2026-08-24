@@ -14,9 +14,18 @@ REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPOSITORY_ROOT / "tools"))
 sys.path.insert(0, str(REPOSITORY_ROOT / "python_pure" / "src"))
 
-from fixture_cases import PricingCase, all_pricing_cases  # noqa: E402
+from fixture_cases import AmericanCase, PricingCase, all_american_cases, all_pricing_cases  # noqa: E402
 from oracle import oracle_implied_volatility, oracle_price_and_greeks  # noqa: E402
-from volarb_py.cli import invert_implied_volatility_record, price_option_record  # noqa: E402
+from volarb_py.american import (  # noqa: E402
+    LatticeInputs,
+    black_scholes_reference_price,
+    richardson_extrapolated_price,
+)
+from volarb_py.cli import (  # noqa: E402
+    invert_implied_volatility_record,
+    price_american_option_record,
+    price_option_record,
+)
 from volarb_py.documents import Document, write_document  # noqa: E402
 
 FIXTURE_ROOT: Final[Path] = REPOSITORY_ROOT / "spec" / "fixtures"
@@ -24,6 +33,9 @@ DOUBLE_PRECISION_EPSILON: Final[float] = sys.float_info.epsilon
 PRICE_ORACLE_ULP_BUDGET: Final[float] = 8.0
 GREEK_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-13
 VOLATILITY_ORACLE_ABSOLUTE_BUDGET: Final[float] = 1e-9
+FINE_LATTICE_BASE_STEPS: Final[int] = 512
+LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-4
+EUROPEAN_LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-4
 
 
 class OracleDisagreementError(AssertionError):
@@ -181,10 +193,74 @@ def boundary_implied_volatility_fixture() -> None:
     print(f"invert-implied-volatility/boundary: {json.dumps(statuses, indent=2)}")
 
 
+def lattice_inputs_from(case: AmericanCase) -> LatticeInputs:
+    return LatticeInputs(
+        spot_price=case.spot_price,
+        strike=case.strike,
+        years_to_expiry=case.years_to_expiry,
+        volatility=case.volatility,
+        zero_rate=case.zero_rate,
+        carry_rate=case.carry_rate,
+        option_type=case.option_type,
+        exercise_style=case.exercise_style,
+    )
+
+
+def verify_lattice_against_oracle(case: AmericanCase, result: dict[str, Any]) -> float:
+    inputs = lattice_inputs_from(case)
+    reference: float = richardson_extrapolated_price(inputs, FINE_LATTICE_BASE_STEPS)
+    scale = max(abs(reference), case.spot_price)
+    discrepancy: float = abs(float(result["price"]) - reference) / scale
+    if discrepancy > LATTICE_ORACLE_RELATIVE_BUDGET:
+        raise OracleDisagreementError(
+            f"{case.id}: lattice price differs from the fine lattice by {discrepancy}"
+        )
+    if case.exercise_style == "european":
+        closed_form = black_scholes_reference_price(inputs)
+        closed_form_discrepancy = abs(float(result["price"]) - closed_form) / scale
+        if closed_form_discrepancy > EUROPEAN_LATTICE_ORACLE_RELATIVE_BUDGET:
+            raise OracleDisagreementError(
+                f"{case.id}: European lattice differs from Black-Scholes by {closed_form_discrepancy}"
+            )
+    if result["price"] < result["european_price"] - 1e-9:
+        raise OracleDisagreementError(f"{case.id}: American price below its European counterpart")
+    return discrepancy
+
+
+def build_american_fixture(family: str, cases: list[AmericanCase]) -> None:
+    request_records = [asdict(case) for case in cases]
+    result_records = []
+    worst = 0.0
+    for case, record in zip(cases, request_records, strict=True):
+        result = price_american_option_record(record)
+        worst = max(worst, verify_lattice_against_oracle(case, result))
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "price-american-options"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(
+        directory / f"{family}.input.json", Document("american_pricing_request/v1", request_records)
+    )
+    write_document(
+        directory / f"{family}.expected.json", Document("american_pricing_result/v1", result_records)
+    )
+    print(
+        f"price-american-options/{family}: {len(cases)} cases verified, "
+        f"worst relative discrepancy against the fine lattice {worst:.2e}"
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--verb", choices=["price-options", "invert-implied-volatility", "all"], default="all"
+        "--verb",
+        choices=[
+            "price-options",
+            "invert-implied-volatility",
+            "price-american-options",
+            "all",
+        ],
+        default="all",
     )
     arguments = parser.parse_args()
 
@@ -196,6 +272,9 @@ def main() -> int:
         for family, cases in families.items():
             build_implied_volatility_fixture(family, cases)
         boundary_implied_volatility_fixture()
+    if arguments.verb in ("price-american-options", "all"):
+        for family, american_cases in all_american_cases().items():
+            build_american_fixture(family, american_cases)
     return 0
 
 

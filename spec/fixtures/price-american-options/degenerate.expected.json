@@ -1,0 +1,89 @@
+{
+  "schema": "american_pricing_result/v1",
+  "records": [
+    {
+      "id": "expired_in_the_money_call",
+      "price": 10.0,
+      "european_price": 10.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "expired_in_the_money_put",
+      "price": 0.0,
+      "european_price": 0.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "expired_out_of_the_money_call",
+      "price": 0.0,
+      "european_price": 0.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "expired_out_of_the_money_put",
+      "price": 10.0,
+      "european_price": 10.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "zero_volatility_call",
+      "price": 5.0,
+      "european_price": 5.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "zero_volatility_put",
+      "price": 0.0,
+      "european_price": 0.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "deep_in_the_money_long_dated_call",
+      "price": 0.11503305108218519,
+      "european_price": 0.11503296643646753,
+      "early_exercise_premium": 8.464571765731677e-08,
+      "lattice_steps": 128
+    },
+    {
+      "id": "deep_in_the_money_long_dated_put",
+      "price": 150.0,
+      "european_price": 126.01193356656727,
+      "early_exercise_premium": 23.988066433432735,
+      "lattice_steps": 128
+    },
+    {
+      "id": "deep_out_of_the_money_short_dated_call",
+      "price": 0.0,
+      "european_price": 0.0,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "deep_out_of_the_money_short_dated_put",
+      "price": 120.0,
+      "european_price": 119.85910740158143,
+      "early_exercise_premium": 0.14089259841857427,
+      "lattice_steps": 128
+    },
+    {
+      "id": "negative_carry_call",
+      "price": 13.90607958980404,
+      "european_price": 13.90607958980404,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "negative_carry_put",
+      "price": 7.402147892192978,
+      "european_price": 6.699672746550832,
+      "early_exercise_premium": 0.7024751456421461,
+      "lattice_steps": 128
+    }
+  ]
+}

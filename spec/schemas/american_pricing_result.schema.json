@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "american_pricing_result/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "american_pricing_result/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "price", "european_price", "early_exercise_premium", "lattice_steps"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "price": { "type": "number", "minimum": 0 },
+          "european_price": { "type": "number", "minimum": 0 },
+          "early_exercise_premium": { "type": "number", "minimum": 0 },
+          "lattice_steps": { "type": "integer", "exclusiveMinimum": 0 }
+        }
+      }
+    }
+  }
+}

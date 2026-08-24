@@ -18,6 +18,10 @@ output_schema = "chain_snapshot/v1"
 input_schema = "chain_query/v1"
 output_schema = "forward_curve/v1"
 
+[verbs.price-american-options]
+input_schema = "american_pricing_request/v1"
+output_schema = "american_pricing_result/v1"
+
 [verbs.price-options]
 input_schema = "pricing_request/v1"
 output_schema = "pricing_result/v1"

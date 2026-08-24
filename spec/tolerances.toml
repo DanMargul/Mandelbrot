@@ -145,3 +145,18 @@ absolute = 1e-14
 ["forward_curve/v1".chi_square_per_degree_of_freedom]
 relative = 1e-10
 absolute = 1e-14
+
+["american_pricing_result/v1".lattice_steps]
+exact = true
+
+["american_pricing_result/v1".price]
+relative = 1e-12
+absolute = 1e-14
+
+["american_pricing_result/v1".european_price]
+relative = 1e-12
+absolute = 1e-14
+
+["american_pricing_result/v1".early_exercise_premium]
+relative = 1e-11
+absolute = 1e-14

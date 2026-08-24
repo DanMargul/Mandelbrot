@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "american_pricing_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "american_pricing_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "spot_price", "strike", "years_to_expiry", "volatility",
+          "zero_rate", "carry_rate", "option_type", "exercise_style"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "spot_price": { "type": "number", "exclusiveMinimum": 0 },
+          "strike": { "type": "number", "exclusiveMinimum": 0 },
+          "years_to_expiry": { "type": "number", "minimum": 0 },
+          "volatility": { "type": "number", "minimum": 0 },
+          "zero_rate": { "type": "number" },
+          "carry_rate": { "type": "number" },
+          "option_type": { "enum": ["call", "put"] },
+          "exercise_style": { "enum": ["european", "american"] }
+        }
+      }
+    }
+  }
+}

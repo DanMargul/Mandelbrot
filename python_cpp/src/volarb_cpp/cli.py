@@ -82,6 +82,35 @@ def invert_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def required_exercise_style(record: JsonRecord, field: str) -> _volarb_core.ExerciseStyle:
+    value = required_string(record, field)
+    if value == "european":
+        return "european"
+    if value == "american":
+        return "american"
+    raise DocumentError(f"field {field!r} must be 'european' or 'american', found {value!r}")
+
+
+def price_american_option_record(record: JsonRecord) -> JsonRecord:
+    inputs = _volarb_core.LatticeInputs(
+        spot_price=required_float(record, "spot_price"),
+        strike=required_float(record, "strike"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+        volatility=required_float(record, "volatility"),
+        zero_rate=required_float(record, "zero_rate"),
+        carry_rate=required_float(record, "carry_rate"),
+        option_type=required_option_type(record, "option_type"),
+        exercise_style=required_exercise_style(record, "exercise_style"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "price": _volarb_core.richardson_extrapolated_price(inputs),
+        "european_price": _volarb_core.european_price(inputs),
+        "early_exercise_premium": _volarb_core.early_exercise_premium(inputs),
+        "lattice_steps": _volarb_core.RICHARDSON_BASE_STEPS,
+    }
+
+
 def chain_snapshot_record(query_id: str, quote: _volarb_core.ContractQuote) -> JsonRecord:
     return {
         "id": f"{query_id}|{quote.contract_symbol}",
@@ -188,6 +217,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="chain_query/v1",
         output_schema="chain_snapshot/v1",
         transform_records=read_chain_as_of_records,
+    ),
+    "price-american-options": Verb(
+        name="price-american-options",
+        input_schema="american_pricing_request/v1",
+        output_schema="american_pricing_result/v1",
+        transform_records=mapped_over_records(price_american_option_record),
     ),
     "imply-forward-curve": Verb(
         name="imply-forward-curve",

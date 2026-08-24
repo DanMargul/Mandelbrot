@@ -68,6 +68,35 @@ class ForwardCurvePoint:
     discount_factor_is_monotone_in_expiry: bool
     status: ForwardCurveStatus
 
+ExerciseStyle = Literal["european", "american"]
+
+class InvalidLatticeInputsError(ValueError): ...
+
+class LatticeInputs:
+    spot_price: float
+    strike: float
+    years_to_expiry: float
+    volatility: float
+    zero_rate: float
+    carry_rate: float
+    def __init__(
+        self,
+        *,
+        spot_price: float,
+        strike: float,
+        years_to_expiry: float,
+        volatility: float,
+        zero_rate: float,
+        carry_rate: float,
+        option_type: OptionType,
+        exercise_style: ExerciseStyle,
+    ) -> None: ...
+
+RICHARDSON_BASE_STEPS: int
+
+def richardson_extrapolated_price(inputs: LatticeInputs) -> float: ...
+def european_price(inputs: LatticeInputs) -> float: ...
+def early_exercise_premium(inputs: LatticeInputs) -> float: ...
 def imply_forward_curve(quotes: list[ContractQuote], observation_time: str) -> list[ForwardCurvePoint]: ...
 
 class BlackScholesInputs:

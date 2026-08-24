@@ -1,0 +1,3785 @@
+{
+  "schema": "american_pricing_result/v1",
+  "records": [
+    {
+      "id": "k70_t0.083333_v0.12_q0_call_european",
+      "price": 30.247477177233126,
+      "european_price": 30.247477177233126,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0_call_american",
+      "price": 30.247477177233126,
+      "european_price": 30.247477177233126,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0_put_european",
+      "price": 7.696445568657044e-28,
+      "european_price": 7.696445568657044e-28,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0_put_american",
+      "price": 7.7062179384759205e-28,
+      "european_price": 7.696445568657044e-28,
+      "early_exercise_premium": 9.772369818876694e-31,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.025_call_european",
+      "price": 30.03936153876082,
+      "european_price": 30.03936153876082,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.025_call_american",
+      "price": 30.039361538783357,
+      "european_price": 30.03936153876082,
+      "early_exercise_premium": 2.2538415578310378e-11,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.025_put_european",
+      "price": 1.448077514283663e-27,
+      "european_price": 1.448077514283663e-27,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.025_put_american",
+      "price": 1.4485703809626234e-27,
+      "european_price": 1.448077514283663e-27,
+      "early_exercise_premium": 4.928666789604953e-31,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.07_call_european",
+      "price": 29.665844249114613,
+      "european_price": 29.665844249114613,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.07_call_american",
+      "price": 30.0,
+      "european_price": 29.665844249114613,
+      "early_exercise_premium": 0.33415575088538674,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.07_put_european",
+      "price": 4.476888876673718e-27,
+      "european_price": 4.476888876673718e-27,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.12_q0.07_put_american",
+      "price": 4.476888876673718e-27,
+      "european_price": 4.476888876673718e-27,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0_call_european",
+      "price": 30.247502200837264,
+      "european_price": 30.247502200837264,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0_call_american",
+      "price": 30.247502200837264,
+      "european_price": 30.247502200837264,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0_put_european",
+      "price": 2.5023605959660552e-05,
+      "european_price": 2.5023605959660552e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0_put_american",
+      "price": 2.507174786825636e-05,
+      "european_price": 2.5023605959660552e-05,
+      "early_exercise_premium": 4.814190859580593e-08,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.025_call_european",
+      "price": 30.039389438876665,
+      "european_price": 30.039389438876665,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.025_call_american",
+      "price": 30.039418523541606,
+      "european_price": 30.039389438876665,
+      "early_exercise_premium": 2.908466494133677e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.025_put_european",
+      "price": 2.790011676416464e-05,
+      "european_price": 2.790011676416464e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.025_put_american",
+      "price": 2.7921717274314334e-05,
+      "european_price": 2.790011676416464e-05,
+      "early_exercise_premium": 2.1600510149695582e-08,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.07_call_european",
+      "price": 29.665878140037822,
+      "european_price": 29.665878140037822,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.07_call_american",
+      "price": 30.0,
+      "european_price": 29.665878140037822,
+      "early_exercise_premium": 0.3341218599621776,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.07_put_european",
+      "price": 3.389092540752386e-05,
+      "european_price": 3.389092540752386e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.3_q0.07_put_american",
+      "price": 3.389092540752386e-05,
+      "european_price": 3.389092540752386e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0_call_european",
+      "price": 30.41147734822617,
+      "european_price": 30.41147734822617,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0_call_american",
+      "price": 30.41147734822617,
+      "european_price": 30.41147734822617,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0_put_european",
+      "price": 0.16400017099304115,
+      "european_price": 0.16400017099304115,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0_put_american",
+      "price": 0.16423977652193794,
+      "european_price": 0.16400017099304115,
+      "early_exercise_premium": 0.00023960552889679132,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.025_call_european",
+      "price": 30.20800737538557,
+      "european_price": 30.20800737538557,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.025_call_american",
+      "price": 30.209262433263458,
+      "european_price": 30.20800737538557,
+      "early_exercise_premium": 0.0012550578778878219,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.025_put_european",
+      "price": 0.16864583662613095,
+      "european_price": 0.16864583662613095,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.025_put_american",
+      "price": 0.1687524534365365,
+      "european_price": 0.16864583662613095,
+      "early_exercise_premium": 0.00010661681040555204,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.07_call_european",
+      "price": 29.843141642549874,
+      "european_price": 29.843141642549874,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.07_call_american",
+      "price": 30.049418973576923,
+      "european_price": 29.843141642549874,
+      "early_exercise_premium": 0.20627733102704937,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.07_put_european",
+      "price": 0.17729739343543285,
+      "european_price": 0.17729739343543285,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.083333_v0.65_q0.07_put_american",
+      "price": 0.1772973956678143,
+      "european_price": 0.17729739343543285,
+      "early_exercise_premium": 2.2323814463653946e-09,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0_call_european",
+      "price": 31.471812728907853,
+      "european_price": 31.471812728907853,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0_call_american",
+      "price": 31.471812728907853,
+      "european_price": 31.471812728907853,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0_put_european",
+      "price": 6.058751422700521e-06,
+      "european_price": 6.058751422700521e-06,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0_put_american",
+      "price": 6.168416319419771e-06,
+      "european_price": 6.058751422700521e-06,
+      "early_exercise_premium": 1.0966489671924926e-07,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.025_call_european",
+      "price": 30.229598897934626,
+      "european_price": 30.229598897934626,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.025_call_american",
+      "price": 30.229786709876983,
+      "european_price": 30.229598897934626,
+      "early_exercise_premium": 0.0001878119423572855,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.025_put_european",
+      "price": 1.2178395703334212e-05,
+      "european_price": 1.2178395703334212e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.025_put_american",
+      "price": 1.2255813954745029e-05,
+      "european_price": 1.2178395703334212e-05,
+      "early_exercise_premium": 7.741825141081661e-08,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.07_call_european",
+      "price": 28.032388975964302,
+      "european_price": 28.032388975964302,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.07_call_american",
+      "price": 30.0,
+      "european_price": 28.032388975964302,
+      "early_exercise_premium": 1.9676110240356977,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.07_put_european",
+      "price": 4.068005691723747e-05,
+      "european_price": 4.068005691723747e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.12_q0.07_put_american",
+      "price": 4.068005691723747e-05,
+      "european_price": 4.068005691723747e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0_call_european",
+      "price": 31.733250041918076,
+      "european_price": 31.733250041918076,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0_call_american",
+      "price": 31.733250041918076,
+      "european_price": 31.733250041918076,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0_put_european",
+      "price": 0.2614433717561118,
+      "european_price": 0.2614433717561118,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0_put_american",
+      "price": 0.26465419332738144,
+      "european_price": 0.2614433717561118,
+      "early_exercise_premium": 0.0032108215712696175,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.025_call_european",
+      "price": 30.530268860873246,
+      "european_price": 30.530268860873246,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.025_call_american",
+      "price": 30.541815691844857,
+      "european_price": 30.530268860873246,
+      "early_exercise_premium": 0.011546830971610689,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.025_put_european",
+      "price": 0.30068214133004,
+      "european_price": 0.30068214133004,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.025_put_american",
+      "price": 0.30223388087766656,
+      "european_price": 0.30068214133004,
+      "early_exercise_premium": 0.0015517395476265516,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.07_call_european",
+      "price": 28.41640658519833,
+      "european_price": 28.41640658519833,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.07_call_american",
+      "price": 30.0,
+      "european_price": 28.41640658519833,
+      "early_exercise_premium": 1.583593414801669,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.07_put_european",
+      "price": 0.3840582892861499,
+      "european_price": 0.3840582892861499,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.3_q0.07_put_american",
+      "price": 0.384058562220625,
+      "european_price": 0.3840582892861499,
+      "early_exercise_premium": 2.729344751317697e-07,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0_call_european",
+      "price": 35.80041972051173,
+      "european_price": 35.80041972051173,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0_call_american",
+      "price": 35.80041972051173,
+      "european_price": 35.80041972051173,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0_put_european",
+      "price": 4.328613050353337,
+      "european_price": 4.328613050353337,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0_put_american",
+      "price": 4.36176353612525,
+      "european_price": 4.328613050353337,
+      "early_exercise_premium": 0.033150485771912486,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.025_call_european",
+      "price": 34.74394661845681,
+      "european_price": 34.74394661845681,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.025_call_american",
+      "price": 34.79504408986056,
+      "european_price": 34.74394661845681,
+      "early_exercise_premium": 0.051097471403750205,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.025_put_european",
+      "price": 4.514359898916194,
+      "european_price": 4.514359898916194,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.025_put_american",
+      "price": 4.533986720170092,
+      "european_price": 4.514359898916194,
+      "early_exercise_premium": 0.019626821253898363,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.07_call_european",
+      "price": 32.89510914415016,
+      "european_price": 32.89510914415016,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.07_call_american",
+      "price": 33.550921390110375,
+      "european_price": 32.89510914415016,
+      "early_exercise_premium": 0.6558122459602131,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.07_put_european",
+      "price": 4.862760848240434,
+      "european_price": 4.862760848240434,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t0.5_v0.65_q0.07_put_american",
+      "price": 4.864958453581714,
+      "european_price": 4.862760848240434,
+      "early_exercise_premium": 0.0021976053412799956,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0_call_european",
+      "price": 35.72383580550473,
+      "european_price": 35.72383580550473,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0_call_american",
+      "price": 35.72383580550473,
+      "european_price": 35.72383580550473,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0_put_european",
+      "price": 0.019695713604479193,
+      "european_price": 0.019695713604479193,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0_put_american",
+      "price": 0.02156270613287892,
+      "european_price": 0.019695713604479193,
+      "early_exercise_premium": 0.001866992528399728,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.025_call_european",
+      "price": 30.874415216180022,
+      "european_price": 30.874415216180022,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.025_call_american",
+      "price": 30.904166931631217,
+      "european_price": 30.874415216180022,
+      "early_exercise_premium": 0.02975171545119437,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.025_put_european",
+      "price": 0.04733267421429482,
+      "european_price": 0.04733267421429482,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.025_put_american",
+      "price": 0.04886735498167826,
+      "european_price": 0.04733267421429482,
+      "early_exercise_premium": 0.0015346807673834381,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.07_call_european",
+      "price": 22.831002694011495,
+      "european_price": 22.831002694011495,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.07_call_american",
+      "price": 30.0,
+      "european_price": 22.831002694011495,
+      "early_exercise_premium": 7.168997305988505,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.07_put_european",
+      "price": 0.19103906223342612,
+      "european_price": 0.19103906223342612,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.12_q0.07_put_american",
+      "price": 0.191039078105614,
+      "european_price": 0.19103906223342612,
+      "early_exercise_premium": 1.587218786958111e-08,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0_call_european",
+      "price": 38.28621858671042,
+      "european_price": 38.28621858671042,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0_call_american",
+      "price": 38.28621858671042,
+      "european_price": 38.28621858671042,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0_put_european",
+      "price": 2.5820784948109297,
+      "european_price": 2.5820784948109297,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0_put_american",
+      "price": 2.711723850228112,
+      "european_price": 2.5820784948109297,
+      "early_exercise_premium": 0.12964535541718236,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.025_call_european",
+      "price": 33.97602093357518,
+      "european_price": 33.97602093357518,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.025_call_american",
+      "price": 34.19104181611519,
+      "european_price": 33.97602093357518,
+      "early_exercise_premium": 0.21502088254000995,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.025_put_european",
+      "price": 3.1489383916118014,
+      "european_price": 3.1489383916118014,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.025_put_american",
+      "price": 3.2278915488652338,
+      "european_price": 3.1489383916118014,
+      "early_exercise_premium": 0.07895315725343233,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.07_call_european",
+      "price": 27.031368440669105,
+      "european_price": 27.031368440669105,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.07_call_american",
+      "price": 30.800691895999854,
+      "european_price": 27.031368440669105,
+      "early_exercise_premium": 3.769323455330749,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.07_put_european",
+      "price": 4.391404808892998,
+      "european_price": 4.391404808892998,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.3_q0.07_put_american",
+      "price": 4.398028616441883,
+      "european_price": 4.391404808892998,
+      "early_exercise_premium": 0.006623807548885807,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0_call_european",
+      "price": 49.958830718965274,
+      "european_price": 49.958830718965274,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0_call_american",
+      "price": 49.958830718965274,
+      "european_price": 49.958830718965274,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0_put_european",
+      "price": 14.254690627063376,
+      "european_price": 14.254690627063376,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0_put_american",
+      "price": 14.690173583950335,
+      "european_price": 14.254690627063376,
+      "early_exercise_premium": 0.43548295688695937,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.025_call_european",
+      "price": 45.962652350317626,
+      "european_price": 45.962652350317626,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.025_call_american",
+      "price": 46.47366773277893,
+      "european_price": 45.962652350317626,
+      "early_exercise_premium": 0.5110153824613022,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.025_put_european",
+      "price": 15.135569808349393,
+      "european_price": 15.135569808349393,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.025_put_american",
+      "price": 15.469918579442732,
+      "european_price": 15.135569808349393,
+      "early_exercise_premium": 0.3343487710933388,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.07_call_european",
+      "price": 39.42321597638181,
+      "european_price": 39.42321597638181,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.07_call_american",
+      "price": 42.22017059956646,
+      "european_price": 39.42321597638181,
+      "early_exercise_premium": 2.7969546231846465,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.07_put_european",
+      "price": 16.783252344601323,
+      "european_price": 16.783252344601323,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k70_t2_v0.65_q0.07_put_american",
+      "price": 16.96114256837346,
+      "european_price": 16.783252344601323,
+      "early_exercise_premium": 0.17789022377213826,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0_call_european",
+      "price": 10.31893215567836,
+      "european_price": 10.31893215567836,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0_call_american",
+      "price": 10.31893215567836,
+      "european_price": 10.31893215567836,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0_put_european",
+      "price": 0.0007472135207336924,
+      "european_price": 0.0007472135207336924,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0_put_american",
+      "price": 0.000752949498287035,
+      "european_price": 0.0007472135207336924,
+      "early_exercise_premium": 5.735977553342621e-06,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.025_call_european",
+      "price": 10.110997986807911,
+      "european_price": 10.110997986807911,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.025_call_american",
+      "price": 10.110997986807911,
+      "european_price": 10.110997986807911,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.025_put_european",
+      "price": 0.0009286831225708541,
+      "european_price": 0.0009286831225708541,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.025_put_american",
+      "price": 0.0009311041379924949,
+      "european_price": 0.0009286831225708541,
+      "early_exercise_premium": 2.4210154216408077e-06,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.07_call_european",
+      "price": 9.737914494212237,
+      "european_price": 9.737914494212237,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.07_call_american",
+      "price": 10.0,
+      "european_price": 9.737914494212237,
+      "early_exercise_premium": 0.2620855057877627,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.07_put_european",
+      "price": 0.0013624801732403022,
+      "european_price": 0.0013624801732403022,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.12_q0.07_put_american",
+      "price": 0.0013624801732403022,
+      "european_price": 0.0013624801732403022,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0_call_european",
+      "price": 10.72633172660225,
+      "european_price": 10.72633172660225,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0_call_american",
+      "price": 10.72633172660225,
+      "european_price": 10.72633172660225,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0_put_european",
+      "price": 0.40814678444647307,
+      "european_price": 0.40814678444647307,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0_put_american",
+      "price": 0.4099427960676028,
+      "european_price": 0.40814678444647307,
+      "early_exercise_premium": 0.001796011621129745,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.025_call_european",
+      "price": 10.538765615313473,
+      "european_price": 10.538765615313473,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.025_call_american",
+      "price": 10.538765615418603,
+      "european_price": 10.538765615313473,
+      "early_exercise_premium": 1.0513012682622502e-10,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.025_put_european",
+      "price": 0.42869631162963223,
+      "european_price": 0.42869631162963223,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.025_put_american",
+      "price": 0.42942148850328726,
+      "european_price": 0.42869631162963223,
+      "early_exercise_premium": 0.0007251768736550313,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.07_call_european",
+      "price": 10.20436872212558,
+      "european_price": 10.20436872212558,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.07_call_american",
+      "price": 10.29770380392207,
+      "european_price": 10.20436872212558,
+      "early_exercise_premium": 0.09333508179649108,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.07_put_european",
+      "price": 0.46781670808849063,
+      "european_price": 0.46781670808849063,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.3_q0.07_put_american",
+      "price": 0.46781670808849096,
+      "european_price": 0.46781670808849063,
+      "early_exercise_premium": 3.3306690738754696e-16,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0_call_european",
+      "price": 13.404797881020862,
+      "european_price": 13.404797881020862,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0_call_american",
+      "price": 13.404797881020862,
+      "european_price": 13.404797881020862,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0_put_european",
+      "price": 3.0866129388637673,
+      "european_price": 3.0866129388637673,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0_put_american",
+      "price": 3.093760498065508,
+      "european_price": 3.0866129388637673,
+      "early_exercise_premium": 0.007147559201740705,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.025_call_european",
+      "price": 13.249097499247325,
+      "european_price": 13.249097499247325,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.025_call_american",
+      "price": 13.249127378394446,
+      "european_price": 13.249097499247325,
+      "early_exercise_premium": 2.9879147120936977e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.025_put_european",
+      "price": 3.139028195562931,
+      "european_price": 3.139028195562931,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.025_put_american",
+      "price": 3.142389258210786,
+      "european_price": 3.139028195562931,
+      "early_exercise_premium": 0.003361062647855295,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.07_call_european",
+      "price": 12.971515133588502,
+      "european_price": 12.971515133588502,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.07_call_american",
+      "price": 13.014644504853765,
+      "european_price": 12.971515133588502,
+      "early_exercise_premium": 0.043129371265262506,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.07_put_european",
+      "price": 3.23496311955008,
+      "european_price": 3.23496311955008,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.083333_v0.65_q0.07_put_american",
+      "price": 3.23496453007634,
+      "european_price": 3.23496311955008,
+      "early_exercise_premium": 1.410526259792988e-06,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0_call_european",
+      "price": 12.129812446850497,
+      "european_price": 12.129812446850497,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0_call_american",
+      "price": 12.129812446850497,
+      "european_price": 12.129812446850497,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0_put_european",
+      "price": 0.2374895852207605,
+      "european_price": 0.2374895852207605,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0_put_american",
+      "price": 0.24872120705735587,
+      "european_price": 0.2374895852207605,
+      "early_exercise_premium": 0.011231621836595373,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.025_call_european",
+      "price": 10.977258783479506,
+      "european_price": 10.977258783479506,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.025_call_american",
+      "price": 10.977258784023363,
+      "european_price": 10.977258783479506,
+      "early_exercise_premium": 5.438565153781383e-10,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.025_put_european",
+      "price": 0.3271558724672692,
+      "european_price": 0.3271558724672692,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.025_put_american",
+      "price": 0.33238500981007585,
+      "european_price": 0.3271558724672692,
+      "early_exercise_premium": 0.005229137342806667,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.07_call_european",
+      "price": 9.011560086043593,
+      "european_price": 9.011560086043593,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.07_call_american",
+      "price": 10.0,
+      "european_price": 9.011560086043593,
+      "early_exercise_premium": 0.9884399139564071,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.07_put_european",
+      "price": 0.558695598662512,
+      "european_price": 0.558695598662512,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.12_q0.07_put_american",
+      "price": 0.5586955986625127,
+      "european_price": 0.558695598662512,
+      "early_exercise_premium": 7.771561172376096e-16,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0_call_european",
+      "price": 15.258045317259922,
+      "european_price": 15.258045317259922,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0_call_american",
+      "price": 15.258045317259922,
+      "european_price": 15.258045317259922,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0_put_european",
+      "price": 3.3657224556248235,
+      "european_price": 3.3657224556248235,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0_put_american",
+      "price": 3.433512765161826,
+      "european_price": 3.3657224556248235,
+      "early_exercise_premium": 0.06779030953700227,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.025_call_european",
+      "price": 14.326806035748914,
+      "european_price": 14.326806035748914,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.025_call_american",
+      "price": 14.327322823361403,
+      "european_price": 14.326806035748914,
+      "early_exercise_premium": 0.0005167876124883009,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.025_put_european",
+      "price": 3.676703124731811,
+      "european_price": 3.676703124731811,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.025_put_american",
+      "price": 3.7091567018174967,
+      "european_price": 3.676703124731811,
+      "early_exercise_premium": 0.03245357708568575,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.07_call_european",
+      "price": 12.738865712834492,
+      "european_price": 12.738865712834492,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.07_call_american",
+      "price": 13.094158807155003,
+      "european_price": 12.738865712834492,
+      "early_exercise_premium": 0.35529309432051015,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.07_put_european",
+      "price": 4.286001225448449,
+      "european_price": 4.286001225448449,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.3_q0.07_put_american",
+      "price": 4.286050629363332,
+      "european_price": 4.286001225448449,
+      "early_exercise_premium": 4.940391488261753e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0_call_european",
+      "price": 23.67380201531897,
+      "european_price": 23.67380201531897,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0_call_american",
+      "price": 23.67380201531897,
+      "european_price": 23.67380201531897,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0_put_european",
+      "price": 11.781479153687275,
+      "european_price": 11.781479153687275,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0_put_american",
+      "price": 11.898322953785755,
+      "european_price": 11.781479153687275,
+      "early_exercise_premium": 0.11684380009847928,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.025_call_european",
+      "price": 22.818494523730493,
+      "european_price": 22.818494523730493,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.025_call_american",
+      "price": 22.836158080758402,
+      "european_price": 22.818494523730493,
+      "early_exercise_premium": 0.017663557027908894,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.025_put_european",
+      "price": 12.168391612716471,
+      "european_price": 12.168391612716471,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.025_put_american",
+      "price": 12.239854871278364,
+      "european_price": 12.168391612716471,
+      "early_exercise_premium": 0.07146325856189328,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.07_call_european",
+      "price": 21.335446384101488,
+      "european_price": 21.335446384101488,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.07_call_american",
+      "price": 21.63607765595051,
+      "european_price": 21.335446384101488,
+      "early_exercise_premium": 0.3006312718490207,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.07_put_european",
+      "price": 12.882581896718373,
+      "european_price": 12.882581896718373,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t0.5_v0.65_q0.07_put_american",
+      "price": 12.89411422718109,
+      "european_price": 12.882581896718373,
+      "early_exercise_premium": 0.01153233046271751,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0_call_european",
+      "price": 18.345692628352207,
+      "european_price": 18.345692628352207,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0_call_american",
+      "price": 18.345692628352207,
+      "european_price": 18.345692628352207,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0_put_european",
+      "price": 1.0117982244809491,
+      "european_price": 1.0117982244809491,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0_put_american",
+      "price": 1.206081244259795,
+      "european_price": 1.0117982244809491,
+      "early_exercise_premium": 0.19428301977884588,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.025_call_european",
+      "price": 14.17746348242275,
+      "european_price": 14.17746348242275,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.025_call_american",
+      "price": 14.177957902253413,
+      "european_price": 14.17746348242275,
+      "early_exercise_premium": 0.0004944198306624514,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.025_put_european",
+      "price": 1.7206266284859755,
+      "european_price": 1.7206266284859755,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.025_put_american",
+      "price": 1.831449153890663,
+      "european_price": 1.7206266284859755,
+      "early_exercise_premium": 0.11082252540468751,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.07_call_european",
+      "price": 8.119344757084416,
+      "european_price": 8.119344757084416,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.07_call_american",
+      "price": 10.40100293888656,
+      "european_price": 8.119344757084416,
+      "early_exercise_premium": 2.2816581818021433,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.07_put_european",
+      "price": 3.849626813335331,
+      "european_price": 3.849626813335331,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.12_q0.07_put_american",
+      "price": 3.849649096475411,
+      "european_price": 3.849626813335331,
+      "early_exercise_premium": 2.228314008023702e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0_call_european",
+      "price": 25.5016397964713,
+      "european_price": 25.5016397964713,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0_call_american",
+      "price": 25.5016397964713,
+      "european_price": 25.5016397964713,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0_put_european",
+      "price": 8.167745392601269,
+      "european_price": 8.167745392601269,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0_put_american",
+      "price": 8.726231388751463,
+      "european_price": 8.167745392601269,
+      "early_exercise_premium": 0.5584859961501945,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.025_call_european",
+      "price": 21.95883679563398,
+      "european_price": 21.95883679563398,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.025_call_american",
+      "price": 22.024865172335396,
+      "european_price": 21.95883679563398,
+      "early_exercise_premium": 0.06602837670141426,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.025_put_european",
+      "price": 9.501999941699056,
+      "european_price": 9.501999941699056,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.025_put_american",
+      "price": 9.837054500544522,
+      "european_price": 9.501999941699056,
+      "early_exercise_premium": 0.3350545588454654,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.07_call_european",
+      "price": 16.48011885288641,
+      "european_price": 16.48011885288641,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.07_call_american",
+      "price": 18.00938257744294,
+      "european_price": 16.48011885288641,
+      "early_exercise_premium": 1.5292637245565288,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.07_put_european",
+      "price": 12.21040090913872,
+      "european_price": 12.21040090913872,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.3_q0.07_put_american",
+      "price": 12.251263549491332,
+      "european_price": 12.21040090913872,
+      "early_exercise_premium": 0.040862640352612445,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0_call_european",
+      "price": 41.66011152008996,
+      "european_price": 41.66011152008996,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0_call_american",
+      "price": 41.66011152008996,
+      "european_price": 41.66011152008996,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0_put_european",
+      "price": 24.32621711621646,
+      "european_price": 24.32621711621646,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0_put_american",
+      "price": 25.199171410955664,
+      "european_price": 24.32621711621646,
+      "early_exercise_premium": 0.8729542947392055,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.025_call_european",
+      "price": 38.05692444575401,
+      "european_price": 38.05692444575401,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.025_call_american",
+      "price": 38.38683140782288,
+      "european_price": 38.05692444575401,
+      "early_exercise_premium": 0.3299069620688755,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.025_put_european",
+      "price": 25.60008759181478,
+      "european_price": 25.60008759181478,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.025_put_american",
+      "price": 26.277674944600978,
+      "european_price": 25.60008759181478,
+      "early_exercise_premium": 0.6775873527861975,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.07_call_european",
+      "price": 32.21475739141042,
+      "european_price": 32.21475739141042,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.07_call_american",
+      "price": 34.09535511511083,
+      "european_price": 32.21475739141042,
+      "early_exercise_premium": 1.8805977237004043,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.07_put_european",
+      "price": 27.945039447659035,
+      "european_price": 27.945039447659035,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k90_t2_v0.65_q0.07_put_american",
+      "price": 28.32565181740564,
+      "european_price": 27.945039447659035,
+      "early_exercise_premium": 0.3806123697466042,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0_call_european",
+      "price": 1.563436305779005,
+      "european_price": 1.563436305779005,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0_call_american",
+      "price": 1.563436305779005,
+      "european_price": 1.563436305779005,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0_put_european",
+      "price": 1.2098974811591194,
+      "european_price": 1.2098974811591194,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0_put_american",
+      "price": 1.2376936393934146,
+      "european_price": 1.2098974811591194,
+      "early_exercise_premium": 0.027796158234295154,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.025_call_european",
+      "price": 1.451958794119839,
+      "european_price": 1.451958794119839,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.025_call_american",
+      "price": 1.451958794119839,
+      "european_price": 1.451958794119839,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.025_put_european",
+      "price": 1.3065356079722352,
+      "european_price": 1.3065356079722352,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.025_put_american",
+      "price": 1.3165838194969541,
+      "european_price": 1.3065356079722352,
+      "early_exercise_premium": 0.010048211524718909,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.07_call_european",
+      "price": 1.2644068422537909,
+      "european_price": 1.2644068422537909,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.07_call_american",
+      "price": 1.2819741900206145,
+      "european_price": 1.2644068422537909,
+      "early_exercise_premium": 0.01756734776682367,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.07_put_european",
+      "price": 1.4925009457526095,
+      "european_price": 1.4925009457526095,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.12_q0.07_put_american",
+      "price": 1.4925009457526095,
+      "european_price": 1.4925009457526095,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0_call_european",
+      "price": 3.6274061848236867,
+      "european_price": 3.6274061848236867,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0_call_american",
+      "price": 3.6274061848236867,
+      "european_price": 3.6274061848236867,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0_put_european",
+      "price": 3.273867360205643,
+      "european_price": 3.273867360205643,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0_put_american",
+      "price": 3.2973446815309204,
+      "european_price": 3.273867360205643,
+      "early_exercise_premium": 0.023477321325277245,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.025_call_european",
+      "price": 3.517361507522431,
+      "european_price": 3.517361507522431,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.025_call_american",
+      "price": 3.517361507522483,
+      "european_price": 3.517361507522431,
+      "early_exercise_premium": 5.1958437552457326e-14,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.025_put_european",
+      "price": 3.3719383213766174,
+      "european_price": 3.3719383213766174,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.025_put_american",
+      "price": 3.381467626580953,
+      "european_price": 3.3719383213766174,
+      "early_exercise_premium": 0.009529305204335703,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.07_call_european",
+      "price": 3.3248672326422017,
+      "european_price": 3.3248672326422017,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.07_call_american",
+      "price": 3.341479482981154,
+      "european_price": 3.3248672326422017,
+      "early_exercise_premium": 0.016612250338952084,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.07_put_european",
+      "price": 3.552961336142789,
+      "european_price": 3.552961336142789,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.3_q0.07_put_american",
+      "price": 3.552961336143898,
+      "european_price": 3.552961336142789,
+      "early_exercise_premium": 1.1088907569956064e-12,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0_call_european",
+      "price": 7.639619052674524,
+      "european_price": 7.639619052674524,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0_call_american",
+      "price": 7.639619052674524,
+      "european_price": 7.639619052674524,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0_put_european",
+      "price": 7.286080228055469,
+      "european_price": 7.286080228055469,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0_put_american",
+      "price": 7.307641026765868,
+      "european_price": 7.286080228055469,
+      "early_exercise_premium": 0.021560798710399176,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.025_call_european",
+      "price": 7.526682471785926,
+      "european_price": 7.526682471785926,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.025_call_american",
+      "price": 7.526686651306744,
+      "european_price": 7.526682471785926,
+      "early_exercise_premium": 4.179520818325955e-06,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.025_put_european",
+      "price": 7.381259285639048,
+      "european_price": 7.381259285639048,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.025_put_american",
+      "price": 7.39165907767898,
+      "european_price": 7.381259285639048,
+      "early_exercise_premium": 0.01039979203993191,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.07_call_european",
+      "price": 7.326292875782827,
+      "european_price": 7.326292875782827,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.07_call_american",
+      "price": 7.344425420119077,
+      "european_price": 7.326292875782827,
+      "early_exercise_premium": 0.018132544336249445,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.07_put_european",
+      "price": 7.554386979282446,
+      "european_price": 7.554386979282446,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.083333_v0.65_q0.07_put_american",
+      "price": 7.554400323303836,
+      "european_price": 7.554386979282446,
+      "early_exercise_premium": 1.3344021390082617e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0_call_european",
+      "price": 4.5042326078011525,
+      "european_price": 4.5042326078011525,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0_call_american",
+      "price": 4.5042326078011525,
+      "european_price": 4.5042326078011525,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0_put_european",
+      "price": 2.4016516504347507,
+      "european_price": 2.4016516504347507,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0_put_american",
+      "price": 2.607192296844787,
+      "european_price": 2.4016516504347507,
+      "early_exercise_premium": 0.20554064641003622,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.025_call_european",
+      "price": 3.7753777777248994,
+      "european_price": 3.7753777777248994,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.025_call_american",
+      "price": 3.7753777777251227,
+      "european_price": 3.7753777777248994,
+      "early_exercise_premium": 2.233768725545815e-13,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.025_put_european",
+      "price": 2.9150167709760013,
+      "european_price": 2.9150167709760013,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.025_put_american",
+      "price": 2.9980443824541023,
+      "european_price": 2.9150167709760013,
+      "early_exercise_premium": 0.083027611478101,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.07_call_european",
+      "price": 2.664993100272333,
+      "european_price": 2.664993100272333,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.07_call_american",
+      "price": 2.80868950147112,
+      "european_price": 2.664993100272333,
+      "early_exercise_premium": 0.1436964011987869,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.07_put_european",
+      "price": 4.001870517154369,
+      "european_price": 4.001870517154369,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.12_q0.07_put_american",
+      "price": 4.001870517161084,
+      "european_price": 4.001870517154369,
+      "early_exercise_premium": 6.714628852932947e-12,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0_call_european",
+      "price": 9.451246699576572,
+      "european_price": 9.451246699576572,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0_call_american",
+      "price": 9.451246699576572,
+      "european_price": 9.451246699576572,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0_put_european",
+      "price": 7.348665742204891,
+      "european_price": 7.348665742204891,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0_put_american",
+      "price": 7.536469559644018,
+      "european_price": 7.348665742204891,
+      "early_exercise_premium": 0.18780381743912677,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.025_call_european",
+      "price": 8.742967881333197,
+      "european_price": 8.742967881333197,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.025_call_american",
+      "price": 8.7430716476762,
+      "european_price": 8.742967881333197,
+      "early_exercise_premium": 0.00010376634300257592,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.025_put_european",
+      "price": 7.882606874579161,
+      "european_price": 7.882606874579161,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.025_put_american",
+      "price": 7.972725980428875,
+      "european_price": 7.882606874579161,
+      "early_exercise_premium": 0.0901191058497135,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.07_call_european",
+      "price": 7.561691743521748,
+      "european_price": 7.561691743521748,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.07_call_american",
+      "price": 7.7203385203697845,
+      "european_price": 7.561691743521748,
+      "early_exercise_premium": 0.15864677684803663,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.07_put_european",
+      "price": 8.898569160398765,
+      "european_price": 8.898569160398765,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.3_q0.07_put_american",
+      "price": 8.898878937683289,
+      "european_price": 8.898569160398765,
+      "early_exercise_premium": 0.0003097772845244151,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0_call_european",
+      "price": 19.055153807589488,
+      "european_price": 19.055153807589488,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0_call_american",
+      "price": 19.055153807589488,
+      "european_price": 19.055153807589488,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0_put_european",
+      "price": 16.95257285022114,
+      "european_price": 16.95257285022114,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0_put_american",
+      "price": 17.141850219351067,
+      "european_price": 16.95257285022114,
+      "early_exercise_premium": 0.18927736912992543,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.025_call_european",
+      "price": 18.305450808187715,
+      "european_price": 18.305450808187715,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.025_call_american",
+      "price": 18.316143018591852,
+      "european_price": 18.305450808187715,
+      "early_exercise_premium": 0.01069221040413737,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.025_put_european",
+      "price": 17.445089801436925,
+      "european_price": 17.445089801436925,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.025_put_american",
+      "price": 17.562373330817692,
+      "european_price": 17.445089801436925,
+      "early_exercise_premium": 0.11728352938076725,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.07_call_european",
+      "price": 17.011733026000275,
+      "european_price": 17.011733026000275,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.07_call_american",
+      "price": 17.21966780813413,
+      "european_price": 17.011733026000275,
+      "early_exercise_premium": 0.2079347821338544,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.07_put_european",
+      "price": 18.348610442880496,
+      "european_price": 18.348610442880496,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t0.5_v0.65_q0.07_put_american",
+      "price": 18.370319802234615,
+      "european_price": 18.348610442880496,
+      "early_exercise_premium": 0.02170935935411933,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0_call_european",
+      "price": 11.35557600980246,
+      "european_price": 11.35557600980246,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0_call_american",
+      "price": 11.35557600980246,
+      "european_price": 11.35557600980246,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0_put_european",
+      "price": 3.206804449945684,
+      "european_price": 3.206804449945684,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0_put_american",
+      "price": 4.0978372697438905,
+      "european_price": 3.206804449945684,
+      "early_exercise_premium": 0.8910328197982067,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.025_call_european",
+      "price": 8.091245933150333,
+      "european_price": 8.091245933150333,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.025_call_american",
+      "price": 8.0913002900838,
+      "european_price": 8.091245933150333,
+      "early_exercise_premium": 5.435693346633741e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.025_put_european",
+      "price": 4.819531923228024,
+      "european_price": 4.819531923228024,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.025_put_american",
+      "price": 5.260770767560391,
+      "european_price": 4.819531923228024,
+      "early_exercise_premium": 0.44123884433236693,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.07_call_european",
+      "price": 3.901097272771904,
+      "european_price": 3.901097272771904,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.07_call_american",
+      "price": 4.623605683189788,
+      "european_price": 3.901097272771904,
+      "early_exercise_premium": 0.7225084104178836,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.07_put_european",
+      "price": 8.816502173037284,
+      "european_price": 8.816502173037284,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.12_q0.07_put_american",
+      "price": 8.81676607669042,
+      "european_price": 8.816502173037284,
+      "early_exercise_premium": 0.00026390365313666564,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0_call_european",
+      "price": 20.50682340955752,
+      "european_price": 20.50682340955752,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0_call_american",
+      "price": 20.50682340955752,
+      "european_price": 20.50682340955752,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0_put_european",
+      "price": 12.358051849702182,
+      "european_price": 12.358051849702182,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0_put_american",
+      "price": 13.329868775397149,
+      "european_price": 12.358051849702182,
+      "early_exercise_premium": 0.9718169256949665,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.025_call_european",
+      "price": 17.393944509402505,
+      "european_price": 17.393944509402505,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.025_call_american",
+      "price": 17.431600996721187,
+      "european_price": 17.393944509402505,
+      "early_exercise_premium": 0.03765648731868154,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.025_put_european",
+      "price": 14.122230499481805,
+      "european_price": 14.122230499481805,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.025_put_american",
+      "price": 14.702700223635118,
+      "european_price": 14.122230499481805,
+      "early_exercise_premium": 0.5804697241533123,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.07_call_european",
+      "price": 12.684169006611413,
+      "european_price": 12.684169006611413,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.07_call_american",
+      "price": 13.683051456563796,
+      "european_price": 12.684169006611413,
+      "early_exercise_premium": 0.998882449952383,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.07_put_european",
+      "price": 17.59957390687789,
+      "european_price": 17.59957390687789,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.3_q0.07_put_american",
+      "price": 17.68100885269003,
+      "european_price": 17.59957390687789,
+      "early_exercise_premium": 0.08143494581214128,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0_call_european",
+      "price": 38.18740966516211,
+      "european_price": 38.18740966516211,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0_call_american",
+      "price": 38.18740966516211,
+      "european_price": 38.18740966516211,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0_put_european",
+      "price": 30.03863810530291,
+      "european_price": 30.03863810530291,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0_put_american",
+      "price": 31.194219535498355,
+      "european_price": 30.03863810530291,
+      "early_exercise_premium": 1.155581430195447,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.025_call_european",
+      "price": 34.77236426467788,
+      "european_price": 34.77236426467788,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.025_call_american",
+      "price": 35.04373390014361,
+      "european_price": 34.77236426467788,
+      "early_exercise_premium": 0.27136963546572446,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.025_put_european",
+      "price": 31.500650254753094,
+      "european_price": 31.500650254753094,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.025_put_american",
+      "price": 32.40168274132175,
+      "european_price": 31.500650254753094,
+      "early_exercise_premium": 0.9010324865686563,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.07_call_european",
+      "price": 29.25923121051467,
+      "european_price": 29.25923121051467,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.07_call_american",
+      "price": 30.835778866022256,
+      "european_price": 29.25923121051467,
+      "early_exercise_premium": 1.5765476555075857,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.07_put_european",
+      "price": 34.17463611077791,
+      "european_price": 34.17463611077791,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k100_t2_v0.65_q0.07_put_american",
+      "price": 34.69154862766417,
+      "european_price": 34.17463611077791,
+      "early_exercise_premium": 0.5169125168862578,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0_call_european",
+      "price": 0.0045349511923506464,
+      "european_price": 0.0045349511923506464,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0_call_american",
+      "price": 0.0045349511923506464,
+      "european_price": 0.0045349511923506464,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0_put_european",
+      "price": 9.615642244110216,
+      "european_price": 9.615642244110216,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0_put_american",
+      "price": 10.0,
+      "european_price": 9.615642244110216,
+      "early_exercise_premium": 0.38435775588978416,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.025_call_european",
+      "price": 0.0037254532373664686,
+      "european_price": 0.0037254532373664686,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.025_call_american",
+      "price": 0.0037254532373664686,
+      "european_price": 0.0037254532373664686,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.025_put_european",
+      "price": 9.822948384627505,
+      "european_price": 9.822948384627505,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.025_put_american",
+      "price": 10.0,
+      "european_price": 9.822948384627505,
+      "early_exercise_premium": 0.1770516153724948,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.07_call_european",
+      "price": 0.0025944131499413417,
+      "european_price": 0.0025944131499413417,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.07_call_american",
+      "price": 0.0026073657835271064,
+      "european_price": 0.0025944131499413417,
+      "early_exercise_premium": 1.2952633585764685e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.07_put_european",
+      "price": 10.195334634186572,
+      "european_price": 10.195334634186572,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.12_q0.07_put_american",
+      "price": 10.195334634186572,
+      "european_price": 10.195334634186572,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0_call_european",
+      "price": 0.6730033411905476,
+      "european_price": 0.6730033411905476,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0_call_american",
+      "price": 0.6730033411905476,
+      "european_price": 0.6730033411905476,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0_put_european",
+      "price": 10.284110634110274,
+      "european_price": 10.284110634110274,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0_put_american",
+      "price": 10.406352827291185,
+      "european_price": 10.284110634110274,
+      "early_exercise_premium": 0.12224219318091123,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.025_call_european",
+      "price": 0.6413926764230484,
+      "european_price": 0.6413926764230484,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.025_call_american",
+      "price": 0.6413926764230484,
+      "european_price": 0.6413926764230484,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.025_put_european",
+      "price": 10.46061560781527,
+      "european_price": 10.46061560781527,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.025_put_american",
+      "price": 10.510971428212908,
+      "european_price": 10.46061560781527,
+      "early_exercise_premium": 0.05035582039763753,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.07_call_european",
+      "price": 0.5875598193068221,
+      "european_price": 0.5875598193068221,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.07_call_american",
+      "price": 0.589361057733095,
+      "european_price": 0.5875598193068221,
+      "early_exercise_premium": 0.0018012384262728887,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.07_put_european",
+      "price": 10.780300040345066,
+      "european_price": 10.780300040345066,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.3_q0.07_put_american",
+      "price": 10.780300041153623,
+      "european_price": 10.780300040345066,
+      "early_exercise_premium": 8.085567770876878e-10,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0_call_european",
+      "price": 3.943581283488706,
+      "european_price": 3.943581283488706,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0_call_american",
+      "price": 3.943581283488706,
+      "european_price": 3.943581283488706,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0_put_european",
+      "price": 13.554688576407687,
+      "european_price": 13.554688576407687,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0_put_american",
+      "price": 13.605208799284659,
+      "european_price": 13.554688576407687,
+      "early_exercise_premium": 0.050520222876972554,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.025_call_european",
+      "price": 3.8719303696111966,
+      "european_price": 3.8719303696111966,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.025_call_american",
+      "price": 3.871930936419878,
+      "european_price": 3.8719303696111966,
+      "early_exercise_premium": 5.668086813237494e-07,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.025_put_european",
+      "price": 13.6911533010019,
+      "european_price": 13.6911533010019,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.025_put_american",
+      "price": 13.716181415900987,
+      "european_price": 13.6911533010019,
+      "early_exercise_premium": 0.025028114899086518,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.07_call_european",
+      "price": 3.745463738410209,
+      "european_price": 3.745463738410209,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.07_call_american",
+      "price": 3.75268464855106,
+      "european_price": 3.745463738410209,
+      "early_exercise_premium": 0.007220910140850911,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.07_put_european",
+      "price": 13.938203959447868,
+      "european_price": 13.938203959447868,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.083333_v0.65_q0.07_put_american",
+      "price": 13.938285922458602,
+      "european_price": 13.938203959447868,
+      "early_exercise_premium": 8.1963010734043e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0_call_european",
+      "price": 0.9288012109575753,
+      "european_price": 0.9288012109575753,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0_call_american",
+      "price": 0.9288012109575753,
+      "european_price": 0.9288012109575753,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0_put_european",
+      "price": 8.615962157854517,
+      "european_price": 8.615962157854517,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0_put_american",
+      "price": 10.0,
+      "european_price": 8.615962157854517,
+      "early_exercise_premium": 1.3840378421454833,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.025_call_european",
+      "price": 0.7011684981968842,
+      "european_price": 0.7011684981968842,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.025_call_american",
+      "price": 0.7011684981968842,
+      "european_price": 0.7011684981968842,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.025_put_european",
+      "price": 9.63054939571133,
+      "european_price": 9.63054939571133,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.025_put_american",
+      "price": 10.132971735548914,
+      "european_price": 9.63054939571133,
+      "early_exercise_premium": 0.5024223398375831,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.07_call_european",
+      "price": 0.40619087100472917,
+      "european_price": 0.40619087100472917,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.07_call_american",
+      "price": 0.4187385337711856,
+      "european_price": 0.40619087100472917,
+      "early_exercise_premium": 0.012547662766456413,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.07_put_european",
+      "price": 11.53281019214988,
+      "european_price": 11.53281019214988,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.12_q0.07_put_american",
+      "price": 11.532810197671749,
+      "european_price": 11.53281019214988,
+      "early_exercise_premium": 5.521869184121897e-09,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0_call_european",
+      "price": 5.455041985043932,
+      "european_price": 5.455041985043932,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0_call_american",
+      "price": 5.455041985043932,
+      "european_price": 5.455041985043932,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0_put_european",
+      "price": 13.142202931935673,
+      "european_price": 13.142202931935673,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0_put_american",
+      "price": 13.564025612801522,
+      "european_price": 13.142202931935673,
+      "early_exercise_premium": 0.4218226808658496,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.025_call_european",
+      "price": 4.96728497600346,
+      "european_price": 4.96728497600346,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.025_call_american",
+      "price": 4.967305535362306,
+      "european_price": 4.96728497600346,
+      "early_exercise_premium": 2.0559358846483633e-05,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.025_put_european",
+      "price": 13.896665873512495,
+      "european_price": 13.896665873512495,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.025_put_american",
+      "price": 14.10044135895405,
+      "european_price": 13.896665873512495,
+      "early_exercise_premium": 0.20377548544155566,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.07_call_european",
+      "price": 4.173146266143468,
+      "european_price": 4.173146266143468,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.07_call_american",
+      "price": 4.24175389606313,
+      "european_price": 4.173146266143468,
+      "early_exercise_premium": 0.0686076299196614,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.07_put_european",
+      "price": 15.299765587283533,
+      "european_price": 15.299765587283533,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.3_q0.07_put_american",
+      "price": 15.301148832034295,
+      "european_price": 15.299765587283533,
+      "early_exercise_premium": 0.001383244750762458,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0_call_european",
+      "price": 15.270950494699703,
+      "european_price": 15.270950494699703,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0_call_american",
+      "price": 15.270950494699703,
+      "european_price": 15.270950494699703,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0_put_european",
+      "price": 22.958111441594667,
+      "european_price": 22.958111441594667,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0_put_american",
+      "price": 23.243843622818183,
+      "european_price": 22.958111441594667,
+      "early_exercise_premium": 0.2857321812235156,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.025_call_european",
+      "price": 14.622548437195372,
+      "european_price": 14.622548437195372,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.025_call_american",
+      "price": 14.629132297531347,
+      "european_price": 14.622548437195372,
+      "early_exercise_premium": 0.0065838603359758,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.025_put_european",
+      "price": 23.551929334707854,
+      "european_price": 23.551929334707854,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.025_put_american",
+      "price": 23.731248814003138,
+      "european_price": 23.551929334707854,
+      "early_exercise_premium": 0.1793194792952839,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.07_call_european",
+      "price": 13.50895104809145,
+      "european_price": 13.50895104809145,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.07_call_american",
+      "price": 13.65456231252849,
+      "european_price": 13.50895104809145,
+      "early_exercise_premium": 0.14561126443703998,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.07_put_european",
+      "price": 24.635570369235054,
+      "european_price": 24.635570369235054,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t0.5_v0.65_q0.07_put_american",
+      "price": 24.67289930631224,
+      "european_price": 24.635570369235054,
+      "early_exercise_premium": 0.03732893707718432,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0_call_european",
+      "price": 6.2913983550007755,
+      "european_price": 6.2913983550007755,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0_call_american",
+      "price": 6.2913983550007755,
+      "european_price": 6.2913983550007755,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0_put_european",
+      "price": 7.327749639158467,
+      "european_price": 7.327749639158467,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0_put_american",
+      "price": 10.290560533021754,
+      "european_price": 7.327749639158467,
+      "early_exercise_premium": 2.9628108938632867,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.025_call_european",
+      "price": 4.0887971546346265,
+      "european_price": 4.0887971546346265,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.025_call_american",
+      "price": 4.088802767541323,
+      "european_price": 4.0887971546346265,
+      "early_exercise_premium": 5.612906696761399e-06,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.025_put_european",
+      "price": 10.002205988726804,
+      "european_price": 10.002205988726804,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.025_put_american",
+      "price": 11.29598375499595,
+      "european_price": 10.002205988726804,
+      "early_exercise_premium": 1.2937777662691463,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.07_call_european",
+      "price": 1.6359528915990522,
+      "european_price": 1.6359528915990522,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.07_call_american",
+      "price": 1.8513925383652945,
+      "european_price": 1.6359528915990522,
+      "early_exercise_premium": 0.21543964676624228,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.07_put_european",
+      "price": 15.736480635878925,
+      "european_price": 15.736480635878925,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.12_q0.07_put_american",
+      "price": 15.738368169519894,
+      "european_price": 15.736480635878925,
+      "early_exercise_premium": 0.0018875336409696075,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0_call_european",
+      "price": 16.3734693928258,
+      "european_price": 16.3734693928258,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0_call_american",
+      "price": 16.3734693928258,
+      "european_price": 16.3734693928258,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0_put_european",
+      "price": 17.40982067698523,
+      "european_price": 17.40982067698523,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0_put_american",
+      "price": 18.96923959889643,
+      "european_price": 17.40982067698523,
+      "early_exercise_premium": 1.559418921911199,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.025_call_european",
+      "price": 13.684024244109517,
+      "european_price": 13.684024244109517,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.025_call_american",
+      "price": 13.705878323406054,
+      "european_price": 13.684024244109517,
+      "early_exercise_premium": 0.02185407929653671,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.025_put_european",
+      "price": 19.597433078202993,
+      "european_price": 19.597433078202993,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.025_put_american",
+      "price": 20.52618920318167,
+      "european_price": 19.597433078202993,
+      "early_exercise_premium": 0.9287561249786762,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.07_call_european",
+      "price": 9.702887710839502,
+      "european_price": 9.702887710839502,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.07_call_american",
+      "price": 10.364412541910186,
+      "european_price": 9.702887710839502,
+      "early_exercise_premium": 0.6615248310706843,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.07_put_european",
+      "price": 23.803415455120234,
+      "european_price": 23.803415455120234,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.3_q0.07_put_american",
+      "price": 23.950111523449962,
+      "european_price": 23.803415455120234,
+      "early_exercise_premium": 0.14669606832972804,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0_call_european",
+      "price": 35.08908528839698,
+      "european_price": 35.08908528839698,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0_call_american",
+      "price": 35.08908528839698,
+      "european_price": 35.08908528839698,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0_put_european",
+      "price": 36.12543657255193,
+      "european_price": 36.12543657255193,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0_put_american",
+      "price": 37.60569726762968,
+      "european_price": 36.12543657255193,
+      "early_exercise_premium": 1.480260695077746,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.025_call_european",
+      "price": 31.854306109251354,
+      "european_price": 31.854306109251354,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.025_call_american",
+      "price": 32.08034219103563,
+      "european_price": 31.854306109251354,
+      "early_exercise_premium": 0.22603608178427947,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.025_put_european",
+      "price": 37.76771494334107,
+      "european_price": 37.76771494334107,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.025_put_american",
+      "price": 38.927263161666154,
+      "european_price": 37.76771494334107,
+      "early_exercise_premium": 1.1595482183250851,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.07_call_european",
+      "price": 26.653831468472028,
+      "european_price": 26.653831468472028,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.07_call_american",
+      "price": 27.989895824275123,
+      "european_price": 26.653831468472028,
+      "early_exercise_premium": 1.3360643558030958,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.07_put_european",
+      "price": 40.7543592127498,
+      "european_price": 40.7543592127498,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k110_t2_v0.65_q0.07_put_american",
+      "price": 41.43206763758487,
+      "european_price": 40.7543592127498,
+      "early_exercise_premium": 0.6777084248350747,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0_call_european",
+      "price": 9.18157938193296e-24,
+      "european_price": 9.18157938193296e-24,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0_call_american",
+      "price": 9.18157938193296e-24,
+      "european_price": 9.18157938193296e-24,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0_put_european",
+      "price": 39.505045645531105,
+      "european_price": 39.505045645531105,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0_put_american",
+      "price": 40.0,
+      "european_price": 39.505045645531105,
+      "early_exercise_premium": 0.494954354468895,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.025_call_european",
+      "price": 5.08299973100598e-24,
+      "european_price": 5.08299973100598e-24,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.025_call_american",
+      "price": 5.08299973100598e-24,
+      "european_price": 5.08299973100598e-24,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.025_put_european",
+      "price": 39.71316128400334,
+      "european_price": 39.71316128400334,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.025_put_american",
+      "price": 40.0,
+      "european_price": 39.71316128400334,
+      "early_exercise_premium": 0.2868387159966588,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.07_call_european",
+      "price": 1.7377665599649254e-24,
+      "european_price": 1.7377665599649254e-24,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.07_call_american",
+      "price": 1.7389341663876266e-24,
+      "european_price": 1.7377665599649254e-24,
+      "early_exercise_premium": 1.1676064227012614e-27,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.07_put_european",
+      "price": 40.086678573650055,
+      "european_price": 40.086678573650055,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.12_q0.07_put_american",
+      "price": 40.086678574030074,
+      "european_price": 40.086678573650055,
+      "early_exercise_premium": 3.800195713665744e-10,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0_call_european",
+      "price": 0.00014346637073348062,
+      "european_price": 0.00014346637073348062,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0_call_american",
+      "price": 0.00014346637073348062,
+      "european_price": 0.00014346637073348062,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0_put_european",
+      "price": 39.50518911190363,
+      "european_price": 39.50518911190363,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0_put_american",
+      "price": 40.0,
+      "european_price": 39.50518911190363,
+      "early_exercise_premium": 0.4948108880963673,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.025_call_european",
+      "price": 0.00012923348435133402,
+      "european_price": 0.00012923348435133402,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.025_call_american",
+      "price": 0.00012923348435133402,
+      "european_price": 0.00012923348435133402,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.025_put_european",
+      "price": 39.71329051749064,
+      "european_price": 39.71329051749064,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.025_put_american",
+      "price": 40.0,
+      "european_price": 39.71329051749064,
+      "early_exercise_premium": 0.2867094825093588,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.07_call_european",
+      "price": 0.00010693530933533218,
+      "european_price": 0.00010693530933533218,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.07_call_american",
+      "price": 0.00010708161042009585,
+      "european_price": 0.00010693530933533218,
+      "early_exercise_premium": 1.4630108476366955e-07,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.07_put_european",
+      "price": 40.08678550896061,
+      "european_price": 40.08678550896061,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.3_q0.07_put_american",
+      "price": 40.08689198742493,
+      "european_price": 40.08678550896061,
+      "early_exercise_premium": 0.00010647846431766084,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0_call_european",
+      "price": 0.3362599626074559,
+      "european_price": 0.3362599626074559,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0_call_american",
+      "price": 0.3362599626074559,
+      "european_price": 0.3362599626074559,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0_put_european",
+      "price": 39.84130560814052,
+      "european_price": 39.84130560814052,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0_put_american",
+      "price": 40.1131836482778,
+      "european_price": 39.84130560814052,
+      "early_exercise_premium": 0.271878040137274,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.025_call_european",
+      "price": 0.3267094755199981,
+      "european_price": 0.3267094755199981,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.025_call_american",
+      "price": 0.3267094768513009,
+      "european_price": 0.3267094755199981,
+      "early_exercise_premium": 1.3313027902306374e-09,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.025_put_european",
+      "price": 40.03987075952328,
+      "european_price": 40.03987075952328,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.025_put_american",
+      "price": 40.18554162815245,
+      "european_price": 40.03987075952328,
+      "early_exercise_premium": 0.14567086862916767,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.07_call_european",
+      "price": 0.31011959160914204,
+      "european_price": 0.31011959160914204,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.07_call_american",
+      "price": 0.3104654188663606,
+      "european_price": 0.31011959160914204,
+      "early_exercise_premium": 0.000345827257218545,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.07_put_european",
+      "price": 40.39679816526084,
+      "european_price": 40.39679816526084,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.083333_v0.65_q0.07_put_american",
+      "price": 40.40025698531959,
+      "european_price": 40.39679816526084,
+      "early_exercise_premium": 0.0034588200587464257,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0_call_european",
+      "price": 0.00024060538813048475,
+      "european_price": 0.00024060538813048475,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0_call_american",
+      "price": 0.00024060538813048475,
+      "european_price": 0.00024060538813048475,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0_put_european",
+      "price": 37.05662726507511,
+      "european_price": 37.05662726507511,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0_put_american",
+      "price": 40.0,
+      "european_price": 37.05662726507511,
+      "early_exercise_premium": 2.9433727349248926,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.025_call_european",
+      "price": 0.00012806995951957466,
+      "european_price": 0.00012806995951957466,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.025_call_american",
+      "price": 0.00012806995951957466,
+      "european_price": 0.00012806995951957466,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.025_put_european",
+      "price": 38.29873468026396,
+      "european_price": 38.29873468026396,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.025_put_american",
+      "price": 40.0,
+      "european_price": 38.29873468026396,
+      "early_exercise_premium": 1.701265319736038,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.07_call_european",
+      "price": 3.9154627144401655e-05,
+      "european_price": 3.9154627144401655e-05,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.07_call_american",
+      "price": 3.9597374582987255e-05,
+      "european_price": 3.9154627144401655e-05,
+      "early_exercise_premium": 4.427474385856e-07,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.07_put_european",
+      "price": 40.49588418856173,
+      "european_price": 40.49588418856173,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.12_q0.07_put_american",
+      "price": 40.4966608320206,
+      "european_price": 40.49588418856173,
+      "early_exercise_premium": 0.0007766434588702964,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0_call_european",
+      "price": 0.7483073265717725,
+      "european_price": 0.7483073265717725,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0_call_american",
+      "price": 0.7483073265717725,
+      "european_price": 0.7483073265717725,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0_put_european",
+      "price": 37.80469398625371,
+      "european_price": 37.80469398625371,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0_put_american",
+      "price": 40.0,
+      "european_price": 37.80469398625371,
+      "early_exercise_premium": 2.19530601374629,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.025_call_european",
+      "price": 0.6496793952271237,
+      "european_price": 0.6496793952271237,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.025_call_american",
+      "price": 0.6496795562563501,
+      "european_price": 0.6496793952271237,
+      "early_exercise_premium": 1.610292263976021e-07,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.025_put_european",
+      "price": 38.948286005525354,
+      "european_price": 38.948286005525354,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.025_put_american",
+      "price": 40.05159109042192,
+      "european_price": 38.948286005525354,
+      "early_exercise_premium": 1.1033050848965686,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.07_call_european",
+      "price": 0.5003110029970639,
+      "european_price": 0.5003110029970639,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.07_call_american",
+      "price": 0.5051119975260036,
+      "european_price": 0.5003110029970639,
+      "early_exercise_premium": 0.004800994528939673,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.07_put_european",
+      "price": 40.99615603692634,
+      "european_price": 40.99615603692634,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.3_q0.07_put_american",
+      "price": 41.028120999794154,
+      "european_price": 40.99615603692634,
+      "early_exercise_premium": 0.0319649628678178,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0_call_european",
+      "price": 7.758434029934466,
+      "european_price": 7.758434029934466,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0_call_american",
+      "price": 7.758434029934466,
+      "european_price": 7.758434029934466,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0_put_european",
+      "price": 44.81482068961947,
+      "european_price": 44.81482068961947,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0_put_american",
+      "price": 45.55554492295166,
+      "european_price": 44.81482068961947,
+      "early_exercise_premium": 0.7407242333321946,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.025_call_european",
+      "price": 7.361761048026293,
+      "european_price": 7.361761048026293,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.025_call_american",
+      "price": 7.363444356957713,
+      "european_price": 7.361761048026293,
+      "early_exercise_premium": 0.0016833089314198801,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.025_put_european",
+      "price": 45.66036765832868,
+      "european_price": 45.66036765832868,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.025_put_american",
+      "price": 46.14176401083278,
+      "european_price": 45.66036765832868,
+      "early_exercise_premium": 0.48139635250409896,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.07_call_european",
+      "price": 6.689667271974618,
+      "european_price": 6.689667271974618,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.07_call_american",
+      "price": 6.743096534542535,
+      "european_price": 6.689667271974618,
+      "early_exercise_premium": 0.053429262567917135,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.07_put_european",
+      "price": 47.18551230590822,
+      "european_price": 47.18551230590822,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t0.5_v0.65_q0.07_put_american",
+      "price": 47.31598913026846,
+      "european_price": 47.18551230590822,
+      "early_exercise_premium": 0.13047682436024388,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0_call_european",
+      "price": 0.5862226795080403,
+      "european_price": 0.5862226795080403,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0_call_american",
+      "price": 0.5862226795080403,
+      "european_price": 0.5862226795080403,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0_put_european",
+      "price": 29.177942495709154,
+      "european_price": 29.177942495709154,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0_put_american",
+      "price": 40.0,
+      "european_price": 29.177942495709154,
+      "early_exercise_premium": 10.822057504290846,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.025_call_european",
+      "price": 0.28344972640318267,
+      "european_price": 0.28344972640318267,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.025_call_american",
+      "price": 0.28344973155380254,
+      "european_price": 0.28344972640318267,
+      "early_exercise_premium": 5.1506198750495e-09,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.025_put_european",
+      "price": 33.75222709253877,
+      "european_price": 33.75222709253877,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.025_put_american",
+      "price": 40.0,
+      "european_price": 33.75222709253877,
+      "early_exercise_premium": 6.247772907461233,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.07_call_european",
+      "price": 0.06421623408234924,
+      "european_price": 0.06421623408234924,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.07_call_american",
+      "price": 0.06837715929639786,
+      "european_price": 0.06421623408234924,
+      "early_exercise_premium": 0.004160925214048622,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.07_put_european",
+      "price": 41.7201125104056,
+      "european_price": 41.7201125104056,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.12_q0.07_put_american",
+      "price": 41.8177501427443,
+      "european_price": 41.7201125104056,
+      "early_exercise_premium": 0.09763763233870293,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0_call_european",
+      "price": 8.113092681027908,
+      "european_price": 8.113092681027908,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0_call_american",
+      "price": 8.113092681027908,
+      "european_price": 8.113092681027908,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0_put_european",
+      "price": 36.704812497231565,
+      "european_price": 36.704812497231565,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0_put_american",
+      "price": 41.350490636273264,
+      "european_price": 36.704812497231565,
+      "early_exercise_premium": 4.645678139041699,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.025_call_european",
+      "price": 6.50165091733088,
+      "european_price": 6.50165091733088,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.025_call_american",
+      "price": 6.5063462331107,
+      "european_price": 6.50165091733088,
+      "early_exercise_premium": 0.004695315779819964,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.025_put_european",
+      "price": 39.97042828346703,
+      "european_price": 39.97042828346703,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.025_put_american",
+      "price": 42.720502078663245,
+      "european_price": 39.97042828346703,
+      "early_exercise_premium": 2.750073795196215,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.07_call_european",
+      "price": 4.261180929135797,
+      "european_price": 4.261180929135797,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.07_call_american",
+      "price": 4.46739317710406,
+      "european_price": 4.261180929135797,
+      "early_exercise_premium": 0.20621224796826265,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.07_put_european",
+      "price": 45.91707720545919,
+      "european_price": 45.91707720545919,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.3_q0.07_put_american",
+      "price": 46.48261793882039,
+      "european_price": 45.91707720545919,
+      "early_exercise_premium": 0.5655407333612033,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0_call_european",
+      "price": 27.58222663100796,
+      "european_price": 27.58222663100796,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0_call_american",
+      "price": 27.58222663100796,
+      "european_price": 27.58222663100796,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0_put_european",
+      "price": 56.17394644720555,
+      "european_price": 56.17394644720555,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0_put_american",
+      "price": 58.88651060782652,
+      "european_price": 56.17394644720555,
+      "early_exercise_premium": 2.712564160620971,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.025_call_european",
+      "price": 24.835516381317532,
+      "european_price": 24.835516381317532,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.025_call_american",
+      "price": 24.973802156025883,
+      "european_price": 24.835516381317532,
+      "early_exercise_premium": 0.13828577470835057,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.025_put_european",
+      "price": 58.30429374745069,
+      "european_price": 58.30429374745069,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.025_put_american",
+      "price": 60.45132224195612,
+      "european_price": 58.30429374745069,
+      "early_exercise_premium": 2.1470284945054274,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.07_call_european",
+      "price": 20.469848713963373,
+      "european_price": 20.469848713963373,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.07_call_american",
+      "price": 21.328603973329056,
+      "european_price": 20.469848713963373,
+      "early_exercise_premium": 0.8587552593656831,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.07_put_european",
+      "price": 62.125744990284716,
+      "european_price": 62.125744990284716,
+      "early_exercise_premium": 0.0,
+      "lattice_steps": 128
+    },
+    {
+      "id": "k140_t2_v0.65_q0.07_put_american",
+      "price": 63.43666265316049,
+      "european_price": 62.125744990284716,
+      "early_exercise_premium": 1.3109176628757737,
+      "lattice_steps": 128
+    }
+  ]
+}

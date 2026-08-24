@@ -1,3 +1,4 @@
+#include "volarb/american.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -40,6 +41,14 @@ using volarb::parse_canonical_timestamp;
 using volarb::ForwardCurvePoint;
 using volarb::imply_forward_curve;
 using volarb::name_of_forward_curve_status;
+using volarb::early_exercise_premium;
+using volarb::european_counterpart;
+using volarb::exercise_style_from_name;
+using volarb::ExerciseStyle;
+using volarb::InvalidLatticeInputsError;
+using volarb::LatticeInputs;
+using volarb::richardson_base_steps;
+using volarb::richardson_extrapolated_price;
 
 namespace {
 
@@ -94,6 +103,19 @@ std::vector<ContractQuote> chain_as_of_from_strings(const AsOfChainReader& reade
 std::vector<ForwardCurvePoint> imply_forward_curve_from_strings(
     const std::vector<ContractQuote>& quotes, const std::string& observation_time) {
     return imply_forward_curve(quotes, parse_canonical_timestamp(observation_time));
+}
+
+LatticeInputs make_lattice_inputs(double spot_price, double strike, double years_to_expiry,
+                                  double volatility, double zero_rate, double carry_rate,
+                                  const std::string& option_type, const std::string& exercise_style) {
+    return LatticeInputs{spot_price,
+                         strike,
+                         years_to_expiry,
+                         volatility,
+                         zero_rate,
+                         carry_rate,
+                         option_type_from_name(option_type),
+                         exercise_style_from_name(exercise_style)};
 }
 
 }
@@ -215,6 +237,36 @@ PYBIND11_MODULE(_volarb_core, module) {
 
     module.def("imply_forward_curve", &imply_forward_curve_from_strings, py::arg("quotes"),
                py::arg("observation_time"));
+
+    py::register_exception<InvalidLatticeInputsError>(module, "InvalidLatticeInputsError",
+                                                      PyExc_ValueError);
+
+    py::class_<LatticeInputs>(module, "LatticeInputs")
+        .def(py::init(&make_lattice_inputs), py::arg("spot_price"), py::arg("strike"),
+             py::arg("years_to_expiry"), py::arg("volatility"), py::arg("zero_rate"),
+             py::arg("carry_rate"), py::arg("option_type"), py::arg("exercise_style"))
+        .def_readonly("spot_price", &LatticeInputs::spot_price)
+        .def_readonly("strike", &LatticeInputs::strike)
+        .def_readonly("years_to_expiry", &LatticeInputs::years_to_expiry)
+        .def_readonly("volatility", &LatticeInputs::volatility)
+        .def_readonly("zero_rate", &LatticeInputs::zero_rate)
+        .def_readonly("carry_rate", &LatticeInputs::carry_rate);
+
+    module.attr("RICHARDSON_BASE_STEPS") = richardson_base_steps;
+    module.def(
+        "richardson_extrapolated_price",
+        [](const LatticeInputs& inputs) { return richardson_extrapolated_price(inputs, richardson_base_steps); },
+        py::arg("inputs"));
+    module.def(
+        "european_price",
+        [](const LatticeInputs& inputs) {
+            return richardson_extrapolated_price(european_counterpart(inputs), richardson_base_steps);
+        },
+        py::arg("inputs"));
+    module.def(
+        "early_exercise_premium",
+        [](const LatticeInputs& inputs) { return early_exercise_premium(inputs, richardson_base_steps); },
+        py::arg("inputs"));
 
     module.def(
         "out_of_the_money_option_type",

@@ -1,0 +1,137 @@
+{
+  "schema": "american_pricing_request/v1",
+  "records": [
+    {
+      "id": "expired_in_the_money_call",
+      "spot_price": 100.0,
+      "strike": 90.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.3,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "call",
+      "exercise_style": "american"
+    },
+    {
+      "id": "expired_in_the_money_put",
+      "spot_price": 100.0,
+      "strike": 90.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.3,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "put",
+      "exercise_style": "american"
+    },
+    {
+      "id": "expired_out_of_the_money_call",
+      "spot_price": 100.0,
+      "strike": 110.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.3,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "call",
+      "exercise_style": "american"
+    },
+    {
+      "id": "expired_out_of_the_money_put",
+      "spot_price": 100.0,
+      "strike": 110.0,
+      "years_to_expiry": 0.0,
+      "volatility": 0.3,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "put",
+      "exercise_style": "american"
+    },
+    {
+      "id": "zero_volatility_call",
+      "spot_price": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "call",
+      "exercise_style": "american"
+    },
+    {
+      "id": "zero_volatility_put",
+      "spot_price": 100.0,
+      "strike": 95.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.0,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "put",
+      "exercise_style": "american"
+    },
+    {
+      "id": "deep_in_the_money_long_dated_call",
+      "spot_price": 100.0,
+      "strike": 250.0,
+      "years_to_expiry": 3.0,
+      "volatility": 0.2,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "call",
+      "exercise_style": "american"
+    },
+    {
+      "id": "deep_in_the_money_long_dated_put",
+      "spot_price": 100.0,
+      "strike": 250.0,
+      "years_to_expiry": 3.0,
+      "volatility": 0.2,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "put",
+      "exercise_style": "american"
+    },
+    {
+      "id": "deep_out_of_the_money_short_dated_call",
+      "spot_price": 100.0,
+      "strike": 220.0,
+      "years_to_expiry": 0.019178,
+      "volatility": 0.2,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "call",
+      "exercise_style": "american"
+    },
+    {
+      "id": "deep_out_of_the_money_short_dated_put",
+      "spot_price": 100.0,
+      "strike": 220.0,
+      "years_to_expiry": 0.019178,
+      "volatility": 0.2,
+      "zero_rate": 0.0425,
+      "carry_rate": 0.02,
+      "option_type": "put",
+      "exercise_style": "american"
+    },
+    {
+      "id": "negative_carry_call",
+      "spot_price": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.25,
+      "zero_rate": 0.0425,
+      "carry_rate": -0.03,
+      "option_type": "call",
+      "exercise_style": "american"
+    },
+    {
+      "id": "negative_carry_put",
+      "spot_price": 100.0,
+      "strike": 100.0,
+      "years_to_expiry": 1.0,
+      "volatility": 0.25,
+      "zero_rate": 0.0425,
+      "carry_rate": -0.03,
+      "option_type": "put",
+      "exercise_style": "american"
+    }
+  ]
+}
