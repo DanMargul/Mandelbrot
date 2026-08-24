@@ -47,12 +47,17 @@ def dataset_digest(partitions: list[PartitionEntry]) -> str:
 
 
 def write_manifest(
-    dataset_root: Path, partitions: list[PartitionEntry], source: str, created_at: datetime
+    dataset_root: Path,
+    partitions: list[PartitionEntry],
+    source: str,
+    created_at: datetime,
+    chain_schema: str,
 ) -> None:
     ordered = sorted(partitions, key=lambda entry: entry.relative_path)
     payload: dict[str, Any] = {
         "schema": MANIFEST_SCHEMA_ID,
         "source": source,
+        "chain_schema": chain_schema,
         "created_at": canonical_timestamp(created_at),
         "dataset_digest": dataset_digest(ordered),
         "partitions": [asdict(partition) for partition in ordered],

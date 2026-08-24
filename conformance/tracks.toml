@@ -12,11 +12,15 @@ built_when_present = "build/release/cpp_pure/volarb-native"
 
 [verbs.read-chain-as-of]
 input_schema = "chain_query/v1"
-output_schema = "chain_snapshot/v1"
+output_schema = "chain_snapshot/v2"
 
 [verbs.imply-forward-curve]
 input_schema = "chain_query/v1"
 output_schema = "forward_curve/v1"
+
+[verbs.invert-american-implied-volatility]
+input_schema = "american_inversion_request/v1"
+output_schema = "american_inversion_result/v1"
 
 [verbs.price-american-options]
 input_schema = "american_pricing_request/v1"

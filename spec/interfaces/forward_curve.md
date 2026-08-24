@@ -233,3 +233,31 @@ which are precisely the ones most sensitive to it.
 - `discount_factor_is_monotone_in_expiry` is true on the synthetic fixture
 - every non-converged point carries `forward == 0.0` and null uncertainties
 - the implied carry rate recovers the synthetic dividend yield to within its own propagated error
+
+---
+
+# American quotes are refused, not fitted
+
+`C - P = DF * (F - K)` is a **European** relation. For American contracts early exercise
+breaks it into an inequality, `S - K <= C - P <= S - K * DF`, and the regression above has no
+right to be run on such quotes at all.
+
+This was not caught by reasoning about it. It was caught by pricing a synthetic American
+chain with known parameters and looking at what the estimator said:
+
+| input | fitted forward | error | fitted discount factor |
+|---|---|---|---|
+| raw American quotes | 224.3261 | `+4.75e-04` relative | **1.007720** |
+| after stripping the premium | 224.2354 | `+7.07e-05` relative | 0.997706 |
+| truth | 224.2196 | | 0.996726 |
+
+The discount factor came out **above one**. At a positive interest rate that is free money,
+and the module reported it as `converged` because the only check was on the sign of the
+slope. The forward was biased by a factor of seven more than the European case, and the bias
+appeared downstream as a systematic `0.003` volatility point disagreement between calls and
+puts that no amount of quote cleaning would have removed.
+
+The status `american_quotes_not_stripped` now refuses any expiry containing American
+contracts, rather than returning a number that looks fitted. Stripping the early exercise
+premium first is step 3 of `docs/program.md` and is the next increment; the measurement above
+already shows it recovers the forward to European accuracy.

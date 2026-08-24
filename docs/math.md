@@ -182,6 +182,26 @@ mispricing that is not there.
 centring, and the measured accuracy. Three consequences belong here because they constrain
 what the rest of the platform may assume.
 
+### Parity is a European relation
+
+`C - P = DF * (F - K)` holds with equality only for European exercise. American contracts
+satisfy an inequality instead, `S - K <= C - P <= S - K * DF`, because either side may be
+exercised early and the two sides carry different early exercise premiums.
+
+Running the regression anyway does not produce a slightly worse forward. On a synthetic
+American chain with known parameters it produced a **discount factor above one**, which at a
+positive rate is free money, and a forward biased seven times more than the European case.
+The bias then reappears as a systematic disagreement between call-implied and put-implied
+volatility that looks like a data problem and is not.
+
+So `forward_curve` refuses any expiry containing American contracts. The early exercise
+premium has to be stripped first, using the lattice in `american`, and the same measurement
+shows that doing so restores the forward to European accuracy and the discount factor to
+below one.
+
+The general lesson is worth keeping: a model-free relation is only model-free inside its own
+assumptions, and parity's assumption is European exercise.
+
 ### The weight cannot be `volatility_uncertainty`
 
 It would be natural to weight the regression by the quantity `implied_vol` already produces

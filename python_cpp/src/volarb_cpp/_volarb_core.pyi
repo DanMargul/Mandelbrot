@@ -18,6 +18,7 @@ class CorruptDatasetError(ChainDatasetError): ...
 
 class ContractQuote:
     contract_symbol: str
+    exercise_style: ExerciseStyle
     expiry_date: str
     strike: float
     option_type: OptionType
@@ -97,6 +98,34 @@ RICHARDSON_BASE_STEPS: int
 def richardson_extrapolated_price(inputs: LatticeInputs) -> float: ...
 def european_price(inputs: LatticeInputs) -> float: ...
 def early_exercise_premium(inputs: LatticeInputs) -> float: ...
+
+AmericanInversionStatus = Literal[
+    "converged",
+    "below_intrinsic",
+    "above_no_arbitrage_bound",
+    "at_exercise_boundary",
+    "above_volatility_ceiling",
+    "not_converged",
+    "degenerate_expiry",
+]
+
+class AmericanInversionResult:
+    volatility: float
+    status: AmericanInversionStatus
+    iterations: int
+    absolute_price_error: float
+
+def invert_american_implied_volatility(
+    *,
+    spot_price: float,
+    strike: float,
+    years_to_expiry: float,
+    zero_rate: float,
+    carry_rate: float,
+    option_price: float,
+    option_type: OptionType,
+    exercise_style: ExerciseStyle,
+) -> AmericanInversionResult: ...
 def imply_forward_curve(quotes: list[ContractQuote], observation_time: str) -> list[ForwardCurvePoint]: ...
 
 class BlackScholesInputs:

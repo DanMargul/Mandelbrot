@@ -20,6 +20,7 @@ nlohmann::json invert_implied_volatility_record(const nlohmann::json& record);
 nlohmann::json read_chain_as_of_records(const nlohmann::json& records);
 nlohmann::json imply_forward_curve_records(const nlohmann::json& records);
 nlohmann::json price_american_option_record(const nlohmann::json& record);
+nlohmann::json invert_american_implied_volatility_record(const nlohmann::json& record);
 
 const std::map<std::string, Verb>& supported_verbs();
 

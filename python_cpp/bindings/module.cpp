@@ -49,6 +49,10 @@ using volarb::InvalidLatticeInputsError;
 using volarb::LatticeInputs;
 using volarb::richardson_base_steps;
 using volarb::richardson_extrapolated_price;
+using volarb::AmericanInversionInputs;
+using volarb::AmericanInversionResult;
+using volarb::invert_american_implied_volatility;
+using volarb::name_of_american_inversion_status;
 
 namespace {
 
@@ -103,6 +107,16 @@ std::vector<ContractQuote> chain_as_of_from_strings(const AsOfChainReader& reade
 std::vector<ForwardCurvePoint> imply_forward_curve_from_strings(
     const std::vector<ContractQuote>& quotes, const std::string& observation_time) {
     return imply_forward_curve(quotes, parse_canonical_timestamp(observation_time));
+}
+
+AmericanInversionResult invert_american_from_strings(double spot_price, double strike,
+                                                     double years_to_expiry, double zero_rate,
+                                                     double carry_rate, double option_price,
+                                                     const std::string& option_type,
+                                                     const std::string& exercise_style) {
+    return invert_american_implied_volatility(AmericanInversionInputs{
+        spot_price, strike, years_to_expiry, zero_rate, carry_rate, option_price,
+        option_type_from_name(option_type), exercise_style_from_name(exercise_style)});
 }
 
 LatticeInputs make_lattice_inputs(double spot_price, double strike, double years_to_expiry,
@@ -184,6 +198,10 @@ PYBIND11_MODULE(_volarb_core, module) {
         .def_readonly("strike", &ContractQuote::strike)
         .def_readonly("contract_multiplier", &ContractQuote::contract_multiplier)
         .def_readonly("is_standard_deliverable", &ContractQuote::is_standard_deliverable)
+        .def_property_readonly("exercise_style",
+                               [](const ContractQuote& quote) {
+                                   return name_of_exercise_style(quote.exercise_style);
+                               })
         .def_readonly("ingest_sequence", &ContractQuote::ingest_sequence)
         .def_readonly("underlying_price", &ContractQuote::underlying_price)
         .def_readonly("bid_price", &ContractQuote::bid_price)
@@ -263,6 +281,19 @@ PYBIND11_MODULE(_volarb_core, module) {
             return richardson_extrapolated_price(european_counterpart(inputs), richardson_base_steps);
         },
         py::arg("inputs"));
+    py::class_<AmericanInversionResult>(module, "AmericanInversionResult")
+        .def_readonly("volatility", &AmericanInversionResult::volatility)
+        .def_readonly("iterations", &AmericanInversionResult::iterations)
+        .def_readonly("absolute_price_error", &AmericanInversionResult::absolute_price_error)
+        .def_property_readonly("status", [](const AmericanInversionResult& result) {
+            return name_of_american_inversion_status(result.status);
+        });
+
+    module.def("invert_american_implied_volatility", &invert_american_from_strings,
+               py::arg("spot_price"), py::arg("strike"), py::arg("years_to_expiry"),
+               py::arg("zero_rate"), py::arg("carry_rate"), py::arg("option_price"),
+               py::arg("option_type"), py::arg("exercise_style"));
+
     module.def(
         "early_exercise_premium",
         [](const LatticeInputs& inputs) { return early_exercise_premium(inputs, richardson_base_steps); },

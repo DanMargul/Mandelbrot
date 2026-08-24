@@ -8,10 +8,12 @@ from typing import Any, Final
 
 import pyarrow.parquet
 
+from volarb_py.american import ExerciseStyle
 from volarb_py.pricing import OptionType
 
 MANIFEST_FILENAME: Final[str] = "manifest.json"
 MANIFEST_SCHEMA_ID: Final[str] = "chain_dataset_manifest/v1"
+CHAIN_SCHEMA_ID: Final[str] = "option_chain_snapshot/v2"
 STANDARD_CONTRACT_MULTIPLIER: Final[int] = 100
 
 
@@ -61,6 +63,7 @@ class ContractQuote:
     option_type: OptionType
     contract_multiplier: int
     is_standard_deliverable: bool
+    exercise_style: ExerciseStyle
     event_time: datetime
     knowledge_time: datetime
     ingest_sequence: int
@@ -95,6 +98,14 @@ def chain_sort_key(quote: ContractQuote) -> tuple[date, float, str, str]:
     return quote.expiry_date, quote.strike, quote.option_type, quote.contract_symbol
 
 
+def exercise_style_from_name(name: str) -> ExerciseStyle:
+    if name == "european":
+        return "european"
+    if name == "american":
+        return "american"
+    raise CorruptDatasetError(f"exercise_style must be 'european' or 'american', found {name!r}")
+
+
 def option_type_from_name(name: str) -> OptionType:
     if name == "call":
         return "call"
@@ -121,6 +132,11 @@ def read_manifest(dataset_root: Path) -> DatasetManifest:
     payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     if payload.get("schema") != MANIFEST_SCHEMA_ID:
         raise CorruptDatasetError(f"{manifest_path}: expected schema {MANIFEST_SCHEMA_ID!r}")
+    if payload.get("chain_schema") != CHAIN_SCHEMA_ID:
+        raise CorruptDatasetError(
+            f"{manifest_path}: expected chain schema {CHAIN_SCHEMA_ID!r}, "
+            f"found {payload.get('chain_schema')!r}"
+        )
     return DatasetManifest(
         dataset_digest=str(payload["dataset_digest"]),
         partitions=tuple(partition_from_payload(entry) for entry in payload["partitions"]),
@@ -141,6 +157,7 @@ def quote_from_row(row: dict[str, Any]) -> ContractQuote:
         option_type=option_type_from_name(str(row["option_type"])),
         contract_multiplier=int(row["contract_multiplier"]),
         is_standard_deliverable=bool(row["is_standard_deliverable"]),
+        exercise_style=exercise_style_from_name(str(row["exercise_style"])),
         event_time=event_time,
         knowledge_time=knowledge_time,
         ingest_sequence=int(row["ingest_sequence"]),

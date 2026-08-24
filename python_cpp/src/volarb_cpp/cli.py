@@ -111,6 +111,26 @@ def price_american_option_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
+    result = _volarb_core.invert_american_implied_volatility(
+        spot_price=required_float(record, "spot_price"),
+        strike=required_float(record, "strike"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+        zero_rate=required_float(record, "zero_rate"),
+        carry_rate=required_float(record, "carry_rate"),
+        option_price=required_float(record, "option_price"),
+        option_type=required_option_type(record, "option_type"),
+        exercise_style=required_exercise_style(record, "exercise_style"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "volatility": result.volatility,
+        "status": result.status,
+        "iterations": result.iterations,
+        "absolute_price_error": result.absolute_price_error,
+    }
+
+
 def chain_snapshot_record(query_id: str, quote: _volarb_core.ContractQuote) -> JsonRecord:
     return {
         "id": f"{query_id}|{quote.contract_symbol}",
@@ -121,6 +141,7 @@ def chain_snapshot_record(query_id: str, quote: _volarb_core.ContractQuote) -> J
         "option_type": quote.option_type,
         "contract_multiplier": quote.contract_multiplier,
         "is_standard_deliverable": quote.is_standard_deliverable,
+        "exercise_style": quote.exercise_style,
         "event_time": quote.event_time,
         "knowledge_time": quote.knowledge_time,
         "ingest_sequence": quote.ingest_sequence,
@@ -215,7 +236,7 @@ VERBS: Final[dict[str, Verb]] = {
     "read-chain-as-of": Verb(
         name="read-chain-as-of",
         input_schema="chain_query/v1",
-        output_schema="chain_snapshot/v1",
+        output_schema="chain_snapshot/v2",
         transform_records=read_chain_as_of_records,
     ),
     "price-american-options": Verb(
@@ -223,6 +244,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="american_pricing_request/v1",
         output_schema="american_pricing_result/v1",
         transform_records=mapped_over_records(price_american_option_record),
+    ),
+    "invert-american-implied-volatility": Verb(
+        name="invert-american-implied-volatility",
+        input_schema="american_inversion_request/v1",
+        output_schema="american_inversion_result/v1",
+        transform_records=mapped_over_records(invert_american_implied_volatility_record),
     ),
     "imply-forward-curve": Verb(
         name="imply-forward-curve",

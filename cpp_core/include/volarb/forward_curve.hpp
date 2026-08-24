@@ -14,6 +14,7 @@ enum class ForwardCurveStatus {
     TooFewPairs,
     DegenerateStrikeRange,
     NonPositiveDiscountFactor,
+    AmericanQuotesNotStripped,
 };
 
 inline constexpr int minimum_parity_pairs = 4;

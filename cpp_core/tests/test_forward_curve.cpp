@@ -82,6 +82,14 @@ TEST_CASE("a thin chain reports too few pairs rather than guessing", "[forward_c
     REQUIRE_FALSE(points[0].implied_zero_rate.has_value());
 }
 
+TEST_CASE("american quotes are refused rather than silently biased", "[forward_curve]") {
+    const auto points = curve_for("AAPL", "2026-08-21T17:00:00.000000Z");
+    REQUIRE(points.size() == 1);
+    REQUIRE(points[0].status == ForwardCurveStatus::AmericanQuotesNotStripped);
+    REQUIRE(points[0].forward == 0.0);
+    REQUIRE_FALSE(points[0].forward_standard_error.has_value());
+}
+
 TEST_CASE("an empty chain produces no curve points", "[forward_curve]") {
     REQUIRE(curve_for("NVDA", "2026-08-21T17:00:00.000000Z").empty());
 }

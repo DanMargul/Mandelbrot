@@ -13,6 +13,7 @@ ForwardCurveStatus = Literal[
     "too_few_pairs",
     "degenerate_strike_range",
     "non_positive_discount_factor",
+    "american_quotes_not_stripped",
 ]
 
 MINIMUM_PARITY_PAIRS: Final[int] = 4
@@ -248,6 +249,10 @@ def discount_factors_are_monotone(points: list[ForwardCurvePoint]) -> bool:
     return all(later.discount_factor <= earlier.discount_factor for earlier, later in pairwise(converged))
 
 
+def expiry_has_american_quotes(quotes: list[ContractQuote], expiry_date: date) -> bool:
+    return any(quote.expiry_date == expiry_date and quote.exercise_style == "american" for quote in quotes)
+
+
 def spot_price_for(quotes: list[ContractQuote], expiry_date: date) -> float:
     for quote in quotes:
         if quote.expiry_date == expiry_date:
@@ -262,11 +267,14 @@ def imply_forward_curve(quotes: list[ContractQuote], observation_time: datetime)
         years = years_to_expiry_from(observation_time, expiry_date)
         if years <= 0.0:
             continue
-        points.append(
-            curve_point_for_expiry(
-                expiry_date, pairs_by_expiry[expiry_date], years, spot_price_for(quotes, expiry_date)
+        spot_price = spot_price_for(quotes, expiry_date)
+        pairs = pairs_by_expiry[expiry_date]
+        if expiry_has_american_quotes(quotes, expiry_date):
+            points.append(
+                failed_point(expiry_date, years, spot_price, len(pairs), "american_quotes_not_stripped")
             )
-        )
+            continue
+        points.append(curve_point_for_expiry(expiry_date, pairs, years, spot_price))
 
     monotone = discount_factors_are_monotone(points)
     return [replace(point, discount_factor_is_monotone_in_expiry=monotone) for point in points]

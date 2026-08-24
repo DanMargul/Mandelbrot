@@ -4,7 +4,7 @@ from typing import Final
 
 import pyarrow
 
-CHAIN_SCHEMA_ID: Final[str] = "option_chain_snapshot/v1"
+CHAIN_SCHEMA_ID: Final[str] = "option_chain_snapshot/v2"
 
 OPTION_CHAIN_SNAPSHOT_SCHEMA: Final[pyarrow.Schema] = pyarrow.schema(
     [
@@ -15,6 +15,7 @@ OPTION_CHAIN_SNAPSHOT_SCHEMA: Final[pyarrow.Schema] = pyarrow.schema(
         pyarrow.field("option_type", pyarrow.string(), nullable=False),
         pyarrow.field("contract_multiplier", pyarrow.int32(), nullable=False),
         pyarrow.field("is_standard_deliverable", pyarrow.bool_(), nullable=False),
+        pyarrow.field("exercise_style", pyarrow.string(), nullable=False),
         pyarrow.field("event_time", pyarrow.timestamp("us", tz="UTC"), nullable=False),
         pyarrow.field("knowledge_time", pyarrow.timestamp("us", tz="UTC"), nullable=False),
         pyarrow.field("ingest_sequence", pyarrow.int64(), nullable=False),

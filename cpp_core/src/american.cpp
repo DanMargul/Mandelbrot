@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <utility>
 
 namespace volarb {
 
@@ -203,6 +204,133 @@ double black_scholes_reference_price(const LatticeInputs& inputs) {
         std::exp(-inputs.zero_rate * inputs.years_to_expiry),
         inputs.option_type,
     });
+}
+
+}
+
+namespace volarb {
+
+namespace {
+
+LatticeInputs lattice_at_volatility(const AmericanInversionInputs& inputs, double volatility) {
+    return LatticeInputs{inputs.spot_price, inputs.strike,     inputs.years_to_expiry,
+                         volatility,        inputs.zero_rate,  inputs.carry_rate,
+                         inputs.option_type, inputs.exercise_style};
+}
+
+double price_at_volatility(const AmericanInversionInputs& inputs, double volatility) {
+    return richardson_extrapolated_price(lattice_at_volatility(inputs, volatility));
+}
+
+double european_vega_at_volatility(const AmericanInversionInputs& inputs, double volatility) {
+    const double carry = inputs.zero_rate - inputs.carry_rate;
+    const BlackScholesGreeks greeks = black_scholes_price_and_greeks(BlackScholesInputs{
+        inputs.spot_price * std::exp(carry * inputs.years_to_expiry),
+        inputs.strike,
+        inputs.years_to_expiry,
+        volatility,
+        std::exp(-inputs.zero_rate * inputs.years_to_expiry),
+        inputs.option_type,
+    });
+    return greeks.vega_with_respect_to_volatility;
+}
+
+std::pair<double, double> forward_and_discount_of(const AmericanInversionInputs& inputs) {
+    const double carry = inputs.zero_rate - inputs.carry_rate;
+    return {inputs.spot_price * std::exp(carry * inputs.years_to_expiry),
+            std::exp(-inputs.zero_rate * inputs.years_to_expiry)};
+}
+
+double no_arbitrage_price_floor(const AmericanInversionInputs& inputs) {
+    if (inputs.exercise_style == ExerciseStyle::American) {
+        return intrinsic_value(inputs.spot_price, inputs.strike, inputs.option_type);
+    }
+    const auto [forward, discount_factor] = forward_and_discount_of(inputs);
+    return discount_factor * intrinsic_value(forward, inputs.strike, inputs.option_type);
+}
+
+double no_arbitrage_price_ceiling(const AmericanInversionInputs& inputs) {
+    if (inputs.exercise_style == ExerciseStyle::American) {
+        return inputs.option_type == OptionType::Call ? inputs.spot_price : inputs.strike;
+    }
+    const auto [forward, discount_factor] = forward_and_discount_of(inputs);
+    return discount_factor * (inputs.option_type == OptionType::Call ? forward : inputs.strike);
+}
+
+AmericanInversionResult failed_american_inversion(AmericanInversionStatus status) {
+    return AmericanInversionResult{0.0, status, 0, 0.0};
+}
+
+AmericanInversionResult solve_american_volatility(const AmericanInversionInputs& inputs) {
+    double lower = minimum_volatility;
+    double upper = maximum_volatility;
+    double volatility = clamp_into_bracket(
+        brenner_subrahmanyam_seed(inputs.spot_price, inputs.years_to_expiry, inputs.option_price), lower,
+        upper);
+
+    for (int iteration = 1; iteration <= maximum_iterations; ++iteration) {
+        const double price = price_at_volatility(inputs, volatility);
+        if (price > inputs.option_price) {
+            upper = volatility;
+        } else {
+            lower = volatility;
+        }
+        const double next_volatility =
+            next_volatility_estimate(volatility, price - inputs.option_price,
+                                     european_vega_at_volatility(inputs, volatility), lower, upper);
+        const double step_size = std::abs(next_volatility - volatility);
+        volatility = next_volatility;
+        if (step_size <= american_volatility_convergence_tolerance * volatility) {
+            const double final_price = price_at_volatility(inputs, volatility);
+            return AmericanInversionResult{volatility, AmericanInversionStatus::Converged, iteration,
+                                           std::abs(final_price - inputs.option_price)};
+        }
+    }
+
+    const double final_price = price_at_volatility(inputs, volatility);
+    return AmericanInversionResult{volatility, AmericanInversionStatus::NotConverged, maximum_iterations,
+                                   std::abs(final_price - inputs.option_price)};
+}
+
+}
+
+std::string name_of_american_inversion_status(AmericanInversionStatus status) {
+    switch (status) {
+    case AmericanInversionStatus::Converged:
+        return "converged";
+    case AmericanInversionStatus::BelowIntrinsic:
+        return "below_intrinsic";
+    case AmericanInversionStatus::AboveNoArbitrageBound:
+        return "above_no_arbitrage_bound";
+    case AmericanInversionStatus::AtExerciseBoundary:
+        return "at_exercise_boundary";
+    case AmericanInversionStatus::AboveVolatilityCeiling:
+        return "above_volatility_ceiling";
+    case AmericanInversionStatus::NotConverged:
+        return "not_converged";
+    case AmericanInversionStatus::DegenerateExpiry:
+        return "degenerate_expiry";
+    }
+    return "not_converged";
+}
+
+AmericanInversionResult invert_american_implied_volatility(const AmericanInversionInputs& inputs) {
+    if (inputs.years_to_expiry <= 0.0) {
+        return failed_american_inversion(AmericanInversionStatus::DegenerateExpiry);
+    }
+    if (inputs.option_price < no_arbitrage_price_floor(inputs)) {
+        return failed_american_inversion(AmericanInversionStatus::BelowIntrinsic);
+    }
+    if (inputs.option_price >= no_arbitrage_price_ceiling(inputs)) {
+        return failed_american_inversion(AmericanInversionStatus::AboveNoArbitrageBound);
+    }
+    if (inputs.option_price <= price_at_volatility(inputs, minimum_volatility)) {
+        return failed_american_inversion(AmericanInversionStatus::AtExerciseBoundary);
+    }
+    if (inputs.option_price >= price_at_volatility(inputs, maximum_volatility)) {
+        return failed_american_inversion(AmericanInversionStatus::AboveVolatilityCeiling);
+    }
+    return solve_american_volatility(inputs);
 }
 
 }

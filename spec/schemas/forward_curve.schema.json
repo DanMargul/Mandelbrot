@@ -2,40 +2,124 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "forward_curve/v1",
   "type": "object",
-  "required": ["schema", "records"],
+  "required": [
+    "schema",
+    "records"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schema": { "const": "forward_curve/v1" },
+    "schema": {
+      "const": "forward_curve/v1"
+    },
     "records": {
       "type": "array",
       "items": {
         "type": "object",
         "required": [
-          "id", "query_id", "underlying_symbol", "expiry_date", "years_to_expiry", "spot_price",
-          "forward", "forward_standard_error", "discount_factor", "discount_factor_standard_error",
-          "implied_zero_rate", "implied_carry_rate", "parity_pair_count", "active_pair_count",
-          "chi_square_per_degree_of_freedom", "discount_factor_is_monotone_in_expiry", "status"
+          "id",
+          "query_id",
+          "underlying_symbol",
+          "expiry_date",
+          "years_to_expiry",
+          "spot_price",
+          "forward",
+          "forward_standard_error",
+          "discount_factor",
+          "discount_factor_standard_error",
+          "implied_zero_rate",
+          "implied_carry_rate",
+          "parity_pair_count",
+          "active_pair_count",
+          "chi_square_per_degree_of_freedom",
+          "discount_factor_is_monotone_in_expiry",
+          "status"
         ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "minLength": 1 },
-          "query_id": { "type": "string", "minLength": 1 },
-          "underlying_symbol": { "type": "string", "minLength": 1 },
-          "expiry_date": { "type": "string", "format": "date" },
-          "years_to_expiry": { "type": "number", "exclusiveMinimum": 0 },
-          "spot_price": { "type": "number", "exclusiveMinimum": 0 },
-          "forward": { "type": "number", "minimum": 0 },
-          "forward_standard_error": { "type": ["number", "null"], "minimum": 0 },
-          "discount_factor": { "type": "number", "minimum": 0 },
-          "discount_factor_standard_error": { "type": ["number", "null"], "minimum": 0 },
-          "implied_zero_rate": { "type": ["number", "null"] },
-          "implied_carry_rate": { "type": ["number", "null"] },
-          "parity_pair_count": { "type": "integer", "minimum": 0 },
-          "active_pair_count": { "type": "integer", "minimum": 0 },
-          "chi_square_per_degree_of_freedom": { "type": ["number", "null"], "minimum": 0 },
-          "discount_factor_is_monotone_in_expiry": { "type": "boolean" },
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "query_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "underlying_symbol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expiry_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "years_to_expiry": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "spot_price": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "forward": {
+            "type": "number",
+            "minimum": 0
+          },
+          "forward_standard_error": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "discount_factor": {
+            "type": "number",
+            "minimum": 0
+          },
+          "discount_factor_standard_error": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "implied_zero_rate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "implied_carry_rate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "parity_pair_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "active_pair_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "chi_square_per_degree_of_freedom": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "discount_factor_is_monotone_in_expiry": {
+            "type": "boolean"
+          },
           "status": {
-            "enum": ["converged", "too_few_pairs", "degenerate_strike_range", "non_positive_discount_factor"]
+            "enum": [
+              "converged",
+              "too_few_pairs",
+              "degenerate_strike_range",
+              "non_positive_discount_factor",
+              "american_quotes_not_stripped"
+            ]
           }
         }
       }

@@ -8,7 +8,7 @@ from typing import Any
 
 import pyarrow
 import pyarrow.parquet
-from chain_schema import OPTION_CHAIN_SNAPSHOT_SCHEMA
+from chain_schema import CHAIN_SCHEMA_ID, OPTION_CHAIN_SNAPSHOT_SCHEMA
 from manifest import PartitionEntry, canonical_timestamp, sha256_of_file, write_manifest
 
 STANDARD_CONTRACT_MULTIPLIER = 100
@@ -80,5 +80,5 @@ def write_dataset(
         write_partition(dataset_root, relative_partition_path(underlying_symbol, observation_date), group)
         for (underlying_symbol, observation_date), group in sorted(grouped.items())
     ]
-    write_manifest(dataset_root, partitions, source, created_at)
+    write_manifest(dataset_root, partitions, source, created_at, CHAIN_SCHEMA_ID)
     return partitions

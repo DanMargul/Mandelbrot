@@ -41,26 +41,8 @@ double undiscounted_price(
     return undiscounted_price_and_vega(forward, strike, years_to_expiry, volatility, option_type).price;
 }
 
-double brenner_subrahmanyam_seed(double forward, double years_to_expiry, double target_price) {
-    return std::sqrt(2.0 * std::numbers::pi / years_to_expiry) * target_price / forward;
-}
 
-double clamp_into_bracket(double value, double lower, double upper) {
-    return std::min(std::max(value, lower), upper);
-}
 
-double next_volatility_estimate(
-    double volatility, double price_error, double vega, double lower, double upper) {
-    const double bisection = 0.5 * (lower + upper);
-    if (vega < minimum_usable_vega) {
-        return bisection;
-    }
-    const double newton_candidate = volatility - price_error / vega;
-    if (newton_candidate <= lower || newton_candidate >= upper) {
-        return bisection;
-    }
-    return newton_candidate;
-}
 
 ImpliedVolatilityResult completed_inversion(
     const InversionProblem& problem, double volatility, InversionStatus status, int iterations) {
@@ -125,6 +107,27 @@ std::string name_of_inversion_status(InversionStatus status) {
         return "degenerate_expiry";
     }
     return "not_converged";
+}
+
+double brenner_subrahmanyam_seed(double forward, double years_to_expiry, double target_price) {
+    return std::sqrt(2.0 * std::numbers::pi / years_to_expiry) * target_price / forward;
+}
+
+double clamp_into_bracket(double value, double lower, double upper) {
+    return std::min(std::max(value, lower), upper);
+}
+
+double next_volatility_estimate(
+    double volatility, double price_error, double vega, double lower, double upper) {
+    const double bisection = 0.5 * (lower + upper);
+    if (vega < minimum_usable_vega) {
+        return bisection;
+    }
+    const double newton_candidate = volatility - price_error / vega;
+    if (newton_candidate <= lower || newton_candidate >= upper) {
+        return bisection;
+    }
+    return newton_candidate;
 }
 
 OptionType out_of_the_money_option_type(double forward, double strike) {

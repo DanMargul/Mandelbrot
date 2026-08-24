@@ -19,6 +19,7 @@ namespace {
 constexpr std::int64_t microseconds_per_second = 1000000;
 constexpr const char* manifest_filename = "manifest.json";
 constexpr const char* manifest_schema_id = "chain_dataset_manifest/v1";
+constexpr const char* chain_schema_id = "option_chain_snapshot/v2";
 
 using ResolutionKey = std::tuple<EpochMicroseconds, EpochMicroseconds, std::int64_t>;
 
@@ -90,6 +91,7 @@ struct ChainColumns {
     std::shared_ptr<arrow::StringArray> option_type;
     std::shared_ptr<arrow::Int32Array> contract_multiplier;
     std::shared_ptr<arrow::BooleanArray> is_standard_deliverable;
+    std::shared_ptr<arrow::StringArray> exercise_style;
     std::shared_ptr<arrow::TimestampArray> event_time;
     std::shared_ptr<arrow::TimestampArray> knowledge_time;
     std::shared_ptr<arrow::Int64Array> ingest_sequence;
@@ -108,6 +110,7 @@ ChainColumns bind_columns(const arrow::Table& table) {
         typed_column<arrow::StringArray>(table, "option_type"),
         typed_column<arrow::Int32Array>(table, "contract_multiplier"),
         typed_column<arrow::BooleanArray>(table, "is_standard_deliverable"),
+        typed_column<arrow::StringArray>(table, "exercise_style"),
         typed_column<arrow::TimestampArray>(table, "event_time"),
         typed_column<arrow::TimestampArray>(table, "knowledge_time"),
         typed_column<arrow::Int64Array>(table, "ingest_sequence"),
@@ -133,6 +136,7 @@ ContractQuote quote_at(const ChainColumns& columns, std::int64_t row) {
         option_type_from_name(columns.option_type->GetString(row)),
         columns.contract_multiplier->Value(row),
         columns.is_standard_deliverable->Value(row),
+        exercise_style_from_name(columns.exercise_style->GetString(row)),
         event_time,
         knowledge_time,
         columns.ingest_sequence->Value(row),
@@ -218,6 +222,9 @@ DatasetManifest read_manifest(const std::filesystem::path& dataset_root) {
     }
     if (require_string(payload, "schema") != manifest_schema_id) {
         throw CorruptDatasetError(manifest_path.string() + ": unexpected manifest schema");
+    }
+    if (require_string(payload, "chain_schema") != chain_schema_id) {
+        throw CorruptDatasetError(manifest_path.string() + ": unexpected chain schema");
     }
 
     DatasetManifest manifest;

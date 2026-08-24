@@ -40,53 +40,56 @@ exact = true
 ["implied_volatility_result/v1".iterations]
 exact = true
 
-["chain_snapshot/v1".query_id]
+["chain_snapshot/v2".query_id]
 exact = true
 
-["chain_snapshot/v1".contract_symbol]
+["chain_snapshot/v2".contract_symbol]
 exact = true
 
-["chain_snapshot/v1".expiry_date]
+["chain_snapshot/v2".expiry_date]
 exact = true
 
-["chain_snapshot/v1".option_type]
+["chain_snapshot/v2".option_type]
 exact = true
 
-["chain_snapshot/v1".contract_multiplier]
+["chain_snapshot/v2".contract_multiplier]
 exact = true
 
-["chain_snapshot/v1".is_standard_deliverable]
+["chain_snapshot/v2".is_standard_deliverable]
 exact = true
 
-["chain_snapshot/v1".event_time]
+["chain_snapshot/v2".exercise_style]
 exact = true
 
-["chain_snapshot/v1".knowledge_time]
+["chain_snapshot/v2".event_time]
 exact = true
 
-["chain_snapshot/v1".ingest_sequence]
+["chain_snapshot/v2".knowledge_time]
 exact = true
 
-["chain_snapshot/v1".strike]
+["chain_snapshot/v2".ingest_sequence]
+exact = true
+
+["chain_snapshot/v2".strike]
 relative = 1e-15
 absolute = 1e-15
 
-["chain_snapshot/v1".underlying_price]
+["chain_snapshot/v2".underlying_price]
 relative = 1e-15
 absolute = 1e-15
 
-["chain_snapshot/v1".bid_price]
+["chain_snapshot/v2".bid_price]
 relative = 1e-15
 absolute = 1e-15
 
-["chain_snapshot/v1".ask_price]
+["chain_snapshot/v2".ask_price]
 relative = 1e-15
 absolute = 1e-15
 
-["chain_snapshot/v1".bid_size]
+["chain_snapshot/v2".bid_size]
 exact = true
 
-["chain_snapshot/v1".ask_size]
+["chain_snapshot/v2".ask_size]
 exact = true
 
 ["forward_curve/v1".query_id]
@@ -160,3 +163,17 @@ absolute = 1e-14
 ["american_pricing_result/v1".early_exercise_premium]
 relative = 1e-11
 absolute = 1e-14
+
+["american_inversion_result/v1".status]
+exact = true
+
+["american_inversion_result/v1".iterations]
+exact = true
+
+["american_inversion_result/v1".volatility]
+relative = 1e-11
+absolute = 1e-14
+
+["american_inversion_result/v1".absolute_price_error]
+relative = 1.0
+absolute = 1e-12

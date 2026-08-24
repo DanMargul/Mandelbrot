@@ -150,3 +150,11 @@ def test_the_implied_carry_rate_recovers_the_synthetic_dividend_yield() -> None:
     for underlying, point in converged_points():
         assert point.implied_carry_rate is not None
         assert abs(point.implied_carry_rate - CARRY_RATES[underlying]) < CARRY_RATE_RECOVERY_TOLERANCE
+
+
+def test_american_quotes_are_refused_rather_than_silently_biased() -> None:
+    points = curve_for("AAPL", 17)
+    assert len(points) == 1
+    assert points[0].status == "american_quotes_not_stripped"
+    assert points[0].forward == 0.0
+    assert points[0].forward_standard_error is None

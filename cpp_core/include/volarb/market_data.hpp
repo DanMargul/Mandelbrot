@@ -1,5 +1,6 @@
 #pragma once
 
+#include "volarb/american.hpp"
 #include "volarb/pricing.hpp"
 
 #include <cstdint>
@@ -47,6 +48,7 @@ struct ContractQuote {
     OptionType option_type;
     std::int32_t contract_multiplier;
     bool is_standard_deliverable;
+    ExerciseStyle exercise_style;
     EpochMicroseconds event_time;
     EpochMicroseconds knowledge_time;
     std::int64_t ingest_sequence;

@@ -206,6 +206,15 @@ bool discount_factors_are_monotone(const std::vector<ForwardCurvePoint>& points)
     return true;
 }
 
+bool expiry_has_american_quotes(const std::vector<ContractQuote>& quotes, DaysSinceEpoch expiry_date) {
+    for (const ContractQuote& quote : quotes) {
+        if (quote.expiry_date == expiry_date && quote.exercise_style == ExerciseStyle::American) {
+            return true;
+        }
+    }
+    return false;
+}
+
 double spot_price_for(const std::vector<ContractQuote>& quotes, DaysSinceEpoch expiry_date) {
     for (const ContractQuote& quote : quotes) {
         if (quote.expiry_date == expiry_date) {
@@ -227,6 +236,8 @@ std::string name_of_forward_curve_status(ForwardCurveStatus status) {
         return "degenerate_strike_range";
     case ForwardCurveStatus::NonPositiveDiscountFactor:
         return "non_positive_discount_factor";
+    case ForwardCurveStatus::AmericanQuotesNotStripped:
+        return "american_quotes_not_stripped";
     }
     return "too_few_pairs";
 }
@@ -284,7 +295,14 @@ std::vector<ForwardCurvePoint> imply_forward_curve(const std::vector<ContractQuo
         if (years <= 0.0) {
             continue;
         }
-        points.push_back(curve_point_for_expiry(expiry_date, pairs, years, spot_price_for(quotes, expiry_date)));
+        const double spot_price = spot_price_for(quotes, expiry_date);
+        if (expiry_has_american_quotes(quotes, expiry_date)) {
+            points.push_back(failed_point(expiry_date, years, spot_price,
+                                          static_cast<int>(pairs.size()),
+                                          ForwardCurveStatus::AmericanQuotesNotStripped));
+            continue;
+        }
+        points.push_back(curve_point_for_expiry(expiry_date, pairs, years, spot_price));
     }
 
     const bool monotone = discount_factors_are_monotone(points);

@@ -14,7 +14,13 @@ REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPOSITORY_ROOT / "tools"))
 sys.path.insert(0, str(REPOSITORY_ROOT / "python_pure" / "src"))
 
-from fixture_cases import AmericanCase, PricingCase, all_american_cases, all_pricing_cases  # noqa: E402
+from fixture_cases import (  # noqa: E402
+    AmericanCase,
+    PricingCase,
+    all_american_cases,
+    all_pricing_cases,
+    american_inversion_cases,
+)
 from oracle import oracle_implied_volatility, oracle_price_and_greeks  # noqa: E402
 from volarb_py.american import (  # noqa: E402
     LatticeInputs,
@@ -22,6 +28,7 @@ from volarb_py.american import (  # noqa: E402
     richardson_extrapolated_price,
 )
 from volarb_py.cli import (  # noqa: E402
+    invert_american_implied_volatility_record,
     invert_implied_volatility_record,
     price_american_option_record,
     price_option_record,
@@ -35,7 +42,8 @@ GREEK_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-13
 VOLATILITY_ORACLE_ABSOLUTE_BUDGET: Final[float] = 1e-9
 FINE_LATTICE_BASE_STEPS: Final[int] = 512
 LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-4
-EUROPEAN_LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-4
+EUROPEAN_LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 5e-5
+AMERICAN_INVERSION_RELATIVE_BUDGET: Final[float] = 1e-4
 
 
 class OracleDisagreementError(AssertionError):
@@ -250,6 +258,44 @@ def build_american_fixture(family: str, cases: list[AmericanCase]) -> None:
     )
 
 
+def build_american_inversion_fixture() -> None:
+    request_records = []
+    result_records = []
+    for case in american_inversion_cases():
+        priced = price_american_option_record(asdict(case))
+        request = {
+            "id": case.id,
+            "spot_price": case.spot_price,
+            "strike": case.strike,
+            "years_to_expiry": case.years_to_expiry,
+            "zero_rate": case.zero_rate,
+            "carry_rate": case.carry_rate,
+            "option_price": priced["price"],
+            "option_type": case.option_type,
+            "exercise_style": case.exercise_style,
+        }
+        result = invert_american_implied_volatility_record(request)
+        if result["status"] == "converged":
+            recovered = abs(float(result["volatility"]) - case.volatility) / case.volatility
+            if recovered > AMERICAN_INVERSION_RELATIVE_BUDGET:
+                raise OracleDisagreementError(
+                    f"{case.id}: inversion did not recover its own volatility, off by {recovered}"
+                )
+        request_records.append(request)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "invert-american-implied-volatility"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(
+        directory / "roundtrip.input.json", Document("american_inversion_request/v1", request_records)
+    )
+    write_document(
+        directory / "roundtrip.expected.json", Document("american_inversion_result/v1", result_records)
+    )
+    statuses = sorted({str(record["status"]) for record in result_records})
+    print(f"invert-american-implied-volatility/roundtrip: {len(result_records)} cases, statuses {statuses}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -258,6 +304,7 @@ def main() -> int:
             "price-options",
             "invert-implied-volatility",
             "price-american-options",
+            "invert-american-implied-volatility",
             "all",
         ],
         default="all",
@@ -275,6 +322,8 @@ def main() -> int:
     if arguments.verb in ("price-american-options", "all"):
         for family, american_cases in all_american_cases().items():
             build_american_fixture(family, american_cases)
+    if arguments.verb in ("invert-american-implied-volatility", "all"):
+        build_american_inversion_fixture()
     return 0
 
 

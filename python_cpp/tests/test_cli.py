@@ -36,7 +36,7 @@ def every_fixture() -> list[tuple[str, str]]:
 
 
 def load_schema(schema_id: str) -> dict[str, Any]:
-    return load_json(SCHEMA_ROOT / (schema_id.replace("/v1", "") + ".schema.json"))
+    return load_json(SCHEMA_ROOT / (schema_id.split("/", maxsplit=1)[0] + ".schema.json"))
 
 
 def assert_matches_within_specified_tolerance(

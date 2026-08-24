@@ -65,6 +65,7 @@ nlohmann::json chain_snapshot_record(const std::string& query_id, const Contract
     result["option_type"] = name_of_option_type(quote.option_type);
     result["contract_multiplier"] = quote.contract_multiplier;
     result["is_standard_deliverable"] = quote.is_standard_deliverable;
+    result["exercise_style"] = name_of_exercise_style(quote.exercise_style);
     result["event_time"] = format_canonical_timestamp(quote.event_time);
     result["knowledge_time"] = format_canonical_timestamp(quote.knowledge_time);
     result["ingest_sequence"] = quote.ingest_sequence;
@@ -109,6 +110,27 @@ nlohmann::json price_american_option_record(const nlohmann::json& record) {
     result["early_exercise_premium"] = early_exercise_premium(inputs, richardson_base_steps);
     result["lattice_steps"] = richardson_base_steps;
     return result;
+}
+
+nlohmann::json invert_american_implied_volatility_record(const nlohmann::json& record) {
+    const AmericanInversionResult result = invert_american_implied_volatility(AmericanInversionInputs{
+        required_number(record, "spot_price"),
+        required_number(record, "strike"),
+        required_number(record, "years_to_expiry"),
+        required_number(record, "zero_rate"),
+        required_number(record, "carry_rate"),
+        required_number(record, "option_price"),
+        required_option_type(record, "option_type"),
+        required_exercise_style(record, "exercise_style"),
+    });
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["volatility"] = result.volatility;
+    output["status"] = name_of_american_inversion_status(result.status);
+    output["iterations"] = result.iterations;
+    output["absolute_price_error"] = result.absolute_price_error;
+    return output;
 }
 
 nlohmann::json read_chain_as_of_records(const nlohmann::json& records) {
@@ -199,9 +221,13 @@ const std::map<std::string, Verb>& supported_verbs() {
          Verb{"invert-implied-volatility", "implied_volatility_request/v1",
               "implied_volatility_result/v1", mapped_over_records(invert_implied_volatility_record)}},
         {"read-chain-as-of",
-         Verb{"read-chain-as-of", "chain_query/v1", "chain_snapshot/v1", read_chain_as_of_records}},
+         Verb{"read-chain-as-of", "chain_query/v1", "chain_snapshot/v2", read_chain_as_of_records}},
         {"imply-forward-curve",
          Verb{"imply-forward-curve", "chain_query/v1", "forward_curve/v1", imply_forward_curve_records}},
+        {"invert-american-implied-volatility",
+         Verb{"invert-american-implied-volatility", "american_inversion_request/v1",
+              "american_inversion_result/v1",
+              mapped_over_records(invert_american_implied_volatility_record)}},
         {"price-american-options",
          Verb{"price-american-options", "american_pricing_request/v1", "american_pricing_result/v1",
               mapped_over_records(price_american_option_record)}},

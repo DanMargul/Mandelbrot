@@ -63,25 +63,41 @@ flagged rather than silently producing garbage surfaces.
 
 ## 3. American exercise, and the early-exercise premium as a first-class quantity
 
-*Extends Phase 2. **Pricer done**, see `spec/interfaces/american.md`; the call-put borrow
-diagnostic is the remaining half.*
+*Extends Phase 2. **Pricer and inversion done**, see `spec/interfaces/american.md`.
+De-Americanization is the remaining half.*
 
 SPX is European and deferred that problem. Single names are not. Bjerksund-Stensland 2002
 for throughput, Andersen-Lake-Offengenden or CRR with Richardson extrapolation for accuracy,
 with the fast pricer validated against the accurate one.
 
-The ambitious part is the cross-check. De-Americanize calls and puts on the same strike and
-they must imply the same volatility. When they do not, the error is almost never in the
-option pricer; it is in the borrow or dividend assumption from step 2. That disagreement
-becomes a diagnostic that feeds backwards, and the two steps are calibrated jointly rather
-than in sequence.
+The ambitious part was going to be a cross-check: de-Americanize calls and puts on the same
+strike, require the same implied volatility, and read any disagreement as a borrow error
+feeding back into step 2. Measurement changed the shape of that.
+
+**The rate is not identifiable this way.** Parity already pins the forward, so `r` and `q`
+have only one free parameter between them, and the call-put volatility disagreement turned
+out to move by about `0.002` volatility points across a **twelve percentage point** range of
+rate. Quote noise alone is `0.003`. There is no signal there to solve for.
+
+**What the measurement found instead is more useful.** Running the parity regression on
+American quotes at all is invalid, because parity is a European relation. On synthetic data
+with known parameters it produced a discount factor of `1.0077`, above one, reported as
+converged. Stripping the early exercise premium first cut the forward error by a factor of
+seven and restored a sane discount factor.
+
+So the deliverable is de-Americanization rather than a disagreement diagnostic: invert the
+American quote for its volatility, evaluate the European price at that volatility, and run
+the parity regression on those. `forward_curve` already refuses unstripped American quotes
+rather than fitting them, so nothing downstream can consume the biased number in the
+meantime.
 
 This is also where the native tracks start to matter. Inverting an American price means
 inverting a numerical pricer, and the Phase 1 benchmark already showed 5.78x on European
 inversion.
 
-**Done when** call-implied and put-implied volatilities agree across the strike range after
-de-Americanization, and residual disagreement is attributed to borrow rather than absorbed.
+**Done when** the forward implied from de-Americanized American quotes recovers synthetic
+ground truth to the same accuracy as the European case, and no expiry containing American
+contracts is ever fitted without stripping.
 
 ---
 

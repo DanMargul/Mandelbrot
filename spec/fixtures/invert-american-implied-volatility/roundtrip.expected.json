@@ -1,0 +1,677 @@
+{
+  "schema": "american_inversion_result/v1",
+  "records": [
+    {
+      "id": "k85_t0.083333_v0.18_q0_call_european",
+      "volatility": 0.1799999999379991,
+      "status": "converged",
+      "iterations": 11,
+      "absolute_price_error": 3.801403636316536e-13
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0_call_american",
+      "volatility": 0.1799999999379991,
+      "status": "converged",
+      "iterations": 11,
+      "absolute_price_error": 3.801403636316536e-13
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0_put_european",
+      "volatility": 0.1800000000047777,
+      "status": "converged",
+      "iterations": 13,
+      "absolute_price_error": 3.0497793960387876e-13
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0_put_american",
+      "volatility": 0.1800000000208961,
+      "status": "converged",
+      "iterations": 13,
+      "absolute_price_error": 1.3422401211327095e-12
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0.07_call_european",
+      "volatility": 0.17999999995173668,
+      "status": "converged",
+      "iterations": 11,
+      "absolute_price_error": 2.327027459614328e-12
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0.07_call_american",
+      "volatility": 0.0,
+      "status": "at_exercise_boundary",
+      "iterations": 0,
+      "absolute_price_error": 0.0
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0.07_put_european",
+      "volatility": 0.18000000000034141,
+      "status": "converged",
+      "iterations": 13,
+      "absolute_price_error": 2.8026409318315793e-14
+    },
+    {
+      "id": "k85_t0.083333_v0.18_q0.07_put_american",
+      "volatility": 0.18000000000034838,
+      "status": "converged",
+      "iterations": 13,
+      "absolute_price_error": 2.8051779649151953e-14
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0_call_european",
+      "volatility": 0.4499999999998855,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 2.33946195749013e-12
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0_call_american",
+      "volatility": 0.4499999999998855,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 2.33946195749013e-12
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0_put_european",
+      "volatility": 0.44999999999999674,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 4.2299497238218464e-14
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0_put_american",
+      "volatility": 0.44999999999685375,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 1.487621137385986e-11
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0.07_call_european",
+      "volatility": 0.44999999999981116,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 2.618349981275969e-12
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0.07_call_american",
+      "volatility": 0.4500000013546825,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 6.270626684568015e-09
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0.07_put_european",
+      "volatility": 0.44999999999996493,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 2.864375403532904e-13
+    },
+    {
+      "id": "k85_t0.083333_v0.45_q0.07_put_american",
+      "volatility": 0.450000000000035,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 1.6220358389773537e-13
+    },
+    {
+      "id": "k85_t1_v0.18_q0_call_european",
+      "volatility": 0.18000000000255,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 4.941824727211497e-11
+    },
+    {
+      "id": "k85_t1_v0.18_q0_call_american",
+      "volatility": 0.18000000000255,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 4.941824727211497e-11
+    },
+    {
+      "id": "k85_t1_v0.18_q0_put_european",
+      "volatility": 0.18000000000161429,
+      "status": "converged",
+      "iterations": 9,
+      "absolute_price_error": 3.044187124601194e-11
+    },
+    {
+      "id": "k85_t1_v0.18_q0_put_american",
+      "volatility": 0.1799999997948238,
+      "status": "converged",
+      "iterations": 11,
+      "absolute_price_error": 3.99202915168928e-09
+    },
+    {
+      "id": "k85_t1_v0.18_q0.07_call_european",
+      "volatility": 0.18000000000616018,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.596109910906307e-10
+    },
+    {
+      "id": "k85_t1_v0.18_q0.07_call_american",
+      "volatility": 0.18000000445182318,
+      "status": "converged",
+      "iterations": 17,
+      "absolute_price_error": 7.166837079353172e-08
+    },
+    {
+      "id": "k85_t1_v0.18_q0.07_put_european",
+      "volatility": 0.1800000000001671,
+      "status": "converged",
+      "iterations": 7,
+      "absolute_price_error": 4.715783319397815e-12
+    },
+    {
+      "id": "k85_t1_v0.18_q0.07_put_american",
+      "volatility": 0.18000000000054517,
+      "status": "converged",
+      "iterations": 7,
+      "absolute_price_error": 1.4736212250454628e-11
+    },
+    {
+      "id": "k85_t1_v0.45_q0_call_european",
+      "volatility": 0.45000000000004337,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 3.7552183584921295e-12
+    },
+    {
+      "id": "k85_t1_v0.45_q0_call_american",
+      "volatility": 0.45000000000004337,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 3.7552183584921295e-12
+    },
+    {
+      "id": "k85_t1_v0.45_q0_put_european",
+      "volatility": 0.4500000000000175,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 8.93507490218326e-13
+    },
+    {
+      "id": "k85_t1_v0.45_q0_put_american",
+      "volatility": 0.45000000033164916,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 1.0614915169071537e-08
+    },
+    {
+      "id": "k85_t1_v0.45_q0.07_call_european",
+      "volatility": 0.4500000000002998,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 9.396927680427325e-12
+    },
+    {
+      "id": "k85_t1_v0.45_q0.07_call_american",
+      "volatility": 0.45000000006222823,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 2.002774834863885e-09
+    },
+    {
+      "id": "k85_t1_v0.45_q0.07_put_european",
+      "volatility": 0.45000000000016843,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 5.9898752624576446e-12
+    },
+    {
+      "id": "k85_t1_v0.45_q0.07_put_american",
+      "volatility": 0.4500000000048434,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 1.5733370162251958e-10
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0_call_european",
+      "volatility": 0.18000000000003633,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 4.2810199829546036e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0_call_american",
+      "volatility": 0.18000000000003633,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 4.2810199829546036e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0_put_european",
+      "volatility": 0.1800000000001168,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 2.8821389719269064e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0_put_american",
+      "volatility": 0.17999999999967506,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 5.409006575973763e-12
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0.07_call_european",
+      "volatility": 0.17999999999976185,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 5.311306949806749e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0.07_call_american",
+      "volatility": 0.17999999999765498,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 2.5102364631379714e-11
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0.07_put_european",
+      "volatility": 0.1800000000001669,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 3.610445276081009e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.18_q0.07_put_american",
+      "volatility": 0.1800000000001669,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 3.610445276081009e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0_call_european",
+      "volatility": 0.44999999999997076,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 8.535394613318203e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0_call_american",
+      "volatility": 0.44999999999997076,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 8.535394613318203e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0_put_european",
+      "volatility": 0.4499999999999783,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.184830011879967e-12
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0_put_american",
+      "volatility": 0.4499999999976085,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 2.8107294269830163e-11
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0.07_call_european",
+      "volatility": 0.45000000000004914,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.9895196601282805e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0.07_call_american",
+      "volatility": 0.45000000000058044,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 5.6701310313655995e-12
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0.07_put_european",
+      "volatility": 0.4500000000000221,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 7.389644451905042e-13
+    },
+    {
+      "id": "k100_t0.083333_v0.45_q0.07_put_american",
+      "volatility": 0.4500000000000217,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 7.389644451905042e-13
+    },
+    {
+      "id": "k100_t1_v0.18_q0_call_european",
+      "volatility": 0.17999999999997723,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.13509202037676e-12
+    },
+    {
+      "id": "k100_t1_v0.18_q0_call_american",
+      "volatility": 0.17999999999997723,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.13509202037676e-12
+    },
+    {
+      "id": "k100_t1_v0.18_q0_put_european",
+      "volatility": 0.17999999999997277,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 5.222489107836736e-13
+    },
+    {
+      "id": "k100_t1_v0.18_q0_put_american",
+      "volatility": 0.1800000000040862,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.5509815654013437e-10
+    },
+    {
+      "id": "k100_t1_v0.18_q0.07_call_european",
+      "volatility": 0.1800000000000152,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 7.993605777301127e-14
+    },
+    {
+      "id": "k100_t1_v0.18_q0.07_call_american",
+      "volatility": 0.1800000000039695,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 1.4922996172117564e-10
+    },
+    {
+      "id": "k100_t1_v0.18_q0.07_put_european",
+      "volatility": 0.18000000000000316,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.7408297026122455e-13
+    },
+    {
+      "id": "k100_t1_v0.18_q0.07_put_american",
+      "volatility": 0.18000000000029986,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.2315481967561936e-11
+    },
+    {
+      "id": "k100_t1_v0.45_q0_call_european",
+      "volatility": 0.4499999999999831,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.4921397450962104e-13
+    },
+    {
+      "id": "k100_t1_v0.45_q0_call_american",
+      "volatility": 0.4499999999999831,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.4921397450962104e-13
+    },
+    {
+      "id": "k100_t1_v0.45_q0_put_european",
+      "volatility": 0.45000000000001983,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.0444978215673473e-12
+    },
+    {
+      "id": "k100_t1_v0.45_q0_put_american",
+      "volatility": 0.4500000000064259,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 2.440927460156672e-10
+    },
+    {
+      "id": "k100_t1_v0.45_q0.07_call_european",
+      "volatility": 0.4499999999999808,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 1.3091749906379846e-12
+    },
+    {
+      "id": "k100_t1_v0.45_q0.07_call_american",
+      "volatility": 0.4500000000160963,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 5.985008044717688e-10
+    },
+    {
+      "id": "k100_t1_v0.45_q0.07_put_european",
+      "volatility": 0.4500000000000005,
+      "status": "converged",
+      "iterations": 3,
+      "absolute_price_error": 2.3447910280083306e-13
+    },
+    {
+      "id": "k100_t1_v0.45_q0.07_put_american",
+      "volatility": 0.4500000000394698,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.461675225300496e-09
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0_call_european",
+      "volatility": 0.17999999999996277,
+      "status": "converged",
+      "iterations": 14,
+      "absolute_price_error": 1.477062829685627e-15
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0_call_american",
+      "volatility": 0.17999999999996277,
+      "status": "converged",
+      "iterations": 14,
+      "absolute_price_error": 1.477062829685627e-15
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0_put_european",
+      "volatility": 0.18000000002508193,
+      "status": "converged",
+      "iterations": 12,
+      "absolute_price_error": 2.6574298317427747e-12
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0_put_american",
+      "volatility": 0.0,
+      "status": "at_exercise_boundary",
+      "iterations": 0,
+      "absolute_price_error": 0.0
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0.07_call_european",
+      "volatility": 0.17999999999996302,
+      "status": "converged",
+      "iterations": 15,
+      "absolute_price_error": 9.836966310960982e-16
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0.07_call_american",
+      "volatility": 0.18000000002173805,
+      "status": "converged",
+      "iterations": 14,
+      "absolute_price_error": 4.959308246184346e-13
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0.07_put_european",
+      "volatility": 0.18000000014556794,
+      "status": "converged",
+      "iterations": 13,
+      "absolute_price_error": 1.1297629498585593e-12
+    },
+    {
+      "id": "k120_t0.083333_v0.18_q0.07_put_american",
+      "volatility": 0.18000000012674483,
+      "status": "converged",
+      "iterations": 13,
+      "absolute_price_error": 1.0729195309977513e-12
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0_call_european",
+      "volatility": 0.4500000000032816,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 1.5833334643389207e-11
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0_call_american",
+      "volatility": 0.4500000000032816,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 1.5833334643389207e-11
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0_put_european",
+      "volatility": 0.4500000000049112,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 2.2723156689608004e-11
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0_put_american",
+      "volatility": 0.4500000044351383,
+      "status": "converged",
+      "iterations": 10,
+      "absolute_price_error": 1.8812297497561303e-08
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0.07_call_european",
+      "volatility": 0.4500000000088035,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 4.052069790816404e-11
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0.07_call_american",
+      "volatility": 0.4500000000205088,
+      "status": "converged",
+      "iterations": 8,
+      "absolute_price_error": 9.380424215166272e-11
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0.07_put_european",
+      "volatility": 0.45000000001030577,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 4.5844217311241664e-11
+    },
+    {
+      "id": "k120_t0.083333_v0.45_q0.07_put_american",
+      "volatility": 0.4500000000108634,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 4.949285425936978e-11
+    },
+    {
+      "id": "k120_t1_v0.18_q0_call_european",
+      "volatility": 0.18000000000001615,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 5.551115123125783e-14
+    },
+    {
+      "id": "k120_t1_v0.18_q0_call_american",
+      "volatility": 0.18000000000001615,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 5.551115123125783e-14
+    },
+    {
+      "id": "k120_t1_v0.18_q0_put_european",
+      "volatility": 0.18000000000000674,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 3.694822225952521e-13
+    },
+    {
+      "id": "k120_t1_v0.18_q0_put_american",
+      "volatility": 0.1800001137338373,
+      "status": "converged",
+      "iterations": 82,
+      "absolute_price_error": 4.533656863259239e-07
+    },
+    {
+      "id": "k120_t1_v0.18_q0.07_call_european",
+      "volatility": 0.180000000004799,
+      "status": "converged",
+      "iterations": 9,
+      "absolute_price_error": 9.965650527021808e-11
+    },
+    {
+      "id": "k120_t1_v0.18_q0.07_call_american",
+      "volatility": 0.18000000011179243,
+      "status": "converged",
+      "iterations": 11,
+      "absolute_price_error": 2.4017317024060958e-09
+    },
+    {
+      "id": "k120_t1_v0.18_q0.07_put_european",
+      "volatility": 0.1799999999998881,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 8.029132914089132e-13
+    },
+    {
+      "id": "k120_t1_v0.18_q0.07_put_american",
+      "volatility": 0.17999999999477356,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 1.0859935173357371e-10
+    },
+    {
+      "id": "k120_t1_v0.45_q0_call_european",
+      "volatility": 0.44999999999995444,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.7994494783124537e-12
+    },
+    {
+      "id": "k120_t1_v0.45_q0_call_american",
+      "volatility": 0.44999999999995444,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.7994494783124537e-12
+    },
+    {
+      "id": "k120_t1_v0.45_q0_put_european",
+      "volatility": 0.45000000000001816,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.4992451724538114e-12
+    },
+    {
+      "id": "k120_t1_v0.45_q0_put_american",
+      "volatility": 0.4500000011512236,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 4.432761713246691e-08
+    },
+    {
+      "id": "k120_t1_v0.45_q0.07_call_european",
+      "volatility": 0.45000000000044627,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 1.6568080241086136e-11
+    },
+    {
+      "id": "k120_t1_v0.45_q0.07_call_american",
+      "volatility": 0.44999999994475587,
+      "status": "converged",
+      "iterations": 6,
+      "absolute_price_error": 2.031457668749681e-09
+    },
+    {
+      "id": "k120_t1_v0.45_q0.07_put_european",
+      "volatility": 0.44999999999995965,
+      "status": "converged",
+      "iterations": 4,
+      "absolute_price_error": 4.0962788716569776e-12
+    },
+    {
+      "id": "k120_t1_v0.45_q0.07_put_american",
+      "volatility": 0.44999999957545017,
+      "status": "converged",
+      "iterations": 5,
+      "absolute_price_error": 1.5586913093557087e-08
+    }
+  ]
+}

@@ -11,6 +11,11 @@ from typing import Any, Final
 REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPOSITORY_ROOT / "python_pure" / "src"))
 
+from volarb_py.american import (  # noqa: E402
+    ExerciseStyle,
+    LatticeInputs,
+    richardson_extrapolated_price,
+)
 from volarb_py.pricing import BlackScholesInputs, OptionType, black_scholes_price  # noqa: E402
 
 SYNTHETIC_SOURCE: Final[str] = "synthetic"
@@ -41,6 +46,7 @@ class SyntheticContract:
     contract_multiplier: int
     is_standard_deliverable: bool
     listed_from: datetime
+    exercise_style: ExerciseStyle
 
 
 @dataclass(frozen=True)
@@ -51,6 +57,7 @@ class SyntheticUnderlying:
     expiries: tuple[date, ...]
     strike_offsets: tuple[float, ...]
     stale_strike_offset: float
+    exercise_style: ExerciseStyle
 
 
 OBSERVATION_TIMES: Final[tuple[datetime, ...]] = (
@@ -71,6 +78,7 @@ UNDERLYINGS: Final[tuple[SyntheticUnderlying, ...]] = (
         expiries=(date(2026, 9, 18), date(2026, 12, 18)),
         strike_offsets=(-0.10, -0.07, -0.05, -0.02, 0.0, 0.02, 0.05, 0.07, 0.10),
         stale_strike_offset=-0.07,
+        exercise_style="european",
     ),
     SyntheticUnderlying(
         symbol="THIN",
@@ -79,6 +87,7 @@ UNDERLYINGS: Final[tuple[SyntheticUnderlying, ...]] = (
         expiries=(date(2026, 9, 18),),
         strike_offsets=(-0.05, 0.05),
         stale_strike_offset=99.0,
+        exercise_style="european",
     ),
     SyntheticUnderlying(
         symbol="AAPL",
@@ -87,6 +96,7 @@ UNDERLYINGS: Final[tuple[SyntheticUnderlying, ...]] = (
         expiries=(date(2026, 9, 18),),
         strike_offsets=(-0.08, -0.05, -0.02, 0.0, 0.02, 0.05, 0.08),
         stale_strike_offset=0.05,
+        exercise_style="american",
     ),
 )
 
@@ -144,6 +154,7 @@ def contracts_for(underlying: SyntheticUnderlying) -> list[SyntheticContract]:
                         contract_multiplier=100,
                         is_standard_deliverable=True,
                         listed_from=OBSERVATION_TIMES[0],
+                        exercise_style=underlying.exercise_style,
                     )
                 )
     contracts.append(
@@ -155,6 +166,7 @@ def contracts_for(underlying: SyntheticUnderlying) -> list[SyntheticContract]:
             contract_multiplier=125,
             is_standard_deliverable=False,
             listed_from=OBSERVATION_TIMES[0],
+            exercise_style=underlying.exercise_style,
         )
     )
     contracts.append(
@@ -166,6 +178,7 @@ def contracts_for(underlying: SyntheticUnderlying) -> list[SyntheticContract]:
             contract_multiplier=100,
             is_standard_deliverable=True,
             listed_from=LATE_LISTING_TIME,
+            exercise_style=underlying.exercise_style,
         )
     )
     return contracts
@@ -183,15 +196,17 @@ class QuoteRevision:
     is_stale: bool
 
 
-def quote_row(contract: SyntheticContract, revision: QuoteRevision, noise: random.Random) -> dict[str, Any]:
-    observation_time = revision.observation_time
-    spot_price = revision.spot_price
-    years = years_between(observation_time, contract.expiry_date)
-    discount_factor = discount_factor_for(years)
-    forward = forward_for(spot_price, revision.carry_rate, years)
-    volatility = synthetic_volatility(contract.strike, forward, years)
-    fair_value = (
-        black_scholes_price(
+def model_price(
+    contract: SyntheticContract,
+    revision: QuoteRevision,
+    *,
+    years: float,
+    volatility: float,
+    forward: float,
+    discount_factor: float,
+) -> float:
+    if contract.exercise_style == "european":
+        return black_scholes_price(
             BlackScholesInputs(
                 forward=forward,
                 strike=contract.strike,
@@ -200,6 +215,36 @@ def quote_row(contract: SyntheticContract, revision: QuoteRevision, noise: rando
                 discount_factor=discount_factor,
                 option_type=contract.option_type,
             )
+        )
+    return richardson_extrapolated_price(
+        LatticeInputs(
+            spot_price=revision.spot_price,
+            strike=contract.strike,
+            years_to_expiry=years,
+            volatility=volatility,
+            zero_rate=RISK_FREE_RATE,
+            carry_rate=revision.carry_rate,
+            option_type=contract.option_type,
+            exercise_style="american",
+        )
+    )
+
+
+def quote_row(contract: SyntheticContract, revision: QuoteRevision, noise: random.Random) -> dict[str, Any]:
+    observation_time = revision.observation_time
+    spot_price = revision.spot_price
+    years = years_between(observation_time, contract.expiry_date)
+    discount_factor = discount_factor_for(years)
+    forward = forward_for(spot_price, revision.carry_rate, years)
+    volatility = synthetic_volatility(contract.strike, forward, years)
+    fair_value = (
+        model_price(
+            contract,
+            revision,
+            years=years,
+            volatility=volatility,
+            forward=forward,
+            discount_factor=discount_factor,
         )
         * revision.price_multiplier
     )
@@ -218,6 +263,7 @@ def quote_row(contract: SyntheticContract, revision: QuoteRevision, noise: rando
         "option_type": contract.option_type,
         "contract_multiplier": contract.contract_multiplier,
         "is_standard_deliverable": contract.is_standard_deliverable,
+        "exercise_style": contract.exercise_style,
         "event_time": observation_time,
         "knowledge_time": revision.knowledge_time,
         "ingest_sequence": revision.ingest_sequence,

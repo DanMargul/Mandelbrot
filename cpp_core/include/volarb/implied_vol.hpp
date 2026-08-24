@@ -49,4 +49,9 @@ double volatility_uncertainty_from_price_resolution(
 
 ImpliedVolatilityResult invert_black_implied_volatility(const ImpliedVolatilityInputs& inputs);
 
+double brenner_subrahmanyam_seed(double forward, double years_to_expiry, double target_price);
+double clamp_into_bracket(double value, double lower, double upper);
+double next_volatility_estimate(double volatility, double price_error, double vega, double lower,
+                                double upper);
+
 }

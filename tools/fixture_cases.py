@@ -189,3 +189,38 @@ def degenerate_american_cases() -> list[AmericanCase]:
 
 def all_american_cases() -> dict[str, list[AmericanCase]]:
     return {"lattice": american_pricing_cases(), "degenerate": degenerate_american_cases()}
+
+
+INVERSION_STRIKES: Final[tuple[float, ...]] = (85.0, 100.0, 120.0)
+INVERSION_EXPIRIES: Final[tuple[float, ...]] = (0.083333, 1.0)
+INVERSION_VOLATILITIES: Final[tuple[float, ...]] = (0.18, 0.45)
+INVERSION_CARRY_RATES: Final[tuple[float, ...]] = (0.0, 0.070)
+
+
+def american_inversion_cases() -> list[AmericanCase]:
+    cases: list[AmericanCase] = []
+    option_types: tuple[Literal["call", "put"], ...] = ("call", "put")
+    styles: tuple[Literal["european", "american"], ...] = ("european", "american")
+    for strike in INVERSION_STRIKES:
+        for years in INVERSION_EXPIRIES:
+            for volatility in INVERSION_VOLATILITIES:
+                for carry_rate in INVERSION_CARRY_RATES:
+                    for option_type in option_types:
+                        for exercise_style in styles:
+                            cases.append(
+                                AmericanCase(
+                                    id=(
+                                        f"k{strike:g}_t{years:g}_v{volatility:g}"
+                                        f"_q{carry_rate:g}_{option_type}_{exercise_style}"
+                                    ),
+                                    spot_price=AMERICAN_SPOT,
+                                    strike=strike,
+                                    years_to_expiry=years,
+                                    volatility=volatility,
+                                    zero_rate=AMERICAN_ZERO_RATE,
+                                    carry_rate=carry_rate,
+                                    option_type=option_type,
+                                    exercise_style=exercise_style,
+                                )
+                            )
+    return cases

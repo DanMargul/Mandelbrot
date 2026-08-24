@@ -5,6 +5,8 @@ from dataclasses import replace
 import pytest
 from volarb_py.american import (
     RICHARDSON_BASE_STEPS,
+    AmericanInversionInputs,
+    AmericanInversionResult,
     ExerciseStyle,
     InvalidLatticeInputsError,
     LatticeInputs,
@@ -13,6 +15,7 @@ from volarb_py.american import (
     cox_ross_rubinstein_price,
     early_exercise_premium,
     european_counterpart,
+    invert_american_implied_volatility,
     richardson_extrapolated_price,
 )
 
@@ -128,3 +131,86 @@ def test_invalid_lattice_inputs_are_rejected(field: str, value: float) -> None:
 def test_an_out_of_range_step_count_is_rejected(steps: int) -> None:
     with pytest.raises(InvalidLatticeInputsError, match="steps"):
         cox_ross_rubinstein_price(BASE, steps)
+
+
+def invert_a_priced_option(inputs: LatticeInputs) -> AmericanInversionResult:
+    price = richardson_extrapolated_price(inputs)
+    return invert_american_implied_volatility(
+        AmericanInversionInputs(
+            spot_price=inputs.spot_price,
+            strike=inputs.strike,
+            years_to_expiry=inputs.years_to_expiry,
+            zero_rate=inputs.zero_rate,
+            carry_rate=inputs.carry_rate,
+            option_price=price,
+            option_type=inputs.option_type,
+            exercise_style=inputs.exercise_style,
+        )
+    )
+
+
+def inversion_grid() -> list[LatticeInputs]:
+    return [
+        replace(
+            BASE,
+            strike=strike,
+            volatility=volatility,
+            carry_rate=carry,
+            option_type=side,
+            exercise_style=style,
+        )
+        for strike in (85.0, 100.0, 120.0)
+        for volatility in (0.18, 0.45)
+        for carry in (0.0, 0.070)
+        for side in ("call", "put")
+        for style in ("european", "american")
+    ]
+
+
+@pytest.mark.parametrize("inputs", inversion_grid())
+def test_inversion_recovers_the_volatility_it_was_priced_at(inputs: LatticeInputs) -> None:
+    result = invert_a_priced_option(inputs)
+    if result.status != "converged":
+        pytest.skip(f"not invertible: {result.status}")
+    assert result.volatility == pytest.approx(inputs.volatility, rel=1e-5)
+
+
+def test_a_price_at_the_exercise_boundary_is_named_rather_than_inverted() -> None:
+    inputs = replace(BASE, strike=80.0, years_to_expiry=0.083333, volatility=0.15, carry_rate=0.07)
+    result = invert_a_priced_option(inputs)
+    assert result.status == "at_exercise_boundary"
+    assert result.volatility == 0.0
+
+
+def test_a_deep_in_the_money_european_quote_is_not_called_below_intrinsic() -> None:
+    inputs = replace(EUROPEAN_BASE, strike=120.0, option_type="put", volatility=0.18, carry_rate=0.0)
+    result = invert_a_priced_option(inputs)
+    assert result.status == "converged"
+
+
+def test_a_price_below_the_no_arbitrage_floor_is_rejected() -> None:
+    inputs = AmericanInversionInputs(
+        spot_price=100.0,
+        strike=120.0,
+        years_to_expiry=1.0,
+        zero_rate=0.0425,
+        carry_rate=0.0,
+        option_price=5.0,
+        option_type="put",
+        exercise_style="american",
+    )
+    assert invert_american_implied_volatility(inputs).status == "below_intrinsic"
+
+
+def test_an_expired_contract_is_rejected() -> None:
+    inputs = AmericanInversionInputs(
+        spot_price=100.0,
+        strike=100.0,
+        years_to_expiry=0.0,
+        zero_rate=0.0425,
+        carry_rate=0.0,
+        option_price=1.0,
+        option_type="call",
+        exercise_style="american",
+    )
+    assert invert_american_implied_volatility(inputs).status == "degenerate_expiry"

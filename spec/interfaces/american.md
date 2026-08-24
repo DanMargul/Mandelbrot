@@ -139,3 +139,69 @@ the stated bounds. Violations raise; they are programming errors. `years_to_expi
 `price-american-options`, input `american_pricing_request/v1`, output
 `american_pricing_result/v1`. The verb always uses `RICHARDSON_BASE_STEPS`, so the step count
 is not a request field and cannot drift between tracks.
+
+---
+
+# Inverting an American price
+
+```
+AmericanInversionStatus =
+    "converged" | "below_intrinsic" | "above_no_arbitrage_bound" | "at_exercise_boundary"
+  | "above_volatility_ceiling" | "not_converged" | "degenerate_expiry"
+
+invert_american_implied_volatility(inputs: AmericanInversionInputs) -> AmericanInversionResult
+```
+
+Same bracketed Newton with bisection safeguard as `implied_vol`, with the lattice as the
+price function and the **European** vega as the Newton derivative. The American vega has no
+closed form, the European one is close enough to steer with, and the bracket guarantees
+correctness regardless of how poor the derivative is.
+
+## The no-arbitrage bounds depend on the exercise style
+
+| style | floor | ceiling |
+|---|---|---|
+| American | `max(S - K, 0)` or `max(K - S, 0)` | `S` or `K` |
+| European | `DF * max(F - K, 0)` or `DF * max(K - F, 0)` | `DF * F` or `DF * K` |
+
+Using the American floor for a European contract is wrong and was wrong here first: a deep
+in-the-money European put is legitimately worth **less** than `K - S`, because the strike
+arrives discounted. Four fixture cases were being reported as `below_intrinsic` when they
+were perfectly ordinary quotes.
+
+## `at_exercise_boundary`
+
+Deep in-the-money American options are worth exactly their intrinsic value: immediate
+exercise is optimal and the contract carries no time value at all. That is not a bad quote
+and not a failure, it is a statement about the contract, so it gets its own status rather
+than being lumped in with `below_intrinsic`.
+
+It matters downstream because such a contract carries **no volatility information**. It
+should be dropped from a surface fit rather than repaired.
+
+## Why the convergence tolerance is looser than the European one
+
+`AMERICAN_VOLATILITY_CONVERGENCE_TOLERANCE` is `1e-7`, against `1e-12` for the European
+inverter. The difference is not laziness, it is what the price function permits.
+
+The American price is **exactly flat** below a critical volatility. On a one-year 120 strike
+put with spot 100 and no carry, the lattice returns exactly `20.000000` for every volatility
+from `1e-9` through `0.15`, then begins to rise. Inside that region the true derivative is
+zero while the European vega used to steer is around 27, so Newton proposes a step it cannot
+justify and the bracket takes over.
+
+Near the solution the price error bottoms out around `4e-8`, because the American price has a
+kink at the exercise boundary that a finite lattice resolves only so finely. With vega near
+30 the Newton step plateaus at roughly `1.3e-9` and never reaches `1e-12` relative. The
+solver was honest about it and reported `not_converged` at an answer already good to `3e-5`.
+
+Asking a lattice approximation for twelve digits is asking for something it does not have.
+At `1e-7` every case in the grid converges, the median iteration count falls from 7 to 5, and
+the worst round trip over 160 cases is `2.4e-6` relative.
+
+## Invariants under test
+
+- inverting a lattice price recovers the volatility it was priced at to `1e-5` relative
+- a deep in-the-money European quote converges rather than being called `below_intrinsic`
+- a price at the American exercise boundary reports `at_exercise_boundary` with volatility `0`
+- a price below the no-arbitrage floor is rejected
