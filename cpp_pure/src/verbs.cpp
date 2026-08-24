@@ -1,6 +1,7 @@
 #include "verbs.hpp"
 
 #include "volarb/american.hpp"
+#include "volarb/svi.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -133,6 +134,30 @@ nlohmann::json invert_american_implied_volatility_record(const nlohmann::json& r
     return output;
 }
 
+nlohmann::json scan_svi_slice_record(const nlohmann::json& record) {
+    const SviParameters parameters{
+        required_number(record, "a"),   required_number(record, "b"),
+        required_number(record, "rho"), required_number(record, "m"),
+        required_number(record, "sigma"),
+    };
+    const auto steps = record.find("scan_steps");
+    const int scan_steps =
+        steps == record.end() || !steps->is_number_integer() ? default_scan_steps : steps->get<int>();
+    const SviSliceScan scan =
+        scan_svi_slice(parameters, required_number(record, "lowest_log_moneyness"),
+                       required_number(record, "highest_log_moneyness"), scan_steps);
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["minimum_durrleman_value"] = scan.minimum_durrleman_value;
+    output["log_moneyness_at_minimum"] = scan.log_moneyness_at_minimum;
+    output["minimum_total_variance"] = scan.minimum_total_variance;
+    output["minimum_risk_neutral_density"] = scan.minimum_risk_neutral_density;
+    output["scan_steps"] = scan.scan_steps;
+    output["status"] = name_of_svi_status(scan.status);
+    return output;
+}
+
 nlohmann::json read_chain_as_of_records(const nlohmann::json& records) {
     std::map<std::pair<std::string, std::string>, AsOfChainReader> readers;
     nlohmann::json snapshots = nlohmann::json::array();
@@ -227,6 +252,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"imply-forward-curve",
          Verb{"imply-forward-curve", "forward_curve_query/v1", "forward_curve/v1",
               imply_forward_curve_records}},
+        {"scan-svi-slice",
+         Verb{"scan-svi-slice", "svi_scan_request/v1", "svi_scan_result/v1",
+              mapped_over_records(scan_svi_slice_record)}},
         {"invert-american-implied-volatility",
          Verb{"invert-american-implied-volatility", "american_inversion_request/v1",
               "american_inversion_result/v1",

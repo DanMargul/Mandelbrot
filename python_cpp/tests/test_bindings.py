@@ -190,3 +190,37 @@ def test_an_unknown_exercise_style_raises_a_value_error() -> None:
 
 def test_the_lattice_step_count_is_exposed_as_a_contract_constant() -> None:
     assert core.RICHARDSON_BASE_STEPS == RICHARDSON_BASE_STEPS
+
+
+BENIGN_SVI = {"a": 0.0002, "b": 0.018, "rho": -0.65, "m": 0.01, "sigma": 0.10}
+VIOLATING_SVI = {"a": 0.0002, "b": 0.350, "rho": -0.85, "m": 0.00, "sigma": 0.02}
+
+
+def svi_scan(**overrides: object) -> object:
+    arguments = {
+        **BENIGN_SVI,
+        "lowest_log_moneyness": -0.6,
+        "highest_log_moneyness": 0.6,
+        "scan_steps": core.DEFAULT_SCAN_STEPS,
+    }
+    arguments.update(overrides)
+    return core.scan_svi_slice(**arguments)
+
+
+def test_a_well_shaped_slice_scans_clean_through_the_bindings() -> None:
+    scan = svi_scan()
+    assert scan.status == "arbitrage_free_on_grid"
+    assert scan.minimum_durrleman_value > 0.0
+    assert scan.minimum_risk_neutral_density > 0.0
+
+
+def test_a_violating_slice_is_caught_through_the_bindings() -> None:
+    scan = svi_scan(**VIOLATING_SVI)
+    assert scan.status == "butterfly_arbitrage_found"
+    assert scan.minimum_durrleman_value < 0.0
+    assert scan.minimum_risk_neutral_density < 0.0
+
+
+def test_invalid_svi_parameters_raise_a_value_error() -> None:
+    with pytest.raises(ValueError, match="rho"):
+        svi_scan(rho=1.0)

@@ -74,6 +74,31 @@ class ForwardCurvePoint:
 ExerciseStyle = Literal["european", "american"]
 
 class InvalidLatticeInputsError(ValueError): ...
+class InvalidSviParametersError(ValueError): ...
+
+SviStatus = Literal["arbitrage_free_on_grid", "butterfly_arbitrage_found", "invalid_parameters"]
+
+class SviSliceScan:
+    minimum_durrleman_value: float
+    log_moneyness_at_minimum: float
+    minimum_total_variance: float
+    minimum_risk_neutral_density: float
+    scan_steps: int
+    status: SviStatus
+
+DEFAULT_SCAN_STEPS: int
+
+def scan_svi_slice(
+    *,
+    a: float,
+    b: float,
+    rho: float,
+    m: float,
+    sigma: float,
+    lowest_log_moneyness: float,
+    highest_log_moneyness: float,
+    scan_steps: int,
+) -> SviSliceScan: ...
 
 class LatticeInputs:
     spot_price: float

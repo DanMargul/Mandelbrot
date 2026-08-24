@@ -45,6 +45,11 @@ from volarb_py.market_data import (
     parse_canonical_timestamp,
 )
 from volarb_py.pricing import BlackScholesInputs, InvalidOptionInputsError, black_scholes_price_and_greeks
+from volarb_py.svi import (
+    DEFAULT_SCAN_STEPS,
+    SviParameters,
+    scan_svi_slice,
+)
 
 
 @dataclass(frozen=True)
@@ -154,6 +159,32 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
         "status": result.status,
         "iterations": result.iterations,
         "absolute_price_error": result.absolute_price_error,
+    }
+
+
+def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
+    parameters = SviParameters(
+        a=required_float(record, "a"),
+        b=required_float(record, "b"),
+        rho=required_float(record, "rho"),
+        m=required_float(record, "m"),
+        sigma=required_float(record, "sigma"),
+    )
+    steps = record.get("scan_steps", DEFAULT_SCAN_STEPS)
+    scan = scan_svi_slice(
+        parameters,
+        required_float(record, "lowest_log_moneyness"),
+        required_float(record, "highest_log_moneyness"),
+        int(steps) if isinstance(steps, int) else DEFAULT_SCAN_STEPS,
+    )
+    return {
+        "id": required_string(record, "id"),
+        "minimum_durrleman_value": scan.minimum_durrleman_value,
+        "log_moneyness_at_minimum": scan.log_moneyness_at_minimum,
+        "minimum_total_variance": scan.minimum_total_variance,
+        "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
+        "scan_steps": scan.scan_steps,
+        "status": scan.status,
     }
 
 
@@ -283,6 +314,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="american_inversion_request/v1",
         output_schema="american_inversion_result/v1",
         transform_records=mapped_over_records(invert_american_implied_volatility_record),
+    ),
+    "scan-svi-slice": Verb(
+        name="scan-svi-slice",
+        input_schema="svi_scan_request/v1",
+        output_schema="svi_scan_result/v1",
+        transform_records=mapped_over_records(scan_svi_slice_record),
     ),
     "imply-forward-curve": Verb(
         name="imply-forward-curve",

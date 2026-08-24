@@ -34,10 +34,10 @@ tools/check_all.sh
 
 ## Status
 
-**Phase 1 complete; steps 1, 2 and 3 of [`docs/program.md`](docs/program.md) complete.**
-Pricing, implied volatility, the point-in-time data spine, forwards implied from put-call
-parity, and American exercise with premium stripping are implemented in all three tracks
-and pass conformance: 35 comparisons over 1352 golden fixture records, each track
+**Phase 1 complete; steps 1 to 3 of [`docs/program.md`](docs/program.md) complete, step 4
+under way.** Pricing, implied volatility, the point-in-time data spine, forwards implied
+from put-call parity, American exercise with premium stripping, and the SVI no-arbitrage
+acceptance test are implemented in all three tracks and pass conformance: 35 comparisons over 1352 golden fixture records, each track
 against the golden documents and each against the others. The fixtures themselves are
 verified against an independent `mpmath` oracle at 50 decimal digits.
 
@@ -47,10 +47,10 @@ takes 31 solver iterations in every track.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2643 passed |
-| `python_cpp` tests | 370 passed |
-| C++ tests (Catch2) | 48 passed |
-| conformance | 60 comparisons, all tracks agree |
+| `python_pure` tests | 2662 passed |
+| `python_cpp` tests | 376 passed |
+| C++ tests (Catch2) | 56 passed |
+| conformance | 65 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |

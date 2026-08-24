@@ -132,6 +132,29 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
+    steps = record.get("scan_steps", _volarb_core.DEFAULT_SCAN_STEPS)
+    scan = _volarb_core.scan_svi_slice(
+        a=required_float(record, "a"),
+        b=required_float(record, "b"),
+        rho=required_float(record, "rho"),
+        m=required_float(record, "m"),
+        sigma=required_float(record, "sigma"),
+        lowest_log_moneyness=required_float(record, "lowest_log_moneyness"),
+        highest_log_moneyness=required_float(record, "highest_log_moneyness"),
+        scan_steps=int(steps) if isinstance(steps, int) else _volarb_core.DEFAULT_SCAN_STEPS,
+    )
+    return {
+        "id": required_string(record, "id"),
+        "minimum_durrleman_value": scan.minimum_durrleman_value,
+        "log_moneyness_at_minimum": scan.log_moneyness_at_minimum,
+        "minimum_total_variance": scan.minimum_total_variance,
+        "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
+        "scan_steps": scan.scan_steps,
+        "status": scan.status,
+    }
+
+
 def chain_snapshot_record(query_id: str, quote: _volarb_core.ContractQuote) -> JsonRecord:
     return {
         "id": f"{query_id}|{quote.contract_symbol}",
@@ -254,6 +277,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="american_inversion_request/v1",
         output_schema="american_inversion_result/v1",
         transform_records=mapped_over_records(invert_american_implied_volatility_record),
+    ),
+    "scan-svi-slice": Verb(
+        name="scan-svi-slice",
+        input_schema="svi_scan_request/v1",
+        output_schema="svi_scan_result/v1",
+        transform_records=mapped_over_records(scan_svi_slice_record),
     ),
     "imply-forward-curve": Verb(
         name="imply-forward-curve",

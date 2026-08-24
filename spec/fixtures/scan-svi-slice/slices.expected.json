@@ -1,0 +1,365 @@
+{
+  "schema": "svi_scan_result/v1",
+  "records": [
+    {
+      "id": "short_dated_index_smile_standard",
+      "minimum_durrleman_value": 0.2603063255548149,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.00156789392736857,
+      "minimum_risk_neutral_density": 6.006425700248242e-05,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "long_dated_index_smile_standard",
+      "minimum_durrleman_value": 0.3897835727059709,
+      "log_moneyness_at_minimum": -0.5999999999999993,
+      "minimum_total_variance": 0.03630772943773713,
+      "minimum_risk_neutral_density": 0.11980164176467009,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "almost_flat_smile_standard",
+      "minimum_durrleman_value": 0.9756671179148548,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.0409949895403553,
+      "minimum_risk_neutral_density": 0.034103818917975655,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "steep_negative_skew_standard",
+      "minimum_durrleman_value": 0.2890275649880072,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.01023068390080378,
+      "minimum_risk_neutral_density": 0.05436027514565823,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "positive_skew_standard",
+      "minimum_durrleman_value": 0.3333291023048135,
+      "log_moneyness_at_minimum": 0.6,
+      "minimum_total_variance": 0.01452630955945872,
+      "minimum_risk_neutral_density": 0.014546759285605603,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "zero_convexity_standard",
+      "minimum_durrleman_value": 1.0,
+      "log_moneyness_at_minimum": -0.5976562500000004,
+      "minimum_total_variance": 0.04,
+      "minimum_risk_neutral_density": 0.03078939672895335,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "high_level_wide_smile_standard",
+      "minimum_durrleman_value": 0.6864711680450998,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.364972803461446,
+      "minimum_risk_neutral_density": 0.3388847120131388,
+      "scan_steps": 512,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "butterfly_violation_narrow_wing_standard",
+      "minimum_durrleman_value": -2.293805108179792,
+      "log_moneyness_at_minimum": -0.0375739886800913,
+      "minimum_total_variance": 0.003887848869095605,
+      "minimum_risk_neutral_density": -5.5815061483551025,
+      "scan_steps": 512,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_steep_slope_standard",
+      "minimum_durrleman_value": -0.7851291396830138,
+      "log_moneyness_at_minimum": -0.1064792186572089,
+      "minimum_total_variance": 0.01624500399239393,
+      "minimum_risk_neutral_density": -0.9860399861208416,
+      "scan_steps": 512,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_off_centre_standard",
+      "minimum_durrleman_value": -0.915775004389443,
+      "log_moneyness_at_minimum": 0.22464761227570054,
+      "minimum_total_variance": 0.009500022027706105,
+      "minimum_risk_neutral_density": -0.8645822918923919,
+      "scan_steps": 512,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "short_dated_index_smile_narrow",
+      "minimum_durrleman_value": 0.3772320405236723,
+      "log_moneyness_at_minimum": -0.15,
+      "minimum_total_variance": 0.0015678939273685698,
+      "minimum_risk_neutral_density": 0.28014323046791684,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "long_dated_index_smile_narrow",
+      "minimum_durrleman_value": 0.80856433192937,
+      "log_moneyness_at_minimum": -0.15,
+      "minimum_total_variance": 0.037810494501762326,
+      "minimum_risk_neutral_density": 1.1923081971008984,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "almost_flat_smile_narrow",
+      "minimum_durrleman_value": 0.9989266456048472,
+      "log_moneyness_at_minimum": -0.14999999999999358,
+      "minimum_total_variance": 0.0409949895403553,
+      "minimum_risk_neutral_density": 1.603433389671686,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "steep_negative_skew_narrow",
+      "minimum_durrleman_value": 0.5825423824181201,
+      "log_moneyness_at_minimum": -0.15,
+      "minimum_total_variance": 0.012292232530251876,
+      "minimum_risk_neutral_density": 0.9905844700604017,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "positive_skew_narrow",
+      "minimum_durrleman_value": 0.6951118052037526,
+      "log_moneyness_at_minimum": 0.15,
+      "minimum_total_variance": 0.01452630955945872,
+      "minimum_risk_neutral_density": 1.0370739250017682,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "zero_convexity_narrow",
+      "minimum_durrleman_value": 1.0,
+      "log_moneyness_at_minimum": -0.1476562500000004,
+      "minimum_total_variance": 0.04,
+      "minimum_risk_neutral_density": 1.6270977432390996,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "high_level_wide_smile_narrow",
+      "minimum_durrleman_value": 1.1325595943506843,
+      "log_moneyness_at_minimum": -0.15,
+      "minimum_total_variance": 0.36753975315279475,
+      "minimum_risk_neutral_density": 0.7089013086707552,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "butterfly_violation_narrow_wing_narrow",
+      "minimum_durrleman_value": -2.2938051081797917,
+      "log_moneyness_at_minimum": -0.03757398839726527,
+      "minimum_total_variance": 0.003887848869095604,
+      "minimum_risk_neutral_density": -5.581506167181162,
+      "scan_steps": 128,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_steep_slope_narrow",
+      "minimum_durrleman_value": -0.7851291396830138,
+      "log_moneyness_at_minimum": -0.10647921937723577,
+      "minimum_total_variance": 0.016245553203367593,
+      "minimum_risk_neutral_density": -0.9860399832474572,
+      "scan_steps": 128,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_off_centre_narrow",
+      "minimum_durrleman_value": 0.648019788135439,
+      "log_moneyness_at_minimum": -0.15,
+      "minimum_total_variance": 0.009500022027706109,
+      "minimum_risk_neutral_density": 1.121037218939536,
+      "scan_steps": 128,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "short_dated_index_smile_wide",
+      "minimum_durrleman_value": 0.2519648655029185,
+      "log_moneyness_at_minimum": -1.5,
+      "minimum_total_variance": 0.001567933151132927,
+      "minimum_risk_neutral_density": 1.4678595702258e-11,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "long_dated_index_smile_wide",
+      "minimum_durrleman_value": 0.28417284934910475,
+      "log_moneyness_at_minimum": -1.5,
+      "minimum_total_variance": 0.03630772943773713,
+      "minimum_risk_neutral_density": 0.0036343770852237593,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "almost_flat_smile_wide",
+      "minimum_durrleman_value": 0.9289618342787338,
+      "log_moneyness_at_minimum": -1.5,
+      "minimum_total_variance": 0.040994987831138426,
+      "minimum_risk_neutral_density": 2.1464010827267364e-11,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "steep_negative_skew_wide",
+      "minimum_durrleman_value": 0.2568256069921805,
+      "log_moneyness_at_minimum": -1.5,
+      "minimum_total_variance": 0.010230683900803783,
+      "minimum_risk_neutral_density": 0.0009365793445673203,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "positive_skew_wide",
+      "minimum_durrleman_value": 0.2732063789071159,
+      "log_moneyness_at_minimum": 1.4999999999999987,
+      "minimum_total_variance": 0.014526300407074803,
+      "minimum_risk_neutral_density": 1.2228701354632371e-05,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "zero_convexity_wide",
+      "minimum_durrleman_value": 1.0,
+      "log_moneyness_at_minimum": -1.4970703125000004,
+      "minimum_total_variance": 0.04,
+      "minimum_risk_neutral_density": 2.8571129138674368e-12,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "high_level_wide_smile_wide",
+      "minimum_durrleman_value": 0.3850746410984282,
+      "log_moneyness_at_minimum": -1.5,
+      "minimum_total_variance": 0.3649729663053848,
+      "minimum_risk_neutral_density": 0.08545928292333259,
+      "scan_steps": 1024,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "butterfly_violation_narrow_wing_wide",
+      "minimum_durrleman_value": -2.293805108179792,
+      "log_moneyness_at_minimum": -0.03757398831642528,
+      "minimum_total_variance": 0.0038874813843428656,
+      "minimum_risk_neutral_density": -5.581506172562206,
+      "scan_steps": 1024,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_steep_slope_wide",
+      "minimum_durrleman_value": -0.7851291396830136,
+      "log_moneyness_at_minimum": -0.10647921911294768,
+      "minimum_total_variance": 0.01624500399239393,
+      "minimum_risk_neutral_density": -0.9860399843021416,
+      "scan_steps": 1024,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_off_centre_wide",
+      "minimum_durrleman_value": -0.9157750043894431,
+      "log_moneyness_at_minimum": 0.22464761146519419,
+      "minimum_total_variance": 0.00950162188423369,
+      "minimum_risk_neutral_density": -0.8645822952279908,
+      "scan_steps": 1024,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "short_dated_index_smile_coarse",
+      "minimum_durrleman_value": 0.2603063255548149,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.0015863348795377818,
+      "minimum_risk_neutral_density": 6.006425700248242e-05,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "long_dated_index_smile_coarse",
+      "minimum_durrleman_value": 0.3897835727059709,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.036335463701691814,
+      "minimum_risk_neutral_density": 0.11980164176466979,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "almost_flat_smile_coarse",
+      "minimum_durrleman_value": 0.9756671179148548,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.040996187420807836,
+      "minimum_risk_neutral_density": 0.034103818917975655,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "steep_negative_skew_coarse",
+      "minimum_durrleman_value": 0.2890275649880072,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.010234173683310505,
+      "minimum_risk_neutral_density": 0.05436027514565823,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "positive_skew_coarse",
+      "minimum_durrleman_value": 0.3333291023048135,
+      "log_moneyness_at_minimum": 0.6,
+      "minimum_total_variance": 0.014526932339180638,
+      "minimum_risk_neutral_density": 0.014546759285605603,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "zero_convexity_coarse",
+      "minimum_durrleman_value": 1.0,
+      "log_moneyness_at_minimum": -0.5250000000000135,
+      "minimum_total_variance": 0.04,
+      "minimum_risk_neutral_density": 0.08230584766622243,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "high_level_wide_smile_coarse",
+      "minimum_durrleman_value": 0.6864711680450998,
+      "log_moneyness_at_minimum": -0.6,
+      "minimum_total_variance": 0.3652400842696445,
+      "minimum_risk_neutral_density": 0.3388847120131388,
+      "scan_steps": 16,
+      "status": "arbitrage_free_on_grid"
+    },
+    {
+      "id": "butterfly_violation_narrow_wing_coarse",
+      "minimum_durrleman_value": -2.2938051081797908,
+      "log_moneyness_at_minimum": -0.03757398759855008,
+      "minimum_total_variance": 0.00505480571845504,
+      "minimum_risk_neutral_density": -5.581506220346926,
+      "scan_steps": 16,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_steep_slope_coarse",
+      "minimum_durrleman_value": -0.7851291396830137,
+      "log_moneyness_at_minimum": -0.10647922054949135,
+      "minimum_total_variance": 0.016245553203367593,
+      "minimum_risk_neutral_density": -0.9860399785693807,
+      "scan_steps": 16,
+      "status": "butterfly_arbitrage_found"
+    },
+    {
+      "id": "butterfly_violation_off_centre_coarse",
+      "minimum_durrleman_value": -0.9157750043894431,
+      "log_moneyness_at_minimum": 0.22464761223709878,
+      "minimum_total_variance": 0.01019436802675439,
+      "minimum_risk_neutral_density": -0.8645822920512557,
+      "scan_steps": 16,
+      "status": "butterfly_arbitrage_found"
+    }
+  ]
+}

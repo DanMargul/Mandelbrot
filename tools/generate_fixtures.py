@@ -32,8 +32,15 @@ from volarb_py.cli import (  # noqa: E402
     invert_implied_volatility_record,
     price_american_option_record,
     price_option_record,
+    scan_svi_slice_record,
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
+from volarb_py.svi import (  # noqa: E402
+    SviParameters,
+    durrleman_function,
+    risk_neutral_density,
+    scan_svi_slice,
+)
 
 FIXTURE_ROOT: Final[Path] = REPOSITORY_ROOT / "spec" / "fixtures"
 DOUBLE_PRECISION_EPSILON: Final[float] = sys.float_info.epsilon
@@ -44,6 +51,8 @@ FINE_LATTICE_BASE_STEPS: Final[int] = 512
 LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 1e-4
 EUROPEAN_LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 5e-5
 AMERICAN_INVERSION_RELATIVE_BUDGET: Final[float] = 1e-4
+SVI_FINE_SCAN_STEPS: Final[int] = 20000
+SVI_SCAN_ORACLE_BUDGET: Final[float] = 1e-9
 
 
 class OracleDisagreementError(AssertionError):
@@ -296,6 +305,93 @@ def build_american_inversion_fixture() -> None:
     print(f"invert-american-implied-volatility/roundtrip: {len(result_records)} cases, statuses {statuses}")
 
 
+SVI_SCAN_CASES: Final[tuple[dict[str, Any], ...]] = (
+    {"id": "short_dated_index_smile", "a": 0.0002, "b": 0.018, "rho": -0.65, "m": 0.01, "sigma": 0.10},
+    {"id": "long_dated_index_smile", "a": 0.0100, "b": 0.090, "rho": -0.55, "m": 0.05, "sigma": 0.35},
+    {"id": "almost_flat_smile", "a": 0.0400, "b": 0.002, "rho": -0.10, "m": 0.00, "sigma": 0.50},
+    {"id": "steep_negative_skew", "a": 0.0050, "b": 0.060, "rho": -0.90, "m": 0.02, "sigma": 0.20},
+    {"id": "positive_skew", "a": 0.0050, "b": 0.050, "rho": 0.50, "m": -0.02, "sigma": 0.22},
+    {"id": "zero_convexity", "a": 0.0400, "b": 0.000, "rho": -0.30, "m": 0.00, "sigma": 0.30},
+    {"id": "high_level_wide_smile", "a": 0.2000, "b": 0.300, "rho": -0.40, "m": 0.00, "sigma": 0.60},
+    {
+        "id": "butterfly_violation_narrow_wing",
+        "a": 0.0002,
+        "b": 0.350,
+        "rho": -0.85,
+        "m": 0.00,
+        "sigma": 0.02,
+    },
+    {
+        "id": "butterfly_violation_steep_slope",
+        "a": 0.0100,
+        "b": 0.400,
+        "rho": -0.95,
+        "m": 0.00,
+        "sigma": 0.05,
+    },
+    {"id": "butterfly_violation_off_centre", "a": 0.0050, "b": 0.250, "rho": 0.80, "m": 0.15, "sigma": 0.03},
+)
+
+SVI_SCAN_RANGES: Final[tuple[tuple[str, float, float, int], ...]] = (
+    ("standard", -0.60, 0.60, 512),
+    ("narrow", -0.15, 0.15, 128),
+    ("wide", -1.50, 1.50, 1024),
+    ("coarse", -0.60, 0.60, 16),
+)
+
+
+def verify_svi_scan(request: dict[str, Any], result: dict[str, Any]) -> None:
+    parameters = SviParameters(
+        a=float(request["a"]),
+        b=float(request["b"]),
+        rho=float(request["rho"]),
+        m=float(request["m"]),
+        sigma=float(request["sigma"]),
+    )
+    minimum_point = float(result["log_moneyness_at_minimum"])
+    durrleman = durrleman_function(parameters, minimum_point)
+    density = risk_neutral_density(parameters, minimum_point)
+    if (durrleman < 0.0) != (density < 0.0):
+        raise OracleDisagreementError(f"{request['id']}: density and Durrleman disagree on sign")
+
+    fine = scan_svi_slice(
+        parameters,
+        float(request["lowest_log_moneyness"]),
+        float(request["highest_log_moneyness"]),
+        SVI_FINE_SCAN_STEPS,
+    )
+    slack = float(result["minimum_durrleman_value"]) - fine.minimum_durrleman_value
+    if slack > SVI_SCAN_ORACLE_BUDGET:
+        raise OracleDisagreementError(
+            f"{request['id']}: a {SVI_FINE_SCAN_STEPS} step scan found {slack} more depth"
+        )
+
+
+def build_svi_scan_fixture() -> None:
+    request_records = []
+    result_records = []
+    for label, lowest, highest, steps in SVI_SCAN_RANGES:
+        for case in SVI_SCAN_CASES:
+            request = {
+                **case,
+                "id": f"{case['id']}_{label}",
+                "lowest_log_moneyness": lowest,
+                "highest_log_moneyness": highest,
+                "scan_steps": steps,
+            }
+            result = scan_svi_slice_record(request)
+            verify_svi_scan(request, result)
+            request_records.append(request)
+            result_records.append(result)
+
+    directory = FIXTURE_ROOT / "scan-svi-slice"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "slices.input.json", Document("svi_scan_request/v1", request_records))
+    write_document(directory / "slices.expected.json", Document("svi_scan_result/v1", result_records))
+    statuses = sorted({str(record["status"]) for record in result_records})
+    print(f"scan-svi-slice/slices: {len(result_records)} cases, statuses {statuses}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -305,6 +401,7 @@ def main() -> int:
             "invert-implied-volatility",
             "price-american-options",
             "invert-american-implied-volatility",
+            "scan-svi-slice",
             "all",
         ],
         default="all",
@@ -324,6 +421,8 @@ def main() -> int:
             build_american_fixture(family, american_cases)
     if arguments.verb in ("invert-american-implied-volatility", "all"):
         build_american_inversion_fixture()
+    if arguments.verb in ("scan-svi-slice", "all"):
+        build_svi_scan_fixture()
     return 0
 
 

@@ -103,7 +103,8 @@ contracts is ever fitted without stripping.
 
 ## 4. A surface that is arbitrage-free by construction, not by inspection
 
-*Extends Phase 3.*
+*Extends Phase 3. **Acceptance test done**, see `spec/interfaces/svi.md`; calibration is the
+remaining half.*
 
 SVI per slice, eSSVI globally with calendar-monotone total variance, calibrated under the
 Durrleman condition. That much is standard.
@@ -114,6 +115,22 @@ parameters and violated between them. The real test is that the surface produces
 non-negative risk-neutral density and a valid non-negative local volatility via Dupire, on a
 dense grid, everywhere. A surface that passes the parameter check and fails the density
 check is arbitrageable, and it is the density that the strategy is implicitly trading.
+
+The acceptance test is built **before** the calibrator, deliberately. A calibration is only
+as good as the test it must pass, and fitting first invites the test to be relaxed until the
+fit passes, which is exactly backwards.
+
+Two things the checker turned up. The risk-neutral density and Durrleman's function differ
+only by a strictly positive factor, so non-negative density and non-negative `g` are the same
+condition rather than two; both are reported because the density carries units a reader can
+reason about. And a grid alone is not enough: on a deliberately arbitrageable slice a 16-step
+grid finds only `-1.64` of a true `-2.29` minimum, missing forty percent of the depth, so the
+scan refines around its lowest point by golden section. The depth matters as much as the
+detection, because it says whether a fit is slightly imperfect or badly wrong.
+
+The status is `arbitrage_free_on_grid`, never `arbitrage_free`. A finite scan cannot prove
+absence of a violation between its points and says nothing outside its range, and the name
+carries that limit rather than hiding it.
 
 **Done when** dense-grid density non-negativity, calendar monotonicity, and a Dupire
 round-trip all hold as fixture assertions, so a refactor that reproduces the parameter

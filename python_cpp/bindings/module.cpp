@@ -3,6 +3,7 @@
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
 #include "volarb/pricing.hpp"
+#include "volarb/svi.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -54,6 +55,12 @@ using volarb::AmericanInversionInputs;
 using volarb::AmericanInversionResult;
 using volarb::invert_american_implied_volatility;
 using volarb::name_of_american_inversion_status;
+using volarb::default_scan_steps;
+using volarb::InvalidSviParametersError;
+using volarb::name_of_svi_status;
+using volarb::scan_svi_slice;
+using volarb::SviParameters;
+using volarb::SviSliceScan;
 
 namespace {
 
@@ -119,6 +126,13 @@ AmericanInversionResult invert_american_from_strings(double spot_price, double s
     return invert_american_implied_volatility(AmericanInversionInputs{
         spot_price, strike, years_to_expiry, zero_rate, carry_rate, option_price,
         option_type_from_name(option_type), exercise_style_from_name(exercise_style)});
+}
+
+SviSliceScan scan_svi_slice_from_values(double a, double b, double rho, double m, double sigma,
+                                        double lowest_log_moneyness, double highest_log_moneyness,
+                                        int scan_steps) {
+    return scan_svi_slice(SviParameters{a, b, rho, m, sigma}, lowest_log_moneyness,
+                          highest_log_moneyness, scan_steps);
 }
 
 LatticeInputs make_lattice_inputs(double spot_price, double strike, double years_to_expiry,
@@ -262,6 +276,23 @@ PYBIND11_MODULE(_volarb_core, module) {
 
     py::register_exception<InvalidLatticeInputsError>(module, "InvalidLatticeInputsError",
                                                       PyExc_ValueError);
+    py::register_exception<InvalidSviParametersError>(module, "InvalidSviParametersError",
+                                                      PyExc_ValueError);
+
+    py::class_<SviSliceScan>(module, "SviSliceScan")
+        .def_readonly("minimum_durrleman_value", &SviSliceScan::minimum_durrleman_value)
+        .def_readonly("log_moneyness_at_minimum", &SviSliceScan::log_moneyness_at_minimum)
+        .def_readonly("minimum_total_variance", &SviSliceScan::minimum_total_variance)
+        .def_readonly("minimum_risk_neutral_density", &SviSliceScan::minimum_risk_neutral_density)
+        .def_readonly("scan_steps", &SviSliceScan::scan_steps)
+        .def_property_readonly("status", [](const SviSliceScan& scan) {
+            return name_of_svi_status(scan.status);
+        });
+
+    module.attr("DEFAULT_SCAN_STEPS") = default_scan_steps;
+    module.def("scan_svi_slice", &scan_svi_slice_from_values, py::arg("a"), py::arg("b"),
+               py::arg("rho"), py::arg("m"), py::arg("sigma"), py::arg("lowest_log_moneyness"),
+               py::arg("highest_log_moneyness"), py::arg("scan_steps"));
 
     py::class_<LatticeInputs>(module, "LatticeInputs")
         .def(py::init(&make_lattice_inputs), py::arg("spot_price"), py::arg("strike"),
