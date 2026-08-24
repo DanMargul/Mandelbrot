@@ -8,6 +8,7 @@
 #include <pybind11/stl.h>
 
 #include <filesystem>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -105,8 +106,9 @@ std::vector<ContractQuote> chain_as_of_from_strings(const AsOfChainReader& reade
 }
 
 std::vector<ForwardCurvePoint> imply_forward_curve_from_strings(
-    const std::vector<ContractQuote>& quotes, const std::string& observation_time) {
-    return imply_forward_curve(quotes, parse_canonical_timestamp(observation_time));
+    const std::vector<ContractQuote>& quotes, const std::string& observation_time,
+    std::optional<double> zero_rate) {
+    return imply_forward_curve(quotes, parse_canonical_timestamp(observation_time), zero_rate);
 }
 
 AmericanInversionResult invert_american_from_strings(double spot_price, double strike,
@@ -244,6 +246,8 @@ PYBIND11_MODULE(_volarb_core, module) {
         .def_readonly("active_pair_count", &ForwardCurvePoint::active_pair_count)
         .def_readonly("chi_square_per_degree_of_freedom",
                       &ForwardCurvePoint::chi_square_per_degree_of_freedom)
+        .def_readonly("early_exercise_premium_stripped",
+                      &ForwardCurvePoint::early_exercise_premium_stripped)
         .def_readonly("discount_factor_is_monotone_in_expiry",
                       &ForwardCurvePoint::discount_factor_is_monotone_in_expiry)
         .def_property_readonly(
@@ -254,7 +258,7 @@ PYBIND11_MODULE(_volarb_core, module) {
         });
 
     module.def("imply_forward_curve", &imply_forward_curve_from_strings, py::arg("quotes"),
-               py::arg("observation_time"));
+               py::arg("observation_time"), py::arg("zero_rate"));
 
     py::register_exception<InvalidLatticeInputsError>(module, "InvalidLatticeInputsError",
                                                       PyExc_ValueError);

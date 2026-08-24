@@ -113,6 +113,9 @@ exact = true
 ["forward_curve/v1".discount_factor_is_monotone_in_expiry]
 exact = true
 
+["forward_curve/v1".early_exercise_premium_stripped]
+exact = true
+
 ["forward_curve/v1".years_to_expiry]
 relative = 1e-14
 absolute = 1e-16

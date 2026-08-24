@@ -63,8 +63,8 @@ flagged rather than silently producing garbage surfaces.
 
 ## 3. American exercise, and the early-exercise premium as a first-class quantity
 
-*Extends Phase 2. **Pricer and inversion done**, see `spec/interfaces/american.md`.
-De-Americanization is the remaining half.*
+*Extends Phase 2. **Done.** See `spec/interfaces/american.md` and the stripping section of
+`spec/interfaces/forward_curve.md`.*
 
 SPX is European and deferred that problem. Single names are not. Bjerksund-Stensland 2002
 for throughput, Andersen-Lake-Offengenden or CRR with Richardson extrapolation for accuracy,

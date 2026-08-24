@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_curve_query/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "forward_curve_query/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "dataset_root", "underlying_symbol", "observation_time", "knowledge_horizon"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "pattern": "^[^|]+$" },
+          "dataset_root": { "type": "string", "minLength": 1 },
+          "underlying_symbol": { "type": "string", "minLength": 1 },
+          "observation_time": { "type": "string", "format": "date-time" },
+          "knowledge_horizon": { "type": "string", "format": "date-time" },
+          "include_adjusted_contracts": { "type": "boolean" },
+          "zero_rate": { "type": "number" }
+        }
+      }
+    }
+  }
+}

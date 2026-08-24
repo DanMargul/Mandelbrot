@@ -179,6 +179,7 @@ nlohmann::json forward_curve_record(const std::string& query_id, const std::stri
     result["active_pair_count"] = point.active_pair_count;
     result["chi_square_per_degree_of_freedom"] =
         json_optional_number(point.chi_square_per_degree_of_freedom);
+    result["early_exercise_premium_stripped"] = point.early_exercise_premium_stripped;
     result["discount_factor_is_monotone_in_expiry"] = point.discount_factor_is_monotone_in_expiry;
     result["status"] = name_of_forward_curve_status(point.status);
     return result;
@@ -204,8 +205,9 @@ nlohmann::json imply_forward_curve_records(const nlohmann::json& records) {
         const ChainQuery query{underlying_symbol, observation_time,
                                optional_boolean(record, "include_adjusted_contracts", false)};
         const std::string query_id = required_string(record, "id");
+        const auto zero_rate = optional_number(record, "zero_rate");
         for (const ForwardCurvePoint& point :
-             imply_forward_curve(readers.at(cache_key).chain_as_of(query), observation_time)) {
+             imply_forward_curve(readers.at(cache_key).chain_as_of(query), observation_time, zero_rate)) {
             curve.push_back(forward_curve_record(query_id, underlying_symbol, point));
         }
     }
@@ -223,7 +225,8 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"read-chain-as-of",
          Verb{"read-chain-as-of", "chain_query/v1", "chain_snapshot/v2", read_chain_as_of_records}},
         {"imply-forward-curve",
-         Verb{"imply-forward-curve", "chain_query/v1", "forward_curve/v1", imply_forward_curve_records}},
+         Verb{"imply-forward-curve", "forward_curve_query/v1", "forward_curve/v1",
+              imply_forward_curve_records}},
         {"invert-american-implied-volatility",
          Verb{"invert-american-implied-volatility", "american_inversion_request/v1",
               "american_inversion_result/v1",

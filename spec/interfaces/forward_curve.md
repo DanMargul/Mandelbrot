@@ -257,7 +257,52 @@ slope. The forward was biased by a factor of seven more than the European case, 
 appeared downstream as a systematic `0.003` volatility point disagreement between calls and
 puts that no amount of quote cleaning would have removed.
 
-The status `american_quotes_not_stripped` now refuses any expiry containing American
-contracts, rather than returning a number that looks fitted. Stripping the early exercise
-premium first is step 3 of `docs/program.md` and is the next increment; the measurement above
-already shows it recovers the forward to European accuracy.
+## Stripping the premium
+
+`imply_forward_curve` takes an optional `zero_rate`. Without one, an expiry containing
+American contracts returns `american_quotes_not_stripped` rather than a number that looks
+fitted. With one, the premium is stripped and the fit proceeds.
+
+The premium depends on the carry, the carry depends on the forward, and the forward is what
+the regression computes, so it is a fixed point:
+
+```
+forward = raw parity fit          (biased, but the right order of magnitude)
+repeat up to MAXIMUM_STRIPPING_PASSES:
+    carry            = zero_rate - log(forward / spot) / T
+    for each quote:  volatility = invert_american(quote, zero_rate, carry)
+                     european   = quote_mid - early_exercise_premium(volatility, zero_rate, carry)
+    forward          = centred parity fit over the european prices
+    stop when the forward moves by less than FORWARD_STRIPPING_TOLERANCE relative
+```
+
+```
+MAXIMUM_STRIPPING_PASSES   = 4
+FORWARD_STRIPPING_TOLERANCE = 1e-6
+```
+
+It settles in three passes. Measured on the synthetic American chain:
+
+| pass | forward | error |
+|---|---|---|
+| raw | 224.3261 | `+4.75e-04` |
+| 1 | 224.2484 | `+1.29e-04` |
+| 2 | 224.2390 | `+8.65e-05` |
+| 3 | 224.2377 | `+8.13e-05` |
+
+**The result barely depends on the supplied rate.** Feeding a zero rate that is 2.25
+percentage points too low gives `+9.88e-05`, and one 2.75 points too high gives `+5.46e-05`,
+against `+8.07e-05` at the true rate. All three are within a factor of two of each other and
+all are five to nine times better than the unstripped fit.
+
+That matters because of what step 2 established: the discount factor is not identifiable from
+parity. If stripping needed an accurate rate, it would need the thing this platform cannot
+measure. It does not. A rate good to a couple of percentage points, which any curve provides,
+is enough to recover the forward to `1e-4`.
+
+`early_exercise_premium_stripped` records on every point whether the premium was removed, so
+a consumer never has to infer it from the underlying's exercise style.
+
+The cost is real and is where the native tracks earn their place: the fixed point runs an
+American inversion and two lattice evaluations per quote per pass, and one AAPL expiry takes
+about 2.4 seconds in pure Python.

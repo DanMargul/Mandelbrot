@@ -1,5 +1,5 @@
 {
-  "schema": "chain_query/v1",
+  "schema": "forward_curve_query/v1",
   "records": [
     {
       "id": "spx_1500_horizon_1500",
@@ -49,7 +49,8 @@
       "dataset_root": "spec/fixtures/datasets/synthetic_chain",
       "underlying_symbol": "AAPL",
       "observation_time": "2026-08-21T17:00:00.000000Z",
-      "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z",
+      "zero_rate": 0.0425
     },
     {
       "id": "absent_underlying_is_empty_not_an_error",
@@ -62,6 +63,21 @@
       "id": "thin_chain_has_too_few_parity_pairs",
       "dataset_root": "spec/fixtures/datasets/synthetic_chain",
       "underlying_symbol": "THIN",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
+    },
+    {
+      "id": "aapl_stripped_with_a_deliberately_wrong_rate",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "AAPL",
+      "observation_time": "2026-08-21T17:00:00.000000Z",
+      "knowledge_horizon": "2026-08-21T17:00:00.000000Z",
+      "zero_rate": 0.02
+    },
+    {
+      "id": "aapl_without_a_rate_cannot_be_stripped",
+      "dataset_root": "spec/fixtures/datasets/synthetic_chain",
+      "underlying_symbol": "AAPL",
       "observation_time": "2026-08-21T17:00:00.000000Z",
       "knowledge_horizon": "2026-08-21T17:00:00.000000Z"
     }

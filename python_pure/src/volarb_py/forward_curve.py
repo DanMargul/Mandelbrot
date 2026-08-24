@@ -6,6 +6,12 @@ from datetime import UTC, date, datetime
 from itertools import pairwise
 from typing import Final, Literal
 
+from volarb_py.american import (
+    AmericanInversionInputs,
+    LatticeInputs,
+    early_exercise_premium,
+    invert_american_implied_volatility,
+)
 from volarb_py.market_data import ContractQuote
 
 ForwardCurveStatus = Literal[
@@ -24,6 +30,8 @@ MINIMUM_HALF_SPREAD: Final[float] = 1e-8
 EXPIRY_SETTLEMENT_HOUR_UTC: Final[int] = 21
 DAYS_PER_YEAR: Final[float] = 365.0
 SECONDS_PER_DAY: Final[float] = 86400.0
+MAXIMUM_STRIPPING_PASSES: Final[int] = 4
+FORWARD_STRIPPING_TOLERANCE: Final[float] = 1e-6
 MINIMUM_COVARIANCE_INFLATION: Final[float] = 1.0
 
 
@@ -48,6 +56,7 @@ class ForwardCurvePoint:
     parity_pair_count: int
     active_pair_count: int
     chi_square_per_degree_of_freedom: float | None
+    early_exercise_premium_stripped: bool
     discount_factor_is_monotone_in_expiry: bool
     status: ForwardCurveStatus
 
@@ -102,7 +111,9 @@ def parity_pair_from(call: ContractQuote, put: ContractQuote) -> ParityPair:
     )
 
 
-def parity_pairs_from_chain(quotes: list[ContractQuote]) -> dict[date, list[ParityPair]]:
+def paired_quotes_from_chain(
+    quotes: list[ContractQuote],
+) -> dict[date, list[tuple[ContractQuote, ContractQuote]]]:
     calls: dict[tuple[date, float], ContractQuote] = {}
     puts: dict[tuple[date, float], ContractQuote] = {}
     for quote in quotes:
@@ -111,11 +122,67 @@ def parity_pairs_from_chain(quotes: list[ContractQuote]) -> dict[date, list[Pari
         side = calls if quote.option_type == "call" else puts
         side[(quote.expiry_date, quote.strike)] = quote
 
-    pairs_by_expiry: dict[date, list[ParityPair]] = {}
+    paired: dict[date, list[tuple[ContractQuote, ContractQuote]]] = {}
     for key in sorted(calls.keys() & puts.keys()):
-        expiry_date = key[0]
-        pairs_by_expiry.setdefault(expiry_date, []).append(parity_pair_from(calls[key], puts[key]))
-    return pairs_by_expiry
+        paired.setdefault(key[0], []).append((calls[key], puts[key]))
+    return paired
+
+
+def parity_pairs_from_chain(quotes: list[ContractQuote]) -> dict[date, list[ParityPair]]:
+    return {
+        expiry_date: [parity_pair_from(call, put) for call, put in pairs]
+        for expiry_date, pairs in paired_quotes_from_chain(quotes).items()
+    }
+
+
+def carry_rate_from(forward: float, spot_price: float, years: float, zero_rate: float) -> float:
+    return zero_rate - math.log(forward / spot_price) / years
+
+
+def european_equivalent_price(
+    quote: ContractQuote, years: float, zero_rate: float, carry_rate: float
+) -> float:
+    observed = mid_price_of(quote)
+    inversion = invert_american_implied_volatility(
+        AmericanInversionInputs(
+            spot_price=quote.underlying_price,
+            strike=quote.strike,
+            years_to_expiry=years,
+            zero_rate=zero_rate,
+            carry_rate=carry_rate,
+            option_price=observed,
+            option_type=quote.option_type,
+            exercise_style=quote.exercise_style,
+        )
+    )
+    if inversion.status != "converged":
+        return observed
+    premium = early_exercise_premium(
+        LatticeInputs(
+            spot_price=quote.underlying_price,
+            strike=quote.strike,
+            years_to_expiry=years,
+            volatility=inversion.volatility,
+            zero_rate=zero_rate,
+            carry_rate=carry_rate,
+            option_type=quote.option_type,
+            exercise_style=quote.exercise_style,
+        )
+    )
+    return observed - premium
+
+
+def stripped_parity_pair(
+    call: ContractQuote, put: ContractQuote, years: float, zero_rate: float, carry_rate: float
+) -> ParityPair:
+    call_half_spread = half_spread_of(call)
+    put_half_spread = half_spread_of(put)
+    return ParityPair(
+        strike=call.strike,
+        call_minus_put_mid=european_equivalent_price(call, years, zero_rate, carry_rate)
+        - european_equivalent_price(put, years, zero_rate, carry_rate),
+        weight=1.0 / (call_half_spread * call_half_spread + put_half_spread * put_half_spread),
+    )
 
 
 def fit_weighted_line(pairs: list[ParityPair]) -> WeightedLineFit | None:
@@ -203,6 +270,7 @@ def failed_point(
         parity_pair_count=pair_count,
         active_pair_count=0,
         chi_square_per_degree_of_freedom=None,
+        early_exercise_premium_stripped=False,
         discount_factor_is_monotone_in_expiry=False,
         status=status,
     )
@@ -237,6 +305,7 @@ def curve_point_for_expiry(
         parity_pair_count=len(pairs),
         active_pair_count=len(active),
         chi_square_per_degree_of_freedom=fit.chi_square_per_degree_of_freedom,
+        early_exercise_premium_stripped=False,
         discount_factor_is_monotone_in_expiry=False,
         status="converged",
     )
@@ -260,21 +329,55 @@ def spot_price_for(quotes: list[ContractQuote], expiry_date: date) -> float:
     return 0.0
 
 
-def imply_forward_curve(quotes: list[ContractQuote], observation_time: datetime) -> list[ForwardCurvePoint]:
-    pairs_by_expiry = parity_pairs_from_chain(quotes)
+def stripped_curve_point(
+    expiry_date: date,
+    quote_pairs: list[tuple[ContractQuote, ContractQuote]],
+    years: float,
+    spot_price: float,
+    zero_rate: float,
+) -> ForwardCurvePoint:
+    seed = curve_point_for_expiry(
+        expiry_date, [parity_pair_from(call, put) for call, put in quote_pairs], years, spot_price
+    )
+    if seed.status != "converged":
+        return seed
+
+    forward = seed.forward
+    point = seed
+    for _ in range(MAXIMUM_STRIPPING_PASSES):
+        carry_rate = carry_rate_from(forward, spot_price, years, zero_rate)
+        pairs = [stripped_parity_pair(call, put, years, zero_rate, carry_rate) for call, put in quote_pairs]
+        point = curve_point_for_expiry(expiry_date, pairs, years, spot_price)
+        if point.status != "converged":
+            return point
+        settled = abs(point.forward - forward) <= FORWARD_STRIPPING_TOLERANCE * point.forward
+        forward = point.forward
+        if settled:
+            break
+    return replace(point, early_exercise_premium_stripped=True)
+
+
+def imply_forward_curve(
+    quotes: list[ContractQuote], observation_time: datetime, zero_rate: float | None = None
+) -> list[ForwardCurvePoint]:
+    paired = paired_quotes_from_chain(quotes)
     points: list[ForwardCurvePoint] = []
-    for expiry_date in sorted(pairs_by_expiry):
+    for expiry_date in sorted(paired):
         years = years_to_expiry_from(observation_time, expiry_date)
         if years <= 0.0:
             continue
         spot_price = spot_price_for(quotes, expiry_date)
-        pairs = pairs_by_expiry[expiry_date]
-        if expiry_has_american_quotes(quotes, expiry_date):
+        quote_pairs = paired[expiry_date]
+
+        if not expiry_has_american_quotes(quotes, expiry_date):
+            pairs = [parity_pair_from(call, put) for call, put in quote_pairs]
+            points.append(curve_point_for_expiry(expiry_date, pairs, years, spot_price))
+        elif zero_rate is None:
             points.append(
-                failed_point(expiry_date, years, spot_price, len(pairs), "american_quotes_not_stripped")
+                failed_point(expiry_date, years, spot_price, len(quote_pairs), "american_quotes_not_stripped")
             )
-            continue
-        points.append(curve_point_for_expiry(expiry_date, pairs, years, spot_price))
+        else:
+            points.append(stripped_curve_point(expiry_date, quote_pairs, years, spot_price, zero_rate))
 
     monotone = discount_factors_are_monotone(points)
     return [replace(point, discount_factor_is_monotone_in_expiry=monotone) for point in points]

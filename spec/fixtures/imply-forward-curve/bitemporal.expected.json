@@ -17,6 +17,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 7,
       "chi_square_per_degree_of_freedom": 0.03036863291313534,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -36,6 +37,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.022887444289584193,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -55,6 +57,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 7,
       "chi_square_per_degree_of_freedom": 0.02536538363879573,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -74,6 +77,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.02006335015332208,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -93,6 +97,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 7,
       "chi_square_per_degree_of_freedom": 0.054411188057263374,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -112,6 +117,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.02006335015332208,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -131,6 +137,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.024181876731813545,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -150,6 +157,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.028446225744171855,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -169,6 +177,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.03166450486955589,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -188,6 +197,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.06558316545693023,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -207,6 +217,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.024181876731813545,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -226,6 +237,7 @@
       "parity_pair_count": 9,
       "active_pair_count": 8,
       "chi_square_per_degree_of_freedom": 0.028446225744171855,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "converged"
     },
@@ -236,17 +248,18 @@
       "expiry_date": "2026-09-18",
       "years_to_expiry": 0.0771689497716895,
       "spot_price": 224.99086719388626,
-      "forward": 0.0,
-      "forward_standard_error": null,
-      "discount_factor": 0.0,
-      "discount_factor_standard_error": null,
-      "implied_zero_rate": null,
-      "implied_carry_rate": null,
+      "forward": 224.23765923544264,
+      "forward_standard_error": 0.038634679725983195,
+      "discount_factor": 0.9979628836171717,
+      "discount_factor_standard_error": 0.00555234779385161,
+      "implied_zero_rate": 0.026425059984059186,
+      "implied_carry_rate": 0.06987962294738592,
       "parity_pair_count": 7,
-      "active_pair_count": 0,
-      "chi_square_per_degree_of_freedom": null,
+      "active_pair_count": 6,
+      "chi_square_per_degree_of_freedom": 0.008705884532850695,
+      "early_exercise_premium_stripped": true,
       "discount_factor_is_monotone_in_expiry": true,
-      "status": "american_quotes_not_stripped"
+      "status": "converged"
     },
     {
       "id": "thin_chain_has_too_few_parity_pairs|2026-09-18",
@@ -264,8 +277,49 @@
       "parity_pair_count": 2,
       "active_pair_count": 0,
       "chi_square_per_degree_of_freedom": null,
+      "early_exercise_premium_stripped": false,
       "discount_factor_is_monotone_in_expiry": true,
       "status": "too_few_pairs"
+    },
+    {
+      "id": "aapl_stripped_with_a_deliberately_wrong_rate|2026-09-18",
+      "query_id": "aapl_stripped_with_a_deliberately_wrong_rate",
+      "underlying_symbol": "AAPL",
+      "expiry_date": "2026-09-18",
+      "years_to_expiry": 0.0771689497716895,
+      "spot_price": 224.99086719388626,
+      "forward": 224.24171875080648,
+      "forward_standard_error": 0.038613532678860654,
+      "discount_factor": 0.998551503424145,
+      "discount_factor_standard_error": 0.00555234779385161,
+      "implied_zero_rate": 0.018784066200994248,
+      "implied_carry_rate": 0.06200403396683006,
+      "parity_pair_count": 7,
+      "active_pair_count": 6,
+      "chi_square_per_degree_of_freedom": 0.01494862568244735,
+      "early_exercise_premium_stripped": true,
+      "discount_factor_is_monotone_in_expiry": true,
+      "status": "converged"
+    },
+    {
+      "id": "aapl_without_a_rate_cannot_be_stripped|2026-09-18",
+      "query_id": "aapl_without_a_rate_cannot_be_stripped",
+      "underlying_symbol": "AAPL",
+      "expiry_date": "2026-09-18",
+      "years_to_expiry": 0.0771689497716895,
+      "spot_price": 224.99086719388626,
+      "forward": 0.0,
+      "forward_standard_error": null,
+      "discount_factor": 0.0,
+      "discount_factor_standard_error": null,
+      "implied_zero_rate": null,
+      "implied_carry_rate": null,
+      "parity_pair_count": 7,
+      "active_pair_count": 0,
+      "chi_square_per_degree_of_freedom": null,
+      "early_exercise_premium_stripped": false,
+      "discount_factor_is_monotone_in_expiry": true,
+      "status": "american_quotes_not_stripped"
     }
   ]
 }

@@ -1,9 +1,11 @@
 #pragma once
 
+#include "volarb/american.hpp"
 #include "volarb/market_data.hpp"
 
 #include <map>
 #include <optional>
+#include <utility>
 #include <string>
 #include <vector>
 
@@ -26,6 +28,8 @@ inline constexpr double minimum_covariance_inflation = 1.0;
 inline constexpr int expiry_settlement_hour_utc = 21;
 inline constexpr double days_per_year = 365.0;
 inline constexpr double seconds_per_day = 86400.0;
+inline constexpr int maximum_stripping_passes = 4;
+inline constexpr double forward_stripping_tolerance = 1e-6;
 
 struct ParityPair {
     double strike;
@@ -46,6 +50,7 @@ struct ForwardCurvePoint {
     int parity_pair_count;
     int active_pair_count;
     std::optional<double> chi_square_per_degree_of_freedom;
+    bool early_exercise_premium_stripped;
     bool discount_factor_is_monotone_in_expiry;
     ForwardCurveStatus status;
 };
@@ -58,7 +63,13 @@ double years_to_expiry_from(EpochMicroseconds observation_time, DaysSinceEpoch e
 std::map<DaysSinceEpoch, std::vector<ParityPair>> parity_pairs_from_chain(
     const std::vector<ContractQuote>& quotes);
 
-std::vector<ForwardCurvePoint> imply_forward_curve(
-    const std::vector<ContractQuote>& quotes, EpochMicroseconds observation_time);
+using QuotePair = std::pair<ContractQuote, ContractQuote>;
+
+std::map<DaysSinceEpoch, std::vector<QuotePair>> paired_quotes_from_chain(
+    const std::vector<ContractQuote>& quotes);
+
+std::vector<ForwardCurvePoint> imply_forward_curve(const std::vector<ContractQuote>& quotes,
+                                                   EpochMicroseconds observation_time,
+                                                   std::optional<double> zero_rate = std::nullopt);
 
 }

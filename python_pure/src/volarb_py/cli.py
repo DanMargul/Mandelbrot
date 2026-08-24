@@ -24,6 +24,7 @@ from volarb_py.documents import (
     JsonRecord,
     json_safe_float,
     optional_boolean,
+    optional_float,
     read_document,
     required_float,
     required_option_type,
@@ -218,6 +219,7 @@ def forward_curve_record(query_id: str, underlying_symbol: str, point: ForwardCu
         "parity_pair_count": point.parity_pair_count,
         "active_pair_count": point.active_pair_count,
         "chi_square_per_degree_of_freedom": point.chi_square_per_degree_of_freedom,
+        "early_exercise_premium_stripped": point.early_exercise_premium_stripped,
         "discount_factor_is_monotone_in_expiry": point.discount_factor_is_monotone_in_expiry,
         "status": point.status,
     }
@@ -246,7 +248,7 @@ def imply_forward_curve_records(records: list[JsonRecord]) -> list[JsonRecord]:
         query_id = required_string(record, "id")
         curve.extend(
             forward_curve_record(query_id, underlying_symbol, point)
-            for point in imply_forward_curve(quotes, observation_time)
+            for point in imply_forward_curve(quotes, observation_time, optional_float(record, "zero_rate"))
         )
     return curve
 
@@ -284,7 +286,7 @@ VERBS: Final[dict[str, Verb]] = {
     ),
     "imply-forward-curve": Verb(
         name="imply-forward-curve",
-        input_schema="chain_query/v1",
+        input_schema="forward_curve_query/v1",
         output_schema="forward_curve/v1",
         transform_records=imply_forward_curve_records,
     ),

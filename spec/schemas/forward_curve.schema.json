@@ -32,7 +32,8 @@
           "active_pair_count",
           "chi_square_per_degree_of_freedom",
           "discount_factor_is_monotone_in_expiry",
-          "status"
+          "status",
+          "early_exercise_premium_stripped"
         ],
         "additionalProperties": false,
         "properties": {
@@ -120,6 +121,9 @@
               "non_positive_discount_factor",
               "american_quotes_not_stripped"
             ]
+          },
+          "early_exercise_premium_stripped": {
+            "type": "boolean"
           }
         }
       }

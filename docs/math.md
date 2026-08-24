@@ -194,10 +194,15 @@ positive rate is free money, and a forward biased seven times more than the Euro
 The bias then reappears as a systematic disagreement between call-implied and put-implied
 volatility that looks like a data problem and is not.
 
-So `forward_curve` refuses any expiry containing American contracts. The early exercise
-premium has to be stripped first, using the lattice in `american`, and the same measurement
-shows that doing so restores the forward to European accuracy and the discount factor to
-below one.
+So `forward_curve` refuses any expiry containing American contracts unless it is given a
+zero rate with which to strip the premium first. Stripping inverts each American quote for
+its volatility, evaluates the European price at that volatility, and fits parity to those,
+iterating because the carry it needs depends on the forward it produces. Three passes settle
+it, and the forward error falls from `4.75e-4` to `8.1e-5`.
+
+The useful part is that the supplied rate barely matters: two and a half percentage points of
+error in it changes the recovered forward by less than a factor of two. Stripping therefore
+does not need the quantity parity cannot measure.
 
 The general lesson is worth keeping: a model-free relation is only model-free inside its own
 assumptions, and parity's assumption is European exercise.

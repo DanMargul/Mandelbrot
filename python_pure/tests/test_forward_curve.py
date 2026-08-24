@@ -26,6 +26,7 @@ CARRY_RATE_RECOVERY_TOLERANCE = 0.05
 ODD_COUNT_MEDIAN = 2.0
 EVEN_COUNT_MEDIAN = 2.5
 SINGLE_VALUE_MEDIAN = 7.0
+STRIPPED_FORWARD_RELATIVE_BUDGET = 2e-4
 
 
 def moment(hour: int) -> datetime:
@@ -158,3 +159,41 @@ def test_american_quotes_are_refused_rather_than_silently_biased() -> None:
     assert points[0].status == "american_quotes_not_stripped"
     assert points[0].forward == 0.0
     assert points[0].forward_standard_error is None
+
+
+def stripped_curve_for(underlying: str, hour: int, zero_rate: float) -> list[ForwardCurvePoint]:
+    observation = moment(hour)
+    reader = open_chain_dataset(DATASET_ROOT, KnowledgeHorizon(observation))
+    quotes = reader.chain_as_of(ChainQuery(underlying, observation))
+    return imply_forward_curve(quotes, observation, zero_rate)
+
+
+def test_stripping_the_early_exercise_premium_beats_fitting_raw_american_quotes() -> None:
+    raw = curve_for("AAPL", 17)
+    stripped = stripped_curve_for("AAPL", 17, RISK_FREE_RATE)
+    assert raw[0].status == "american_quotes_not_stripped"
+    assert stripped[0].status == "converged"
+    assert stripped[0].early_exercise_premium_stripped
+
+    expected = true_forward(stripped[0].spot_price, "AAPL", stripped[0].years_to_expiry)
+    relative_error = abs(stripped[0].forward - expected) / expected
+    assert relative_error < STRIPPED_FORWARD_RELATIVE_BUDGET
+
+
+def test_a_stripped_discount_factor_is_below_one() -> None:
+    stripped = stripped_curve_for("AAPL", 17, RISK_FREE_RATE)
+    assert 0.0 < stripped[0].discount_factor < 1.0
+
+
+@pytest.mark.parametrize("supplied_rate", [0.0200, RISK_FREE_RATE, 0.0700])
+def test_stripping_tolerates_a_badly_wrong_supplied_rate(supplied_rate: float) -> None:
+    stripped = stripped_curve_for("AAPL", 17, supplied_rate)
+    expected = true_forward(stripped[0].spot_price, "AAPL", stripped[0].years_to_expiry)
+    assert abs(stripped[0].forward - expected) / expected < STRIPPED_FORWARD_RELATIVE_BUDGET
+
+
+def test_european_expiries_are_unaffected_by_a_supplied_rate() -> None:
+    without_rate = curve_for("SPX", 17)
+    with_rate = stripped_curve_for("SPX", 17, RISK_FREE_RATE)
+    assert [point.forward for point in without_rate] == [point.forward for point in with_rate]
+    assert not any(point.early_exercise_premium_stripped for point in with_rate)

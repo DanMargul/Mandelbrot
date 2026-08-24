@@ -76,6 +76,17 @@ bool optional_boolean(const nlohmann::json& record, const std::string& field, bo
     return entry->get<bool>();
 }
 
+std::optional<double> optional_number(const nlohmann::json& record, const std::string& field) {
+    const auto entry = record.find(field);
+    if (entry == record.end() || entry->is_null()) {
+        return std::nullopt;
+    }
+    if (!entry->is_number()) {
+        throw DocumentError("field '" + field + "' must be a number");
+    }
+    return entry->get<double>();
+}
+
 ExerciseStyle required_exercise_style(const nlohmann::json& record, const std::string& field) {
     return exercise_style_from_name(required_string(record, field));
 }

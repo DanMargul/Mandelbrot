@@ -15,7 +15,7 @@ input_schema = "chain_query/v1"
 output_schema = "chain_snapshot/v2"
 
 [verbs.imply-forward-curve]
-input_schema = "chain_query/v1"
+input_schema = "forward_curve_query/v1"
 output_schema = "forward_curve/v1"
 
 [verbs.invert-american-implied-volatility]

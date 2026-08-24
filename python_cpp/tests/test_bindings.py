@@ -123,7 +123,7 @@ def test_the_forward_curve_is_reachable_through_the_bindings() -> None:
         observation_time="2026-08-21T17:00:00.000000Z",
         include_adjusted_contracts=False,
     )
-    points = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z")
+    points = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z", None)
     assert len(points) == SPX_EXPIRY_COUNT
     for point in points:
         assert point.status == "converged"
@@ -133,18 +133,22 @@ def test_the_forward_curve_is_reachable_through_the_bindings() -> None:
         assert point.active_pair_count < point.parity_pair_count
 
 
-def test_a_failed_curve_point_reports_none_rather_than_a_number() -> None:
+def test_american_quotes_are_refused_without_a_rate() -> None:
     reader = core.open_chain_dataset("spec/fixtures/datasets/synthetic_chain", "2026-08-21T17:00:00.000000Z")
     quotes = reader.chain_as_of(
-        underlying_symbol="THIN",
+        underlying_symbol="AAPL",
         observation_time="2026-08-21T17:00:00.000000Z",
         include_adjusted_contracts=False,
     )
-    points = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z")
-    assert len(points) == 1
-    assert points[0].status == "too_few_pairs"
-    assert points[0].forward_standard_error is None
-    assert points[0].implied_zero_rate is None
+    refused = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z", None)
+    assert len(refused) == 1
+    assert refused[0].status == "american_quotes_not_stripped"
+    assert refused[0].forward_standard_error is None
+
+    stripped = core.imply_forward_curve(quotes, "2026-08-21T17:00:00.000000Z", 0.0425)
+    assert stripped[0].status == "converged"
+    assert stripped[0].early_exercise_premium_stripped
+    assert 0.0 < stripped[0].discount_factor < 1.0
 
 
 AMERICAN_BASE_ARGUMENTS = {

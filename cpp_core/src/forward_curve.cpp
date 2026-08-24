@@ -142,8 +142,40 @@ double forward_variance_from(const WeightedLineFit& fit) {
 ForwardCurvePoint failed_point(DaysSinceEpoch expiry_date, double years, double spot_price,
                                int pair_count, ForwardCurveStatus status) {
     return ForwardCurvePoint{
-        expiry_date, years, spot_price, 0.0,      std::nullopt, 0.0,   std::nullopt,
-        std::nullopt, std::nullopt,     pair_count, 0,          std::nullopt, false, status,
+        expiry_date,  years,        spot_price,   0.0,          std::nullopt, 0.0,
+        std::nullopt, std::nullopt, std::nullopt, pair_count,   0,            std::nullopt,
+        false,        false,        status,
+    };
+}
+
+double carry_rate_from(double forward, double spot_price, double years, double zero_rate) {
+    return zero_rate - std::log(forward / spot_price) / years;
+}
+
+double european_equivalent_price(const ContractQuote& quote, double years, double zero_rate,
+                                 double carry_rate) {
+    const double observed = mid_price_of(quote);
+    const AmericanInversionResult inversion = invert_american_implied_volatility(AmericanInversionInputs{
+        quote.underlying_price, quote.strike, years, zero_rate, carry_rate, observed,
+        quote.option_type, quote.exercise_style});
+    if (inversion.status != AmericanInversionStatus::Converged) {
+        return observed;
+    }
+    const double premium = early_exercise_premium(LatticeInputs{
+        quote.underlying_price, quote.strike, years, inversion.volatility, zero_rate, carry_rate,
+        quote.option_type, quote.exercise_style});
+    return observed - premium;
+}
+
+ParityPair stripped_parity_pair(const ContractQuote& call, const ContractQuote& put, double years,
+                                double zero_rate, double carry_rate) {
+    const double call_half_spread = half_spread_of(call);
+    const double put_half_spread = half_spread_of(put);
+    return ParityPair{
+        call.strike,
+        european_equivalent_price(call, years, zero_rate, carry_rate) -
+            european_equivalent_price(put, years, zero_rate, carry_rate),
+        1.0 / (call_half_spread * call_half_spread + put_half_spread * put_half_spread),
     };
 }
 
@@ -182,6 +214,7 @@ ForwardCurvePoint curve_point_for_expiry(DaysSinceEpoch expiry_date, const std::
         pair_count,
         static_cast<int>(active.size()),
         fit->chi_square_per_degree_of_freedom,
+        false,
         false,
         ForwardCurveStatus::Converged,
     };
@@ -260,7 +293,7 @@ double years_to_expiry_from(EpochMicroseconds observation_time, DaysSinceEpoch e
     return static_cast<double>(settlement - observation_time) / 1000000.0 / (days_per_year * seconds_per_day);
 }
 
-std::map<DaysSinceEpoch, std::vector<ParityPair>> parity_pairs_from_chain(
+std::map<DaysSinceEpoch, std::vector<QuotePair>> paired_quotes_from_chain(
     const std::vector<ContractQuote>& quotes) {
     std::map<std::pair<DaysSinceEpoch, double>, ContractQuote> calls;
     std::map<std::pair<DaysSinceEpoch, double>, ContractQuote> puts;
@@ -276,33 +309,95 @@ std::map<DaysSinceEpoch, std::vector<ParityPair>> parity_pairs_from_chain(
         }
     }
 
-    std::map<DaysSinceEpoch, std::vector<ParityPair>> pairs_by_expiry;
+    std::map<DaysSinceEpoch, std::vector<QuotePair>> paired;
     for (const auto& [key, call] : calls) {
         const auto put = puts.find(key);
         if (put == puts.end()) {
             continue;
         }
-        pairs_by_expiry[key.first].push_back(parity_pair_from(call, put->second));
+        paired[key.first].push_back(QuotePair{call, put->second});
+    }
+    return paired;
+}
+
+std::map<DaysSinceEpoch, std::vector<ParityPair>> parity_pairs_from_chain(
+    const std::vector<ContractQuote>& quotes) {
+    std::map<DaysSinceEpoch, std::vector<ParityPair>> pairs_by_expiry;
+    for (const auto& [expiry_date, quote_pairs] : paired_quotes_from_chain(quotes)) {
+        for (const QuotePair& pair : quote_pairs) {
+            pairs_by_expiry[expiry_date].push_back(parity_pair_from(pair.first, pair.second));
+        }
     }
     return pairs_by_expiry;
 }
 
+namespace {
+
+std::vector<ParityPair> raw_pairs_of(const std::vector<QuotePair>& quote_pairs) {
+    std::vector<ParityPair> pairs;
+    pairs.reserve(quote_pairs.size());
+    for (const QuotePair& pair : quote_pairs) {
+        pairs.push_back(parity_pair_from(pair.first, pair.second));
+    }
+    return pairs;
+}
+
+ForwardCurvePoint stripped_curve_point(DaysSinceEpoch expiry_date,
+                                       const std::vector<QuotePair>& quote_pairs, double years,
+                                       double spot_price, double zero_rate) {
+    const ForwardCurvePoint seed =
+        curve_point_for_expiry(expiry_date, raw_pairs_of(quote_pairs), years, spot_price);
+    if (seed.status != ForwardCurveStatus::Converged) {
+        return seed;
+    }
+
+    double forward = seed.forward;
+    ForwardCurvePoint point = seed;
+    for (int pass = 0; pass < maximum_stripping_passes; ++pass) {
+        const double carry_rate = carry_rate_from(forward, spot_price, years, zero_rate);
+        std::vector<ParityPair> pairs;
+        pairs.reserve(quote_pairs.size());
+        for (const QuotePair& pair : quote_pairs) {
+            pairs.push_back(stripped_parity_pair(pair.first, pair.second, years, zero_rate, carry_rate));
+        }
+        point = curve_point_for_expiry(expiry_date, pairs, years, spot_price);
+        if (point.status != ForwardCurveStatus::Converged) {
+            return point;
+        }
+        const bool settled = std::abs(point.forward - forward) <= forward_stripping_tolerance * point.forward;
+        forward = point.forward;
+        if (settled) {
+            break;
+        }
+    }
+    point.early_exercise_premium_stripped = true;
+    return point;
+}
+
+}
+
 std::vector<ForwardCurvePoint> imply_forward_curve(const std::vector<ContractQuote>& quotes,
-                                                   EpochMicroseconds observation_time) {
+                                                   EpochMicroseconds observation_time,
+                                                   std::optional<double> zero_rate) {
     std::vector<ForwardCurvePoint> points;
-    for (const auto& [expiry_date, pairs] : parity_pairs_from_chain(quotes)) {
+    for (const auto& [expiry_date, quote_pairs] : paired_quotes_from_chain(quotes)) {
         const double years = years_to_expiry_from(observation_time, expiry_date);
         if (years <= 0.0) {
             continue;
         }
         const double spot_price = spot_price_for(quotes, expiry_date);
-        if (expiry_has_american_quotes(quotes, expiry_date)) {
+
+        if (!expiry_has_american_quotes(quotes, expiry_date)) {
+            points.push_back(
+                curve_point_for_expiry(expiry_date, raw_pairs_of(quote_pairs), years, spot_price));
+        } else if (!zero_rate.has_value()) {
             points.push_back(failed_point(expiry_date, years, spot_price,
-                                          static_cast<int>(pairs.size()),
+                                          static_cast<int>(quote_pairs.size()),
                                           ForwardCurveStatus::AmericanQuotesNotStripped));
-            continue;
+        } else {
+            points.push_back(
+                stripped_curve_point(expiry_date, quote_pairs, years, spot_price, *zero_rate));
         }
-        points.push_back(curve_point_for_expiry(expiry_date, pairs, years, spot_price));
     }
 
     const bool monotone = discount_factors_are_monotone(points);

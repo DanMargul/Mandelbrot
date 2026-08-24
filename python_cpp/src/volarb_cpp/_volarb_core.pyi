@@ -51,6 +51,7 @@ ForwardCurveStatus = Literal[
     "too_few_pairs",
     "degenerate_strike_range",
     "non_positive_discount_factor",
+    "american_quotes_not_stripped",
 ]
 
 class ForwardCurvePoint:
@@ -66,6 +67,7 @@ class ForwardCurvePoint:
     parity_pair_count: int
     active_pair_count: int
     chi_square_per_degree_of_freedom: float | None
+    early_exercise_premium_stripped: bool
     discount_factor_is_monotone_in_expiry: bool
     status: ForwardCurveStatus
 
@@ -126,7 +128,9 @@ def invert_american_implied_volatility(
     option_type: OptionType,
     exercise_style: ExerciseStyle,
 ) -> AmericanInversionResult: ...
-def imply_forward_curve(quotes: list[ContractQuote], observation_time: str) -> list[ForwardCurvePoint]: ...
+def imply_forward_curve(
+    quotes: list[ContractQuote], observation_time: str, zero_rate: float | None
+) -> list[ForwardCurvePoint]: ...
 
 class BlackScholesInputs:
     forward: float
