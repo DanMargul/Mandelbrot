@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "factor_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "factor_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "grid", "observations"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "grid": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "object",
+              "required": ["log_moneyness", "years_to_expiry"],
+              "additionalProperties": false,
+              "properties": {
+                "log_moneyness": { "type": "number" },
+                "years_to_expiry": { "type": "number", "exclusiveMinimum": 0 }
+              }
+            }
+          },
+          "observations": {
+            "type": "array",
+            "minItems": 2,
+            "items": { "type": "array", "items": { "type": "number", "exclusiveMinimum": 0 } }
+          },
+          "scored_grid_index": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

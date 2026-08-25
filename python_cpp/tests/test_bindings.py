@@ -416,3 +416,57 @@ def test_a_malformed_curve_raises_through_the_bindings() -> None:
         core.rate_curve_zero_rate(
             years_to_maturity=[1.0, 2.0], continuously_compounded_zero_rate=[0.01], years=1.0
         )
+
+
+FACTOR_TENORS = (0.0833, 0.25, 0.5, 1.0, 2.0)
+FACTOR_STRIKES = (-0.4, -0.2, -0.1, 0.0, 0.1, 0.2, 0.4)
+FACTOR_GRID_POINTS = len(FACTOR_TENORS) * len(FACTOR_STRIKES)
+FACTOR_OBSERVATIONS = 60
+EXPECTED_FACTORS = 4
+NEUTRALITY_BUDGET = 1e-12
+EXACT_RECONSTRUCTION = 0.999999
+
+
+def factor_arguments() -> dict[str, object]:
+    observations = []
+    for index in range(FACTOR_OBSERVATIONS):
+        level = 0.04 * math.exp(0.2 * math.sin(index * 0.31))
+        slope = 1.0 + 0.1 * math.cos(index * 0.17)
+        skew = -0.35 + 0.08 * math.sin(index * 0.23)
+        observations.append(
+            [
+                level * tenor**slope * math.exp(skew * strike + 0.9 * strike * strike)
+                for tenor in FACTOR_TENORS
+                for strike in FACTOR_STRIKES
+            ]
+        )
+    return {
+        "log_moneyness": [strike for _ in FACTOR_TENORS for strike in FACTOR_STRIKES],
+        "years_to_expiry": [tenor for tenor in FACTOR_TENORS for _ in FACTOR_STRIKES],
+        "observations": observations,
+        "scored_grid_index": 3,
+    }
+
+
+def test_the_factor_basis_explains_a_factor_driven_surface_through_the_bindings() -> None:
+    report = core.decompose_surface_factors(**factor_arguments())
+    assert report.identified_factor_count == EXPECTED_FACTORS
+    assert report.grid_point_count == FACTOR_GRID_POINTS
+    assert report.variance_explained > EXACT_RECONSTRUCTION
+    assert len(report.level_loading) == FACTOR_OBSERVATIONS
+
+
+def test_the_neutralised_residual_carries_no_factor_loading_through_the_bindings() -> None:
+    report = core.decompose_surface_factors(**factor_arguments())
+    assert report.scored_worst_factor_correlation_after < NEUTRALITY_BUDGET
+
+
+def test_a_degenerate_residual_is_flagged_rather_than_scored() -> None:
+    report = core.decompose_surface_factors(**factor_arguments())
+    assert report.scored_residual_is_degenerate
+    assert report.scored_naive_z_score == 0.0
+
+
+def test_a_grid_out_of_range_index_raises_through_the_bindings() -> None:
+    with pytest.raises(ValueError, match="outside the grid"):
+        core.decompose_surface_factors(**{**factor_arguments(), "scored_grid_index": 999})

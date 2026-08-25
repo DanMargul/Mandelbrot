@@ -210,8 +210,9 @@ values but breaks the constraint still fails. **Done.**
 
 ## 5. A surface factor model, so signals trade the residual and nothing else
 
-*Extends Phase 4. **The rate curve this step declared as a prerequisite is done**, see
-`spec/interfaces/rate_curve.md`. The factor decomposition itself remains.*
+*Extends Phase 4. **The rate curve prerequisite and the factor decomposition are done**, see
+`spec/interfaces/rate_curve.md` and `spec/interfaces/factors.md`. P&L attribution waits on the
+backtester.*
 
 Decompose the surface time series into level, term slope, skew, and smile curvature, either
 by PCA on total variance or on a parametric basis. What remains after reconstruction is the
@@ -241,8 +242,28 @@ found that supplying an external rate does not improve the parity forward, `4.8e
 for discounting across expiries, which is the one place the earlier measurement said a real
 curve is needed.
 
+The decomposition then sharpened the orthogonality discipline into something more exact than
+the sentence above. Projecting each surface onto a named basis of level, term slope, skew and
+curvature gives a residual orthogonal to those shapes **across the grid on that date**. It does
+not follow that the residual at one grid point is uncorrelated with the level loading **through
+time**, and measured on a factor-driven series it is not: the correlation is `1.18e-01`. A
+second, time-domain regression of the residual series on the loading series drives it to
+`6.1e-18`. Cross-sectional orthogonality is not time-series neutrality, and only the second one
+makes a trade neutral.
+
+The step's claim about disguised bets is measured rather than repeated: a deviation from the
+mean surface correlates `+0.84` with the level factor while the orthogonal residual correlates
+`-0.02`.
+
+The z-scoring warning is quantified. The effective sample size of a persistent residual is
+`n (1 - rho) / (1 + rho)`, so at `rho = 0.9` a naive z-score overstates significance by
+`4.44x` and **a three-sigma residual is really a `0.7` sigma residual**. The correction runs
+both ways, which matters here: a mean-reverting residual, which is what a convergence strategy
+wants, has an effective sample size *above* `n` and is more significant than it looks.
+
 **Done when** P&L attribution shows the return concentrated in residual convergence rather
-than in factor exposure, on out-of-sample data.
+than in factor exposure, on out-of-sample data. **The decomposition and the honest z-score are
+done**; the attribution itself needs the backtester, so it waits with step 6.
 
 ---
 

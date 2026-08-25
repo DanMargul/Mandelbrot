@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "factor_decomposition/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "factor_decomposition/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "observation_count", "grid_point_count", "identified_factor_count",
+                     "variance_explained", "residual_share", "worst_residual_factor_correlation",
+                     "level_loading", "term_slope_loading", "skew_loading", "curvature_loading",
+                     "scored_grid_index", "scored_worst_factor_correlation_before",
+                     "scored_worst_factor_correlation_after", "scored_lag_one_autocorrelation",
+                     "scored_effective_sample_size", "scored_naive_z_score",
+                     "scored_adjusted_z_score", "scored_naive_overstatement",
+                     "scored_residual_is_degenerate"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "observation_count": { "type": "integer", "minimum": 0 },
+          "grid_point_count": { "type": "integer", "minimum": 0 },
+          "identified_factor_count": { "type": "integer", "minimum": 0 },
+          "variance_explained": { "type": "number" },
+          "residual_share": { "type": "number" },
+          "worst_residual_factor_correlation": { "type": "number" },
+          "level_loading": { "type": "array", "items": { "type": "number" } },
+          "term_slope_loading": { "type": "array", "items": { "type": "number" } },
+          "skew_loading": { "type": "array", "items": { "type": "number" } },
+          "curvature_loading": { "type": "array", "items": { "type": "number" } },
+          "scored_grid_index": { "type": "integer", "minimum": 0 },
+          "scored_worst_factor_correlation_before": { "type": "number" },
+          "scored_worst_factor_correlation_after": { "type": "number" },
+          "scored_lag_one_autocorrelation": { "type": "number" },
+          "scored_effective_sample_size": { "type": "number" },
+          "scored_naive_z_score": { "type": "number" },
+          "scored_adjusted_z_score": { "type": "number" },
+          "scored_naive_overstatement": { "type": "number" },
+          "scored_residual_is_degenerate": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@
 #include "volarb/essvi.hpp"
 #include "volarb/execution.hpp"
 #include "volarb/rate_curve.hpp"
+#include "volarb/factors.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -64,6 +65,15 @@ using volarb::default_scan_steps;
 using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
 using volarb::CurveNode;
+using volarb::decompose_surface_factors;
+using volarb::FactorDecomposition;
+using volarb::FactorLoadings;
+using volarb::InvalidFactorInputsError;
+using volarb::neutralise_against_loadings;
+using volarb::NeutralisedResidual;
+using volarb::ResidualScore;
+using volarb::score_residual;
+using volarb::SurfacePoint;
 using volarb::fill_package;
 using volarb::InvalidRateCurveError;
 using volarb::RateCurve;
@@ -200,6 +210,54 @@ std::vector<double> leg_field_of(const PackageFill& fill, int which) {
                               : which == 1 ? leg.mid_price
                               : which == 2 ? leg.half_spread
                                            : leg.cost_against_mid;
+        values.push_back(picked);
+    }
+    return values;
+}
+
+struct FactorReport {
+    FactorDecomposition decomposition;
+    NeutralisedResidual neutralised;
+    ResidualScore score;
+    int scored_grid_index;
+};
+
+FactorReport decompose_surface_factors_from_values(const std::vector<double>& log_moneyness,
+                                                   const std::vector<double>& years_to_expiry,
+                                                   const std::vector<std::vector<double>>& observations,
+                                                   int scored_grid_index) {
+    if (log_moneyness.size() != years_to_expiry.size()) {
+        throw InvalidFactorInputsError("every grid column must have the same length");
+    }
+    std::vector<SurfacePoint> grid;
+    grid.reserve(log_moneyness.size());
+    for (std::size_t index = 0; index < log_moneyness.size(); ++index) {
+        grid.push_back(SurfacePoint{log_moneyness[index], years_to_expiry[index]});
+    }
+    const FactorDecomposition decomposition = decompose_surface_factors(grid, observations);
+    if (scored_grid_index < 0 ||
+        static_cast<std::size_t>(scored_grid_index) >= decomposition.residuals[0].size()) {
+        throw InvalidFactorInputsError("scored_grid_index is outside the grid");
+    }
+    std::vector<double> series;
+    series.reserve(decomposition.residuals.size());
+    for (const std::vector<double>& residual : decomposition.residuals) {
+        series.push_back(residual[static_cast<std::size_t>(scored_grid_index)]);
+    }
+    const NeutralisedResidual neutralised = neutralise_against_loadings(
+        series, decomposition.loadings, decomposition.identified_factor_count);
+    return FactorReport{decomposition, neutralised, score_residual(neutralised.values),
+                        scored_grid_index};
+}
+
+std::vector<double> loading_column_of(const FactorReport& report, int which) {
+    std::vector<double> values;
+    values.reserve(report.decomposition.loadings.size());
+    for (const FactorLoadings& entry : report.decomposition.loadings) {
+        const double picked = which == 0   ? entry.level
+                              : which == 1 ? entry.term_slope
+                              : which == 2 ? entry.skew
+                                           : entry.curvature;
         values.push_back(picked);
     }
     return values;
@@ -591,6 +649,58 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
                py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
                py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
+
+    py::register_exception<InvalidFactorInputsError>(module, "InvalidFactorInputsError",
+                                                     PyExc_ValueError);
+
+    py::class_<FactorReport>(module, "FactorReport")
+        .def_property_readonly("observation_count",
+                               [](const FactorReport& r) { return r.decomposition.observation_count; })
+        .def_property_readonly("grid_point_count",
+                               [](const FactorReport& r) { return r.decomposition.grid_point_count; })
+        .def_property_readonly(
+            "identified_factor_count",
+            [](const FactorReport& r) { return r.decomposition.identified_factor_count; })
+        .def_property_readonly("variance_explained",
+                               [](const FactorReport& r) { return r.decomposition.variance_explained; })
+        .def_property_readonly("residual_share",
+                               [](const FactorReport& r) { return r.decomposition.residual_share; })
+        .def_property_readonly("worst_residual_factor_correlation",
+                               [](const FactorReport& r) {
+                                   return r.decomposition.worst_residual_factor_correlation;
+                               })
+        .def_property_readonly("level_loading",
+                               [](const FactorReport& r) { return loading_column_of(r, 0); })
+        .def_property_readonly("term_slope_loading",
+                               [](const FactorReport& r) { return loading_column_of(r, 1); })
+        .def_property_readonly("skew_loading",
+                               [](const FactorReport& r) { return loading_column_of(r, 2); })
+        .def_property_readonly("curvature_loading",
+                               [](const FactorReport& r) { return loading_column_of(r, 3); })
+        .def_readonly("scored_grid_index", &FactorReport::scored_grid_index)
+        .def_property_readonly("scored_worst_factor_correlation_before",
+                               [](const FactorReport& r) {
+                                   return r.neutralised.worst_factor_correlation_before;
+                               })
+        .def_property_readonly(
+            "scored_worst_factor_correlation_after",
+            [](const FactorReport& r) { return r.neutralised.worst_factor_correlation; })
+        .def_property_readonly("scored_lag_one_autocorrelation",
+                               [](const FactorReport& r) { return r.score.lag_one_autocorrelation; })
+        .def_property_readonly("scored_effective_sample_size",
+                               [](const FactorReport& r) { return r.score.effective_sample_size; })
+        .def_property_readonly("scored_naive_z_score",
+                               [](const FactorReport& r) { return r.score.naive_z_score; })
+        .def_property_readonly("scored_adjusted_z_score",
+                               [](const FactorReport& r) { return r.score.adjusted_z_score; })
+        .def_property_readonly("scored_naive_overstatement",
+                               [](const FactorReport& r) { return r.score.naive_overstatement; })
+        .def_property_readonly("scored_residual_is_degenerate",
+                               [](const FactorReport& r) { return r.score.residual_is_degenerate; });
+
+    module.def("decompose_surface_factors", &decompose_surface_factors_from_values,
+               py::arg("log_moneyness"), py::arg("years_to_expiry"), py::arg("observations"),
+               py::arg("scored_grid_index"));
 
     py::register_exception<InvalidRateCurveError>(module, "InvalidRateCurveError", PyExc_ValueError);
     module.def("rate_curve_discount_factor", &discount_factor_from_values,

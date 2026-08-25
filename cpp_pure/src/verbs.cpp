@@ -7,6 +7,7 @@
 #include "volarb/essvi.hpp"
 #include "volarb/execution.hpp"
 #include "volarb/rate_curve.hpp"
+#include "volarb/factors.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -191,6 +192,90 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
         });
     }
     return slices;
+}
+
+std::vector<SurfacePoint> surface_grid_from(const nlohmann::json& record) {
+    const auto raw = record.find("grid");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'grid' must be an array");
+    }
+    std::vector<SurfacePoint> grid;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'grid' must be an object");
+        }
+        grid.push_back(SurfacePoint{required_number(entry, "log_moneyness"),
+                                    required_number(entry, "years_to_expiry")});
+    }
+    return grid;
+}
+
+std::vector<std::vector<double>> surface_observations_from(const nlohmann::json& record) {
+    const auto raw = record.find("observations");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'observations' must be an array");
+    }
+    std::vector<std::vector<double>> observations;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_array()) {
+            throw DocumentError("every entry of 'observations' must be an array");
+        }
+        observations.push_back(entry.get<std::vector<double>>());
+    }
+    return observations;
+}
+
+nlohmann::json decompose_surface_factors_record(const nlohmann::json& record) {
+    const FactorDecomposition decomposition =
+        decompose_surface_factors(surface_grid_from(record), surface_observations_from(record));
+    const auto found = record.find("scored_grid_index");
+    const int scored =
+        found == record.end() || !found->is_number_integer() ? 0 : found->get<int>();
+    if (scored < 0 || static_cast<std::size_t>(scored) >= decomposition.residuals[0].size()) {
+        throw DocumentError("scored_grid_index is outside the grid");
+    }
+
+    std::vector<double> series;
+    for (const std::vector<double>& residual : decomposition.residuals) {
+        series.push_back(residual[static_cast<std::size_t>(scored)]);
+    }
+    const NeutralisedResidual neutralised = neutralise_against_loadings(
+        series, decomposition.loadings, decomposition.identified_factor_count);
+    const ResidualScore score = score_residual(neutralised.values);
+
+    std::vector<double> level;
+    std::vector<double> term;
+    std::vector<double> skew;
+    std::vector<double> curvature;
+    for (const FactorLoadings& entry : decomposition.loadings) {
+        level.push_back(entry.level);
+        term.push_back(entry.term_slope);
+        skew.push_back(entry.skew);
+        curvature.push_back(entry.curvature);
+    }
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["observation_count"] = decomposition.observation_count;
+    output["grid_point_count"] = decomposition.grid_point_count;
+    output["identified_factor_count"] = decomposition.identified_factor_count;
+    output["variance_explained"] = decomposition.variance_explained;
+    output["residual_share"] = decomposition.residual_share;
+    output["worst_residual_factor_correlation"] = decomposition.worst_residual_factor_correlation;
+    output["level_loading"] = level;
+    output["term_slope_loading"] = term;
+    output["skew_loading"] = skew;
+    output["curvature_loading"] = curvature;
+    output["scored_grid_index"] = scored;
+    output["scored_worst_factor_correlation_before"] = neutralised.worst_factor_correlation_before;
+    output["scored_worst_factor_correlation_after"] = neutralised.worst_factor_correlation;
+    output["scored_lag_one_autocorrelation"] = score.lag_one_autocorrelation;
+    output["scored_effective_sample_size"] = score.effective_sample_size;
+    output["scored_naive_z_score"] = score.naive_z_score;
+    output["scored_adjusted_z_score"] = score.adjusted_z_score;
+    output["scored_naive_overstatement"] = score.naive_overstatement;
+    output["scored_residual_is_degenerate"] = score.residual_is_degenerate;
+    return output;
 }
 
 RateCurve rate_curve_from(const nlohmann::json& record) {
@@ -528,6 +613,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"decompose-surface-factors",
+         Verb{"decompose-surface-factors", "factor_request/v1", "factor_decomposition/v1",
+              mapped_over_records(decompose_surface_factors_record)}},
         {"evaluate-rate-curve",
          Verb{"evaluate-rate-curve", "rate_curve_query/v1", "rate_curve_point/v1",
               mapped_over_records(evaluate_rate_curve_record)}},

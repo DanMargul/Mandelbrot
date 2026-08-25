@@ -126,6 +126,37 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidFactorInputsError(ValueError): ...
+
+class FactorReport:
+    observation_count: int
+    grid_point_count: int
+    identified_factor_count: int
+    variance_explained: float
+    residual_share: float
+    worst_residual_factor_correlation: float
+    level_loading: list[float]
+    term_slope_loading: list[float]
+    skew_loading: list[float]
+    curvature_loading: list[float]
+    scored_grid_index: int
+    scored_worst_factor_correlation_before: float
+    scored_worst_factor_correlation_after: float
+    scored_lag_one_autocorrelation: float
+    scored_effective_sample_size: float
+    scored_naive_z_score: float
+    scored_adjusted_z_score: float
+    scored_naive_overstatement: float
+    scored_residual_is_degenerate: bool
+
+def decompose_surface_factors(
+    *,
+    log_moneyness: list[float],
+    years_to_expiry: list[float],
+    observations: list[list[float]],
+    scored_grid_index: int,
+) -> FactorReport: ...
+
 class InvalidRateCurveError(ValueError): ...
 
 def rate_curve_discount_factor(

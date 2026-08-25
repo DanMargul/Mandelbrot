@@ -133,6 +133,63 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def surface_grid_columns(record: JsonRecord) -> dict[str, list[float]]:
+    raw = record.get("grid")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'grid' must be an array")
+    columns: dict[str, list[float]] = {"log_moneyness": [], "years_to_expiry": []}
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'grid' must be an object")
+        for name, column in columns.items():
+            column.append(required_float(entry, name))
+    return columns
+
+
+def surface_observations_from(record: JsonRecord) -> list[list[float]]:
+    raw = record.get("observations")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'observations' must be an array")
+    observations: list[list[float]] = []
+    for entry in raw:
+        if not isinstance(entry, list):
+            raise DocumentError("every entry of 'observations' must be an array")
+        observations.append([float(value) for value in entry])
+    return observations
+
+
+def decompose_surface_factors_record(record: JsonRecord) -> JsonRecord:
+    index = record.get("scored_grid_index", 0)
+    scored = index if isinstance(index, int) else 0
+    report = _volarb_core.decompose_surface_factors(
+        **surface_grid_columns(record),
+        observations=surface_observations_from(record),
+        scored_grid_index=scored,
+    )
+    return {
+        "id": required_string(record, "id"),
+        "observation_count": report.observation_count,
+        "grid_point_count": report.grid_point_count,
+        "identified_factor_count": report.identified_factor_count,
+        "variance_explained": report.variance_explained,
+        "residual_share": report.residual_share,
+        "worst_residual_factor_correlation": report.worst_residual_factor_correlation,
+        "level_loading": report.level_loading,
+        "term_slope_loading": report.term_slope_loading,
+        "skew_loading": report.skew_loading,
+        "curvature_loading": report.curvature_loading,
+        "scored_grid_index": report.scored_grid_index,
+        "scored_worst_factor_correlation_before": report.scored_worst_factor_correlation_before,
+        "scored_worst_factor_correlation_after": report.scored_worst_factor_correlation_after,
+        "scored_lag_one_autocorrelation": report.scored_lag_one_autocorrelation,
+        "scored_effective_sample_size": report.scored_effective_sample_size,
+        "scored_naive_z_score": report.scored_naive_z_score,
+        "scored_adjusted_z_score": report.scored_adjusted_z_score,
+        "scored_naive_overstatement": report.scored_naive_overstatement,
+        "scored_residual_is_degenerate": report.scored_residual_is_degenerate,
+    }
+
+
 def rate_curve_columns(record: JsonRecord) -> dict[str, list[float]]:
     raw = record.get("nodes")
     if not isinstance(raw, list):
@@ -520,6 +577,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "decompose-surface-factors": Verb(
+        name="decompose-surface-factors",
+        input_schema="factor_request/v1",
+        output_schema="factor_decomposition/v1",
+        transform_records=mapped_over_records(decompose_surface_factors_record),
     ),
     "evaluate-rate-curve": Verb(
         name="evaluate-rate-curve",

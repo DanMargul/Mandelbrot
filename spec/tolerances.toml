@@ -450,3 +450,74 @@ absolute = 1e-16
 ["rate_curve_point/v1".forward_discount_factor]
 relative = 1e-14
 absolute = 1e-16
+
+["factor_decomposition/v1".observation_count]
+exact = true
+
+["factor_decomposition/v1".grid_point_count]
+exact = true
+
+["factor_decomposition/v1".identified_factor_count]
+exact = true
+
+["factor_decomposition/v1".scored_grid_index]
+exact = true
+
+["factor_decomposition/v1".scored_residual_is_degenerate]
+exact = true
+
+["factor_decomposition/v1".variance_explained]
+relative = 1e-13
+absolute = 1e-15
+
+["factor_decomposition/v1".residual_share]
+relative = 1e-11
+absolute = 1e-18
+
+["factor_decomposition/v1".worst_residual_factor_correlation]
+relative = 1e-9
+absolute = 1e-12
+
+["factor_decomposition/v1".level_loading]
+relative = 1e-13
+absolute = 1e-14
+
+["factor_decomposition/v1".term_slope_loading]
+relative = 1e-13
+absolute = 1e-14
+
+["factor_decomposition/v1".skew_loading]
+relative = 1e-13
+absolute = 1e-14
+
+["factor_decomposition/v1".curvature_loading]
+relative = 1e-13
+absolute = 1e-14
+
+["factor_decomposition/v1".scored_worst_factor_correlation_before]
+relative = 1e-10
+absolute = 1e-13
+
+["factor_decomposition/v1".scored_worst_factor_correlation_after]
+relative = 1.0
+absolute = 1e-12
+
+["factor_decomposition/v1".scored_lag_one_autocorrelation]
+relative = 1e-12
+absolute = 1e-14
+
+["factor_decomposition/v1".scored_effective_sample_size]
+relative = 1e-12
+absolute = 1e-12
+
+["factor_decomposition/v1".scored_naive_z_score]
+relative = 1e-11
+absolute = 1e-13
+
+["factor_decomposition/v1".scored_adjusted_z_score]
+relative = 1e-11
+absolute = 1e-13
+
+["factor_decomposition/v1".scored_naive_overstatement]
+relative = 1e-12
+absolute = 1e-14

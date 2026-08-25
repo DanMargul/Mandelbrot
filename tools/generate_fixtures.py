@@ -33,6 +33,7 @@ from volarb_py.american import (  # noqa: E402
 from volarb_py.cli import (  # noqa: E402
     calibrate_essvi_surface_record,
     calibrate_svi_slice_record,
+    decompose_surface_factors_record,
     evaluate_rate_curve_record,
     invert_american_implied_volatility_record,
     invert_implied_volatility_record,
@@ -593,6 +594,90 @@ def build_svi_surface_fixture() -> None:
     )
 
 
+FACTOR_TENORS: Final[tuple[float, ...]] = (0.0833, 0.25, 0.5, 1.0, 2.0)
+FACTOR_STRIKES: Final[tuple[float, ...]] = (-0.4, -0.2, -0.1, 0.0, 0.1, 0.2, 0.4)
+FACTOR_OBSERVATIONS: Final[int] = 180
+FACTOR_SCORED_INDEX: Final[int] = 3
+FACTOR_ORTHOGONALITY_BUDGET: Final[float] = 1e-9
+
+
+def factor_surface(index: int, idiosyncratic: float, disturbed: int | None) -> list[float]:
+    phase = float(index)
+    level = 0.04 * math.exp(0.2 * math.sin(phase * 0.31))
+    slope = 1.0 + 0.1 * math.cos(phase * 0.17)
+    skew = -0.35 + 0.08 * math.sin(phase * 0.23)
+    curvature = 0.9 + 0.15 * math.cos(phase * 0.11)
+    surface = [
+        level * tenor**slope * math.exp(skew * strike + curvature * strike * strike)
+        for tenor in FACTOR_TENORS
+        for strike in FACTOR_STRIKES
+    ]
+    if disturbed is not None:
+        surface[disturbed] *= 1.0 + idiosyncratic * math.sin(phase * 0.71)
+    return surface
+
+
+FACTOR_CASES: Final[tuple[tuple[str, float, int | None], ...]] = (
+    ("pure_factor_surface", 0.0, None),
+    ("one_idiosyncratic_point", 0.02, FACTOR_SCORED_INDEX),
+    ("large_idiosyncratic_point", 0.10, FACTOR_SCORED_INDEX),
+)
+
+
+def factor_request(name: str, idiosyncratic: float, disturbed: int | None) -> dict[str, Any]:
+    return {
+        "id": name,
+        "grid": [
+            {"log_moneyness": strike, "years_to_expiry": tenor}
+            for tenor in FACTOR_TENORS
+            for strike in FACTOR_STRIKES
+        ],
+        "observations": [
+            factor_surface(index, idiosyncratic, disturbed) for index in range(FACTOR_OBSERVATIONS)
+        ],
+        "scored_grid_index": FACTOR_SCORED_INDEX,
+    }
+
+
+def single_expiry_factor_request() -> dict[str, Any]:
+    return {
+        "id": "single_expiry_grid",
+        "grid": [{"log_moneyness": strike, "years_to_expiry": 0.25} for strike in FACTOR_STRIKES],
+        "observations": [
+            [0.04 * math.exp(-0.3 * strike + 0.01 * index) for strike in FACTOR_STRIKES]
+            for index in range(40)
+        ],
+        "scored_grid_index": 0,
+    }
+
+
+def verify_factor_decomposition(request: dict[str, Any], result: dict[str, Any]) -> None:
+    if float(result["scored_worst_factor_correlation_after"]) > FACTOR_ORTHOGONALITY_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the neutralised residual still loads on a factor")
+    share = float(result["residual_share"])
+    if abs(share + float(result["variance_explained"]) - 1.0) > FACTOR_ORTHOGONALITY_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the variance shares do not sum to one")
+    if share < 0.0:
+        raise OracleDisagreementError(f"{request['id']}: a negative residual share")
+
+
+def build_factor_fixture() -> None:
+    request_records = [factor_request(*case) for case in FACTOR_CASES]
+    request_records.append(single_expiry_factor_request())
+    result_records = []
+    for request in request_records:
+        result = decompose_surface_factors_record(request)
+        verify_factor_decomposition(request, result)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "decompose-surface-factors"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "surfaces.input.json", Document("factor_request/v1", request_records))
+    write_document(directory / "surfaces.expected.json", Document("factor_decomposition/v1", result_records))
+    explained = [f"{float(record['variance_explained']):.6f}" for record in result_records]
+    print(f"decompose-surface-factors/surfaces: {len(result_records)} cases, explained {explained}")
+
+
 RATE_CURVES: Final[tuple[tuple[str, tuple[tuple[float, float], ...]], ...]] = (
     (
         "upward",
@@ -1043,6 +1128,7 @@ FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
     "scan-svi-slice": build_svi_scan_fixture,
     "scan-svi-surface": build_svi_surface_fixture,
     "evaluate-rate-curve": build_rate_curve_fixture,
+    "decompose-surface-factors": build_factor_fixture,
     "simulate-fills": build_fill_fixture,
     "calibrate-essvi-surface": build_essvi_fixture,
     "calibrate-svi-slice": build_svi_calibration_fixture,

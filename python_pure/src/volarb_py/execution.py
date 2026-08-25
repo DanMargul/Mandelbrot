@@ -58,6 +58,13 @@ class PackageFill:
     status: FillStatus
 
 
+def accumulated(values: list[float]) -> float:
+    total = 0.0
+    for value in values:
+        total += value
+    return total
+
+
 def validate_quote(quote: Quote) -> None:
     if quote.bid_price < 0.0:
         raise InvalidQuoteError(f"bid_price must not be negative, got {quote.bid_price}")
@@ -128,13 +135,15 @@ def fill_package(legs: list[PackageLeg]) -> PackageFill:
     fills = [fill_at_touch(leg.quote, leg.side, leg.quantity, leg.contract_multiplier) for leg in legs]
     requested = sum(leg.quantity for leg in legs)
     filled = sum(fill.filled_quantity for fill in fills)
-    cost = sum(fill.cost_against_mid for fill in fills)
-    net_vega = sum(
-        signed_direction(leg.side)
-        * fill.filled_quantity
-        * leg.contract_multiplier
-        * leg.vega_with_respect_to_volatility
-        for leg, fill in zip(legs, fills, strict=True)
+    cost = accumulated([fill.cost_against_mid for fill in fills])
+    net_vega = accumulated(
+        [
+            signed_direction(leg.side)
+            * fill.filled_quantity
+            * leg.contract_multiplier
+            * leg.vega_with_respect_to_volatility
+            for leg, fill in zip(legs, fills, strict=True)
+        ]
     )
 
     magnitude = abs(net_vega)

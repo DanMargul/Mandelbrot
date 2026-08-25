@@ -34,6 +34,12 @@ from volarb_py.documents import (
 )
 from volarb_py.essvi import EssviSliceQuotes, calibrate_essvi_surface
 from volarb_py.execution import OrderSide, PackageLeg, Quote, fill_package
+from volarb_py.factors import (
+    SurfacePoint,
+    decompose_surface_factors,
+    neutralise_against_loadings,
+    score_residual,
+)
 from volarb_py.forward_curve import ForwardCurvePoint, imply_forward_curve
 from volarb_py.implied_vol import ImpliedVolatilityInputs, invert_black_implied_volatility
 from volarb_py.market_data import (
@@ -207,6 +213,68 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
         "status": scan.status,
+    }
+
+
+def surface_grid_from(record: JsonRecord) -> list[SurfacePoint]:
+    raw = record.get("grid")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'grid' must be an array")
+    grid: list[SurfacePoint] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'grid' must be an object")
+        grid.append(
+            SurfacePoint(
+                log_moneyness=required_float(entry, "log_moneyness"),
+                years_to_expiry=required_float(entry, "years_to_expiry"),
+            )
+        )
+    return grid
+
+
+def surface_observations_from(record: JsonRecord) -> list[list[float]]:
+    raw = record.get("observations")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'observations' must be an array")
+    observations: list[list[float]] = []
+    for entry in raw:
+        if not isinstance(entry, list):
+            raise DocumentError("every entry of 'observations' must be an array")
+        observations.append([float(value) for value in entry])
+    return observations
+
+
+def decompose_surface_factors_record(record: JsonRecord) -> JsonRecord:
+    decomposition = decompose_surface_factors(surface_grid_from(record), surface_observations_from(record))
+    index = record.get("scored_grid_index", 0)
+    scored = index if isinstance(index, int) else 0
+    series = [residual[scored] for residual in decomposition.residuals]
+    neutralised = neutralise_against_loadings(
+        series, decomposition.loadings, decomposition.identified_factor_count
+    )
+    score = score_residual(neutralised.values)
+    return {
+        "id": required_string(record, "id"),
+        "observation_count": decomposition.observation_count,
+        "grid_point_count": decomposition.grid_point_count,
+        "identified_factor_count": decomposition.identified_factor_count,
+        "variance_explained": decomposition.variance_explained,
+        "residual_share": decomposition.residual_share,
+        "worst_residual_factor_correlation": decomposition.worst_residual_factor_correlation,
+        "level_loading": [entry.level for entry in decomposition.loadings],
+        "term_slope_loading": [entry.term_slope for entry in decomposition.loadings],
+        "skew_loading": [entry.skew for entry in decomposition.loadings],
+        "curvature_loading": [entry.curvature for entry in decomposition.loadings],
+        "scored_grid_index": scored,
+        "scored_worst_factor_correlation_before": neutralised.worst_factor_correlation_before,
+        "scored_worst_factor_correlation_after": neutralised.worst_factor_correlation,
+        "scored_lag_one_autocorrelation": score.lag_one_autocorrelation,
+        "scored_effective_sample_size": score.effective_sample_size,
+        "scored_naive_z_score": score.naive_z_score,
+        "scored_adjusted_z_score": score.adjusted_z_score,
+        "scored_naive_overstatement": score.naive_overstatement,
+        "scored_residual_is_degenerate": score.residual_is_degenerate,
     }
 
 
@@ -576,6 +644,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "decompose-surface-factors": Verb(
+        name="decompose-surface-factors",
+        input_schema="factor_request/v1",
+        output_schema="factor_decomposition/v1",
+        transform_records=mapped_over_records(decompose_surface_factors_record),
     ),
     "evaluate-rate-curve": Verb(
         name="evaluate-rate-curve",
