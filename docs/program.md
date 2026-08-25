@@ -103,8 +103,9 @@ contracts is ever fitted without stripping.
 
 ## 4. A surface that is arbitrage-free by construction, not by inspection
 
-*Extends Phase 3. **SVI slice calibration and its acceptance test done**, see
-`spec/interfaces/svi.md`. SSVI, calendar monotonicity and the Dupire round-trip remain.*
+*Extends Phase 3. **Slice calibration, its acceptance test, calendar monotonicity and the
+Dupire round-trip are done**, see `spec/interfaces/svi.md` and `spec/interfaces/svi_surface.md`.
+The eSSVI global fit remains.*
 
 SVI per slice, eSSVI globally with calendar-monotone total variance, calibrated under the
 Durrleman condition. That much is standard.
@@ -143,9 +144,34 @@ result now carries the fitted curve at seventeen reference points, compared tigh
 parameters kept as loosely compared output. **Conformance must compare the answer, not the
 route to it.**
 
+The surface scan then made the same point a second time, in the other direction. Checking
+the two expiries that bound an interval is not enough: two slices can each be butterfly-free,
+their term structure can be calendar-monotone, and the surface interpolated between them can
+still carry a negative risk-neutral density. A search over 20,000 random pairs of
+individually arbitrage-free slices found 66 such pairs. The fixture carries one, where both
+knots scan clean at `+2.60e-02` and `+2.38e-01` while the surface at `T = 0.310` reaches
+`-3.14e-02`. **The region is checked at the parameters and violated between them, and that is
+as true along maturity as it is along strike.**
+
+Two further things the surface work settled. The Dupire local variance is `w_T / g`, where
+`g` is Durrleman's function, so a non-negative local volatility is not a third condition at
+all — it is the conjunction of the calendar and butterfly conditions already being tested.
+What is independent, and was worth building, is the round trip against Dupire's original
+price-space formula, which agrees to `2.4e-6` but only once it is run on out-of-the-money
+options: on calls everywhere it loses five digits deep in the money to cancellation, because
+the price is `O(1)` there while its second difference is `O(1e-4)`.
+
+And refining a two-dimensional scan is not the one-dimensional problem twice. Refining
+strike at each sampled maturity and then maturity at the best strike is coordinate descent,
+and it stalls `1.5%` short when the true minimum sits at the edge of the range. Refining the
+strike-minimised profile instead removes both grids from the answer: the reported depth is
+now identical to machine precision across every grid resolution tried, where the grid alone
+missed `28%` of it.
+
 **Done when** dense-grid density non-negativity, calendar monotonicity, and a Dupire
 round-trip all hold as fixture assertions, so a refactor that reproduces the parameter
-values but breaks the constraint still fails.
+values but breaks the constraint still fails. **These three now hold**; what remains for this
+step is the eSSVI global fit that ties the slices together, judged by this same test.
 
 ---
 

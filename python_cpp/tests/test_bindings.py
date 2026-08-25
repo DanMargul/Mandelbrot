@@ -224,3 +224,59 @@ def test_a_violating_slice_is_caught_through_the_bindings() -> None:
 def test_invalid_svi_parameters_raise_a_value_error() -> None:
     with pytest.raises(ValueError, match="rho"):
         svi_scan(rho=1.0)
+
+
+HEALTHY_SURFACE = {
+    "years_to_expiry": [0.0833, 0.2500, 0.5000, 1.0000],
+    "a": [0.0015, 0.0060, 0.0140, 0.0300],
+    "b": [0.030, 0.055, 0.075, 0.100],
+    "rho": [-0.70, -0.65, -0.60, -0.55],
+    "m": [0.010, 0.015, 0.020, 0.030],
+    "sigma": [0.10, 0.15, 0.22, 0.32],
+}
+SURFACE_ROUND_TRIP_BUDGET = 1e-5
+
+
+def svi_surface_scan(**overrides: object) -> object:
+    arguments: dict[str, object] = {
+        **HEALTHY_SURFACE,
+        "lowest_log_moneyness": -1.5,
+        "highest_log_moneyness": 1.5,
+        "scan_steps": core.DEFAULT_SURFACE_SCAN_STEPS,
+        "time_steps_per_interval": core.DEFAULT_TIME_STEPS_PER_INTERVAL,
+    }
+    arguments.update(overrides)
+    return core.scan_svi_surface(**arguments)
+
+
+def test_a_monotone_surface_scans_clean_through_the_bindings() -> None:
+    scan = svi_surface_scan()
+    assert scan.status == "arbitrage_free_on_grid"
+    assert scan.slice_count == len(HEALTHY_SURFACE["years_to_expiry"])
+    assert scan.minimum_durrleman_value > 0.0
+    assert scan.minimum_risk_neutral_density > 0.0
+    assert scan.minimum_total_variance_time_slope > 0.0
+    assert scan.minimum_local_variance > 0.0
+
+
+def test_the_dupire_round_trip_holds_through_the_bindings() -> None:
+    scan = svi_surface_scan()
+    assert scan.round_trip_point_count > 0
+    assert scan.worst_local_variance_round_trip_error < SURFACE_ROUND_TRIP_BUDGET
+
+
+def test_a_falling_term_structure_is_caught_through_the_bindings() -> None:
+    scan = svi_surface_scan(a=[0.0015, 0.0060, 0.0040, 0.0300], b=[0.030, 0.055, 0.055, 0.100])
+    assert scan.status == "calendar_arbitrage_found"
+    assert scan.minimum_total_variance_time_slope < 0.0
+
+
+def test_ragged_surface_columns_raise_a_value_error() -> None:
+    with pytest.raises(ValueError, match="length"):
+        svi_surface_scan(sigma=[0.10, 0.15])
+
+
+def test_a_surface_with_one_slice_raises_a_value_error() -> None:
+    single = {name: [value[0]] for name, value in HEALTHY_SURFACE.items()}
+    with pytest.raises(ValueError, match="at least"):
+        svi_surface_scan(**single)

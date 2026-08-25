@@ -22,6 +22,10 @@ output_schema = "forward_curve/v1"
 input_schema = "svi_calibration_request/v1"
 output_schema = "svi_calibration_result/v1"
 
+[verbs.scan-svi-surface]
+input_schema = "svi_surface_scan_request/v1"
+output_schema = "svi_surface_scan_result/v1"
+
 [verbs.scan-svi-slice]
 input_schema = "svi_scan_request/v1"
 output_schema = "svi_scan_result/v1"

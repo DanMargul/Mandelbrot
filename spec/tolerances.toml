@@ -244,3 +244,66 @@ absolute = 1e-10
 ["svi_calibration_result/v1".fitted_curve]
 relative = 1e-6
 absolute = 1e-14
+
+["svi_surface_scan_result/v1".status]
+exact = true
+
+["svi_surface_scan_result/v1".slice_count]
+exact = true
+
+["svi_surface_scan_result/v1".scan_steps]
+exact = true
+
+["svi_surface_scan_result/v1".time_steps_per_interval]
+exact = true
+
+["svi_surface_scan_result/v1".round_trip_point_count]
+exact = true
+
+["svi_surface_scan_result/v1".minimum_durrleman_value]
+relative = 1e-11
+absolute = 1e-14
+
+["svi_surface_scan_result/v1".log_moneyness_at_minimum_durrleman_value]
+relative = 1e-9
+absolute = 1e-12
+
+["svi_surface_scan_result/v1".years_to_expiry_at_minimum_durrleman_value]
+relative = 1e-14
+absolute = 1e-16
+
+["svi_surface_scan_result/v1".minimum_risk_neutral_density]
+relative = 1e-10
+absolute = 1e-16
+
+["svi_surface_scan_result/v1".minimum_total_variance_time_slope]
+relative = 1e-11
+absolute = 1e-14
+
+["svi_surface_scan_result/v1".log_moneyness_at_minimum_time_slope]
+relative = 1e-9
+absolute = 1e-12
+
+["svi_surface_scan_result/v1".years_to_expiry_at_minimum_time_slope]
+relative = 1e-14
+absolute = 1e-16
+
+["svi_surface_scan_result/v1".minimum_local_variance]
+relative = 1e-11
+absolute = 1e-14
+
+["svi_surface_scan_result/v1".log_moneyness_at_minimum_local_variance]
+relative = 1e-9
+absolute = 1e-12
+
+["svi_surface_scan_result/v1".years_to_expiry_at_minimum_local_variance]
+relative = 1e-14
+absolute = 1e-16
+
+["svi_surface_scan_result/v1".worst_local_variance_round_trip_error]
+relative = 1e-6
+absolute = 1e-14
+
+["svi_surface_scan_result/v1".log_moneyness_at_worst_round_trip_error]
+relative = 1e-9
+absolute = 1e-12

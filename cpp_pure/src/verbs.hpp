@@ -22,6 +22,7 @@ nlohmann::json imply_forward_curve_records(const nlohmann::json& records);
 nlohmann::json price_american_option_record(const nlohmann::json& record);
 nlohmann::json invert_american_implied_volatility_record(const nlohmann::json& record);
 nlohmann::json scan_svi_slice_record(const nlohmann::json& record);
+nlohmann::json scan_svi_surface_record(const nlohmann::json& record);
 nlohmann::json calibrate_svi_slice_record(const nlohmann::json& record);
 
 const std::map<std::string, Verb>& supported_verbs();

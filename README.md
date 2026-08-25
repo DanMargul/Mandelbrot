@@ -36,21 +36,25 @@ tools/check_all.sh
 
 **Phase 1 complete; steps 1 to 3 of [`docs/program.md`](docs/program.md) complete, step 4
 under way.** Pricing, implied volatility, the point-in-time data spine, forwards implied
-from put-call parity, American exercise with premium stripping, and the SVI no-arbitrage
-acceptance test are implemented in all three tracks and pass conformance: 35 comparisons over 1352 golden fixture records, each track
-against the golden documents and each against the others. The fixtures themselves are
-verified against an independent `mpmath` oracle at 50 decimal digits.
+from put-call parity, American exercise with premium stripping, SVI slice calibration, and
+the surface acceptance test covering butterfly arbitrage, calendar monotonicity and the
+Dupire round-trip are implemented in all three tracks and pass conformance: 75 comparisons
+over 2356 golden fixture records, each track against the golden documents and each against
+the others. The fixtures themselves are verified against independent oracles: an `mpmath`
+recomputation at 50 decimal digits for the closed-form results, and a far finer scan for the
+arbitrage diagnostics.
 
 Agreement is exact, not merely within tolerance. A one-year at-the-money option prices to
 `7.8672269492716005` in every track, inverts to `0.20000000000000026` in every track, and
-takes 31 solver iterations in every track.
+takes 31 solver iterations in every track. The surface scan agrees bit for bit across all
+three tracks on every field of all 36 fixture cases, argmin locations included.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2674 passed |
-| `python_cpp` tests | 379 passed |
-| C++ tests (Catch2) | 62 passed |
-| conformance | 70 comparisons, all tracks agree |
+| `python_pure` tests | 2697 passed |
+| `python_cpp` tests | 387 passed |
+| C++ tests (Catch2) | 72 passed |
+| conformance | 75 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |

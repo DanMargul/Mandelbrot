@@ -126,6 +126,51 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidSviSurfaceError(ValueError): ...
+
+SviSurfaceStatus = Literal[
+    "arbitrage_free_on_grid",
+    "butterfly_arbitrage_found",
+    "calendar_arbitrage_found",
+    "invalid_surface",
+]
+
+class SviSurfaceScan:
+    slice_count: int
+    scan_steps: int
+    time_steps_per_interval: int
+    minimum_durrleman_value: float
+    log_moneyness_at_minimum_durrleman_value: float
+    years_to_expiry_at_minimum_durrleman_value: float
+    minimum_risk_neutral_density: float
+    minimum_total_variance_time_slope: float
+    log_moneyness_at_minimum_time_slope: float
+    years_to_expiry_at_minimum_time_slope: float
+    minimum_local_variance: float
+    log_moneyness_at_minimum_local_variance: float
+    years_to_expiry_at_minimum_local_variance: float
+    worst_local_variance_round_trip_error: float
+    log_moneyness_at_worst_round_trip_error: float
+    round_trip_point_count: int
+    status: SviSurfaceStatus
+
+DEFAULT_SURFACE_SCAN_STEPS: int
+DEFAULT_TIME_STEPS_PER_INTERVAL: int
+
+def scan_svi_surface(
+    *,
+    years_to_expiry: list[float],
+    a: list[float],
+    b: list[float],
+    rho: list[float],
+    m: list[float],
+    sigma: list[float],
+    lowest_log_moneyness: float,
+    highest_log_moneyness: float,
+    scan_steps: int,
+    time_steps_per_interval: int,
+) -> SviSurfaceScan: ...
+
 class LatticeInputs:
     spot_price: float
     strike: float

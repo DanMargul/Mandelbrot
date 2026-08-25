@@ -5,6 +5,7 @@
 #include "volarb/pricing.hpp"
 #include "volarb/svi.hpp"
 #include "volarb/svi_calibration.hpp"
+#include "volarb/svi_surface.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -58,7 +59,14 @@ using volarb::invert_american_implied_volatility;
 using volarb::name_of_american_inversion_status;
 using volarb::default_scan_steps;
 using volarb::InvalidSviParametersError;
+using volarb::default_surface_scan_steps;
+using volarb::default_time_steps_per_interval;
+using volarb::InvalidSviSurfaceError;
 using volarb::name_of_svi_status;
+using volarb::name_of_svi_surface_status;
+using volarb::scan_svi_surface;
+using volarb::SviSurfaceScan;
+using volarb::SviSurfaceSlice;
 using volarb::scan_svi_slice;
 using volarb::SviParameters;
 using volarb::SviSliceScan;
@@ -149,6 +157,29 @@ SviCalibration calibrate_svi_slice_from_values(const std::vector<double>& log_mo
             SliceObservation{log_moneyness[index], total_variances[index], weights[index]});
     }
     return calibrate_svi_slice(observations, lowest_log_moneyness, highest_log_moneyness);
+}
+
+SviSurfaceScan scan_svi_surface_from_values(const std::vector<double>& years_to_expiry,
+                                            const std::vector<double>& a, const std::vector<double>& b,
+                                            const std::vector<double>& rho,
+                                            const std::vector<double>& m,
+                                            const std::vector<double>& sigma,
+                                            double lowest_log_moneyness, double highest_log_moneyness,
+                                            int scan_steps, int time_steps_per_interval) {
+    if (years_to_expiry.size() != a.size() || years_to_expiry.size() != b.size() ||
+        years_to_expiry.size() != rho.size() || years_to_expiry.size() != m.size() ||
+        years_to_expiry.size() != sigma.size()) {
+        throw InvalidSviSurfaceError("every slice column must have the same length");
+    }
+    std::vector<SviSurfaceSlice> slices;
+    slices.reserve(years_to_expiry.size());
+    for (std::size_t index = 0; index < years_to_expiry.size(); ++index) {
+        slices.push_back(SviSurfaceSlice{years_to_expiry[index],
+                                         SviParameters{a[index], b[index], rho[index], m[index],
+                                                       sigma[index]}});
+    }
+    return scan_svi_surface(slices, lowest_log_moneyness, highest_log_moneyness, scan_steps,
+                            time_steps_per_interval);
 }
 
 SviSliceScan scan_svi_slice_from_values(double a, double b, double rho, double m, double sigma,
@@ -339,6 +370,45 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("scan_svi_slice", &scan_svi_slice_from_values, py::arg("a"), py::arg("b"),
                py::arg("rho"), py::arg("m"), py::arg("sigma"), py::arg("lowest_log_moneyness"),
                py::arg("highest_log_moneyness"), py::arg("scan_steps"));
+
+    py::register_exception<InvalidSviSurfaceError>(module, "InvalidSviSurfaceError", PyExc_ValueError);
+
+    py::class_<SviSurfaceScan>(module, "SviSurfaceScan")
+        .def_readonly("slice_count", &SviSurfaceScan::slice_count)
+        .def_readonly("scan_steps", &SviSurfaceScan::scan_steps)
+        .def_readonly("time_steps_per_interval", &SviSurfaceScan::time_steps_per_interval)
+        .def_readonly("minimum_durrleman_value", &SviSurfaceScan::minimum_durrleman_value)
+        .def_readonly("log_moneyness_at_minimum_durrleman_value",
+                      &SviSurfaceScan::log_moneyness_at_minimum_durrleman_value)
+        .def_readonly("years_to_expiry_at_minimum_durrleman_value",
+                      &SviSurfaceScan::years_to_expiry_at_minimum_durrleman_value)
+        .def_readonly("minimum_risk_neutral_density", &SviSurfaceScan::minimum_risk_neutral_density)
+        .def_readonly("minimum_total_variance_time_slope",
+                      &SviSurfaceScan::minimum_total_variance_time_slope)
+        .def_readonly("log_moneyness_at_minimum_time_slope",
+                      &SviSurfaceScan::log_moneyness_at_minimum_time_slope)
+        .def_readonly("years_to_expiry_at_minimum_time_slope",
+                      &SviSurfaceScan::years_to_expiry_at_minimum_time_slope)
+        .def_readonly("minimum_local_variance", &SviSurfaceScan::minimum_local_variance)
+        .def_readonly("log_moneyness_at_minimum_local_variance",
+                      &SviSurfaceScan::log_moneyness_at_minimum_local_variance)
+        .def_readonly("years_to_expiry_at_minimum_local_variance",
+                      &SviSurfaceScan::years_to_expiry_at_minimum_local_variance)
+        .def_readonly("worst_local_variance_round_trip_error",
+                      &SviSurfaceScan::worst_local_variance_round_trip_error)
+        .def_readonly("log_moneyness_at_worst_round_trip_error",
+                      &SviSurfaceScan::log_moneyness_at_worst_round_trip_error)
+        .def_readonly("round_trip_point_count", &SviSurfaceScan::round_trip_point_count)
+        .def_property_readonly("status", [](const SviSurfaceScan& scan) {
+            return name_of_svi_surface_status(scan.status);
+        });
+
+    module.attr("DEFAULT_SURFACE_SCAN_STEPS") = default_surface_scan_steps;
+    module.attr("DEFAULT_TIME_STEPS_PER_INTERVAL") = default_time_steps_per_interval;
+    module.def("scan_svi_surface", &scan_svi_surface_from_values, py::arg("years_to_expiry"),
+               py::arg("a"), py::arg("b"), py::arg("rho"), py::arg("m"), py::arg("sigma"),
+               py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"), py::arg("scan_steps"),
+               py::arg("time_steps_per_interval"));
 
     py::class_<LatticeInputs>(module, "LatticeInputs")
         .def(py::init(&make_lattice_inputs), py::arg("spot_price"), py::arg("strike"),

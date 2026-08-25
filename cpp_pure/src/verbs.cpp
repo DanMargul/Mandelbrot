@@ -3,6 +3,7 @@
 #include "volarb/american.hpp"
 #include "volarb/svi.hpp"
 #include "volarb/svi_calibration.hpp"
+#include "volarb/svi_surface.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -159,6 +160,67 @@ nlohmann::json scan_svi_slice_record(const nlohmann::json& record) {
     return output;
 }
 
+int optional_step_count(const nlohmann::json& record, const char* field, int fallback) {
+    const auto found = record.find(field);
+    if (found == record.end() || !found->is_number_integer()) {
+        return fallback;
+    }
+    return found->get<int>();
+}
+
+std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
+    const auto raw = record.find("slices");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'slices' must be an array");
+    }
+    std::vector<SviSurfaceSlice> slices;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'slices' must be an object");
+        }
+        slices.push_back(SviSurfaceSlice{
+            required_number(entry, "years_to_expiry"),
+            SviParameters{
+                required_number(entry, "a"), required_number(entry, "b"),
+                required_number(entry, "rho"), required_number(entry, "m"),
+                required_number(entry, "sigma"),
+            },
+        });
+    }
+    return slices;
+}
+
+nlohmann::json scan_svi_surface_record(const nlohmann::json& record) {
+    const SviSurfaceScan scan = scan_svi_surface(
+        surface_slices_from(record), required_number(record, "lowest_log_moneyness"),
+        required_number(record, "highest_log_moneyness"),
+        optional_step_count(record, "scan_steps", default_surface_scan_steps),
+        optional_step_count(record, "time_steps_per_interval", default_time_steps_per_interval));
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["slice_count"] = scan.slice_count;
+    output["scan_steps"] = scan.scan_steps;
+    output["time_steps_per_interval"] = scan.time_steps_per_interval;
+    output["minimum_durrleman_value"] = scan.minimum_durrleman_value;
+    output["log_moneyness_at_minimum_durrleman_value"] = scan.log_moneyness_at_minimum_durrleman_value;
+    output["years_to_expiry_at_minimum_durrleman_value"] =
+        scan.years_to_expiry_at_minimum_durrleman_value;
+    output["minimum_risk_neutral_density"] = scan.minimum_risk_neutral_density;
+    output["minimum_total_variance_time_slope"] = scan.minimum_total_variance_time_slope;
+    output["log_moneyness_at_minimum_time_slope"] = scan.log_moneyness_at_minimum_time_slope;
+    output["years_to_expiry_at_minimum_time_slope"] = scan.years_to_expiry_at_minimum_time_slope;
+    output["minimum_local_variance"] = scan.minimum_local_variance;
+    output["log_moneyness_at_minimum_local_variance"] = scan.log_moneyness_at_minimum_local_variance;
+    output["years_to_expiry_at_minimum_local_variance"] =
+        scan.years_to_expiry_at_minimum_local_variance;
+    output["worst_local_variance_round_trip_error"] = scan.worst_local_variance_round_trip_error;
+    output["log_moneyness_at_worst_round_trip_error"] = scan.log_moneyness_at_worst_round_trip_error;
+    output["round_trip_point_count"] = scan.round_trip_point_count;
+    output["status"] = name_of_svi_surface_status(scan.status);
+    return output;
+}
+
 nlohmann::json calibrate_svi_slice_record(const nlohmann::json& record) {
     const auto raw = record.find("observations");
     if (raw == record.end() || !raw->is_array()) {
@@ -293,6 +355,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"scan-svi-surface",
+         Verb{"scan-svi-surface", "svi_surface_scan_request/v1", "svi_surface_scan_result/v1",
+              mapped_over_records(scan_svi_surface_record)}},
         {"scan-svi-slice",
          Verb{"scan-svi-slice", "svi_scan_request/v1", "svi_scan_result/v1",
               mapped_over_records(scan_svi_slice_record)}},

@@ -132,6 +132,64 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def surface_slice_columns(record: JsonRecord) -> dict[str, list[float]]:
+    raw = record.get("slices")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'slices' must be an array")
+    columns: dict[str, list[float]] = {
+        name: [] for name in ("years_to_expiry", "a", "b", "rho", "m", "sigma")
+    }
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'slices' must be an object")
+        for name, column in columns.items():
+            column.append(required_float(entry, name))
+    return columns
+
+
+def optional_step_count(record: JsonRecord, field: str, fallback: int) -> int:
+    value = record.get(field, fallback)
+    return value if isinstance(value, int) else fallback
+
+
+def scan_svi_surface_record(record: JsonRecord) -> JsonRecord:
+    columns = surface_slice_columns(record)
+    scan = _volarb_core.scan_svi_surface(
+        years_to_expiry=columns["years_to_expiry"],
+        a=columns["a"],
+        b=columns["b"],
+        rho=columns["rho"],
+        m=columns["m"],
+        sigma=columns["sigma"],
+        lowest_log_moneyness=required_float(record, "lowest_log_moneyness"),
+        highest_log_moneyness=required_float(record, "highest_log_moneyness"),
+        scan_steps=optional_step_count(record, "scan_steps", _volarb_core.DEFAULT_SURFACE_SCAN_STEPS),
+        time_steps_per_interval=optional_step_count(
+            record, "time_steps_per_interval", _volarb_core.DEFAULT_TIME_STEPS_PER_INTERVAL
+        ),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "slice_count": scan.slice_count,
+        "scan_steps": scan.scan_steps,
+        "time_steps_per_interval": scan.time_steps_per_interval,
+        "minimum_durrleman_value": scan.minimum_durrleman_value,
+        "log_moneyness_at_minimum_durrleman_value": scan.log_moneyness_at_minimum_durrleman_value,
+        "years_to_expiry_at_minimum_durrleman_value": scan.years_to_expiry_at_minimum_durrleman_value,
+        "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
+        "minimum_total_variance_time_slope": scan.minimum_total_variance_time_slope,
+        "log_moneyness_at_minimum_time_slope": scan.log_moneyness_at_minimum_time_slope,
+        "years_to_expiry_at_minimum_time_slope": scan.years_to_expiry_at_minimum_time_slope,
+        "minimum_local_variance": scan.minimum_local_variance,
+        "log_moneyness_at_minimum_local_variance": scan.log_moneyness_at_minimum_local_variance,
+        "years_to_expiry_at_minimum_local_variance": scan.years_to_expiry_at_minimum_local_variance,
+        "worst_local_variance_round_trip_error": scan.worst_local_variance_round_trip_error,
+        "log_moneyness_at_worst_round_trip_error": scan.log_moneyness_at_worst_round_trip_error,
+        "round_trip_point_count": scan.round_trip_point_count,
+        "status": scan.status,
+    }
+
+
 def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
     steps = record.get("scan_steps", _volarb_core.DEFAULT_SCAN_STEPS)
     scan = _volarb_core.scan_svi_slice(
@@ -320,6 +378,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "scan-svi-surface": Verb(
+        name="scan-svi-surface",
+        input_schema="svi_surface_scan_request/v1",
+        output_schema="svi_surface_scan_result/v1",
+        transform_records=mapped_over_records(scan_svi_surface_record),
     ),
     "scan-svi-slice": Verb(
         name="scan-svi-slice",

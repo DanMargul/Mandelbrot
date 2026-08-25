@@ -244,6 +244,51 @@ rates implied from parity.
 That is the dividing line to remember: parity gives a forward good enough for everything,
 and a rate good enough only for diagnostics.
 
+## Local volatility from the surface
+
+With `w(k, T)` the total implied variance at log-moneyness `k = log(K / F)`, Dupire's local
+variance in Gatheral's total-variance form is
+
+```
+local_variance(k, T) = w_T / g(k, T)
+```
+
+where `g` is Durrleman's function from the butterfly test:
+
+```
+g(k) = (1 - k * w' / (2w))^2 - (w'^2 / 4) * (1 / w + 1 / 4) + w" / 2
+```
+
+The two are the same expression: expanding Gatheral's denominator
+`1 - (k/w) w' + (1/4)(-1/4 - 1/w + k^2/w^2) w'^2 + w"/2` term by term reproduces `g`
+exactly. So the local variance is non-negative precisely when the calendar condition
+(`w_T >= 0`) and the butterfly condition (`g >= 0`) both hold, and the Dupire check is not
+an independent third condition. See `spec/interfaces/svi_surface.md`.
+
+### The round trip through price space
+
+Dupire's original statement is in terms of call prices, and with zero rates on a unit
+forward it reduces, under the change of variable `K = e^k`, to
+
+```
+local_variance = c_T / (0.5 * (c_kk - c_k))
+```
+
+because `(1/2) K^2 * d2C/dK2 = (1/2) (c_kk - c_k)`. Checking the total-variance form against
+this one validates the algebra above against the definition it came from.
+
+**It must be evaluated on the out-of-the-money option, for the same reason inversion must
+be.** Deep in the money the price is `O(1)` while the second difference that carries the
+density is `O(1e-4)`, so the subtraction discards the digits that matter: measured on a
+healthy surface, the round trip agrees to `1e-7` near the money and degrades to `4.3e-5` at
+`k = -1.5` using calls throughout, against `2.7e-9` at the same point using the put.
+
+The operator `d_kk - d_k` annihilates the put-call parity term `1 - e^k` exactly, which is
+what makes the substitution legitimate: the put and the call imply the same density. That
+also means the branch must be selected once per finite-difference stencil, from its centre,
+rather than per node. Mixing a put at `k - h` with a call at `k` reintroduces the parity
+term inside the difference, and at `k = 0` the round trip is then wrong by a factor of one.
+
 ## Pseudo-random numbers
 
 Not used before Phase 5. When introduced, both languages use PCG64 with the seed sequence

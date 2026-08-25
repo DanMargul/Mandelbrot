@@ -75,20 +75,27 @@ def implied_volatility(parameters: SviParameters, log_moneyness: float, years_to
     return math.sqrt(max(total_variance(parameters, log_moneyness), 0.0) / years_to_expiry)
 
 
-def durrleman_function(parameters: SviParameters, log_moneyness: float) -> float:
-    variance = max(total_variance(parameters, log_moneyness), MINIMUM_TOTAL_VARIANCE)
-    slope = total_variance_first_derivative(parameters, log_moneyness)
-    curvature = total_variance_second_derivative(parameters, log_moneyness)
+def durrleman_value(log_moneyness: float, variance: float, slope: float, curvature: float) -> float:
     balance = 1.0 - log_moneyness * slope / (2.0 * variance)
     return balance * balance - 0.25 * slope * slope * (1.0 / variance + 0.25) + 0.5 * curvature
 
 
-def risk_neutral_density(parameters: SviParameters, log_moneyness: float) -> float:
-    variance = max(total_variance(parameters, log_moneyness), MINIMUM_TOTAL_VARIANCE)
+def density_weight(log_moneyness: float, variance: float) -> float:
     root = math.sqrt(variance)
     standardized = -log_moneyness / root - 0.5 * root
-    weight = math.exp(-0.5 * standardized * standardized) / math.sqrt(2.0 * math.pi * variance)
-    return durrleman_function(parameters, log_moneyness) * weight
+    return math.exp(-0.5 * standardized * standardized) / math.sqrt(2.0 * math.pi * variance)
+
+
+def durrleman_function(parameters: SviParameters, log_moneyness: float) -> float:
+    variance = max(total_variance(parameters, log_moneyness), MINIMUM_TOTAL_VARIANCE)
+    slope = total_variance_first_derivative(parameters, log_moneyness)
+    curvature = total_variance_second_derivative(parameters, log_moneyness)
+    return durrleman_value(log_moneyness, variance, slope, curvature)
+
+
+def risk_neutral_density(parameters: SviParameters, log_moneyness: float) -> float:
+    variance = max(total_variance(parameters, log_moneyness), MINIMUM_TOTAL_VARIANCE)
+    return durrleman_function(parameters, log_moneyness) * density_weight(log_moneyness, variance)
 
 
 def refined_minimum(parameters: SviParameters, lower: float, upper: float) -> tuple[float, float]:

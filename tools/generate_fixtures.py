@@ -35,6 +35,7 @@ from volarb_py.cli import (  # noqa: E402
     price_american_option_record,
     price_option_record,
     scan_svi_slice_record,
+    scan_svi_surface_record,
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
 from volarb_py.svi import (  # noqa: E402
@@ -44,6 +45,11 @@ from volarb_py.svi import (  # noqa: E402
     scan_svi_slice,
 )
 from volarb_py.svi import total_variance as svi_total_variance  # noqa: E402
+from volarb_py.svi_surface import (  # noqa: E402
+    DEFAULT_TIME_STEPS_PER_INTERVAL,
+    SviSurfaceSlice,
+    scan_svi_surface,
+)
 
 FIXTURE_ROOT: Final[Path] = REPOSITORY_ROOT / "spec" / "fixtures"
 DOUBLE_PRECISION_EPSILON: Final[float] = sys.float_info.epsilon
@@ -56,6 +62,10 @@ EUROPEAN_LATTICE_ORACLE_RELATIVE_BUDGET: Final[float] = 5e-5
 AMERICAN_INVERSION_RELATIVE_BUDGET: Final[float] = 1e-4
 SVI_FINE_SCAN_STEPS: Final[int] = 20000
 SVI_SCAN_ORACLE_BUDGET: Final[float] = 1e-9
+SURFACE_FINE_SCAN_STEPS: Final[int] = 4096
+SURFACE_FINE_TIME_STEPS: Final[int] = 64
+SURFACE_SCAN_ORACLE_BUDGET: Final[float] = 1e-9
+SURFACE_ROUND_TRIP_BUDGET: Final[float] = 1e-5
 
 
 class OracleDisagreementError(AssertionError):
@@ -395,6 +405,186 @@ def build_svi_scan_fixture() -> None:
     print(f"scan-svi-slice/slices: {len(result_records)} cases, statuses {statuses}")
 
 
+SVI_SURFACE_CASES: Final[
+    tuple[tuple[str, tuple[tuple[float, float, float, float, float, float], ...]], ...]
+] = (
+    (
+        "healthy_index_term_structure",
+        (
+            (0.0833, 0.0015, 0.030, -0.70, 0.010, 0.10),
+            (0.2500, 0.0060, 0.055, -0.65, 0.015, 0.15),
+            (0.5000, 0.0140, 0.075, -0.60, 0.020, 0.22),
+            (1.0000, 0.0300, 0.100, -0.55, 0.030, 0.32),
+        ),
+    ),
+    (
+        "two_slice_minimal",
+        (
+            (0.2500, 0.0060, 0.055, -0.65, 0.015, 0.15),
+            (1.0000, 0.0300, 0.100, -0.55, 0.030, 0.32),
+        ),
+    ),
+    (
+        "flat_term_structure",
+        (
+            (0.2500, 0.0060, 0.055, -0.65, 0.015, 0.15),
+            (0.7500, 0.0060, 0.055, -0.65, 0.015, 0.15),
+        ),
+    ),
+    (
+        "steep_skew_term_structure",
+        (
+            (0.0833, 0.0020, 0.040, -0.90, 0.000, 0.08),
+            (0.3333, 0.0090, 0.070, -0.85, 0.010, 0.14),
+            (1.0000, 0.0350, 0.120, -0.80, 0.020, 0.28),
+        ),
+    ),
+    (
+        "positive_skew_term_structure",
+        (
+            (0.1667, 0.0040, 0.045, 0.40, -0.020, 0.12),
+            (0.5000, 0.0150, 0.080, 0.35, -0.010, 0.20),
+            (1.5000, 0.0450, 0.130, 0.30, 0.000, 0.34),
+        ),
+    ),
+    (
+        "calendar_violation_level_falls",
+        (
+            (0.0833, 0.0015, 0.030, -0.70, 0.010, 0.10),
+            (0.2500, 0.0060, 0.055, -0.65, 0.015, 0.15),
+            (0.5000, 0.0040, 0.055, -0.60, 0.020, 0.22),
+            (1.0000, 0.0300, 0.100, -0.55, 0.030, 0.32),
+        ),
+    ),
+    (
+        "calendar_violation_in_the_wing_only",
+        (
+            (0.2500, 0.0300, 0.030, -0.10, 0.000, 0.20),
+            (0.7500, 0.0320, 0.150, -0.80, 0.000, 0.30),
+        ),
+    ),
+    (
+        "butterfly_violation_between_two_clean_knots",
+        (
+            (0.2500, -0.127, 0.379, -0.598, 0.088, 0.419),
+            (1.0000, 0.077, 0.396, -0.617, 0.191, 0.079),
+        ),
+    ),
+    (
+        "butterfly_violation_in_a_knot",
+        (
+            (0.2500, 0.0060, 0.055, -0.65, 0.015, 0.15),
+            (0.7500, 0.0002, 0.350, -0.85, 0.000, 0.02),
+        ),
+    ),
+)
+
+SVI_SURFACE_RANGES: Final[tuple[tuple[str, float, float, int, int], ...]] = (
+    ("standard", -0.60, 0.60, 256, 8),
+    ("unit", -1.00, 1.00, 256, 8),
+    ("wide", -1.50, 1.50, 512, 4),
+    ("coarse", -0.60, 0.60, 16, 1),
+)
+
+
+def surface_slices_of(
+    case: tuple[tuple[float, float, float, float, float, float], ...],
+) -> list[SviSurfaceSlice]:
+    return [
+        SviSurfaceSlice(
+            years_to_expiry=years,
+            parameters=SviParameters(a=a, b=b, rho=rho, m=m, sigma=sigma),
+        )
+        for years, a, b, rho, m, sigma in case
+    ]
+
+
+def verify_svi_surface_scan(
+    case: tuple[tuple[float, float, float, float, float, float], ...],
+    request: dict[str, Any],
+    result: dict[str, Any],
+) -> None:
+    slices = surface_slices_of(case)
+    lowest = float(request["lowest_log_moneyness"])
+    highest = float(request["highest_log_moneyness"])
+    time_steps = int(request["time_steps_per_interval"])
+
+    fine = scan_svi_surface(slices, lowest, highest, SURFACE_FINE_SCAN_STEPS, time_steps)
+    slack = float(result["minimum_durrleman_value"]) - fine.minimum_durrleman_value
+    if slack > SURFACE_SCAN_ORACLE_BUDGET:
+        raise OracleDisagreementError(
+            f"{request['id']}: a {SURFACE_FINE_SCAN_STEPS} step scan in log moneyness "
+            f"found {slack} more butterfly depth"
+        )
+    calendar_slack = (
+        float(result["minimum_total_variance_time_slope"]) - fine.minimum_total_variance_time_slope
+    )
+    if calendar_slack > SURFACE_SCAN_ORACLE_BUDGET:
+        raise OracleDisagreementError(
+            f"{request['id']}: a finer scan found {calendar_slack} more calendar depth"
+        )
+
+    if time_steps >= DEFAULT_TIME_STEPS_PER_INTERVAL:
+        finest = scan_svi_surface(slices, lowest, highest, SURFACE_FINE_SCAN_STEPS, SURFACE_FINE_TIME_STEPS)
+        slack = float(result["minimum_durrleman_value"]) - finest.minimum_durrleman_value
+        if slack > SURFACE_SCAN_ORACLE_BUDGET:
+            raise OracleDisagreementError(
+                f"{request['id']}: a {SURFACE_FINE_SCAN_STEPS} by {SURFACE_FINE_TIME_STEPS} scan "
+                f"found {slack} more butterfly depth"
+            )
+    if result["status"] != "arbitrage_free_on_grid":
+        return
+    error = float(result["worst_local_variance_round_trip_error"])
+    if error > SURFACE_ROUND_TRIP_BUDGET:
+        raise OracleDisagreementError(
+            f"{request['id']}: the Dupire round trip disagreed by {error} > {SURFACE_ROUND_TRIP_BUDGET}"
+        )
+
+
+def build_svi_surface_fixture() -> None:
+    request_records = []
+    result_records = []
+    for label, lowest, highest, steps, time_steps in SVI_SURFACE_RANGES:
+        for name, case in SVI_SURFACE_CASES:
+            request = {
+                "id": f"{name}_{label}",
+                "slices": [
+                    {
+                        "years_to_expiry": years,
+                        "a": a,
+                        "b": b,
+                        "rho": rho,
+                        "m": m,
+                        "sigma": sigma,
+                    }
+                    for years, a, b, rho, m, sigma in case
+                ],
+                "lowest_log_moneyness": lowest,
+                "highest_log_moneyness": highest,
+                "scan_steps": steps,
+                "time_steps_per_interval": time_steps,
+            }
+            result = scan_svi_surface_record(request)
+            verify_svi_surface_scan(case, request, result)
+            request_records.append(request)
+            result_records.append(result)
+
+    directory = FIXTURE_ROOT / "scan-svi-surface"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(
+        directory / "surfaces.input.json", Document("svi_surface_scan_request/v1", request_records)
+    )
+    write_document(
+        directory / "surfaces.expected.json", Document("svi_surface_scan_result/v1", result_records)
+    )
+    statuses = sorted({str(record["status"]) for record in result_records})
+    worst = max(float(record["worst_local_variance_round_trip_error"]) for record in result_records)
+    print(
+        f"scan-svi-surface/surfaces: {len(result_records)} cases, statuses {statuses}, "
+        f"worst round trip {worst:.3e}"
+    )
+
+
 SVI_CALIBRATION_TRUTHS: Final[tuple[tuple[str, SviParameters], ...]] = (
     ("short_dated_index", SviParameters(0.0002, 0.018, -0.65, 0.01, 0.10)),
     ("long_dated_index", SviParameters(0.0100, 0.090, -0.55, 0.05, 0.35)),
@@ -520,6 +710,7 @@ def main() -> int:
             "price-american-options",
             "invert-american-implied-volatility",
             "scan-svi-slice",
+            "scan-svi-surface",
             "calibrate-svi-slice",
             "all",
         ],
@@ -542,6 +733,8 @@ def main() -> int:
         build_american_inversion_fixture()
     if arguments.verb in ("scan-svi-slice", "all"):
         build_svi_scan_fixture()
+    if arguments.verb in ("scan-svi-surface", "all"):
+        build_svi_surface_fixture()
     if arguments.verb in ("calibrate-svi-slice", "all"):
         build_svi_calibration_fixture()
     return 0

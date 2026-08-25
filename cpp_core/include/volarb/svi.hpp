@@ -43,6 +43,8 @@ double total_variance(const SviParameters& parameters, double log_moneyness);
 double total_variance_first_derivative(const SviParameters& parameters, double log_moneyness);
 double total_variance_second_derivative(const SviParameters& parameters, double log_moneyness);
 double implied_volatility(const SviParameters& parameters, double log_moneyness, double years_to_expiry);
+double durrleman_value(double log_moneyness, double variance, double slope, double curvature);
+double density_weight(double log_moneyness, double variance);
 double durrleman_function(const SviParameters& parameters, double log_moneyness);
 double risk_neutral_density(const SviParameters& parameters, double log_moneyness);
 

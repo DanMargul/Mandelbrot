@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "svi_surface_scan_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "svi_surface_scan_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "slices", "lowest_log_moneyness", "highest_log_moneyness"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "slices": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["years_to_expiry", "a", "b", "rho", "m", "sigma"],
+              "additionalProperties": false,
+              "properties": {
+                "years_to_expiry": { "type": "number", "exclusiveMinimum": 0 },
+                "a": { "type": "number" },
+                "b": { "type": "number", "minimum": 0 },
+                "rho": { "type": "number", "exclusiveMinimum": -1, "exclusiveMaximum": 1 },
+                "m": { "type": "number" },
+                "sigma": { "type": "number", "exclusiveMinimum": 0 }
+              }
+            }
+          },
+          "lowest_log_moneyness": { "type": "number" },
+          "highest_log_moneyness": { "type": "number" },
+          "scan_steps": { "type": "integer", "minimum": 2 },
+          "time_steps_per_interval": { "type": "integer", "minimum": 1 }
+        }
+      }
+    }
+  }
+}

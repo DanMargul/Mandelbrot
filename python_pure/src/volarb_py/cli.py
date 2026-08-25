@@ -54,6 +54,12 @@ from volarb_py.svi_calibration import (
     SliceObservation,
     calibrate_svi_slice,
 )
+from volarb_py.svi_surface import (
+    DEFAULT_SURFACE_SCAN_STEPS,
+    DEFAULT_TIME_STEPS_PER_INTERVAL,
+    SviSurfaceSlice,
+    scan_svi_surface,
+)
 
 
 @dataclass(frozen=True)
@@ -188,6 +194,64 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_total_variance": scan.minimum_total_variance,
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
+        "status": scan.status,
+    }
+
+
+def surface_slices_from(record: JsonRecord) -> list[SviSurfaceSlice]:
+    raw = record.get("slices")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'slices' must be an array")
+    slices: list[SviSurfaceSlice] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'slices' must be an object")
+        slices.append(
+            SviSurfaceSlice(
+                years_to_expiry=required_float(entry, "years_to_expiry"),
+                parameters=SviParameters(
+                    a=required_float(entry, "a"),
+                    b=required_float(entry, "b"),
+                    rho=required_float(entry, "rho"),
+                    m=required_float(entry, "m"),
+                    sigma=required_float(entry, "sigma"),
+                ),
+            )
+        )
+    return slices
+
+
+def optional_step_count(record: JsonRecord, field: str, fallback: int) -> int:
+    value = record.get(field, fallback)
+    return value if isinstance(value, int) else fallback
+
+
+def scan_svi_surface_record(record: JsonRecord) -> JsonRecord:
+    scan = scan_svi_surface(
+        surface_slices_from(record),
+        required_float(record, "lowest_log_moneyness"),
+        required_float(record, "highest_log_moneyness"),
+        optional_step_count(record, "scan_steps", DEFAULT_SURFACE_SCAN_STEPS),
+        optional_step_count(record, "time_steps_per_interval", DEFAULT_TIME_STEPS_PER_INTERVAL),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "slice_count": scan.slice_count,
+        "scan_steps": scan.scan_steps,
+        "time_steps_per_interval": scan.time_steps_per_interval,
+        "minimum_durrleman_value": scan.minimum_durrleman_value,
+        "log_moneyness_at_minimum_durrleman_value": scan.log_moneyness_at_minimum_durrleman_value,
+        "years_to_expiry_at_minimum_durrleman_value": scan.years_to_expiry_at_minimum_durrleman_value,
+        "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
+        "minimum_total_variance_time_slope": scan.minimum_total_variance_time_slope,
+        "log_moneyness_at_minimum_time_slope": scan.log_moneyness_at_minimum_time_slope,
+        "years_to_expiry_at_minimum_time_slope": scan.years_to_expiry_at_minimum_time_slope,
+        "minimum_local_variance": scan.minimum_local_variance,
+        "log_moneyness_at_minimum_local_variance": scan.log_moneyness_at_minimum_local_variance,
+        "years_to_expiry_at_minimum_local_variance": scan.years_to_expiry_at_minimum_local_variance,
+        "worst_local_variance_round_trip_error": scan.worst_local_variance_round_trip_error,
+        "log_moneyness_at_worst_round_trip_error": scan.log_moneyness_at_worst_round_trip_error,
+        "round_trip_point_count": scan.round_trip_point_count,
         "status": scan.status,
     }
 
@@ -364,6 +428,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "scan-svi-surface": Verb(
+        name="scan-svi-surface",
+        input_schema="svi_surface_scan_request/v1",
+        output_schema="svi_surface_scan_result/v1",
+        transform_records=mapped_over_records(scan_svi_surface_record),
     ),
     "scan-svi-slice": Verb(
         name="scan-svi-slice",

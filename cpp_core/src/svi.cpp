@@ -98,21 +98,27 @@ double implied_volatility(const SviParameters& parameters, double log_moneyness,
     return std::sqrt(std::max(total_variance(parameters, log_moneyness), 0.0) / years_to_expiry);
 }
 
-double durrleman_function(const SviParameters& parameters, double log_moneyness) {
-    const double variance = std::max(total_variance(parameters, log_moneyness), minimum_total_variance);
-    const double slope = total_variance_first_derivative(parameters, log_moneyness);
-    const double curvature = total_variance_second_derivative(parameters, log_moneyness);
+double durrleman_value(double log_moneyness, double variance, double slope, double curvature) {
     const double balance = 1.0 - log_moneyness * slope / (2.0 * variance);
     return balance * balance - 0.25 * slope * slope * (1.0 / variance + 0.25) + 0.5 * curvature;
 }
 
-double risk_neutral_density(const SviParameters& parameters, double log_moneyness) {
-    const double variance = std::max(total_variance(parameters, log_moneyness), minimum_total_variance);
+double density_weight(double log_moneyness, double variance) {
     const double root = std::sqrt(variance);
     const double standardized = -log_moneyness / root - 0.5 * root;
-    const double weight =
-        std::exp(-0.5 * standardized * standardized) / std::sqrt(2.0 * std::numbers::pi * variance);
-    return durrleman_function(parameters, log_moneyness) * weight;
+    return std::exp(-0.5 * standardized * standardized) / std::sqrt(2.0 * std::numbers::pi * variance);
+}
+
+double durrleman_function(const SviParameters& parameters, double log_moneyness) {
+    const double variance = std::max(total_variance(parameters, log_moneyness), minimum_total_variance);
+    const double slope = total_variance_first_derivative(parameters, log_moneyness);
+    const double curvature = total_variance_second_derivative(parameters, log_moneyness);
+    return durrleman_value(log_moneyness, variance, slope, curvature);
+}
+
+double risk_neutral_density(const SviParameters& parameters, double log_moneyness) {
+    const double variance = std::max(total_variance(parameters, log_moneyness), minimum_total_variance);
+    return durrleman_function(parameters, log_moneyness) * density_weight(log_moneyness, variance);
 }
 
 SviSliceScan scan_svi_slice(const SviParameters& parameters, double lowest_log_moneyness,
