@@ -34,6 +34,10 @@ output_schema = "hedging_statistics/v1"
 input_schema = "random_sample_request/v1"
 output_schema = "random_sample/v1"
 
+[verbs.imply-correlation]
+input_schema = "correlation_request/v1"
+output_schema = "correlation_report/v1"
+
 [verbs.decompose-surface-factors]
 input_schema = "factor_request/v1"
 output_schema = "factor_decomposition/v1"

@@ -257,6 +257,55 @@ def surface_observations_from(record: JsonRecord) -> list[list[float]]:
     return observations
 
 
+@dataclass(frozen=True)
+class BasketColumns:
+    symbols: list[str]
+    weights: list[float]
+    volatilities: list[float]
+
+
+def basket_columns(record: JsonRecord) -> BasketColumns:
+    raw = record.get("constituents")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'constituents' must be an array")
+    symbols: list[str] = []
+    weights: list[float] = []
+    volatilities: list[float] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'constituents' must be an object")
+        symbols.append(required_string(entry, "symbol"))
+        weights.append(required_float(entry, "weight"))
+        volatilities.append(required_float(entry, "volatility"))
+    return BasketColumns(symbols, weights, volatilities)
+
+
+def imply_correlation_record(record: JsonRecord) -> JsonRecord:
+    columns = basket_columns(record)
+    report = _volarb_core.imply_correlation(
+        symbols=columns.symbols,
+        weights=columns.weights,
+        volatilities=columns.volatilities,
+        index_volatility=required_float(record, "index_volatility"),
+        index_vega=required_float(record, "index_vega"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "constituent_count": report.constituent_count,
+        "index_volatility": report.index_volatility,
+        "weighted_volatility": report.weighted_volatility,
+        "concentration": report.concentration,
+        "clean_correlation": report.clean_correlation,
+        "diagonal_bias": report.diagonal_bias,
+        "dirty_correlation": report.dirty_correlation,
+        "lowest_admissible_correlation": report.lowest_admissible_correlation,
+        "is_admissible": report.is_admissible,
+        "exceeds_perfect_correlation": report.exceeds_perfect_correlation,
+        "index_sensitivity": list(report.index_sensitivity),
+        "dispersion_vega_weight": list(report.dispersion_vega_weight),
+    }
+
+
 def decompose_surface_factors_record(record: JsonRecord) -> JsonRecord:
     index = record.get("scored_grid_index", 0)
     scored = index if isinstance(index, int) else 0
@@ -694,6 +743,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="random_sample_request/v1",
         output_schema="random_sample/v1",
         transform_records=mapped_over_records(draw_random_sample_record),
+    ),
+    "imply-correlation": Verb(
+        name="imply-correlation",
+        input_schema="correlation_request/v1",
+        output_schema="correlation_report/v1",
+        transform_records=mapped_over_records(imply_correlation_record),
     ),
     "decompose-surface-factors": Verb(
         name="decompose-surface-factors",

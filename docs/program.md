@@ -513,7 +513,9 @@ machinery works, the strategy on top of it is not established, and step 7 is wha
 
 ## 9. Dispersion and the implied correlation surface
 
-*New. The heaviest lift in the program.*
+*New. The heaviest lift in the program. **The correlation mathematics is done**, see
+`spec/interfaces/implied_correlation.md`. The universe it needs, and the external validation
+that closes the step, are not.*
 
 Index implied variance against the weighted basket of constituent implied variances gives
 implied correlation, with its own term structure and skew. Trading it means selling index
@@ -529,7 +531,18 @@ finishes overnight.
 **Done when** the computed implied correlation series reproduces published benchmarks within
 a stated tolerance. That external validation is worth more than any internal consistency
 check, because it is the one number in this program that can be checked against someone
-else's independent implementation.
+else's independent implementation. **It has not been done**, and no remembered benchmark
+value has been written down in its place.
+
+What is done is the arithmetic underneath it, tri-implemented and bit-identical: the implied
+correlation itself, the exact closed form for the error in the widely used formula that drops
+the diagonal — `concentration * (1 - rho)`, which is `0.0013` for five hundred equally
+weighted names and `0.0562` when two thirds of the weight sits in ten of them — the
+admissibility bounds that catch an index and a constituent set quoting inconsistent
+volatilities, and the constituent vega weights that make a dispersion book flat to everything
+except correlation. The two-sum identity that replaces the `n^2` quadratic form runs **294
+times faster at five hundred names**, which is the difference step 9 predicted between a
+pipeline that finishes overnight and one that does not.
 
 ---
 

@@ -47,6 +47,12 @@ from volarb_py.hedging import (
     HedgingInputs,
     hedging_statistics,
 )
+from volarb_py.implied_correlation import (
+    BasketConstituent,
+    dispersion_vega_weights,
+    imply_correlation,
+    index_sensitivities,
+)
 from volarb_py.implied_vol import ImpliedVolatilityInputs, invert_black_implied_volatility
 from volarb_py.market_data import (
     AsOfChainReader,
@@ -380,6 +386,51 @@ def surface_observations_from(record: JsonRecord) -> list[list[float]]:
             raise DocumentError("every entry of 'observations' must be an array")
         observations.append([float(value) for value in entry])
     return observations
+
+
+def basket_from(record: JsonRecord) -> list[BasketConstituent]:
+    raw = record.get("constituents")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'constituents' must be an array")
+    constituents: list[BasketConstituent] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'constituents' must be an object")
+        constituents.append(
+            BasketConstituent(
+                symbol=required_string(entry, "symbol"),
+                weight=required_float(entry, "weight"),
+                volatility=required_float(entry, "volatility"),
+            )
+        )
+    return constituents
+
+
+def imply_correlation_record(record: JsonRecord) -> JsonRecord:
+    constituents = basket_from(record)
+    report = imply_correlation(constituents, required_float(record, "index_volatility"))
+    sensitivities: list[float] = []
+    weights: list[float] = []
+    if report.is_admissible:
+        sensitivities = index_sensitivities(constituents, report.clean_correlation)
+        weights = dispersion_vega_weights(
+            constituents, report.clean_correlation, required_float(record, "index_vega")
+        )
+    return {
+        "id": required_string(record, "id"),
+        "constituent_count": report.constituent_count,
+        "index_volatility": report.index_volatility,
+        "weighted_volatility": report.weighted_volatility,
+        "concentration": report.concentration,
+        "clean_correlation": report.clean_correlation,
+        "diagonal_bias": report.diagonal_bias,
+        "dirty_correlation": report.dirty_correlation,
+        "lowest_admissible_correlation": report.lowest_admissible_correlation,
+        "is_admissible": report.is_admissible,
+        "exceeds_perfect_correlation": report.exceeds_perfect_correlation,
+        "index_sensitivity": sensitivities,
+        "dispersion_vega_weight": weights,
+    }
 
 
 def decompose_surface_factors_record(record: JsonRecord) -> JsonRecord:
@@ -799,6 +850,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="random_sample_request/v1",
         output_schema="random_sample/v1",
         transform_records=mapped_over_records(draw_random_sample_record),
+    ),
+    "imply-correlation": Verb(
+        name="imply-correlation",
+        input_schema="correlation_request/v1",
+        output_schema="correlation_report/v1",
+        transform_records=mapped_over_records(imply_correlation_record),
     ),
     "decompose-surface-factors": Verb(
         name="decompose-surface-factors",

@@ -10,6 +10,7 @@
 #include "volarb/execution.hpp"
 #include "volarb/rate_curve.hpp"
 #include "volarb/factors.hpp"
+#include "volarb/implied_correlation.hpp"
 #include "volarb/random_source.hpp"
 #include "volarb/hedging.hpp"
 #include "volarb/portfolio.hpp"
@@ -68,7 +69,13 @@ using volarb::default_scan_steps;
 using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
 using volarb::CurveNode;
+using volarb::BasketConstituent;
+using volarb::CorrelationReport;
 using volarb::decompose_surface_factors;
+using volarb::dispersion_vega_weights;
+using volarb::imply_correlation;
+using volarb::index_sensitivities;
+using volarb::InvalidBasketError;
 using volarb::allocate;
 using volarb::Allocation;
 using volarb::band_rule_from_name;
@@ -318,6 +325,32 @@ struct FactorReport {
     ResidualScore score;
     int scored_grid_index;
 };
+
+struct BasketReport {
+    CorrelationReport report;
+    std::vector<double> index_sensitivity;
+    std::vector<double> dispersion_vega_weight;
+};
+
+BasketReport imply_correlation_from_values(const std::vector<std::string>& symbols,
+                                           const std::vector<double>& weights,
+                                           const std::vector<double>& volatilities,
+                                           double index_volatility, double index_vega) {
+    if (symbols.size() != weights.size() || symbols.size() != volatilities.size()) {
+        throw InvalidBasketError("every constituent column must have the same length");
+    }
+    std::vector<BasketConstituent> constituents;
+    constituents.reserve(symbols.size());
+    for (std::size_t index = 0; index < symbols.size(); ++index) {
+        constituents.push_back(BasketConstituent{symbols[index], weights[index], volatilities[index]});
+    }
+    const CorrelationReport report = imply_correlation(constituents, index_volatility);
+    if (!report.is_admissible) {
+        return BasketReport{report, {}, {}};
+    }
+    return BasketReport{report, index_sensitivities(constituents, report.clean_correlation),
+                        dispersion_vega_weights(constituents, report.clean_correlation, index_vega)};
+}
 
 FactorReport decompose_surface_factors_from_values(const std::vector<double>& log_moneyness,
                                                    const std::vector<double>& years_to_expiry,
@@ -858,6 +891,36 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("decompose_surface_factors", &decompose_surface_factors_from_values,
                py::arg("log_moneyness"), py::arg("years_to_expiry"), py::arg("observations"),
                py::arg("scored_grid_index"));
+
+    py::register_exception<InvalidBasketError>(module, "InvalidBasketError", PyExc_ValueError);
+    py::class_<BasketReport>(module, "BasketReport")
+        .def_property_readonly("constituent_count",
+                               [](const BasketReport& r) { return r.report.constituent_count; })
+        .def_property_readonly("index_volatility",
+                               [](const BasketReport& r) { return r.report.index_volatility; })
+        .def_property_readonly("weighted_volatility",
+                               [](const BasketReport& r) { return r.report.weighted_volatility; })
+        .def_property_readonly("concentration",
+                               [](const BasketReport& r) { return r.report.concentration; })
+        .def_property_readonly("clean_correlation",
+                               [](const BasketReport& r) { return r.report.clean_correlation; })
+        .def_property_readonly("diagonal_bias",
+                               [](const BasketReport& r) { return r.report.diagonal_bias; })
+        .def_property_readonly("dirty_correlation",
+                               [](const BasketReport& r) { return r.report.dirty_correlation; })
+        .def_property_readonly(
+            "lowest_admissible_correlation",
+            [](const BasketReport& r) { return r.report.lowest_admissible_correlation; })
+        .def_property_readonly("is_admissible",
+                               [](const BasketReport& r) { return r.report.is_admissible; })
+        .def_property_readonly("exceeds_perfect_correlation",
+                               [](const BasketReport& r) { return r.report.exceeds_perfect_correlation; })
+        .def_readonly("index_sensitivity", &BasketReport::index_sensitivity)
+        .def_readonly("dispersion_vega_weight", &BasketReport::dispersion_vega_weight);
+
+    module.def("imply_correlation", &imply_correlation_from_values, py::arg("symbols"),
+               py::arg("weights"), py::arg("volatilities"), py::arg("index_volatility"),
+               py::arg("index_vega"));
 
     py::register_exception<InvalidRateCurveError>(module, "InvalidRateCurveError", PyExc_ValueError);
     module.def("rate_curve_discount_factor", &discount_factor_from_values,

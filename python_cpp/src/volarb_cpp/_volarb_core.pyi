@@ -234,6 +234,31 @@ def decompose_surface_factors(
     scored_grid_index: int,
 ) -> FactorReport: ...
 
+class InvalidBasketError(ValueError): ...
+
+class BasketReport:
+    constituent_count: int
+    index_volatility: float
+    weighted_volatility: float
+    concentration: float
+    clean_correlation: float
+    diagonal_bias: float
+    dirty_correlation: float
+    lowest_admissible_correlation: float
+    is_admissible: bool
+    exceeds_perfect_correlation: bool
+    index_sensitivity: list[float]
+    dispersion_vega_weight: list[float]
+
+def imply_correlation(
+    *,
+    symbols: list[str],
+    weights: list[float],
+    volatilities: list[float],
+    index_volatility: float,
+    index_vega: float,
+) -> BasketReport: ...
+
 class InvalidRateCurveError(ValueError): ...
 
 def rate_curve_discount_factor(

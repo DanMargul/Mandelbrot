@@ -8,6 +8,7 @@
 #include "volarb/execution.hpp"
 #include "volarb/rate_curve.hpp"
 #include "volarb/factors.hpp"
+#include "volarb/implied_correlation.hpp"
 #include "volarb/random_source.hpp"
 #include "volarb/hedging.hpp"
 #include "volarb/portfolio.hpp"
@@ -345,6 +346,51 @@ std::vector<std::vector<double>> surface_observations_from(const nlohmann::json&
         observations.push_back(entry.get<std::vector<double>>());
     }
     return observations;
+}
+
+std::vector<BasketConstituent> basket_from(const nlohmann::json& record) {
+    const auto found = record.find("constituents");
+    if (found == record.end() || !found->is_array()) {
+        throw DocumentError("field 'constituents' must be an array");
+    }
+    std::vector<BasketConstituent> constituents;
+    for (const nlohmann::json& entry : *found) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'constituents' must be an object");
+        }
+        constituents.push_back(BasketConstituent{required_string(entry, "symbol"),
+                                                 required_number(entry, "weight"),
+                                                 required_number(entry, "volatility")});
+    }
+    return constituents;
+}
+
+nlohmann::json imply_correlation_record(const nlohmann::json& record) {
+    const std::vector<BasketConstituent> constituents = basket_from(record);
+    const CorrelationReport report =
+        imply_correlation(constituents, required_number(record, "index_volatility"));
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["constituent_count"] = report.constituent_count;
+    output["index_volatility"] = report.index_volatility;
+    output["weighted_volatility"] = report.weighted_volatility;
+    output["concentration"] = report.concentration;
+    output["clean_correlation"] = report.clean_correlation;
+    output["diagonal_bias"] = report.diagonal_bias;
+    output["dirty_correlation"] = report.dirty_correlation;
+    output["lowest_admissible_correlation"] = report.lowest_admissible_correlation;
+    output["is_admissible"] = report.is_admissible;
+    output["exceeds_perfect_correlation"] = report.exceeds_perfect_correlation;
+    std::vector<double> sensitivities;
+    std::vector<double> weights;
+    if (report.is_admissible) {
+        sensitivities = index_sensitivities(constituents, report.clean_correlation);
+        weights = dispersion_vega_weights(constituents, report.clean_correlation,
+                                          required_number(record, "index_vega"));
+    }
+    output["index_sensitivity"] = sensitivities;
+    output["dispersion_vega_weight"] = weights;
+    return output;
 }
 
 nlohmann::json decompose_surface_factors_record(const nlohmann::json& record) {
@@ -744,6 +790,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"draw-random-sample",
          Verb{"draw-random-sample", "random_sample_request/v1", "random_sample/v1",
               mapped_over_records(draw_random_sample_record)}},
+        {"imply-correlation",
+         Verb{"imply-correlation", "correlation_request/v1", "correlation_report/v1",
+              mapped_over_records(imply_correlation_record)}},
         {"decompose-surface-factors",
          Verb{"decompose-surface-factors", "factor_request/v1", "factor_decomposition/v1",
               mapped_over_records(decompose_surface_factors_record)}},

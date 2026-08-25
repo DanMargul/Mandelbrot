@@ -37,6 +37,7 @@ from volarb_py.cli import (  # noqa: E402
     decompose_surface_factors_record,
     draw_random_sample_record,
     evaluate_rate_curve_record,
+    imply_correlation_record,
     invert_american_implied_volatility_record,
     invert_implied_volatility_record,
     price_american_option_record,
@@ -48,6 +49,11 @@ from volarb_py.cli import (  # noqa: E402
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
 from volarb_py.essvi import EssviParameters, slices_from_parameters  # noqa: E402
+from volarb_py.implied_correlation import (  # noqa: E402
+    BasketConstituent,
+    basket_volatility,
+    moments_of,
+)
 from volarb_py.random_source import MANTISSA_SCALE as RANDOM_MANTISSA_SCALE  # noqa: E402
 from volarb_py.random_source import MANTISSA_SHIFT as RANDOM_MANTISSA_SHIFT  # noqa: E402
 from volarb_py.svi import (  # noqa: E402
@@ -1313,6 +1319,116 @@ def build_all_american_fixtures() -> None:
         build_american_fixture(family, cases)
 
 
+def spread_basket(count: int) -> tuple[tuple[str, float, float], ...]:
+    return tuple((f"N{index:03d}", 1.0 / count, 0.16 + 0.01 * (index % 11)) for index in range(count))
+
+
+CORRELATION_ORACLE_BUDGET: Final[float] = 1e-11
+CORRELATION_INDEX_VEGA: Final[float] = 250.0
+CORRELATION_IMPOSSIBLE_MULTIPLE: Final[float] = 1.04
+
+CORRELATION_BASKETS: Final[tuple[tuple[str, tuple[tuple[str, float, float], ...], float], ...]] = (
+    ("pair", (("A", 0.5, 0.22), ("B", 0.5, 0.28)), 0.30),
+    (
+        "concentrated-three",
+        (("HEAVY", 0.70, 0.30), ("LIGHT_A", 0.20, 0.25), ("LIGHT_B", 0.10, 0.35)),
+        0.42,
+    ),
+    ("negative", (("A", 0.34, 0.20), ("B", 0.33, 0.24), ("C", 0.33, 0.30)), -0.20),
+    ("near-perfect", (("A", 0.6, 0.19), ("B", 0.4, 0.23)), 0.985),
+    ("spread-twelve", spread_basket(12), 0.35),
+    ("spread-sixty", spread_basket(60), 0.35),
+)
+
+
+def constituents_of(rows: tuple[tuple[str, float, float], ...]) -> list[BasketConstituent]:
+    return [BasketConstituent(symbol, weight, volatility) for symbol, weight, volatility in rows]
+
+
+def correlation_request(
+    case: str, rows: tuple[tuple[str, float, float], ...], index_volatility: float
+) -> dict[str, Any]:
+    return {
+        "id": case,
+        "constituents": [
+            {"symbol": symbol, "weight": weight, "volatility": volatility}
+            for symbol, weight, volatility in rows
+        ],
+        "index_volatility": index_volatility,
+        "index_vega": CORRELATION_INDEX_VEGA,
+    }
+
+
+def naive_basket_volatility(constituents: list[BasketConstituent], correlation: float) -> float:
+    total = 0.0
+    for row, first in enumerate(constituents):
+        for column, second in enumerate(constituents):
+            entry = 1.0 if row == column else correlation
+            total += first.weight * second.weight * first.volatility * second.volatility * entry
+    return math.sqrt(total)
+
+
+def verify_correlation_report(request: dict[str, Any], result: dict[str, Any]) -> None:
+    constituents = constituents_of(
+        tuple(
+            (str(entry["symbol"]), float(entry["weight"]), float(entry["volatility"]))
+            for entry in request["constituents"]
+        )
+    )
+    implied = float(result["clean_correlation"])
+    quoted = float(request["index_volatility"])
+    if bool(result["is_admissible"]):
+        repriced = naive_basket_volatility(constituents, implied)
+        if abs(repriced - quoted) > CORRELATION_ORACLE_BUDGET:
+            raise OracleDisagreementError(
+                f"{request['id']}: repricing the full quadratic form at the implied correlation "
+                f"gave {repriced} against a quoted {quoted}"
+            )
+    predicted_bias = moments_of(constituents).concentration * (1.0 - implied)
+    if abs(predicted_bias - float(result["diagonal_bias"])) > CORRELATION_ORACLE_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the diagonal bias is not the closed form")
+    if abs(float(result["dirty_correlation"]) - implied - predicted_bias) > CORRELATION_ORACLE_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the dirty correlation is not clean plus bias")
+    if not bool(result["is_admissible"]):
+        return
+    euler = 0.0
+    for constituent, sensitivity in zip(constituents, result["index_sensitivity"], strict=True):
+        euler += constituent.volatility * float(sensitivity)
+    if abs(euler - quoted) > CORRELATION_ORACLE_BUDGET:
+        raise OracleDisagreementError(
+            f"{request['id']}: the sensitivities sum to {euler} against an index of {quoted}"
+        )
+
+
+def correlation_requests() -> list[dict[str, Any]]:
+    requests = [
+        correlation_request(case, rows, basket_volatility(constituents_of(rows), planted))
+        for case, rows, planted in CORRELATION_BASKETS
+    ]
+    impossible = CORRELATION_BASKETS[1][1]
+    weighted = moments_of(constituents_of(impossible)).weighted_volatility
+    requests.append(
+        correlation_request("above-perfect", impossible, weighted * CORRELATION_IMPOSSIBLE_MULTIPLE)
+    )
+    return requests
+
+
+def build_correlation_fixture() -> None:
+    request_records = correlation_requests()
+    result_records = []
+    for request in request_records:
+        result = imply_correlation_record(request)
+        verify_correlation_report(request, result)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "imply-correlation"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "baskets.input.json", Document("correlation_request/v1", request_records))
+    write_document(directory / "baskets.expected.json", Document("correlation_report/v1", result_records))
+    implied = [f"{float(record['clean_correlation']):.6f}" for record in result_records]
+    print(f"imply-correlation/baskets: {len(result_records)} cases, implied {implied}")
+
+
 FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
     "price-options": build_all_pricing_fixtures,
     "invert-implied-volatility": build_all_implied_volatility_fixtures,
@@ -1328,6 +1444,7 @@ FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
     "simulate-fills": build_fill_fixture,
     "calibrate-essvi-surface": build_essvi_fixture,
     "calibrate-svi-slice": build_svi_calibration_fixture,
+    "imply-correlation": build_correlation_fixture,
 }
 
 

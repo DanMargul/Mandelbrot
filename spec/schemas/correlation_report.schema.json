@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "correlation_report/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "correlation_report/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "constituent_count",
+          "index_volatility",
+          "weighted_volatility",
+          "concentration",
+          "clean_correlation",
+          "diagonal_bias",
+          "dirty_correlation",
+          "lowest_admissible_correlation",
+          "is_admissible",
+          "exceeds_perfect_correlation",
+          "index_sensitivity",
+          "dispersion_vega_weight"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "constituent_count": { "type": "integer", "minimum": 2 },
+          "index_volatility": { "type": "number", "exclusiveMinimum": 0 },
+          "weighted_volatility": { "type": "number", "exclusiveMinimum": 0 },
+          "concentration": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+          "clean_correlation": { "type": "number" },
+          "diagonal_bias": { "type": "number" },
+          "dirty_correlation": { "type": "number" },
+          "lowest_admissible_correlation": { "type": "number", "maximum": 0 },
+          "is_admissible": { "type": "boolean" },
+          "exceeds_perfect_correlation": { "type": "boolean" },
+          "index_sensitivity": { "type": "array", "items": { "type": "number" } },
+          "dispersion_vega_weight": { "type": "array", "items": { "type": "number" } }
+        }
+      }
+    }
+  }
+}

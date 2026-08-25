@@ -1,0 +1,479 @@
+{
+  "schema": "correlation_request/v1",
+  "records": [
+    {
+      "id": "pair",
+      "constituents": [
+        {
+          "symbol": "A",
+          "weight": 0.5,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "B",
+          "weight": 0.5,
+          "volatility": 0.28
+        }
+      ],
+      "index_volatility": 0.2023363536292972,
+      "index_vega": 250.0
+    },
+    {
+      "id": "concentrated-three",
+      "constituents": [
+        {
+          "symbol": "HEAVY",
+          "weight": 0.7,
+          "volatility": 0.3
+        },
+        {
+          "symbol": "LIGHT_A",
+          "weight": 0.2,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "LIGHT_B",
+          "weight": 0.1,
+          "volatility": 0.35
+        }
+      ],
+      "index_volatility": 0.25355275585171616,
+      "index_vega": 250.0
+    },
+    {
+      "id": "negative",
+      "constituents": [
+        {
+          "symbol": "A",
+          "weight": 0.34,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "B",
+          "weight": 0.33,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "C",
+          "weight": 0.33,
+          "volatility": 0.3
+        }
+      ],
+      "index_volatility": 0.11275761615075056,
+      "index_vega": 250.0
+    },
+    {
+      "id": "near-perfect",
+      "constituents": [
+        {
+          "symbol": "A",
+          "weight": 0.6,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "B",
+          "weight": 0.4,
+          "volatility": 0.23
+        }
+      ],
+      "index_volatility": 0.20523488982139468,
+      "index_vega": 250.0
+    },
+    {
+      "id": "spread-twelve",
+      "constituents": [
+        {
+          "symbol": "N000",
+          "weight": 0.08333333333333333,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N001",
+          "weight": 0.08333333333333333,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N002",
+          "weight": 0.08333333333333333,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N003",
+          "weight": 0.08333333333333333,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N004",
+          "weight": 0.08333333333333333,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "N005",
+          "weight": 0.08333333333333333,
+          "volatility": 0.21000000000000002
+        },
+        {
+          "symbol": "N006",
+          "weight": 0.08333333333333333,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "N007",
+          "weight": 0.08333333333333333,
+          "volatility": 0.23
+        },
+        {
+          "symbol": "N008",
+          "weight": 0.08333333333333333,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "N009",
+          "weight": 0.08333333333333333,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "N010",
+          "weight": 0.08333333333333333,
+          "volatility": 0.26
+        },
+        {
+          "symbol": "N011",
+          "weight": 0.08333333333333333,
+          "volatility": 0.16
+        }
+      ],
+      "index_volatility": 0.13108574377949045,
+      "index_vega": 250.0
+    },
+    {
+      "id": "spread-sixty",
+      "constituents": [
+        {
+          "symbol": "N000",
+          "weight": 0.016666666666666666,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N001",
+          "weight": 0.016666666666666666,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N002",
+          "weight": 0.016666666666666666,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N003",
+          "weight": 0.016666666666666666,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N004",
+          "weight": 0.016666666666666666,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "N005",
+          "weight": 0.016666666666666666,
+          "volatility": 0.21000000000000002
+        },
+        {
+          "symbol": "N006",
+          "weight": 0.016666666666666666,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "N007",
+          "weight": 0.016666666666666666,
+          "volatility": 0.23
+        },
+        {
+          "symbol": "N008",
+          "weight": 0.016666666666666666,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "N009",
+          "weight": 0.016666666666666666,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "N010",
+          "weight": 0.016666666666666666,
+          "volatility": 0.26
+        },
+        {
+          "symbol": "N011",
+          "weight": 0.016666666666666666,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N012",
+          "weight": 0.016666666666666666,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N013",
+          "weight": 0.016666666666666666,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N014",
+          "weight": 0.016666666666666666,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N015",
+          "weight": 0.016666666666666666,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "N016",
+          "weight": 0.016666666666666666,
+          "volatility": 0.21000000000000002
+        },
+        {
+          "symbol": "N017",
+          "weight": 0.016666666666666666,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "N018",
+          "weight": 0.016666666666666666,
+          "volatility": 0.23
+        },
+        {
+          "symbol": "N019",
+          "weight": 0.016666666666666666,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "N020",
+          "weight": 0.016666666666666666,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "N021",
+          "weight": 0.016666666666666666,
+          "volatility": 0.26
+        },
+        {
+          "symbol": "N022",
+          "weight": 0.016666666666666666,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N023",
+          "weight": 0.016666666666666666,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N024",
+          "weight": 0.016666666666666666,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N025",
+          "weight": 0.016666666666666666,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N026",
+          "weight": 0.016666666666666666,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "N027",
+          "weight": 0.016666666666666666,
+          "volatility": 0.21000000000000002
+        },
+        {
+          "symbol": "N028",
+          "weight": 0.016666666666666666,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "N029",
+          "weight": 0.016666666666666666,
+          "volatility": 0.23
+        },
+        {
+          "symbol": "N030",
+          "weight": 0.016666666666666666,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "N031",
+          "weight": 0.016666666666666666,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "N032",
+          "weight": 0.016666666666666666,
+          "volatility": 0.26
+        },
+        {
+          "symbol": "N033",
+          "weight": 0.016666666666666666,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N034",
+          "weight": 0.016666666666666666,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N035",
+          "weight": 0.016666666666666666,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N036",
+          "weight": 0.016666666666666666,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N037",
+          "weight": 0.016666666666666666,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "N038",
+          "weight": 0.016666666666666666,
+          "volatility": 0.21000000000000002
+        },
+        {
+          "symbol": "N039",
+          "weight": 0.016666666666666666,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "N040",
+          "weight": 0.016666666666666666,
+          "volatility": 0.23
+        },
+        {
+          "symbol": "N041",
+          "weight": 0.016666666666666666,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "N042",
+          "weight": 0.016666666666666666,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "N043",
+          "weight": 0.016666666666666666,
+          "volatility": 0.26
+        },
+        {
+          "symbol": "N044",
+          "weight": 0.016666666666666666,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N045",
+          "weight": 0.016666666666666666,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N046",
+          "weight": 0.016666666666666666,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N047",
+          "weight": 0.016666666666666666,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N048",
+          "weight": 0.016666666666666666,
+          "volatility": 0.2
+        },
+        {
+          "symbol": "N049",
+          "weight": 0.016666666666666666,
+          "volatility": 0.21000000000000002
+        },
+        {
+          "symbol": "N050",
+          "weight": 0.016666666666666666,
+          "volatility": 0.22
+        },
+        {
+          "symbol": "N051",
+          "weight": 0.016666666666666666,
+          "volatility": 0.23
+        },
+        {
+          "symbol": "N052",
+          "weight": 0.016666666666666666,
+          "volatility": 0.24
+        },
+        {
+          "symbol": "N053",
+          "weight": 0.016666666666666666,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "N054",
+          "weight": 0.016666666666666666,
+          "volatility": 0.26
+        },
+        {
+          "symbol": "N055",
+          "weight": 0.016666666666666666,
+          "volatility": 0.16
+        },
+        {
+          "symbol": "N056",
+          "weight": 0.016666666666666666,
+          "volatility": 0.17
+        },
+        {
+          "symbol": "N057",
+          "weight": 0.016666666666666666,
+          "volatility": 0.18
+        },
+        {
+          "symbol": "N058",
+          "weight": 0.016666666666666666,
+          "volatility": 0.19
+        },
+        {
+          "symbol": "N059",
+          "weight": 0.016666666666666666,
+          "volatility": 0.2
+        }
+      ],
+      "index_volatility": 0.12468755395431862,
+      "index_vega": 250.0
+    },
+    {
+      "id": "above-perfect",
+      "constituents": [
+        {
+          "symbol": "HEAVY",
+          "weight": 0.7,
+          "volatility": 0.3
+        },
+        {
+          "symbol": "LIGHT_A",
+          "weight": 0.2,
+          "volatility": 0.25
+        },
+        {
+          "symbol": "LIGHT_B",
+          "weight": 0.1,
+          "volatility": 0.35
+        }
+      ],
+      "index_volatility": 0.3068,
+      "index_vega": 250.0
+    }
+  ]
+}

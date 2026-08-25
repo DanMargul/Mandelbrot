@@ -20,6 +20,7 @@ add_library(volarb_core STATIC
     src/execution.cpp
     src/rate_curve.cpp
     src/factors.cpp
+    src/implied_correlation.cpp
     src/random_source.cpp
     src/hedging.cpp
     src/portfolio.cpp
@@ -50,6 +51,7 @@ if(VOLARB_CORE_BUILD_TESTS)
         tests/test_execution.cpp
         tests/test_rate_curve.cpp
         tests/test_factors.cpp
+        tests/test_implied_correlation.cpp
         tests/test_random_source.cpp
         tests/test_hedging.cpp
         tests/test_portfolio.cpp
