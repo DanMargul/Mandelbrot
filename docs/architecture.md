@@ -122,7 +122,7 @@ a defect in one of them, and conformance is what finds it.
 | `experiment` registry (`research/registry.py`) | append-only bookkeeping; the cost is a hash per trial, not arithmetic |
 | result pinning (`research/pins.py`) | reads git and the Parquet manifest; I/O, once per trial |
 | research statistics (`research/statistics.py`) | deflated Sharpe and its quantile run once per result, not per backtest step |
-| `reporting` and attribution | presentation, run once per result |
+| `reporting` and attribution (`reporting/attribution.py`) | greeks come from the reference track; runs once per result, not on the inner loop |
 | plotting | presentation |
 
 Reimplementing any of these in C++ costs real effort and produces no comparison worth

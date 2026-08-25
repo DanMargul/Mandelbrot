@@ -261,9 +261,34 @@ The z-scoring warning is quantified. The effective sample size of a persistent r
 both ways, which matters here: a mean-reverting residual, which is what a convergence strategy
 wants, has an effective sample size *above* `n` and is more significant than it looks.
 
+Attribution then made the step's own criterion checkable, and the first thing it showed was a
+loss. Splitting the vega profit of a short position in an option quoted `4%` rich, held one
+day while the surface also moved:
+
+| what moved | vega profit |
+|---|---|
+| level | `-134.50` |
+| term slope | `-19.40` |
+| residual | `+71.20` |
+| net | `-82.05` |
+
+**The residual bet was right and the trade still lost money.** The option converged and earned
+`+71.20`; an unhedged level exposure took `-134.50` back. That is the failure this step exists
+to prevent, stated in currency rather than in principle, and it is why the neutralisation is a
+second regression through time rather than a hope.
+
+Two things the attribution itself had to get right. `math.md` requires the roll of `F` and
+`DF` toward expiry to be attributed separately from theta, so there is an explicit discount
+term; price is exactly linear in the discount factor and the term explains that move to
+`2.7e-14`. And every greek is exact in its own variable while a *combined* move leaves `89%`
+of its residual in cross terms, which no refinement of the individual greeks will reach. The
+unexplained share runs from `0.23%` on a one percent move to `14.42%` on a twenty percent one,
+so the report carries it rather than letting a reader assume the expansion always holds.
+
 **Done when** P&L attribution shows the return concentrated in residual convergence rather
-than in factor exposure, on out-of-sample data. **The decomposition and the honest z-score are
-done**; the attribution itself needs the backtester, so it waits with step 6.
+than in factor exposure, on out-of-sample data. **The decomposition, the honest z-score and the
+attribution are done**; running it over out-of-sample dates needs the backtester, so that last
+clause waits with step 6.
 
 ---
 
