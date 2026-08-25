@@ -210,7 +210,8 @@ values but breaks the constraint still fails. **Done.**
 
 ## 5. A surface factor model, so signals trade the residual and nothing else
 
-*Extends Phase 4.*
+*Extends Phase 4. **The rate curve this step declared as a prerequisite is done**, see
+`spec/interfaces/rate_curve.md`. The factor decomposition itself remains.*
 
 Decompose the surface time series into level, term slope, skew, and smile curvature, either
 by PCA on total variance or on a parametric basis. What remains after reconstruction is the
@@ -224,6 +225,21 @@ neutral to level, skew, and term moves by design rather than by hope.
 Z-scoring needs a real model too. Residuals are autocorrelated and heteroskedastic, so a
 rolling mean and standard deviation will systematically misstate how unusual a residual is,
 in the direction that makes everything look tradeable.
+
+The prerequisite landed first, and it was worth building carefully rather than reaching for
+the obvious interpolation. A discount curve is defined by its nodes and by what fills the gaps
+between them, and filling them by interpolating the zero rate — which looks equivalent to
+interpolating its integral and is not — turns a curve of 1% at one month rising to 4% at three
+months into an instantaneous forward that ranges over `2.56%` to `8.44%` inside that single
+segment, a factor of `3.3`. Interpolating `z(t) * t` instead gives one constant `5.50%`.
+**Calendar structure trades exactly that quantity**, so the artefact would have gone straight
+into the signal this step is supposed to produce.
+
+Scope was set by a measurement already on the record rather than by re-deriving it: step 2
+found that supplying an external rate does not improve the parity forward, `4.8e-5` against
+`4.9e-5`, so the curve is deliberately **not** wired into the forward regression. It exists
+for discounting across expiries, which is the one place the earlier measurement said a real
+curve is needed.
 
 **Done when** P&L attribution shows the return concentrated in residual convergence rather
 than in factor exposure, on out-of-sample data.

@@ -1,0 +1,1045 @@
+{
+  "schema": "rate_curve_query/v1",
+  "records": [
+    {
+      "id": "upward_0.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 0.0,
+      "forward_start_years": 0.0,
+      "forward_end_years": 0.5
+    },
+    {
+      "id": "upward_0.0417",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 0.0417,
+      "forward_start_years": 0.0417,
+      "forward_end_years": 0.5417
+    },
+    {
+      "id": "upward_0.0833",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 0.0833,
+      "forward_start_years": 0.0833,
+      "forward_end_years": 0.5833
+    },
+    {
+      "id": "upward_0.1667",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 0.1667,
+      "forward_start_years": 0.1667,
+      "forward_end_years": 0.6667
+    },
+    {
+      "id": "upward_0.2500",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 0.25,
+      "forward_start_years": 0.25,
+      "forward_end_years": 0.75
+    },
+    {
+      "id": "upward_0.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 0.5,
+      "forward_start_years": 0.5,
+      "forward_end_years": 1.0
+    },
+    {
+      "id": "upward_1.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 1.0,
+      "forward_start_years": 1.0,
+      "forward_end_years": 1.5
+    },
+    {
+      "id": "upward_2.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 2.0,
+      "forward_start_years": 2.0,
+      "forward_end_years": 2.5
+    },
+    {
+      "id": "upward_3.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 3.5,
+      "forward_start_years": 3.5,
+      "forward_end_years": 4.0
+    },
+    {
+      "id": "upward_10.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.01
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.04
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.045
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.043
+        }
+      ],
+      "years_to_maturity": 10.0,
+      "forward_start_years": 10.0,
+      "forward_end_years": 10.5
+    },
+    {
+      "id": "inverted_0.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 0.0,
+      "forward_start_years": 0.0,
+      "forward_end_years": 0.5
+    },
+    {
+      "id": "inverted_0.0417",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 0.0417,
+      "forward_start_years": 0.0417,
+      "forward_end_years": 0.5417
+    },
+    {
+      "id": "inverted_0.0833",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 0.0833,
+      "forward_start_years": 0.0833,
+      "forward_end_years": 0.5833
+    },
+    {
+      "id": "inverted_0.1667",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 0.1667,
+      "forward_start_years": 0.1667,
+      "forward_end_years": 0.6667
+    },
+    {
+      "id": "inverted_0.2500",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 0.25,
+      "forward_start_years": 0.25,
+      "forward_end_years": 0.75
+    },
+    {
+      "id": "inverted_0.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 0.5,
+      "forward_start_years": 0.5,
+      "forward_end_years": 1.0
+    },
+    {
+      "id": "inverted_1.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 1.0,
+      "forward_start_years": 1.0,
+      "forward_end_years": 1.5
+    },
+    {
+      "id": "inverted_2.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 2.0,
+      "forward_start_years": 2.0,
+      "forward_end_years": 2.5
+    },
+    {
+      "id": "inverted_3.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 3.5,
+      "forward_start_years": 3.5,
+      "forward_end_years": 4.0
+    },
+    {
+      "id": "inverted_10.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.053
+        },
+        {
+          "years_to_maturity": 0.25,
+          "continuously_compounded_zero_rate": 0.051
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.043
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": 0.038
+        }
+      ],
+      "years_to_maturity": 10.0,
+      "forward_start_years": 10.0,
+      "forward_end_years": 10.5
+    },
+    {
+      "id": "negative_front_0.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 0.0,
+      "forward_start_years": 0.0,
+      "forward_end_years": 0.5
+    },
+    {
+      "id": "negative_front_0.0417",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 0.0417,
+      "forward_start_years": 0.0417,
+      "forward_end_years": 0.5417
+    },
+    {
+      "id": "negative_front_0.0833",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 0.0833,
+      "forward_start_years": 0.0833,
+      "forward_end_years": 0.5833
+    },
+    {
+      "id": "negative_front_0.1667",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 0.1667,
+      "forward_start_years": 0.1667,
+      "forward_end_years": 0.6667
+    },
+    {
+      "id": "negative_front_0.2500",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 0.25,
+      "forward_start_years": 0.25,
+      "forward_end_years": 0.75
+    },
+    {
+      "id": "negative_front_0.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 0.5,
+      "forward_start_years": 0.5,
+      "forward_end_years": 1.0
+    },
+    {
+      "id": "negative_front_1.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 1.0,
+      "forward_start_years": 1.0,
+      "forward_end_years": 1.5
+    },
+    {
+      "id": "negative_front_2.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 2.0,
+      "forward_start_years": 2.0,
+      "forward_end_years": 2.5
+    },
+    {
+      "id": "negative_front_3.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 3.5,
+      "forward_start_years": 3.5,
+      "forward_end_years": 4.0
+    },
+    {
+      "id": "negative_front_10.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": -0.006
+        },
+        {
+          "years_to_maturity": 2.0,
+          "continuously_compounded_zero_rate": -0.002
+        },
+        {
+          "years_to_maturity": 5.0,
+          "continuously_compounded_zero_rate": 0.004
+        }
+      ],
+      "years_to_maturity": 10.0,
+      "forward_start_years": 10.0,
+      "forward_end_years": 10.5
+    },
+    {
+      "id": "flat_single_node_0.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 0.0,
+      "forward_start_years": 0.0,
+      "forward_end_years": 0.5
+    },
+    {
+      "id": "flat_single_node_0.0417",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 0.0417,
+      "forward_start_years": 0.0417,
+      "forward_end_years": 0.5417
+    },
+    {
+      "id": "flat_single_node_0.0833",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 0.0833,
+      "forward_start_years": 0.0833,
+      "forward_end_years": 0.5833
+    },
+    {
+      "id": "flat_single_node_0.1667",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 0.1667,
+      "forward_start_years": 0.1667,
+      "forward_end_years": 0.6667
+    },
+    {
+      "id": "flat_single_node_0.2500",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 0.25,
+      "forward_start_years": 0.25,
+      "forward_end_years": 0.75
+    },
+    {
+      "id": "flat_single_node_0.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 0.5,
+      "forward_start_years": 0.5,
+      "forward_end_years": 1.0
+    },
+    {
+      "id": "flat_single_node_1.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 1.0,
+      "forward_start_years": 1.0,
+      "forward_end_years": 1.5
+    },
+    {
+      "id": "flat_single_node_2.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 2.0,
+      "forward_start_years": 2.0,
+      "forward_end_years": 2.5
+    },
+    {
+      "id": "flat_single_node_3.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 3.5,
+      "forward_start_years": 3.5,
+      "forward_end_years": 4.0
+    },
+    {
+      "id": "flat_single_node_10.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        }
+      ],
+      "years_to_maturity": 10.0,
+      "forward_start_years": 10.0,
+      "forward_end_years": 10.5
+    },
+    {
+      "id": "humped_0.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 0.0,
+      "forward_start_years": 0.0,
+      "forward_end_years": 0.5
+    },
+    {
+      "id": "humped_0.0417",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 0.0417,
+      "forward_start_years": 0.0417,
+      "forward_end_years": 0.5417
+    },
+    {
+      "id": "humped_0.0833",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 0.0833,
+      "forward_start_years": 0.0833,
+      "forward_end_years": 0.5833
+    },
+    {
+      "id": "humped_0.1667",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 0.1667,
+      "forward_start_years": 0.1667,
+      "forward_end_years": 0.6667
+    },
+    {
+      "id": "humped_0.2500",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 0.25,
+      "forward_start_years": 0.25,
+      "forward_end_years": 0.75
+    },
+    {
+      "id": "humped_0.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 0.5,
+      "forward_start_years": 0.5,
+      "forward_end_years": 1.0
+    },
+    {
+      "id": "humped_1.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 1.0,
+      "forward_start_years": 1.0,
+      "forward_end_years": 1.5
+    },
+    {
+      "id": "humped_2.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 2.0,
+      "forward_start_years": 2.0,
+      "forward_end_years": 2.5
+    },
+    {
+      "id": "humped_3.5000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 3.5,
+      "forward_start_years": 3.5,
+      "forward_end_years": 4.0
+    },
+    {
+      "id": "humped_10.0000",
+      "nodes": [
+        {
+          "years_to_maturity": 0.0833,
+          "continuously_compounded_zero_rate": 0.02
+        },
+        {
+          "years_to_maturity": 0.5,
+          "continuously_compounded_zero_rate": 0.048
+        },
+        {
+          "years_to_maturity": 1.0,
+          "continuously_compounded_zero_rate": 0.03
+        },
+        {
+          "years_to_maturity": 3.0,
+          "continuously_compounded_zero_rate": 0.035
+        }
+      ],
+      "years_to_maturity": 10.0,
+      "forward_start_years": 10.0,
+      "forward_end_years": 10.5
+    }
+  ]
+}

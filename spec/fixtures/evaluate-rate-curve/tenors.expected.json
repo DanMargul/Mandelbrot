@@ -1,0 +1,455 @@
+{
+  "schema": "rate_curve_point/v1",
+  "records": [
+    {
+      "id": "upward_0.0000",
+      "years_to_maturity": 0.0,
+      "discount_factor": 1.0,
+      "zero_rate": 0.01,
+      "integrated_rate": 0.0,
+      "forward_rate": 0.043333333333333335,
+      "forward_discount_factor": 0.9785663694822792
+    },
+    {
+      "id": "upward_0.0417",
+      "years_to_maturity": 0.0417,
+      "discount_factor": 0.9995830869324159,
+      "zero_rate": 0.01,
+      "integrated_rate": 0.000417,
+      "forward_rate": 0.04639133333333333,
+      "forward_discount_factor": 0.977071284786863
+    },
+    {
+      "id": "upward_0.0833",
+      "years_to_maturity": 0.0833,
+      "discount_factor": 0.9991673468481851,
+      "zero_rate": 0.01,
+      "integrated_rate": 0.000833,
+      "forward_rate": 0.049442,
+      "forward_discount_factor": 0.9755820614568685
+    },
+    {
+      "id": "upward_0.1667",
+      "years_to_maturity": 0.1667,
+      "discount_factor": 0.9945954080929914,
+      "zero_rate": 0.032508995501439604,
+      "integrated_rate": 0.0054192495500899815,
+      "forward_rate": 0.04805350089982004,
+      "forward_discount_factor": 0.9762595940252379
+    },
+    {
+      "id": "upward_0.2500",
+      "years_to_maturity": 0.25,
+      "discount_factor": 0.9900498337491681,
+      "zero_rate": 0.04,
+      "integrated_rate": 0.01,
+      "forward_rate": 0.04666666666666666,
+      "forward_discount_factor": 0.9769367838983476
+    },
+    {
+      "id": "upward_0.5000",
+      "years_to_maturity": 0.5,
+      "discount_factor": 0.9785663694822792,
+      "zero_rate": 0.043333333333333335,
+      "integrated_rate": 0.021666666666666667,
+      "forward_rate": 0.04666666666666666,
+      "forward_discount_factor": 0.9769367838983476
+    },
+    {
+      "id": "upward_1.0000",
+      "years_to_maturity": 1.0,
+      "discount_factor": 0.9559974818331,
+      "zero_rate": 0.045,
+      "integrated_rate": 0.045,
+      "forward_rate": 0.04100000000000001,
+      "forward_discount_factor": 0.9797086964745179
+    },
+    {
+      "id": "upward_2.0000",
+      "years_to_maturity": 2.0,
+      "discount_factor": 0.9175942312201509,
+      "zero_rate": 0.043,
+      "integrated_rate": 0.086,
+      "forward_rate": 0.04099999999999998,
+      "forward_discount_factor": 0.9797086964745179
+    },
+    {
+      "id": "upward_3.5000",
+      "years_to_maturity": 3.5,
+      "discount_factor": 0.8628624383213754,
+      "zero_rate": 0.04214285714285714,
+      "integrated_rate": 0.1475,
+      "forward_rate": 0.04099999999999998,
+      "forward_discount_factor": 0.9797086964745179
+    },
+    {
+      "id": "upward_10.0000",
+      "years_to_maturity": 10.0,
+      "discount_factor": 0.6610009512659125,
+      "zero_rate": 0.04139999999999999,
+      "integrated_rate": 0.4139999999999999,
+      "forward_rate": 0.04100000000000015,
+      "forward_discount_factor": 0.9797086964745177
+    },
+    {
+      "id": "inverted_0.0000",
+      "years_to_maturity": 0.0,
+      "discount_factor": 1.0,
+      "zero_rate": 0.053,
+      "integrated_rate": 0.0,
+      "forward_rate": 0.04566666666666666,
+      "forward_discount_factor": 0.9774253744277501
+    },
+    {
+      "id": "inverted_0.0417",
+      "years_to_maturity": 0.0417,
+      "discount_factor": 0.9977923404727777,
+      "zero_rate": 0.053,
+      "integrated_rate": 0.0022101,
+      "forward_rate": 0.04461026666666667,
+      "forward_discount_factor": 0.9779417868830459
+    },
+    {
+      "id": "inverted_0.0833",
+      "years_to_maturity": 0.0833,
+      "discount_factor": 0.9955948313447665,
+      "zero_rate": 0.053000000000000005,
+      "integrated_rate": 0.0044149,
+      "forward_rate": 0.0435564,
+      "forward_discount_factor": 0.9784572327995051
+    },
+    {
+      "id": "inverted_0.1667",
+      "years_to_maturity": 0.1667,
+      "discount_factor": 0.9914517954256967,
+      "zero_rate": 0.05149940029990403,
+      "integrated_rate": 0.008584950029994001,
+      "forward_rate": 0.04194389994001199,
+      "forward_discount_factor": 0.9792464320760168
+    },
+    {
+      "id": "inverted_0.2500",
+      "years_to_maturity": 0.25,
+      "discount_factor": 0.9873309369029926,
+      "zero_rate": 0.051,
+      "integrated_rate": 0.01275,
+      "forward_rate": 0.04033333333333333,
+      "forward_discount_factor": 0.9800353204743183
+    },
+    {
+      "id": "inverted_0.5000",
+      "years_to_maturity": 0.5,
+      "discount_factor": 0.9774253744277501,
+      "zero_rate": 0.04566666666666666,
+      "integrated_rate": 0.02283333333333333,
+      "forward_rate": 0.04033333333333333,
+      "forward_discount_factor": 0.9800353204743183
+    },
+    {
+      "id": "inverted_1.0000",
+      "years_to_maturity": 1.0,
+      "discount_factor": 0.9579113900670306,
+      "zero_rate": 0.043,
+      "integrated_rate": 0.043,
+      "forward_rate": 0.033,
+      "forward_discount_factor": 0.9836353793906724
+    },
+    {
+      "id": "inverted_2.0000",
+      "years_to_maturity": 2.0,
+      "discount_factor": 0.9268162065593822,
+      "zero_rate": 0.038,
+      "integrated_rate": 0.076,
+      "forward_rate": 0.033,
+      "forward_discount_factor": 0.9836353793906724
+    },
+    {
+      "id": "inverted_3.5000",
+      "years_to_maturity": 3.5,
+      "discount_factor": 0.8820557644270329,
+      "zero_rate": 0.03585714285714286,
+      "integrated_rate": 0.1255,
+      "forward_rate": 0.03300000000000003,
+      "forward_discount_factor": 0.9836353793906724
+    },
+    {
+      "id": "inverted_10.0000",
+      "years_to_maturity": 10.0,
+      "discount_factor": 0.7117703227626097,
+      "zero_rate": 0.034,
+      "integrated_rate": 0.34,
+      "forward_rate": 0.03300000000000003,
+      "forward_discount_factor": 0.9836353793906724
+    },
+    {
+      "id": "negative_front_0.0000",
+      "years_to_maturity": 0.0,
+      "discount_factor": 1.0,
+      "zero_rate": -0.006,
+      "integrated_rate": 0.0,
+      "forward_rate": -0.006,
+      "forward_discount_factor": 1.003004504503377
+    },
+    {
+      "id": "negative_front_0.0417",
+      "years_to_maturity": 0.0417,
+      "discount_factor": 1.0002502313026307,
+      "zero_rate": -0.006,
+      "integrated_rate": -0.0002502,
+      "forward_rate": -0.0055552000000000015,
+      "forward_discount_factor": 1.0027814611049208
+    },
+    {
+      "id": "negative_front_0.0833",
+      "years_to_maturity": 0.0833,
+      "discount_factor": 1.0004999249208308,
+      "zero_rate": -0.006,
+      "integrated_rate": -0.0004998,
+      "forward_rate": -0.0051114666666666675,
+      "forward_discount_factor": 1.0025590020037924
+    },
+    {
+      "id": "negative_front_0.1667",
+      "years_to_maturity": 0.1667,
+      "discount_factor": 1.0010007003668284,
+      "zero_rate": -0.006,
+      "integrated_rate": -0.0010002,
+      "forward_rate": -0.0042218666666666675,
+      "forward_discount_factor": 1.0021131629216637
+    },
+    {
+      "id": "negative_front_0.2500",
+      "years_to_maturity": 0.25,
+      "discount_factor": 1.001501125562711,
+      "zero_rate": -0.006,
+      "integrated_rate": -0.0015,
+      "forward_rate": -0.003333333333333333,
+      "forward_discount_factor": 1.001668056327482
+    },
+    {
+      "id": "negative_front_0.5000",
+      "years_to_maturity": 0.5,
+      "discount_factor": 1.003004504503377,
+      "zero_rate": -0.006,
+      "integrated_rate": -0.003,
+      "forward_rate": -0.0006666666666666678,
+      "forward_discount_factor": 1.0003333888950623
+    },
+    {
+      "id": "negative_front_1.0000",
+      "years_to_maturity": 1.0,
+      "discount_factor": 1.0033388950668758,
+      "zero_rate": -0.003333333333333334,
+      "integrated_rate": -0.003333333333333334,
+      "forward_rate": -0.0006666666666666661,
+      "forward_discount_factor": 1.0003333888950623
+    },
+    {
+      "id": "negative_front_2.0000",
+      "years_to_maturity": 2.0,
+      "discount_factor": 1.004008010677342,
+      "zero_rate": -0.002,
+      "integrated_rate": -0.004,
+      "forward_rate": 0.008,
+      "forward_discount_factor": 0.9960079893439915
+    },
+    {
+      "id": "negative_front_3.5000",
+      "years_to_maturity": 3.5,
+      "discount_factor": 0.9920319148370607,
+      "zero_rate": 0.002285714285714286,
+      "integrated_rate": 0.008,
+      "forward_rate": 0.007999999999999997,
+      "forward_discount_factor": 0.9960079893439915
+    },
+    {
+      "id": "negative_front_10.0000",
+      "years_to_maturity": 10.0,
+      "discount_factor": 0.9417645335842487,
+      "zero_rate": 0.006,
+      "integrated_rate": 0.06,
+      "forward_rate": 0.008000000000000007,
+      "forward_discount_factor": 0.9960079893439915
+    },
+    {
+      "id": "flat_single_node_0.0000",
+      "years_to_maturity": 0.0,
+      "discount_factor": 1.0,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.0,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_0.0417",
+      "years_to_maturity": 0.0417,
+      "discount_factor": 0.9987497821742993,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.001251,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_0.0833",
+      "years_to_maturity": 0.0833,
+      "discount_factor": 0.9975041199010812,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.002499,
+      "forward_rate": 0.030000000000000002,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_0.1667",
+      "years_to_maturity": 0.1667,
+      "discount_factor": 0.9950114841807006,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.005000999999999999,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_0.2500",
+      "years_to_maturity": 0.25,
+      "discount_factor": 0.9925280548191384,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.0075,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_0.5000",
+      "years_to_maturity": 0.5,
+      "discount_factor": 0.9851119396030626,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.015,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_1.0000",
+      "years_to_maturity": 1.0,
+      "discount_factor": 0.9704455335485082,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.03,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_2.0000",
+      "years_to_maturity": 2.0,
+      "discount_factor": 0.9417645335842487,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.06,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_3.5000",
+      "years_to_maturity": 3.5,
+      "discount_factor": 0.9003245225862656,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.105,
+      "forward_rate": 0.03,
+      "forward_discount_factor": 0.9851119396030626
+    },
+    {
+      "id": "flat_single_node_10.0000",
+      "years_to_maturity": 10.0,
+      "discount_factor": 0.7408182206817179,
+      "zero_rate": 0.030000000000000006,
+      "integrated_rate": 0.30000000000000004,
+      "forward_rate": 0.029999999999999805,
+      "forward_discount_factor": 0.9851119396030628
+    },
+    {
+      "id": "humped_0.0000",
+      "years_to_maturity": 0.0,
+      "discount_factor": 1.0,
+      "zero_rate": 0.02,
+      "integrated_rate": 0.0,
+      "forward_rate": 0.048,
+      "forward_discount_factor": 0.9762857097579093
+    },
+    {
+      "id": "humped_0.0417",
+      "years_to_maturity": 0.0417,
+      "discount_factor": 0.9991663476813378,
+      "zero_rate": 0.02,
+      "integrated_rate": 0.000834,
+      "forward_rate": 0.0473328,
+      "forward_discount_factor": 0.9766114530016367
+    },
+    {
+      "id": "humped_0.0833",
+      "years_to_maturity": 0.0833,
+      "discount_factor": 0.9983353870076415,
+      "zero_rate": 0.02,
+      "integrated_rate": 0.001666,
+      "forward_rate": 0.0466672,
+      "forward_discount_factor": 0.9769365233819066
+    },
+    {
+      "id": "humped_0.1667",
+      "years_to_maturity": 0.1667,
+      "discount_factor": 0.9938827710612415,
+      "zero_rate": 0.03680873328574026,
+      "integrated_rate": 0.006136015838732901,
+      "forward_rate": 0.0397287683225342,
+      "forward_discount_factor": 0.9803316127861065
+    },
+    {
+      "id": "humped_0.2500",
+      "years_to_maturity": 0.25,
+      "discount_factor": 0.9894553171612446,
+      "zero_rate": 0.0424026877849772,
+      "integrated_rate": 0.0106006719462443,
+      "forward_rate": 0.0327986561075114,
+      "forward_discount_factor": 0.9837344088633716
+    },
+    {
+      "id": "humped_0.5000",
+      "years_to_maturity": 0.5,
+      "discount_factor": 0.9762857097579093,
+      "zero_rate": 0.048,
+      "integrated_rate": 0.024,
+      "forward_rate": 0.011999999999999997,
+      "forward_discount_factor": 0.9940179640539353
+    },
+    {
+      "id": "humped_1.0000",
+      "years_to_maturity": 1.0,
+      "discount_factor": 0.9704455335485082,
+      "zero_rate": 0.03,
+      "integrated_rate": 0.03,
+      "forward_rate": 0.037500000000000006,
+      "forward_discount_factor": 0.9814246877477771
+    },
+    {
+      "id": "humped_2.0000",
+      "years_to_maturity": 2.0,
+      "discount_factor": 0.9347277206160275,
+      "zero_rate": 0.03375,
+      "integrated_rate": 0.0675,
+      "forward_rate": 0.03750000000000003,
+      "forward_discount_factor": 0.981424687747777
+    },
+    {
+      "id": "humped_3.5000",
+      "years_to_maturity": 3.5,
+      "discount_factor": 0.8836007134508922,
+      "zero_rate": 0.03535714285714286,
+      "integrated_rate": 0.12375000000000001,
+      "forward_rate": 0.037500000000000006,
+      "forward_discount_factor": 0.9814246877477771
+    },
+    {
+      "id": "humped_10.0000",
+      "years_to_maturity": 10.0,
+      "discount_factor": 0.6924633268086434,
+      "zero_rate": 0.036750000000000005,
+      "integrated_rate": 0.36750000000000005,
+      "forward_rate": 0.03750000000000009,
+      "forward_discount_factor": 0.981424687747777
+    }
+  ]
+}

@@ -22,6 +22,10 @@ output_schema = "forward_curve/v1"
 input_schema = "svi_calibration_request/v1"
 output_schema = "svi_calibration_result/v1"
 
+[verbs.evaluate-rate-curve]
+input_schema = "rate_curve_query/v1"
+output_schema = "rate_curve_point/v1"
+
 [verbs.simulate-fills]
 input_schema = "fill_request/v1"
 output_schema = "fill_result/v1"

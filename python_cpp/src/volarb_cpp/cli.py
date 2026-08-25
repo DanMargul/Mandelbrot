@@ -133,6 +133,42 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def rate_curve_columns(record: JsonRecord) -> dict[str, list[float]]:
+    raw = record.get("nodes")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'nodes' must be an array")
+    columns: dict[str, list[float]] = {
+        "years_to_maturity": [],
+        "continuously_compounded_zero_rate": [],
+    }
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'nodes' must be an object")
+        for name, column in columns.items():
+            column.append(required_float(entry, name))
+    return columns
+
+
+def evaluate_rate_curve_record(record: JsonRecord) -> JsonRecord:
+    columns = rate_curve_columns(record)
+    years = required_float(record, "years_to_maturity")
+    start = optional_float(record, "forward_start_years")
+    end = optional_float(record, "forward_end_years")
+    if start is None or end is None:
+        start, end = years, years + 1.0
+    return {
+        "id": required_string(record, "id"),
+        "years_to_maturity": years,
+        "discount_factor": _volarb_core.rate_curve_discount_factor(**columns, years=years),
+        "zero_rate": _volarb_core.rate_curve_zero_rate(**columns, years=years),
+        "integrated_rate": _volarb_core.rate_curve_integrated_rate(**columns, years=years),
+        "forward_rate": _volarb_core.rate_curve_forward_rate(**columns, start_years=start, end_years=end),
+        "forward_discount_factor": _volarb_core.rate_curve_forward_discount_factor(
+            **columns, start_years=start, end_years=end
+        ),
+    }
+
+
 def required_order_side(record: JsonRecord, field: str) -> str:
     value = record.get(field)
     if value in ("buy", "sell"):
@@ -484,6 +520,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "evaluate-rate-curve": Verb(
+        name="evaluate-rate-curve",
+        input_schema="rate_curve_query/v1",
+        output_schema="rate_curve_point/v1",
+        transform_records=mapped_over_records(evaluate_rate_curve_record),
     ),
     "simulate-fills": Verb(
         name="simulate-fills",

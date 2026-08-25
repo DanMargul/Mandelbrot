@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rate_curve_point/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "rate_curve_point/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "years_to_maturity", "discount_factor", "zero_rate", "integrated_rate",
+                     "forward_rate", "forward_discount_factor"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "years_to_maturity": { "type": "number" },
+          "discount_factor": { "type": "number", "exclusiveMinimum": 0 },
+          "zero_rate": { "type": "number" },
+          "integrated_rate": { "type": "number" },
+          "forward_rate": { "type": "number" },
+          "forward_discount_factor": { "type": "number", "exclusiveMinimum": 0 }
+        }
+      }
+    }
+  }
+}

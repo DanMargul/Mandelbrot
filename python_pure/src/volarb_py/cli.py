@@ -48,6 +48,15 @@ from volarb_py.market_data import (
     parse_canonical_timestamp,
 )
 from volarb_py.pricing import BlackScholesInputs, InvalidOptionInputsError, black_scholes_price_and_greeks
+from volarb_py.rate_curve import (
+    CurveNode,
+    RateCurve,
+    discount_factor,
+    forward_discount_factor,
+    forward_rate,
+    integrated_rate,
+    zero_rate,
+)
 from volarb_py.svi import (
     DEFAULT_SCAN_STEPS,
     SviParameters,
@@ -198,6 +207,41 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
         "status": scan.status,
+    }
+
+
+def rate_curve_from(record: JsonRecord) -> RateCurve:
+    raw = record.get("nodes")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'nodes' must be an array")
+    nodes: list[CurveNode] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'nodes' must be an object")
+        nodes.append(
+            CurveNode(
+                years_to_maturity=required_float(entry, "years_to_maturity"),
+                continuously_compounded_zero_rate=required_float(entry, "continuously_compounded_zero_rate"),
+            )
+        )
+    return RateCurve(nodes)
+
+
+def evaluate_rate_curve_record(record: JsonRecord) -> JsonRecord:
+    curve = rate_curve_from(record)
+    years = required_float(record, "years_to_maturity")
+    start = optional_float(record, "forward_start_years")
+    end = optional_float(record, "forward_end_years")
+    if start is None or end is None:
+        start, end = years, years + 1.0
+    return {
+        "id": required_string(record, "id"),
+        "years_to_maturity": years,
+        "discount_factor": discount_factor(curve, years),
+        "zero_rate": zero_rate(curve, years),
+        "integrated_rate": integrated_rate(curve, years),
+        "forward_rate": forward_rate(curve, start, end),
+        "forward_discount_factor": forward_discount_factor(curve, start, end),
     }
 
 
@@ -532,6 +576,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "evaluate-rate-curve": Verb(
+        name="evaluate-rate-curve",
+        input_schema="rate_curve_query/v1",
+        output_schema="rate_curve_point/v1",
+        transform_records=mapped_over_records(evaluate_rate_curve_record),
     ),
     "simulate-fills": Verb(
         name="simulate-fills",

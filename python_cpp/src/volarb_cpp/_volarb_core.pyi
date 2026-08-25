@@ -126,6 +126,32 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidRateCurveError(ValueError): ...
+
+def rate_curve_discount_factor(
+    *, years_to_maturity: list[float], continuously_compounded_zero_rate: list[float], years: float
+) -> float: ...
+def rate_curve_zero_rate(
+    *, years_to_maturity: list[float], continuously_compounded_zero_rate: list[float], years: float
+) -> float: ...
+def rate_curve_integrated_rate(
+    *, years_to_maturity: list[float], continuously_compounded_zero_rate: list[float], years: float
+) -> float: ...
+def rate_curve_forward_rate(
+    *,
+    years_to_maturity: list[float],
+    continuously_compounded_zero_rate: list[float],
+    start_years: float,
+    end_years: float,
+) -> float: ...
+def rate_curve_forward_discount_factor(
+    *,
+    years_to_maturity: list[float],
+    continuously_compounded_zero_rate: list[float],
+    start_years: float,
+    end_years: float,
+) -> float: ...
+
 class InvalidQuoteError(ValueError): ...
 class InvalidOrderError(ValueError): ...
 

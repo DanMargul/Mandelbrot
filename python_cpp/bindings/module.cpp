@@ -8,6 +8,7 @@
 #include "volarb/svi_surface.hpp"
 #include "volarb/essvi.hpp"
 #include "volarb/execution.hpp"
+#include "volarb/rate_curve.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -62,7 +63,10 @@ using volarb::name_of_american_inversion_status;
 using volarb::default_scan_steps;
 using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
+using volarb::CurveNode;
 using volarb::fill_package;
+using volarb::InvalidRateCurveError;
+using volarb::RateCurve;
 using volarb::InvalidOrderError;
 using volarb::InvalidQuoteError;
 using volarb::LegFill;
@@ -199,6 +203,48 @@ std::vector<double> leg_field_of(const PackageFill& fill, int which) {
         values.push_back(picked);
     }
     return values;
+}
+
+RateCurve rate_curve_from_values(const std::vector<double>& years_to_maturity,
+                                 const std::vector<double>& continuously_compounded_zero_rate) {
+    if (years_to_maturity.size() != continuously_compounded_zero_rate.size()) {
+        throw InvalidRateCurveError("every node column must have the same length");
+    }
+    std::vector<CurveNode> nodes;
+    nodes.reserve(years_to_maturity.size());
+    for (std::size_t index = 0; index < years_to_maturity.size(); ++index) {
+        nodes.push_back(CurveNode{years_to_maturity[index], continuously_compounded_zero_rate[index]});
+    }
+    return RateCurve{nodes};
+}
+
+double discount_factor_from_values(const std::vector<double>& years_to_maturity,
+                                   const std::vector<double>& zero_rates, double years) {
+    return volarb::discount_factor(rate_curve_from_values(years_to_maturity, zero_rates), years);
+}
+
+double zero_rate_from_values(const std::vector<double>& years_to_maturity,
+                             const std::vector<double>& zero_rates, double years) {
+    return volarb::zero_rate(rate_curve_from_values(years_to_maturity, zero_rates), years);
+}
+
+double integrated_rate_from_values(const std::vector<double>& years_to_maturity,
+                                   const std::vector<double>& zero_rates, double years) {
+    return volarb::integrated_rate(rate_curve_from_values(years_to_maturity, zero_rates), years);
+}
+
+double forward_rate_from_values(const std::vector<double>& years_to_maturity,
+                                const std::vector<double>& zero_rates, double start_years,
+                                double end_years) {
+    return volarb::forward_rate(rate_curve_from_values(years_to_maturity, zero_rates), start_years,
+                                end_years);
+}
+
+double forward_discount_factor_from_values(const std::vector<double>& years_to_maturity,
+                                           const std::vector<double>& zero_rates, double start_years,
+                                           double end_years) {
+    return volarb::forward_discount_factor(rate_curve_from_values(years_to_maturity, zero_rates),
+                                           start_years, end_years);
 }
 
 PackageFill fill_package_from_values(const std::vector<double>& bid_price,
@@ -545,6 +591,22 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
                py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
                py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
+
+    py::register_exception<InvalidRateCurveError>(module, "InvalidRateCurveError", PyExc_ValueError);
+    module.def("rate_curve_discount_factor", &discount_factor_from_values,
+               py::arg("years_to_maturity"), py::arg("continuously_compounded_zero_rate"),
+               py::arg("years"));
+    module.def("rate_curve_zero_rate", &zero_rate_from_values, py::arg("years_to_maturity"),
+               py::arg("continuously_compounded_zero_rate"), py::arg("years"));
+    module.def("rate_curve_integrated_rate", &integrated_rate_from_values,
+               py::arg("years_to_maturity"), py::arg("continuously_compounded_zero_rate"),
+               py::arg("years"));
+    module.def("rate_curve_forward_rate", &forward_rate_from_values, py::arg("years_to_maturity"),
+               py::arg("continuously_compounded_zero_rate"), py::arg("start_years"),
+               py::arg("end_years"));
+    module.def("rate_curve_forward_discount_factor", &forward_discount_factor_from_values,
+               py::arg("years_to_maturity"), py::arg("continuously_compounded_zero_rate"),
+               py::arg("start_years"), py::arg("end_years"));
 
     py::register_exception<InvalidQuoteError>(module, "InvalidQuoteError", PyExc_ValueError);
     py::register_exception<InvalidOrderError>(module, "InvalidOrderError", PyExc_ValueError);

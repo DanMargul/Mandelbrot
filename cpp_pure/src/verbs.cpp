@@ -6,6 +6,7 @@
 #include "volarb/svi_surface.hpp"
 #include "volarb/essvi.hpp"
 #include "volarb/execution.hpp"
+#include "volarb/rate_curve.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -190,6 +191,41 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
         });
     }
     return slices;
+}
+
+RateCurve rate_curve_from(const nlohmann::json& record) {
+    const auto raw = record.find("nodes");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'nodes' must be an array");
+    }
+    std::vector<CurveNode> nodes;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'nodes' must be an object");
+        }
+        nodes.push_back(CurveNode{required_number(entry, "years_to_maturity"),
+                                  required_number(entry, "continuously_compounded_zero_rate")});
+    }
+    return RateCurve{nodes};
+}
+
+nlohmann::json evaluate_rate_curve_record(const nlohmann::json& record) {
+    const RateCurve curve = rate_curve_from(record);
+    const double years = required_number(record, "years_to_maturity");
+    const std::optional<double> start = optional_number(record, "forward_start_years");
+    const std::optional<double> end = optional_number(record, "forward_end_years");
+    const double forward_start = start.has_value() && end.has_value() ? *start : years;
+    const double forward_end = start.has_value() && end.has_value() ? *end : years + 1.0;
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["years_to_maturity"] = years;
+    output["discount_factor"] = discount_factor(curve, years);
+    output["zero_rate"] = zero_rate(curve, years);
+    output["integrated_rate"] = integrated_rate(curve, years);
+    output["forward_rate"] = forward_rate(curve, forward_start, forward_end);
+    output["forward_discount_factor"] = forward_discount_factor(curve, forward_start, forward_end);
+    return output;
 }
 
 std::vector<PackageLeg> package_legs_from(const nlohmann::json& record) {
@@ -492,6 +528,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"evaluate-rate-curve",
+         Verb{"evaluate-rate-curve", "rate_curve_query/v1", "rate_curve_point/v1",
+              mapped_over_records(evaluate_rate_curve_record)}},
         {"simulate-fills",
          Verb{"simulate-fills", "fill_request/v1", "fill_result/v1",
               mapped_over_records(simulate_fills_record)}},

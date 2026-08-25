@@ -382,3 +382,37 @@ def test_an_unknown_side_raises_through_the_bindings() -> None:
 def test_ragged_leg_columns_raise_through_the_bindings() -> None:
     with pytest.raises(ValueError, match="length"):
         core.fill_package(**{**LIQUID_LEG, "quantity": [10, 10]})
+
+
+UPWARD_CURVE = {
+    "years_to_maturity": [0.0833, 0.25, 1.0, 2.0],
+    "continuously_compounded_zero_rate": [0.01, 0.04, 0.045, 0.043],
+}
+FIRST_NODE_YEARS = 0.0833
+FIRST_NODE_RATE = 0.01
+
+
+def test_the_curve_reproduces_a_node_through_the_bindings() -> None:
+    assert core.rate_curve_zero_rate(**UPWARD_CURVE, years=FIRST_NODE_YEARS) == pytest.approx(
+        FIRST_NODE_RATE, rel=1e-14
+    )
+    assert core.rate_curve_discount_factor(**UPWARD_CURVE, years=FIRST_NODE_YEARS) == pytest.approx(
+        math.exp(-FIRST_NODE_RATE * FIRST_NODE_YEARS), rel=1e-14
+    )
+
+
+def test_the_forward_is_constant_inside_a_segment_through_the_bindings() -> None:
+    whole = core.rate_curve_forward_rate(**UPWARD_CURVE, start_years=0.0833, end_years=0.25)
+    part = core.rate_curve_forward_rate(**UPWARD_CURVE, start_years=0.12, end_years=0.20)
+    assert whole == pytest.approx(part, rel=1e-12)
+
+
+def test_a_malformed_curve_raises_through_the_bindings() -> None:
+    with pytest.raises(ValueError, match="increasing"):
+        core.rate_curve_zero_rate(
+            years_to_maturity=[1.0, 0.5], continuously_compounded_zero_rate=[0.01, 0.02], years=1.0
+        )
+    with pytest.raises(ValueError, match="length"):
+        core.rate_curve_zero_rate(
+            years_to_maturity=[1.0, 2.0], continuously_compounded_zero_rate=[0.01], years=1.0
+        )

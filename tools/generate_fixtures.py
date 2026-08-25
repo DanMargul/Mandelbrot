@@ -3,8 +3,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import random
 import sys
+from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Final
@@ -31,6 +33,7 @@ from volarb_py.american import (  # noqa: E402
 from volarb_py.cli import (  # noqa: E402
     calibrate_essvi_surface_record,
     calibrate_svi_slice_record,
+    evaluate_rate_curve_record,
     invert_american_implied_volatility_record,
     invert_implied_volatility_record,
     price_american_option_record,
@@ -590,6 +593,84 @@ def build_svi_surface_fixture() -> None:
     )
 
 
+RATE_CURVES: Final[tuple[tuple[str, tuple[tuple[float, float], ...]], ...]] = (
+    (
+        "upward",
+        ((0.0833, 0.0100), (0.2500, 0.0400), (1.0000, 0.0450), (2.0000, 0.0430)),
+    ),
+    (
+        "inverted",
+        ((0.0833, 0.0530), (0.2500, 0.0510), (1.0000, 0.0430), (2.0000, 0.0380)),
+    ),
+    (
+        "negative_front",
+        ((0.5000, -0.0060), (2.0000, -0.0020), (5.0000, 0.0040)),
+    ),
+    ("flat_single_node", ((1.0000, 0.0300),)),
+    ("humped", ((0.0833, 0.0200), (0.5000, 0.0480), (1.0000, 0.0300), (3.0000, 0.0350))),
+)
+
+RATE_CURVE_TENORS: Final[tuple[float, ...]] = (
+    0.0,
+    0.0417,
+    0.0833,
+    0.1667,
+    0.2500,
+    0.5000,
+    1.0000,
+    2.0000,
+    3.5000,
+    10.0000,
+)
+
+RATE_CURVE_FORWARD_BUDGET: Final[float] = 1e-13
+
+
+def rate_curve_request(name: str, nodes: tuple[tuple[float, float], ...], years: float) -> dict[str, Any]:
+    return {
+        "id": f"{name}_{years:.4f}",
+        "nodes": [
+            {"years_to_maturity": tenor, "continuously_compounded_zero_rate": rate} for tenor, rate in nodes
+        ],
+        "years_to_maturity": years,
+        "forward_start_years": years,
+        "forward_end_years": years + 0.5,
+    }
+
+
+def verify_rate_curve(request: dict[str, Any], result: dict[str, Any]) -> None:
+    years = float(result["years_to_maturity"])
+    expected = math.exp(-float(result["integrated_rate"]))
+    if abs(float(result["discount_factor"]) - expected) > RATE_CURVE_FORWARD_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the discount factor does not match its exponent")
+    if years > 0.0:
+        implied = float(result["integrated_rate"]) / years
+        if abs(implied - float(result["zero_rate"])) > RATE_CURVE_FORWARD_BUDGET:
+            raise OracleDisagreementError(f"{request['id']}: the zero rate does not match its integral")
+    span = float(request["forward_end_years"]) - float(request["forward_start_years"])
+    composed = math.exp(-float(result["forward_rate"]) * span)
+    if abs(composed - float(result["forward_discount_factor"])) > RATE_CURVE_FORWARD_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the forward factor does not match its rate")
+
+
+def build_rate_curve_fixture() -> None:
+    request_records = []
+    result_records = []
+    for name, nodes in RATE_CURVES:
+        for years in RATE_CURVE_TENORS:
+            request = rate_curve_request(name, nodes, years)
+            result = evaluate_rate_curve_record(request)
+            verify_rate_curve(request, result)
+            request_records.append(request)
+            result_records.append(result)
+
+    directory = FIXTURE_ROOT / "evaluate-rate-curve"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "tenors.input.json", Document("rate_curve_query/v1", request_records))
+    write_document(directory / "tenors.expected.json", Document("rate_curve_point/v1", result_records))
+    print(f"evaluate-rate-curve/tenors: {len(result_records)} cases over {len(RATE_CURVES)} curves")
+
+
 FILL_QUOTES: Final[tuple[tuple[str, float, float, int, int, float], ...]] = (
     ("liquid_index", 10.00, 10.20, 250, 180, 0.2000),
     ("liquid_single_name", 2.40, 2.50, 90, 75, 0.0850),
@@ -938,49 +1019,44 @@ def build_svi_calibration_fixture() -> None:
     )
 
 
+def build_all_pricing_fixtures() -> None:
+    for family, cases in all_pricing_cases().items():
+        build_pricing_fixture(family, cases)
+
+
+def build_all_implied_volatility_fixtures() -> None:
+    for family, cases in all_pricing_cases().items():
+        build_implied_volatility_fixture(family, cases)
+    boundary_implied_volatility_fixture()
+
+
+def build_all_american_fixtures() -> None:
+    for family, cases in all_american_cases().items():
+        build_american_fixture(family, cases)
+
+
+FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
+    "price-options": build_all_pricing_fixtures,
+    "invert-implied-volatility": build_all_implied_volatility_fixtures,
+    "price-american-options": build_all_american_fixtures,
+    "invert-american-implied-volatility": build_american_inversion_fixture,
+    "scan-svi-slice": build_svi_scan_fixture,
+    "scan-svi-surface": build_svi_surface_fixture,
+    "evaluate-rate-curve": build_rate_curve_fixture,
+    "simulate-fills": build_fill_fixture,
+    "calibrate-essvi-surface": build_essvi_fixture,
+    "calibrate-svi-slice": build_svi_calibration_fixture,
+}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--verb",
-        choices=[
-            "price-options",
-            "invert-implied-volatility",
-            "price-american-options",
-            "invert-american-implied-volatility",
-            "scan-svi-slice",
-            "scan-svi-surface",
-            "calibrate-essvi-surface",
-            "simulate-fills",
-            "calibrate-svi-slice",
-            "all",
-        ],
-        default="all",
-    )
+    parser.add_argument("--verb", choices=[*FIXTURE_BUILDERS, "all"], default="all")
     arguments = parser.parse_args()
 
-    families = all_pricing_cases()
-    if arguments.verb in ("price-options", "all"):
-        for family, cases in families.items():
-            build_pricing_fixture(family, cases)
-    if arguments.verb in ("invert-implied-volatility", "all"):
-        for family, cases in families.items():
-            build_implied_volatility_fixture(family, cases)
-        boundary_implied_volatility_fixture()
-    if arguments.verb in ("price-american-options", "all"):
-        for family, american_cases in all_american_cases().items():
-            build_american_fixture(family, american_cases)
-    if arguments.verb in ("invert-american-implied-volatility", "all"):
-        build_american_inversion_fixture()
-    if arguments.verb in ("scan-svi-slice", "all"):
-        build_svi_scan_fixture()
-    if arguments.verb in ("scan-svi-surface", "all"):
-        build_svi_surface_fixture()
-    if arguments.verb in ("simulate-fills", "all"):
-        build_fill_fixture()
-    if arguments.verb in ("calibrate-essvi-surface", "all"):
-        build_essvi_fixture()
-    if arguments.verb in ("calibrate-svi-slice", "all"):
-        build_svi_calibration_fixture()
+    for verb, build in FIXTURE_BUILDERS.items():
+        if arguments.verb in (verb, "all"):
+            build()
     return 0
 
 

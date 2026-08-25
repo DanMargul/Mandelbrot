@@ -426,3 +426,27 @@ absolute = 1e-16
 ["fill_result/v1".leg_cost_against_mid]
 relative = 1e-13
 absolute = 1e-15
+
+["rate_curve_point/v1".years_to_maturity]
+relative = 1e-15
+absolute = 1e-15
+
+["rate_curve_point/v1".discount_factor]
+relative = 1e-14
+absolute = 1e-16
+
+["rate_curve_point/v1".zero_rate]
+relative = 1e-13
+absolute = 1e-16
+
+["rate_curve_point/v1".integrated_rate]
+relative = 1e-14
+absolute = 1e-16
+
+["rate_curve_point/v1".forward_rate]
+relative = 1e-12
+absolute = 1e-16
+
+["rate_curve_point/v1".forward_discount_factor]
+relative = 1e-14
+absolute = 1e-16
