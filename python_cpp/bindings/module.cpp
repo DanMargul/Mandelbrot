@@ -4,6 +4,7 @@
 #include "volarb/market_data.hpp"
 #include "volarb/pricing.hpp"
 #include "volarb/svi.hpp"
+#include "volarb/svi_calibration.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -61,6 +62,11 @@ using volarb::name_of_svi_status;
 using volarb::scan_svi_slice;
 using volarb::SviParameters;
 using volarb::SviSliceScan;
+using volarb::calibrate_svi_slice;
+using volarb::InvalidCalibrationInputsError;
+using volarb::name_of_svi_calibration_status;
+using volarb::SliceObservation;
+using volarb::SviCalibration;
 
 namespace {
 
@@ -126,6 +132,23 @@ AmericanInversionResult invert_american_from_strings(double spot_price, double s
     return invert_american_implied_volatility(AmericanInversionInputs{
         spot_price, strike, years_to_expiry, zero_rate, carry_rate, option_price,
         option_type_from_name(option_type), exercise_style_from_name(exercise_style)});
+}
+
+SviCalibration calibrate_svi_slice_from_values(const std::vector<double>& log_moneyness,
+                                               const std::vector<double>& total_variances,
+                                               const std::vector<double>& weights,
+                                               double lowest_log_moneyness,
+                                               double highest_log_moneyness) {
+    if (log_moneyness.size() != total_variances.size() || log_moneyness.size() != weights.size()) {
+        throw InvalidCalibrationInputsError("observation columns must be the same length");
+    }
+    std::vector<SliceObservation> observations;
+    observations.reserve(log_moneyness.size());
+    for (std::size_t index = 0; index < log_moneyness.size(); ++index) {
+        observations.push_back(
+            SliceObservation{log_moneyness[index], total_variances[index], weights[index]});
+    }
+    return calibrate_svi_slice(observations, lowest_log_moneyness, highest_log_moneyness);
 }
 
 SviSliceScan scan_svi_slice_from_values(double a, double b, double rho, double m, double sigma,
@@ -288,6 +311,29 @@ PYBIND11_MODULE(_volarb_core, module) {
         .def_property_readonly("status", [](const SviSliceScan& scan) {
             return name_of_svi_status(scan.status);
         });
+
+    py::register_exception<InvalidCalibrationInputsError>(module, "InvalidCalibrationInputsError",
+                                                          PyExc_ValueError);
+
+    py::class_<SviCalibration>(module, "SviCalibration")
+        .def_readonly("objective", &SviCalibration::objective)
+        .def_readonly("weighted_root_mean_square_residual",
+                      &SviCalibration::weighted_root_mean_square_residual)
+        .def_readonly("simplex_iterations", &SviCalibration::simplex_iterations)
+        .def_readonly("observation_count", &SviCalibration::observation_count)
+        .def_readonly("fitted_curve", &SviCalibration::fitted_curve)
+        .def_property_readonly("a", [](const SviCalibration& c) { return c.parameters.a; })
+        .def_property_readonly("b", [](const SviCalibration& c) { return c.parameters.b; })
+        .def_property_readonly("rho", [](const SviCalibration& c) { return c.parameters.rho; })
+        .def_property_readonly("m", [](const SviCalibration& c) { return c.parameters.m; })
+        .def_property_readonly("sigma", [](const SviCalibration& c) { return c.parameters.sigma; })
+        .def_property_readonly("status", [](const SviCalibration& c) {
+            return name_of_svi_calibration_status(c.status);
+        });
+
+    module.def("calibrate_svi_slice", &calibrate_svi_slice_from_values, py::arg("log_moneyness"),
+               py::arg("total_variances"), py::arg("weights"), py::arg("lowest_log_moneyness"),
+               py::arg("highest_log_moneyness"));
 
     module.attr("DEFAULT_SCAN_STEPS") = default_scan_steps;
     module.def("scan_svi_slice", &scan_svi_slice_from_values, py::arg("a"), py::arg("b"),

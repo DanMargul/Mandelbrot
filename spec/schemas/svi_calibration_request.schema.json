@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "svi_calibration_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "svi_calibration_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "lowest_log_moneyness", "highest_log_moneyness", "observations"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "lowest_log_moneyness": { "type": "number" },
+          "highest_log_moneyness": { "type": "number" },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["log_moneyness", "total_variance", "weight"],
+              "additionalProperties": false,
+              "properties": {
+                "log_moneyness": { "type": "number" },
+                "total_variance": { "type": "number", "minimum": 0 },
+                "weight": { "type": "number", "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

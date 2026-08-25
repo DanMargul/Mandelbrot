@@ -103,8 +103,8 @@ contracts is ever fitted without stripping.
 
 ## 4. A surface that is arbitrage-free by construction, not by inspection
 
-*Extends Phase 3. **Acceptance test done**, see `spec/interfaces/svi.md`; calibration is the
-remaining half.*
+*Extends Phase 3. **SVI slice calibration and its acceptance test done**, see
+`spec/interfaces/svi.md`. SSVI, calendar monotonicity and the Dupire round-trip remain.*
 
 SVI per slice, eSSVI globally with calendar-monotone total variance, calibrated under the
 Durrleman condition. That much is standard.
@@ -131,6 +131,17 @@ detection, because it says whether a fit is slightly imperfect or badly wrong.
 The status is `arbitrage_free_on_grid`, never `arbitrage_free`. A finite scan cannot prove
 absence of a violation between its points and says nothing outside its range, and the name
 carries that limit rather than hiding it.
+
+Calibration then produced the sharpest lesson so far about what conformance is for.
+Nelder-Mead is chaotic, so a single ulp anywhere sends the two tracks down different
+trajectories to the same minimum: objectives agree to `1e-13` while iteration counts differ
+by half a percent. Chasing a bit-identical path was rejected as a contract that cannot be
+kept across independent implementations. The measurement that decided it: on an almost flat
+smile the fitted parameters differ between tracks by `1.5e-2` while the curve they describe
+differs by `3.4e-16`. The parameters are a coordinate system; the curve is the answer. The
+result now carries the fitted curve at seventeen reference points, compared tightly, with the
+parameters kept as loosely compared output. **Conformance must compare the answer, not the
+route to it.**
 
 **Done when** dense-grid density non-negativity, calendar monotonicity, and a Dupire
 round-trip all hold as fixture assertions, so a refactor that reproduces the parameter

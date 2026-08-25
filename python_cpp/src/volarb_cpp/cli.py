@@ -155,6 +155,43 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def calibrate_svi_slice_record(record: JsonRecord) -> JsonRecord:
+    raw = record.get("observations")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'observations' must be an array")
+    log_moneyness: list[float] = []
+    total_variances: list[float] = []
+    weights: list[float] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every observation must be an object")
+        log_moneyness.append(required_float(entry, "log_moneyness"))
+        total_variances.append(required_float(entry, "total_variance"))
+        weights.append(required_float(entry, "weight"))
+
+    calibration = _volarb_core.calibrate_svi_slice(
+        log_moneyness=log_moneyness,
+        total_variances=total_variances,
+        weights=weights,
+        lowest_log_moneyness=required_float(record, "lowest_log_moneyness"),
+        highest_log_moneyness=required_float(record, "highest_log_moneyness"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "a": calibration.a,
+        "b": calibration.b,
+        "rho": calibration.rho,
+        "m": calibration.m,
+        "sigma": calibration.sigma,
+        "objective": calibration.objective,
+        "weighted_root_mean_square_residual": calibration.weighted_root_mean_square_residual,
+        "simplex_iterations": calibration.simplex_iterations,
+        "observation_count": calibration.observation_count,
+        "fitted_curve": calibration.fitted_curve,
+        "status": calibration.status,
+    }
+
+
 def chain_snapshot_record(query_id: str, quote: _volarb_core.ContractQuote) -> JsonRecord:
     return {
         "id": f"{query_id}|{quote.contract_symbol}",
@@ -277,6 +314,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="american_inversion_request/v1",
         output_schema="american_inversion_result/v1",
         transform_records=mapped_over_records(invert_american_implied_volatility_record),
+    ),
+    "calibrate-svi-slice": Verb(
+        name="calibrate-svi-slice",
+        input_schema="svi_calibration_request/v1",
+        output_schema="svi_calibration_result/v1",
+        transform_records=mapped_over_records(calibrate_svi_slice_record),
     ),
     "scan-svi-slice": Verb(
         name="scan-svi-slice",

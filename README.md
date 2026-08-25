@@ -47,10 +47,10 @@ takes 31 solver iterations in every track.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2662 passed |
-| `python_cpp` tests | 376 passed |
-| C++ tests (Catch2) | 56 passed |
-| conformance | 65 comparisons, all tracks agree |
+| `python_pure` tests | 2674 passed |
+| `python_cpp` tests | 379 passed |
+| C++ tests (Catch2) | 62 passed |
+| conformance | 70 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |

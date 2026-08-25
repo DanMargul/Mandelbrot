@@ -1,0 +1,1457 @@
+{
+  "schema": "svi_calibration_request/v1",
+  "records": [
+    {
+      "id": "short_dated_index_clean_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.009690139090964838,
+          "weight": 1.064976386104033e+16
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.008827784749034662,
+          "weight": 1.2832064380544404e+16
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.007971648326421055,
+          "weight": 1.573634025266733e+16
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.0071238965504940455,
+          "weight": 1.9704471523423736e+16
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.006287763899645099,
+          "weight": 2.529341956533906e+16
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.0054682332075403775,
+          "weight": 3.3443055078634948e+16
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.00467321950403421,
+          "weight": 4.578968319945943e+16
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.00391558441227157,
+          "weight": 6.5223908209452e+16
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.0032161800108320665,
+          "weight": 9.667614028384349e+16
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.002606659330568422,
+          "weight": 1.471741200458655e+17
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.00212597761180176,
+          "weight": 2.2124966739505152e+17
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.001801647024893403,
+          "weight": 3.080779262440455e+17
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.0016274611797498107,
+          "weight": 3.775536941473883e+17
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.0015691247254758258,
+          "weight": 4.061487007607485e+17
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.0015888923745173314,
+          "weight": 3.961056511972149e+17
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.0016588370961353458,
+          "weight": 3.634063589264569e+17
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.0017611549261968835,
+          "weight": 3.224073071296833e+17
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.0018849223594996217,
+          "weight": 2.8145765671425555e+17
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.0020233770334344026,
+          "weight": 2.4425663381581222e+17
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.0021722197797862833,
+          "weight": 2.1193001655485555e+17
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.002328630194064068,
+          "weight": 1.844161500078518e+17
+        }
+      ]
+    },
+    {
+      "id": "long_dated_index_clean_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.07187272721475249,
+          "weight": 193585021477705.78
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.06852126052496575,
+          "weight": 212985144359205.25
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.06526294543850863,
+          "weight": 234783006239704.44
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.06211041284186495,
+          "weight": 259221588758346.06
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.05907770486446946,
+          "weight": 286518566903601.0
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.05618015986734347,
+          "weight": 316835662100203.5
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.053434137625018696,
+          "weight": 350237295467394.8
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.05085653828494738,
+          "weight": 386639668373750.9
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.048464085390119455,
+          "weight": 425755196734994.44
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.04627238152782923,
+          "weight": 467042385271535.06
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.04429480515339464,
+          "weight": 509676264123938.75
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.042541386657324584,
+          "weight": 552556530816953.75
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.041017854520020866,
+          "weight": 594366220340274.9
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.03972504691685536,
+          "weight": 633681695655176.2
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.03865882293563454,
+          "weight": 669118051678663.8
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.037810494501762326,
+          "weight": 699479974321855.1
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.03716767846467004,
+          "weight": 723884252749516.2
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.03671538652880894,
+          "weight": 741828971993550.1
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.036437153953131775,
+          "weight": 753201376132489.4
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.0363160478954699,
+          "weight": 758233275215543.8
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.036335463701691814,
+          "weight": 757423169848492.4
+        }
+      ]
+    },
+    {
+      "id": "steep_negative_skew_clean_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.044921554716935846,
+          "weight": 495553380147107.9
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.04179669794457025,
+          "weight": 572421654613044.6
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.03872146336022807,
+          "weight": 666954913572228.8
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.0357077007849538,
+          "weight": 784289184713888.5
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.03277056274847714,
+          "weight": 931176916318238.1
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.029929285698088025,
+          "weight": 1116367786344709.4
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.027207866738880444,
+          "weight": 1350862097430021.0
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.02463525465261599,
+          "weight": 1647729390230126.5
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.022244395537122815,
+          "weight": 2020964953612101.0
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.020069316876852986,
+          "weight": 2482760456814757.5
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.01813985074534507,
+          "weight": 3039013163766140.0
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.016474990636700475,
+          "weight": 3684254707596563.5
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.015077646832622686,
+          "weight": 4398786332442593.0
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.013933772060250253,
+          "weight": 5150656607202590.0
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.013016407864998737,
+          "weight": 5902251385004317.0
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.012292232530251876,
+          "weight": 6618178336982374.0
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.011727498169838837,
+          "weight": 7270918092557271.0
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.011291737068960465,
+          "weight": 7842932659883223.0
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.010959282496782206,
+          "weight": 8325987533486804.0
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.010709372712298547,
+          "weight": 8719105514560791.0
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.010525580640902303,
+          "weight": 9026260728083438.0
+        }
+      ]
+    },
+    {
+      "id": "positive_skew_clean_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.015804493814764856,
+          "weight": 4003490647644249.0
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.015400825805346713,
+          "weight": 4216110478909891.0
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.015056349186104049,
+          "weight": 4411239557921933.0
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.014784441853748633,
+          "weight": 4574989828697554.0
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.014601470508735444,
+          "weight": 4690366817773190.0
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.014526932339180638,
+          "weight": 4738623157468722.0
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.014583045973594572,
+          "weight": 4702226126108257.0
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.014793396380615196,
+          "weight": 4569452970285564.0
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.01518033988749895,
+          "weight": 4339473184076121.5
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.01576135777277262,
+          "weight": 4025434322882140.5
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.016545361017187264,
+          "weight": 3652981765214990.5
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.017530514172678476,
+          "weight": 3253948623490772.5
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.018704699910719626,
+          "weight": 2858238797769272.5
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.020048373876248846,
+          "weight": 2487950265467014.0
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.021538404810405302,
+          "weight": 2155623599857137.0
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.02315143877445785,
+          "weight": 1865709522212249.5
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.024866068747318507,
+          "weight": 1617281951617368.5
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.02666383046283955,
+          "weight": 1406549178601441.8
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.0285293863659264,
+          "weight": 1228613092038357.2
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.030450274723201307,
+          "weight": 1078493593392336.1
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.0324164878389476,
+          "weight": 951629904478606.5
+        }
+      ]
+    },
+    {
+      "id": "almost_flat_clean_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.04122619037896906,
+          "weight": 588374159707689.0
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.04119048581161403,
+          "weight": 589394625928527.6
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.04115723396990897,
+          "weight": 590347380617114.5
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.0411266197490365,
+          "weight": 591226604433533.9
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.04109882642044691,
+          "weight": 592026515909919.9
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.041074030650891054,
+          "weight": 592741526528500.1
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.0410523968105746,
+          "weight": 593366418390743.4
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.04103407086367045,
+          "weight": 593896535409653.8
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.041019174264961135,
+          "weight": 594327974851074.4
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.04100779838290946,
+          "weight": 594657762988269.2
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.041,
+          "weight": 594883997620463.9
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.040995798382909454,
+          "weight": 595005941963747.5
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.04099517426496113,
+          "weight": 595024059057828.6
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.040998070863670445,
+          "weight": 594939982661104.4
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.0410043968105746,
+          "weight": 594756428275576.4
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.041014030650891056,
+          "weight": 594477054830565.1
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.041026826420446916,
+          "weight": 594106292291492.4
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.0410426197490365,
+          "weight": 593649152339854.0
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.04106123396990896,
+          "weight": 593111038373785.0
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.04108248581161403,
+          "weight": 592497568109480.4
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.04110619037896906,
+          "weight": 591814418016051.4
+        }
+      ]
+    },
+    {
+      "id": "short_dated_index_noisy_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.009686310212597457,
+          "weight": 42599055444.161316
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.008829651324708672,
+          "weight": 51328257522.17762
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.0079711409308505,
+          "weight": 62945361010.66933
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.007120455702389859,
+          "weight": 78817886093.69493
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.00628553938085534,
+          "weight": 101173678261.35622
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.005468686274290338,
+          "weight": 133772220314.53976
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.004674296233095108,
+          "weight": 183158732797.83765
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.003915111322228592,
+          "weight": 260895632837.80807
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.003216646941922536,
+          "weight": 386704561135.37384
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.0026065985086482614,
+          "weight": 588696480183.462
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.002126219406096454,
+          "weight": 884998669580.2059
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.0018025241247514026,
+          "weight": 1232311704976.182
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.0016274561389788712,
+          "weight": 1510214776589.5535
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.001568545566598433,
+          "weight": 1624594803042.994
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.001589651658635773,
+          "weight": 1584422604788.8594
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.001658376508916851,
+          "weight": 1453625435705.8274
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.001761529357032479,
+          "weight": 1289629228518.7332
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.0018858613889128953,
+          "weight": 1125830626857.0222
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.00202351592112521,
+          "weight": 977026535263.249
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.0021730298952165055,
+          "weight": 847720066219.422
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.0023284122538369243,
+          "weight": 737664600031.4071
+        }
+      ]
+    },
+    {
+      "id": "long_dated_index_noisy_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.07187299382859234,
+          "weight": 774340085.9108229
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.06851094561329629,
+          "weight": 851940577.4368211
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.06526146972435276,
+          "weight": 939132024.9588176
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.06211861744760959,
+          "weight": 1036886355.0333842
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.059101636958632776,
+          "weight": 1146074267.614404
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.05619348116349539,
+          "weight": 1267342648.4008138
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.05341146300466899,
+          "weight": 1400949181.8695788
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.05085063642607177,
+          "weight": 1546558673.4950032
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.04848217706198059,
+          "weight": 1703020786.9399772
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.046277298262234125,
+          "weight": 1868169541.0861394
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.04427935379581087,
+          "weight": 2038705056.4957547
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.042558337578960104,
+          "weight": 2210226123.267814
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.04101676940818394,
+          "weight": 2377464881.3610992
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.039724906508662366,
+          "weight": 2534726782.6207047
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.03867668261210532,
+          "weight": 2676472206.7146554
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.03779466991572351,
+          "weight": 2797919897.2874203
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.037165745855659696,
+          "weight": 2895537010.998065
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.03672929515070945,
+          "weight": 2967315887.9742007
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.03644142044654342,
+          "weight": 3012805504.5299573
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.036322911871363474,
+          "weight": 3032933100.862174
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.03633990606239111,
+          "weight": 3029692679.393969
+        }
+      ]
+    },
+    {
+      "id": "steep_negative_skew_noisy_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.04494119214825665,
+          "weight": 1982213520.5884311
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.04181747398503511,
+          "weight": 2289686618.452178
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.038714304571350194,
+          "weight": 2667819654.288914
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.03572172687786153,
+          "weight": 3137156738.855554
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.032780567421775895,
+          "weight": 3724707665.272953
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.029934231986391557,
+          "weight": 4465471145.378838
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.027205459170394165,
+          "weight": 5403448389.720084
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.02464555906937316,
+          "weight": 6590917560.920506
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.022233910871779616,
+          "weight": 8083859814.448402
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.020069173022348927,
+          "weight": 9931041827.259027
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.01814524763195158,
+          "weight": 12156052655.064558
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.016478734840790484,
+          "weight": 14737018830.386251
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.015075973216142402,
+          "weight": 17595145329.770367
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.013930542134561484,
+          "weight": 20602626428.810352
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.013014155004394084,
+          "weight": 23609005540.01726
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.012295130609931875,
+          "weight": 26472713347.929493
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.011730192600889571,
+          "weight": 29083672370.229076
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.011292216749518169,
+          "weight": 31371730639.53288
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.010963456783801813,
+          "weight": 33303950133.94721
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.010708198155222814,
+          "weight": 34876422058.243164
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.010525653184195684,
+          "weight": 36105042912.33375
+        }
+      ]
+    },
+    {
+      "id": "positive_skew_noisy_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.015804079453749165,
+          "weight": 16013962590.576994
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.015396902022632365,
+          "weight": 16864441915.639557
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.01504890287894882,
+          "weight": 17644958231.687733
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.01478846275359851,
+          "weight": 18299959314.790215
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.014599762531427108,
+          "weight": 18761467271.09276
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.01452349178339514,
+          "weight": 18954492629.874886
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.014577718788449009,
+          "weight": 18808904504.433025
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.01478781775447587,
+          "weight": 18277811881.142258
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.01517398564966078,
+          "weight": 17357892736.304485
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.01575556620033763,
+          "weight": 16101737291.528555
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.01655064556917714,
+          "weight": 14611927060.859964
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.017527018781509984,
+          "weight": 13015794493.963089
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.018713503733669607,
+          "weight": 11432955191.07709
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.020044256769379015,
+          "weight": 9951801061.868053
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.02153470493533516,
+          "weight": 8622494399.428547
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.02314050573147665,
+          "weight": 7462838088.848997
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.024860831694849945,
+          "weight": 6469127806.469472
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.026666565066593182,
+          "weight": 5626196714.4057665
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.028524018722020563,
+          "weight": 4914452368.153429
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.030455971382521877,
+          "weight": 4313974373.569345
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.032413103244709175,
+          "weight": 3806519617.9144254
+        }
+      ]
+    },
+    {
+      "id": "almost_flat_noisy_wide",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.3,
+          "total_variance": 0.04123847477658307,
+          "weight": 2353496638.830756
+        },
+        {
+          "log_moneyness": -0.27,
+          "total_variance": 0.041193622774911336,
+          "weight": 2357578503.714111
+        },
+        {
+          "log_moneyness": -0.24,
+          "total_variance": 0.04115465398098088,
+          "weight": 2361389522.4684577
+        },
+        {
+          "log_moneyness": -0.21,
+          "total_variance": 0.041122533862715575,
+          "weight": 2364906417.7341347
+        },
+        {
+          "log_moneyness": -0.18,
+          "total_variance": 0.04107889064523439,
+          "weight": 2368106063.6396794
+        },
+        {
+          "log_moneyness": -0.15,
+          "total_variance": 0.041072946098229465,
+          "weight": 2370966106.1140003
+        },
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.041044630538969305,
+          "weight": 2373465673.5629735
+        },
+        {
+          "log_moneyness": -0.08999999999999997,
+          "total_variance": 0.04102728481740291,
+          "weight": 2375586141.6386147
+        },
+        {
+          "log_moneyness": -0.06,
+          "total_variance": 0.04101536979455834,
+          "weight": 2377311899.4042974
+        },
+        {
+          "log_moneyness": -0.030000000000000027,
+          "total_variance": 0.04101033137517423,
+          "weight": 2378631051.9530764
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.040985694169237065,
+          "weight": 2379535990.481856
+        },
+        {
+          "log_moneyness": 0.02999999999999997,
+          "total_variance": 0.04098352591370897,
+          "weight": 2380023767.854989
+        },
+        {
+          "log_moneyness": 0.06,
+          "total_variance": 0.041003739102802104,
+          "weight": 2380096236.231314
+        },
+        {
+          "log_moneyness": 0.09000000000000002,
+          "total_variance": 0.040982416417759494,
+          "weight": 2379759930.644418
+        },
+        {
+          "log_moneyness": 0.12000000000000005,
+          "total_variance": 0.0409897249863507,
+          "weight": 2379025713.1023054
+        },
+        {
+          "log_moneyness": 0.15000000000000002,
+          "total_variance": 0.04101675749869542,
+          "weight": 2377908219.3222604
+        },
+        {
+          "log_moneyness": 0.18,
+          "total_variance": 0.041015386635003294,
+          "weight": 2376425169.1659694
+        },
+        {
+          "log_moneyness": 0.21000000000000002,
+          "total_variance": 0.04106042144367938,
+          "weight": 2374596609.359416
+        },
+        {
+          "log_moneyness": 0.23999999999999994,
+          "total_variance": 0.041047614016244065,
+          "weight": 2372444153.4951396
+        },
+        {
+          "log_moneyness": 0.2700000000000001,
+          "total_variance": 0.041098073454482145,
+          "weight": 2369990272.4379215
+        },
+        {
+          "log_moneyness": 0.3,
+          "total_variance": 0.04109151931279102,
+          "weight": 2367257672.0642047
+        }
+      ]
+    },
+    {
+      "id": "short_dated_index_noisy_narrow",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.004674690697950911,
+          "weight": 183158732797.83765
+        },
+        {
+          "log_moneyness": -0.096,
+          "total_variance": 0.004063359426420508,
+          "weight": 242275746849.0156
+        },
+        {
+          "log_moneyness": -0.072,
+          "total_variance": 0.0034889125285287098,
+          "weight": 328935230050.81274
+        },
+        {
+          "log_moneyness": -0.048,
+          "total_variance": 0.002958722808528371,
+          "weight": 456707378831.115
+        },
+        {
+          "log_moneyness": -0.023999999999999994,
+          "total_variance": 0.002498343303089789,
+          "weight": 640514658520.8517
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.0021254613359129636,
+          "weight": 884998669580.2059
+        },
+        {
+          "log_moneyness": 0.023999999999999994,
+          "total_variance": 0.001854588502345201,
+          "weight": 1164007024574.521
+        },
+        {
+          "log_moneyness": 0.04799999999999999,
+          "total_variance": 0.0016811792146087228,
+          "weight": 1415582588354.1782
+        },
+        {
+          "log_moneyness": 0.07200000000000001,
+          "total_variance": 0.0015917097261976068,
+          "weight": 1577272850216.7793
+        },
+        {
+          "log_moneyness": 0.09600000000000003,
+          "total_variance": 0.0015673392795211019,
+          "weight": 1627154278745.8218
+        },
+        {
+          "log_moneyness": 0.12,
+          "total_variance": 0.0015895484415280733,
+          "weight": 1584422604788.86
+        }
+      ]
+    },
+    {
+      "id": "long_dated_index_noisy_narrow",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.05345340265619195,
+          "weight": 1400949181.8695788
+        },
+        {
+          "log_moneyness": -0.096,
+          "total_variance": 0.05137042735831674,
+          "weight": 1516518249.1664276
+        },
+        {
+          "log_moneyness": -0.072,
+          "total_variance": 0.04942251003011681,
+          "weight": 1639247572.1362555
+        },
+        {
+          "log_moneyness": -0.048,
+          "total_variance": 0.047543979984368795,
+          "weight": 1768196783.7340114
+        },
+        {
+          "log_moneyness": -0.023999999999999994,
+          "total_variance": 0.04587894571014477,
+          "weight": 1901971528.1953335
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.04431487964782244,
+          "weight": 2038705056.4957547
+        },
+        {
+          "log_moneyness": 0.023999999999999994,
+          "total_variance": 0.04287436967447434,
+          "weight": 2176086442.0217733
+        },
+        {
+          "log_moneyness": 0.04799999999999999,
+          "total_variance": 0.04160422398199752,
+          "weight": 2311444508.7351503
+        },
+        {
+          "log_moneyness": 0.07200000000000001,
+          "total_variance": 0.040489817776678344,
+          "weight": 2441887256.926478
+        },
+        {
+          "log_moneyness": 0.09600000000000003,
+          "total_variance": 0.03948071310853832,
+          "weight": 2564484718.249218
+        },
+        {
+          "log_moneyness": 0.12,
+          "total_variance": 0.03864074604846407,
+          "weight": 2676472206.7146535
+        }
+      ]
+    },
+    {
+      "id": "steep_negative_skew_noisy_narrow",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.027201358709514407,
+          "weight": 5403448389.720084
+        },
+        {
+          "log_moneyness": -0.096,
+          "total_variance": 0.025128989416561272,
+          "weight": 6330764778.550728
+        },
+        {
+          "log_moneyness": -0.072,
+          "total_variance": 0.02318338755392379,
+          "weight": 7446563181.999643
+        },
+        {
+          "log_moneyness": -0.048,
+          "total_variance": 0.021336633402121722,
+          "weight": 8778111610.703709
+        },
+        {
+          "log_moneyness": -0.023999999999999994,
+          "total_variance": 0.019664850496185108,
+          "weight": 10345746082.571987
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.018147974096100746,
+          "weight": 12156052655.064558
+        },
+        {
+          "log_moneyness": 0.023999999999999994,
+          "total_variance": 0.016784625854413735,
+          "weight": 14195309585.669092
+        },
+        {
+          "log_moneyness": 0.04799999999999999,
+          "total_variance": 0.015607515791672532,
+          "weight": 16425961943.442642
+        },
+        {
+          "log_moneyness": 0.07200000000000001,
+          "total_variance": 0.01458695329526464,
+          "weight": 18788486594.96391
+        },
+        {
+          "log_moneyness": 0.09600000000000003,
+          "total_variance": 0.013727297588832559,
+          "weight": 21208832267.466797
+        },
+        {
+          "log_moneyness": 0.12,
+          "total_variance": 0.013019877481137773,
+          "weight": 23609005540.01726
+        }
+      ]
+    },
+    {
+      "id": "positive_skew_noisy_narrow",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.014590046815499646,
+          "weight": 18808904504.433025
+        },
+        {
+          "log_moneyness": -0.096,
+          "total_variance": 0.014739457408185578,
+          "weight": 18415800200.84476
+        },
+        {
+          "log_moneyness": -0.072,
+          "total_variance": 0.01500478611272645,
+          "weight": 17770439201.355927
+        },
+        {
+          "log_moneyness": -0.048,
+          "total_variance": 0.015389798292613721,
+          "weight": 16890957184.530798
+        },
+        {
+          "log_moneyness": -0.023999999999999994,
+          "total_variance": 0.015908473909795478,
+          "weight": 15818541291.854202
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.016549511333861733,
+          "weight": 14611927060.859964
+        },
+        {
+          "log_moneyness": 0.023999999999999994,
+          "total_variance": 0.01731701804445971,
+          "weight": 13337437540.9578
+        },
+        {
+          "log_moneyness": 0.04799999999999999,
+          "total_variance": 0.018207923493770515,
+          "weight": 12057980692.332806
+        },
+        {
+          "log_moneyness": 0.07200000000000001,
+          "total_variance": 0.01922359573371035,
+          "weight": 10824646816.151758
+        },
+        {
+          "log_moneyness": 0.09600000000000003,
+          "total_variance": 0.020336328912767185,
+          "weight": 9672820585.228727
+        },
+        {
+          "log_moneyness": 0.12,
+          "total_variance": 0.021545255578999816,
+          "weight": 8622494399.42855
+        }
+      ]
+    },
+    {
+      "id": "almost_flat_noisy_narrow",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.12,
+          "total_variance": 0.041038958988881574,
+          "weight": 2373465673.5629735
+        },
+        {
+          "log_moneyness": -0.096,
+          "total_variance": 0.04102160929508553,
+          "weight": 2375193174.65692
+        },
+        {
+          "log_moneyness": -0.072,
+          "total_variance": 0.041033377041508924,
+          "weight": 2376669813.467996
+        },
+        {
+          "log_moneyness": -0.048,
+          "total_variance": 0.041031078447826524,
+          "weight": 2377888880.218372
+        },
+        {
+          "log_moneyness": -0.023999999999999994,
+          "total_variance": 0.04101840287264146,
+          "weight": 2378845339.83356
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.040987658687063326,
+          "weight": 2379535990.481856
+        },
+        {
+          "log_moneyness": 0.023999999999999994,
+          "total_variance": 0.04099717071616976,
+          "weight": 2379959565.287555
+        },
+        {
+          "log_moneyness": 0.04799999999999999,
+          "total_variance": 0.04101194819501178,
+          "weight": 2380116769.5085754
+        },
+        {
+          "log_moneyness": 0.07200000000000001,
+          "total_variance": 0.04099545639718082,
+          "weight": 2380010250.3704762
+        },
+        {
+          "log_moneyness": 0.09600000000000003,
+          "total_variance": 0.04100347870408783,
+          "weight": 2379644502.033343
+        },
+        {
+          "log_moneyness": 0.12,
+          "total_variance": 0.04102081107842237,
+          "weight": 2379025713.1023054
+        }
+      ]
+    },
+    {
+      "id": "too_few_observations",
+      "lowest_log_moneyness": -0.6,
+      "highest_log_moneyness": 0.6,
+      "observations": [
+        {
+          "log_moneyness": -0.1,
+          "total_variance": 0.004162892374517331,
+          "weight": 5.77044935880586e+16
+        },
+        {
+          "log_moneyness": 0.0,
+          "total_variance": 0.00212597761180176,
+          "weight": 2.2124966739505152e+17
+        },
+        {
+          "log_moneyness": 0.1,
+          "total_variance": 0.001568652328473268,
+          "weight": 4.0639335958670125e+17
+        }
+      ]
+    }
+  ]
+}

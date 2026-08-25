@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -28,6 +29,7 @@ from volarb_py.american import (  # noqa: E402
     richardson_extrapolated_price,
 )
 from volarb_py.cli import (  # noqa: E402
+    calibrate_svi_slice_record,
     invert_american_implied_volatility_record,
     invert_implied_volatility_record,
     price_american_option_record,
@@ -41,6 +43,7 @@ from volarb_py.svi import (  # noqa: E402
     risk_neutral_density,
     scan_svi_slice,
 )
+from volarb_py.svi import total_variance as svi_total_variance  # noqa: E402
 
 FIXTURE_ROOT: Final[Path] = REPOSITORY_ROOT / "spec" / "fixtures"
 DOUBLE_PRECISION_EPSILON: Final[float] = sys.float_info.epsilon
@@ -392,6 +395,121 @@ def build_svi_scan_fixture() -> None:
     print(f"scan-svi-slice/slices: {len(result_records)} cases, statuses {statuses}")
 
 
+SVI_CALIBRATION_TRUTHS: Final[tuple[tuple[str, SviParameters], ...]] = (
+    ("short_dated_index", SviParameters(0.0002, 0.018, -0.65, 0.01, 0.10)),
+    ("long_dated_index", SviParameters(0.0100, 0.090, -0.55, 0.05, 0.35)),
+    ("steep_negative_skew", SviParameters(0.0050, 0.060, -0.90, 0.02, 0.20)),
+    ("positive_skew", SviParameters(0.0050, 0.050, 0.50, -0.02, 0.22)),
+    ("almost_flat", SviParameters(0.0400, 0.002, -0.10, 0.00, 0.50)),
+)
+
+SVI_CALIBRATION_SAMPLINGS: Final[tuple[tuple[str, float, float, int, float], ...]] = (
+    ("clean_wide", -0.30, 0.30, 21, 0.0),
+    ("noisy_wide", -0.30, 0.30, 21, 5e-4),
+    ("noisy_narrow", -0.12, 0.12, 11, 5e-4),
+)
+
+CALIBRATION_NOISE_SEED: Final[int] = 917
+CALIBRATION_CURVE_BUDGET: Final[float] = 3e-3
+
+
+def slice_observations(
+    truth: SviParameters,
+    generator: random.Random,
+    *,
+    lowest: float,
+    highest: float,
+    count: int,
+    noise_fraction: float,
+) -> list[dict[str, float]]:
+    observations = []
+    for index in range(count):
+        point = lowest + (highest - lowest) * index / (count - 1)
+        variance = svi_total_variance(truth, point)
+        disturbed = variance * (1.0 + noise_fraction * generator.uniform(-1.0, 1.0))
+        scale = max(noise_fraction, 1e-6) * variance
+        observations.append(
+            {"log_moneyness": point, "total_variance": disturbed, "weight": 1.0 / (scale * scale)}
+        )
+    return observations
+
+
+def verify_calibration(truth: SviParameters, request: dict[str, Any], result: dict[str, Any]) -> float:
+    fitted = SviParameters(
+        a=float(result["a"]),
+        b=float(result["b"]),
+        rho=float(result["rho"]),
+        m=float(result["m"]),
+        sigma=float(result["sigma"]),
+    )
+    worst = 0.0
+    for observation in request["observations"]:
+        point = float(observation["log_moneyness"])
+        expected = svi_total_variance(truth, point)
+        worst = max(worst, abs(svi_total_variance(fitted, point) - expected) / expected)
+    if worst > CALIBRATION_CURVE_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: fitted curve departs from the truth by {worst}")
+    scan = scan_svi_slice(
+        fitted, float(request["lowest_log_moneyness"]), float(request["highest_log_moneyness"])
+    )
+    if scan.status != "arbitrage_free_on_grid":
+        raise OracleDisagreementError(f"{request['id']}: the fitted slice admits butterfly arbitrage")
+    return worst
+
+
+def build_svi_calibration_fixture() -> None:
+    generator = random.Random(CALIBRATION_NOISE_SEED)
+    request_records = []
+    result_records = []
+    worst = 0.0
+    for sampling, lowest, highest, count, noise in SVI_CALIBRATION_SAMPLINGS:
+        for name, truth in SVI_CALIBRATION_TRUTHS:
+            request = {
+                "id": f"{name}_{sampling}",
+                "lowest_log_moneyness": -0.6,
+                "highest_log_moneyness": 0.6,
+                "observations": slice_observations(
+                    truth,
+                    generator,
+                    lowest=lowest,
+                    highest=highest,
+                    count=count,
+                    noise_fraction=noise,
+                ),
+            }
+            result = calibrate_svi_slice_record(request)
+            worst = max(worst, verify_calibration(truth, request, result))
+            request_records.append(request)
+            result_records.append(result)
+
+    request_records.append(
+        {
+            "id": "too_few_observations",
+            "lowest_log_moneyness": -0.6,
+            "highest_log_moneyness": 0.6,
+            "observations": slice_observations(
+                SVI_CALIBRATION_TRUTHS[0][1],
+                generator,
+                lowest=-0.1,
+                highest=0.1,
+                count=3,
+                noise_fraction=0.0,
+            ),
+        }
+    )
+    result_records.append(calibrate_svi_slice_record(request_records[-1]))
+
+    directory = FIXTURE_ROOT / "calibrate-svi-slice"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "slices.input.json", Document("svi_calibration_request/v1", request_records))
+    write_document(directory / "slices.expected.json", Document("svi_calibration_result/v1", result_records))
+    statuses = sorted({str(record["status"]) for record in result_records})
+    print(
+        f"calibrate-svi-slice/slices: {len(result_records)} cases, statuses {statuses}, "
+        f"worst curve departure from truth {worst:.2e}"
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -402,6 +520,7 @@ def main() -> int:
             "price-american-options",
             "invert-american-implied-volatility",
             "scan-svi-slice",
+            "calibrate-svi-slice",
             "all",
         ],
         default="all",
@@ -423,6 +542,8 @@ def main() -> int:
         build_american_inversion_fixture()
     if arguments.verb in ("scan-svi-slice", "all"):
         build_svi_scan_fixture()
+    if arguments.verb in ("calibrate-svi-slice", "all"):
+        build_svi_calibration_fixture()
     return 0
 
 

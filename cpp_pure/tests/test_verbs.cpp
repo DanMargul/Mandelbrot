@@ -6,6 +6,7 @@
 
 #include <cmath>
 #include <filesystem>
+#include <map>
 #include <set>
 #include <string>
 #include <vector>
@@ -20,6 +21,30 @@ namespace {
 
 const std::filesystem::path fixture_root = VOLARB_FIXTURE_ROOT;
 const std::set<std::string> exactly_compared_fields = {"id", "status", "iterations"};
+struct FieldTolerance {
+    double relative;
+    double absolute;
+};
+
+const std::map<std::string, FieldTolerance> mirrored_tolerances = {
+    {"a", {5e-2, 1e-10}},
+    {"b", {5e-2, 1e-10}},
+    {"rho", {5e-2, 1e-10}},
+    {"m", {5e-2, 1e-10}},
+    {"sigma", {5e-2, 1e-10}},
+    {"objective", {5e-2, 1e-10}},
+    {"weighted_root_mean_square_residual", {5e-2, 1e-10}},
+    {"simplex_iterations", {5e-1, 1.0}},
+    {"fitted_curve", {1e-6, 1e-14}},
+};
+
+FieldTolerance tolerance_for(const std::string& field) {
+    const auto entry = mirrored_tolerances.find(field);
+    if (entry == mirrored_tolerances.end()) {
+        return FieldTolerance{1e-12, 1e-300};
+    }
+    return entry->second;
+}
 
 std::vector<std::string> fixture_families(const std::string& verb) {
     std::vector<std::string> families;
@@ -33,27 +58,44 @@ std::vector<std::string> fixture_families(const std::string& verb) {
     return families;
 }
 
+void require_values_agree(const nlohmann::json& actual_value, const nlohmann::json& expected_value,
+                          const std::string& field, const std::string& context);
+
 void require_fields_agree(const nlohmann::json& produced, const nlohmann::json& expected, const std::string& context) {
     for (const auto& [field, expected_value] : expected.items()) {
         INFO(context << " field " << field);
         REQUIRE(produced.contains(field));
-        const nlohmann::json& actual_value = produced.at(field);
-
-        const bool compare_exactly = exactly_compared_fields.contains(field) || expected_value.is_string() ||
-                                     expected_value.is_null() || expected_value.is_boolean();
-        if (compare_exactly) {
-            REQUIRE(actual_value == expected_value);
-            continue;
-        }
-
-        const double expected_number = expected_value.get<double>();
-        const double actual_number = actual_value.get<double>();
-        if (expected_number == 0.0 || !std::isfinite(expected_number)) {
-            REQUIRE(actual_number == expected_number);
-            continue;
-        }
-        REQUIRE(actual_number == Approx(expected_number).epsilon(1e-12).margin(1e-300));
+        require_values_agree(produced.at(field), expected_value, field, context);
     }
+}
+
+void require_values_agree(const nlohmann::json& actual_value, const nlohmann::json& expected_value,
+                          const std::string& field, const std::string& context) {
+    if (expected_value.is_array()) {
+        REQUIRE(actual_value.is_array());
+        REQUIRE(actual_value.size() == expected_value.size());
+        for (std::size_t position = 0; position < expected_value.size(); ++position) {
+            require_values_agree(actual_value[position], expected_value[position], field, context);
+        }
+        return;
+    }
+
+    const bool compare_exactly = exactly_compared_fields.contains(field) || expected_value.is_string() ||
+                                 expected_value.is_null() || expected_value.is_boolean();
+    if (compare_exactly) {
+        REQUIRE(actual_value == expected_value);
+        return;
+    }
+
+    const double expected_number = expected_value.get<double>();
+    const double actual_number = actual_value.get<double>();
+    if (expected_number == 0.0 || !std::isfinite(expected_number)) {
+        REQUIRE(actual_number == expected_number);
+        return;
+    }
+    const FieldTolerance tolerance = tolerance_for(field);
+    REQUIRE(actual_number ==
+            Approx(expected_number).epsilon(tolerance.relative).margin(tolerance.absolute));
 }
 
 }

@@ -86,6 +86,32 @@ class SviSliceScan:
     scan_steps: int
     status: SviStatus
 
+class InvalidCalibrationInputsError(ValueError): ...
+
+SviCalibrationStatus = Literal["converged", "too_few_observations", "simplex_budget_exhausted"]
+
+class SviCalibration:
+    a: float
+    b: float
+    rho: float
+    m: float
+    sigma: float
+    objective: float
+    weighted_root_mean_square_residual: float
+    simplex_iterations: int
+    observation_count: int
+    fitted_curve: list[float]
+    status: SviCalibrationStatus
+
+def calibrate_svi_slice(
+    *,
+    log_moneyness: list[float],
+    total_variances: list[float],
+    weights: list[float],
+    lowest_log_moneyness: float,
+    highest_log_moneyness: float,
+) -> SviCalibration: ...
+
 DEFAULT_SCAN_STEPS: int
 
 def scan_svi_slice(

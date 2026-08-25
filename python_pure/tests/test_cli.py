@@ -42,6 +42,14 @@ def load_schema(schema_id: str) -> dict[str, Any]:
 def assert_matches_within_specified_tolerance(
     actual: Any, expected: Any, schema: str, field: str, context: str
 ) -> None:
+    if isinstance(expected, list):
+        assert isinstance(actual, list), context
+        assert len(actual) == len(expected), context
+        for position, (one, other) in enumerate(zip(actual, expected, strict=True)):
+            assert_matches_within_specified_tolerance(
+                one, other, schema, field, f"{context} element {position}"
+            )
+        return
     relative, absolute, exact = field_tolerance(schema, field)
     if exact or expected is None or isinstance(expected, str | bool):
         assert actual == expected, context

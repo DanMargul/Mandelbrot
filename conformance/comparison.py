@@ -48,6 +48,16 @@ def requires_exact_comparison(left: Any, right: Any, tolerance: FieldTolerance) 
     return tolerance.exact or left is None or right is None or isinstance(left, str) or isinstance(right, str)
 
 
+def sequences_agree(left: list[Any], right: list[Any], tolerance: FieldTolerance) -> tuple[bool, str]:
+    if len(left) != len(right):
+        return False, f"length {len(left)} against {len(right)}"
+    for position, (one, other) in enumerate(zip(left, right, strict=True)):
+        agree, detail = values_agree(one, other, tolerance)
+        if not agree:
+            return False, f"element {position}: {detail}"
+    return True, "every element agrees"
+
+
 def numbers_agree(left: float, right: float, tolerance: FieldTolerance) -> tuple[bool, str]:
     if math.isnan(left) or math.isnan(right):
         return False, "not a number"
@@ -63,6 +73,8 @@ def numbers_agree(left: float, right: float, tolerance: FieldTolerance) -> tuple
 
 
 def values_agree(left: Any, right: Any, tolerance: FieldTolerance) -> tuple[bool, str]:
+    if isinstance(left, list) and isinstance(right, list):
+        return sequences_agree(left, right, tolerance)
     if requires_exact_comparison(left, right, tolerance):
         return left == right, "exact comparison"
     return numbers_agree(float(left), float(right), tolerance)

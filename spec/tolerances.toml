@@ -202,3 +202,45 @@ absolute = 1e-16
 ["svi_scan_result/v1".minimum_risk_neutral_density]
 relative = 1e-10
 absolute = 1e-16
+
+["svi_calibration_result/v1".status]
+exact = true
+
+["svi_calibration_result/v1".simplex_iterations]
+relative = 5e-1
+absolute = 1
+
+["svi_calibration_result/v1".observation_count]
+exact = true
+
+["svi_calibration_result/v1".a]
+relative = 5e-2
+absolute = 1e-12
+
+["svi_calibration_result/v1".b]
+relative = 5e-2
+absolute = 1e-12
+
+["svi_calibration_result/v1".rho]
+relative = 5e-2
+absolute = 1e-12
+
+["svi_calibration_result/v1".m]
+relative = 5e-2
+absolute = 1e-12
+
+["svi_calibration_result/v1".sigma]
+relative = 5e-2
+absolute = 1e-12
+
+["svi_calibration_result/v1".objective]
+relative = 1e-5
+absolute = 1e-10
+
+["svi_calibration_result/v1".weighted_root_mean_square_residual]
+relative = 1e-4
+absolute = 1e-10
+
+["svi_calibration_result/v1".fitted_curve]
+relative = 1e-6
+absolute = 1e-14

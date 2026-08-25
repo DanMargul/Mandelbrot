@@ -18,6 +18,10 @@ output_schema = "chain_snapshot/v2"
 input_schema = "forward_curve_query/v1"
 output_schema = "forward_curve/v1"
 
+[verbs.calibrate-svi-slice]
+input_schema = "svi_calibration_request/v1"
+output_schema = "svi_calibration_result/v1"
+
 [verbs.scan-svi-slice]
 input_schema = "svi_scan_request/v1"
 output_schema = "svi_scan_result/v1"

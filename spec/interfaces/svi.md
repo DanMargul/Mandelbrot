@@ -115,3 +115,121 @@ tracks perform an identical number of identical evaluations.
 - refinement finds a strictly lower minimum than a coarse grid alone on a violating slice
 - the density and the Durrleman function agree on sign at every point
 - `total_variance` is recovered by `implied_volatility` through `w = sigma^2 * T`
+
+---
+
+# Calibration
+
+```
+SviCalibrationStatus = "converged" | "too_few_observations" | "simplex_budget_exhausted"
+
+SliceObservation:
+    log_moneyness: float
+    total_variance: float
+    weight: float
+
+calibrate_svi_slice(observations, lowest_log_moneyness, highest_log_moneyness) -> SviCalibration
+```
+
+Weighted least squares in total variance, plus a penalty on any butterfly violation over a
+fixed grid, minimised by Nelder-Mead from twelve deterministic starting points.
+
+## Constraints by construction rather than by penalty
+
+The optimiser works in unconstrained coordinates that cannot produce an invalid slice:
+
+```
+minimum_variance = exp(u0)      b = exp(u1)     rho = tanh(u2)
+m                = u3           sigma = exp(u4)
+a                = minimum_variance - b * sigma * sqrt(1 - rho^2)
+```
+
+Solving for the minimum of `w` and deriving `a` from it means `a + b sigma sqrt(1 - rho^2)`
+is positive for every point the optimiser can reach, so the level constraint never has to be
+enforced. Only the butterfly condition needs a penalty, because it is not expressible as a
+box on the parameters.
+
+## The overflow that conformance caught
+
+`exp` of an unbounded coordinate overflows. Two separate defects followed, and neither would
+have surfaced in a single-track project:
+
+At moderate extremes the objective returned `NaN`, which then flowed into the vertex ordering
+and corrupted the simplex silently. Further out, **Python's `math.exp` raises `OverflowError`
+where C++ `std::exp` returns infinity**, so the two tracks did not merely disagree, they
+failed in different ways: one raising, one continuing.
+
+Both are fixed by clamping the exponent argument to `MAXIMUM_LOG_PARAMETER = 30`, which
+bounds every reachable parameter far outside any plausible fit while keeping the objective
+finite.
+
+A third defect of the same family sat next to them. `tanh` saturates: `tanh(x)` is **exactly
+`1.0`** in double precision for `x` above about 19, so the correlation transform could return
+`rho = 1` and make `sqrt(1 - rho^2)` degenerate, which is outside the SVI validity region the
+transform exists to guarantee. `rho` is now clamped to `MAXIMUM_CORRELATION = 0.9999` after
+the `tanh`, explicitly rather than by trusting the saturation point.
+
+None of these three ever bind on a real fit; the seeds start at `|rho| <= 0.7` and converge
+inward. They are reachable only when the simplex throws a vertex far out during expansion,
+which it routinely does.
+
+## What conformance compares, and why it is not the parameters
+
+Nelder-Mead is chaotic. A one-ulp difference anywhere flips a branch, after which the simplex
+takes an entirely different trajectory to the same minimum. Measured across the fixture, the
+two tracks reach objectives agreeing to `1e-13` while their iteration counts differ by about
+half a percent.
+
+Chasing that to a bit-identical path was considered and rejected. Even if the current source
+were found, the next compiler flag or libm revision reintroduces it; requiring two
+independently written implementations to follow identical chaotic trajectories is a contract
+that cannot be kept.
+
+The measurement that settles what to do instead:
+
+| slice | worst parameter difference | worst curve difference |
+|---|---|---|
+| `almost_flat_clean_wide` | `1.49e-02` | `3.37e-16` |
+| worst across the fixture | `1.49e-02` | `5.76e-08` |
+
+On an almost flat smile the parameters are barely identified: many `(a, b, rho, m, sigma)`
+combinations describe the same curve, and the two tracks land on genuinely different ones
+that agree to machine precision on the surface they produce.
+
+**So the parameters are a coordinate system, and the curve is the answer.** The result
+carries `fitted_curve`, the total variance at seventeen fixed reference points, and that is
+what conformance compares tightly at `1e-6`. The parameters are still reported, because
+downstream work needs them, but at a deliberately loose `5e-2`, and `simplex_iterations` is a
+path diagnostic compared only to within a factor of two.
+
+The general lesson is worth keeping: **conformance must compare the answer, not the route to
+it, and for a non-convex fit the answer is the curve.**
+
+`spec/tolerances.toml` is authoritative and the conformance runner and both Python test
+suites read it directly. The Catch2 fixture test in `cpp_pure/tests/test_verbs.cpp` mirrors
+the loose set by hand, because reading TOML from C++ would pull in a dependency for a
+redundant check. If a tolerance changes here, that list changes too.
+
+## Constants
+
+```
+MINIMUM_OBSERVATIONS         = 5
+MAXIMUM_SIMPLEX_ITERATIONS   = 4000
+SIMPLEX_SPREAD_TOLERANCE     = 1e-12
+SIMPLEX_INITIAL_STEP         = 0.5
+BUTTERFLY_PENALTY_WEIGHT     = 1e4
+PENALTY_GRID_STEPS           = 64
+MAXIMUM_LOG_PARAMETER        = 30.0
+MAXIMUM_CORRELATION          = 0.9999
+REFERENCE_LOG_MONEYNESS      = 17 points from -0.4 to 0.4
+```
+
+## Invariants under test
+
+- a slice sampled without noise is refitted to `1e-6` relative in total variance
+- every calibrated slice passes `scan_svi_slice` with `arbitrage_free_on_grid`
+- the fitted parameters always satisfy the validity conditions, by construction
+- fewer than `MINIMUM_OBSERVATIONS` points reports `too_few_observations` rather than fitting
+- an inverted penalty range is rejected
+- the coordinate transform yields a valid slice at every reachable coordinate, including
+  extremes far outside any fit

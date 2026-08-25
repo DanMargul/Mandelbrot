@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "svi_calibration_result/v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "records"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "svi_calibration_result/v1"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "a",
+          "b",
+          "rho",
+          "m",
+          "sigma",
+          "objective",
+          "weighted_root_mean_square_residual",
+          "simplex_iterations",
+          "observation_count",
+          "status",
+          "fitted_curve"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "a": {
+            "type": "number"
+          },
+          "b": {
+            "type": "number",
+            "minimum": 0
+          },
+          "rho": {
+            "type": "number"
+          },
+          "m": {
+            "type": "number"
+          },
+          "sigma": {
+            "type": "number"
+          },
+          "objective": {
+            "type": "number",
+            "minimum": 0
+          },
+          "weighted_root_mean_square_residual": {
+            "type": "number",
+            "minimum": 0
+          },
+          "simplex_iterations": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "observation_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "enum": [
+              "converged",
+              "too_few_observations",
+              "simplex_budget_exhausted"
+            ]
+          },
+          "fitted_curve": {
+            "type": "array",
+            "minItems": 17,
+            "maxItems": 17,
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  }
+}

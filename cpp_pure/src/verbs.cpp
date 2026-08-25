@@ -2,6 +2,7 @@
 
 #include "volarb/american.hpp"
 #include "volarb/svi.hpp"
+#include "volarb/svi_calibration.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -158,6 +159,43 @@ nlohmann::json scan_svi_slice_record(const nlohmann::json& record) {
     return output;
 }
 
+nlohmann::json calibrate_svi_slice_record(const nlohmann::json& record) {
+    const auto raw = record.find("observations");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'observations' must be an array");
+    }
+    std::vector<SliceObservation> observations;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every observation must be an object");
+        }
+        observations.push_back(SliceObservation{
+            required_number(entry, "log_moneyness"),
+            required_number(entry, "total_variance"),
+            required_number(entry, "weight"),
+        });
+    }
+
+    const SviCalibration calibration =
+        calibrate_svi_slice(observations, required_number(record, "lowest_log_moneyness"),
+                            required_number(record, "highest_log_moneyness"));
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["a"] = calibration.parameters.a;
+    output["b"] = calibration.parameters.b;
+    output["rho"] = calibration.parameters.rho;
+    output["m"] = calibration.parameters.m;
+    output["sigma"] = calibration.parameters.sigma;
+    output["objective"] = calibration.objective;
+    output["weighted_root_mean_square_residual"] = calibration.weighted_root_mean_square_residual;
+    output["simplex_iterations"] = calibration.simplex_iterations;
+    output["observation_count"] = calibration.observation_count;
+    output["fitted_curve"] = calibration.fitted_curve;
+    output["status"] = name_of_svi_calibration_status(calibration.status);
+    return output;
+}
+
 nlohmann::json read_chain_as_of_records(const nlohmann::json& records) {
     std::map<std::pair<std::string, std::string>, AsOfChainReader> readers;
     nlohmann::json snapshots = nlohmann::json::array();
@@ -252,6 +290,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"imply-forward-curve",
          Verb{"imply-forward-curve", "forward_curve_query/v1", "forward_curve/v1",
               imply_forward_curve_records}},
+        {"calibrate-svi-slice",
+         Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
+              mapped_over_records(calibrate_svi_slice_record)}},
         {"scan-svi-slice",
          Verb{"scan-svi-slice", "svi_scan_request/v1", "svi_scan_result/v1",
               mapped_over_records(scan_svi_slice_record)}},

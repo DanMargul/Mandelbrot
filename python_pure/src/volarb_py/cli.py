@@ -50,6 +50,10 @@ from volarb_py.svi import (
     SviParameters,
     scan_svi_slice,
 )
+from volarb_py.svi_calibration import (
+    SliceObservation,
+    calibrate_svi_slice,
+)
 
 
 @dataclass(frozen=True)
@@ -188,6 +192,46 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def slice_observations_from(record: JsonRecord) -> list[SliceObservation]:
+    raw = record.get("observations")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'observations' must be an array")
+    observations: list[SliceObservation] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every observation must be an object")
+        observations.append(
+            SliceObservation(
+                log_moneyness=required_float(entry, "log_moneyness"),
+                total_variance=required_float(entry, "total_variance"),
+                weight=required_float(entry, "weight"),
+            )
+        )
+    return observations
+
+
+def calibrate_svi_slice_record(record: JsonRecord) -> JsonRecord:
+    calibration = calibrate_svi_slice(
+        slice_observations_from(record),
+        required_float(record, "lowest_log_moneyness"),
+        required_float(record, "highest_log_moneyness"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "a": calibration.parameters.a,
+        "b": calibration.parameters.b,
+        "rho": calibration.parameters.rho,
+        "m": calibration.parameters.m,
+        "sigma": calibration.parameters.sigma,
+        "objective": calibration.objective,
+        "weighted_root_mean_square_residual": calibration.weighted_root_mean_square_residual,
+        "simplex_iterations": calibration.simplex_iterations,
+        "observation_count": calibration.observation_count,
+        "fitted_curve": calibration.fitted_curve,
+        "status": calibration.status,
+    }
+
+
 def chain_snapshot_record(query_id: str, quote: ContractQuote) -> JsonRecord:
     return {
         "id": f"{query_id}|{quote.contract_symbol}",
@@ -314,6 +358,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="american_inversion_request/v1",
         output_schema="american_inversion_result/v1",
         transform_records=mapped_over_records(invert_american_implied_volatility_record),
+    ),
+    "calibrate-svi-slice": Verb(
+        name="calibrate-svi-slice",
+        input_schema="svi_calibration_request/v1",
+        output_schema="svi_calibration_result/v1",
+        transform_records=mapped_over_records(calibrate_svi_slice_record),
     ),
     "scan-svi-slice": Verb(
         name="scan-svi-slice",
