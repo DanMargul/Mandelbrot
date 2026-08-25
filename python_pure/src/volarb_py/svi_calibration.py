@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import math
-from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Final, Literal
 
+from volarb_py.simplex import SimplexOutcome, minimise_by_simplex
 from volarb_py.svi import SviParameters, durrleman_function, total_variance
 
 SviCalibrationStatus = Literal[
@@ -15,13 +15,6 @@ SviCalibrationStatus = Literal[
 
 PARAMETER_COUNT: Final[int] = 5
 MINIMUM_OBSERVATIONS: Final[int] = 5
-MAXIMUM_SIMPLEX_ITERATIONS: Final[int] = 4000
-SIMPLEX_SPREAD_TOLERANCE: Final[float] = 1e-12
-SIMPLEX_INITIAL_STEP: Final[float] = 0.5
-REFLECTION_COEFFICIENT: Final[float] = 1.0
-EXPANSION_COEFFICIENT: Final[float] = 2.0
-CONTRACTION_COEFFICIENT: Final[float] = 0.5
-SHRINK_COEFFICIENT: Final[float] = 0.5
 BUTTERFLY_PENALTY_WEIGHT: Final[float] = 1e4
 PENALTY_GRID_STEPS: Final[int] = 64
 MAXIMUM_LOG_PARAMETER: Final[float] = 30.0
@@ -137,132 +130,6 @@ def seed_coordinates(observations: list[SliceObservation]) -> list[list[float]]:
     return seeds
 
 
-def simplex_vertex_order(vertices: list[list[float]], values: list[float]) -> list[int]:
-    return sorted(range(len(values)), key=lambda index: (values[index], vertices[index]))
-
-
-def centroid_excluding_worst(vertices: list[list[float]], order: list[int]) -> list[float]:
-    kept = order[:-1]
-    return [sum(vertices[index][axis] for index in kept) / len(kept) for axis in range(PARAMETER_COUNT)]
-
-
-def combine(base: list[float], direction: list[float], scale: float) -> list[float]:
-    return [base[axis] + scale * (direction[axis] - base[axis]) for axis in range(PARAMETER_COUNT)]
-
-
-def simplex_spread(vertices: list[list[float]], order: list[int]) -> float:
-    best = vertices[order[0]]
-    return max(
-        abs(vertices[index][axis] - best[axis]) for index in order[1:] for axis in range(PARAMETER_COUNT)
-    )
-
-
-@dataclass(frozen=True)
-class SimplexStep:
-    coordinates: list[float]
-    value: float
-
-
-@dataclass(frozen=True)
-class ContractionContext:
-    centroid: list[float]
-    worst_vertex: list[float]
-    worst_value: float
-    reflected: list[float]
-    reflected_value: float
-
-
-def contracted_replacement(
-    context: ContractionContext, evaluate: Callable[[list[float]], float]
-) -> SimplexStep | None:
-    if context.reflected_value < context.worst_value:
-        outside = combine(context.centroid, context.reflected, CONTRACTION_COEFFICIENT)
-        outside_value = evaluate(outside)
-        if outside_value <= context.reflected_value:
-            return SimplexStep(outside, outside_value)
-        return None
-    inside = combine(context.centroid, context.worst_vertex, CONTRACTION_COEFFICIENT)
-    inside_value = evaluate(inside)
-    if inside_value < context.worst_value:
-        return SimplexStep(inside, inside_value)
-    return None
-
-
-@dataclass(frozen=True)
-class SimplexOutcome:
-    coordinates: list[float]
-    value: float
-    iterations: int
-    settled: bool
-
-
-def minimise_by_simplex(
-    seed: list[float],
-    observations: list[SliceObservation],
-    lowest_log_moneyness: float,
-    highest_log_moneyness: float,
-) -> SimplexOutcome:
-    def evaluate(coordinates: list[float]) -> float:
-        return calibration_objective(coordinates, observations, lowest_log_moneyness, highest_log_moneyness)
-
-    vertices = [list(seed)]
-    for axis in range(PARAMETER_COUNT):
-        shifted = list(seed)
-        shifted[axis] += SIMPLEX_INITIAL_STEP
-        vertices.append(shifted)
-    values = [evaluate(vertex) for vertex in vertices]
-
-    for iteration in range(1, MAXIMUM_SIMPLEX_ITERATIONS + 1):
-        order = simplex_vertex_order(vertices, values)
-        if simplex_spread(vertices, order) <= SIMPLEX_SPREAD_TOLERANCE:
-            best = order[0]
-            return SimplexOutcome(vertices[best], values[best], iteration, True)
-
-        best, second_worst, worst = order[0], order[-2], order[-1]
-        centroid = centroid_excluding_worst(vertices, order)
-
-        reflected = combine(centroid, vertices[worst], -REFLECTION_COEFFICIENT)
-        reflected_value = evaluate(reflected)
-
-        if reflected_value < values[best]:
-            expanded = combine(centroid, reflected, EXPANSION_COEFFICIENT)
-            expanded_value = evaluate(expanded)
-            if expanded_value < reflected_value:
-                vertices[worst], values[worst] = expanded, expanded_value
-            else:
-                vertices[worst], values[worst] = reflected, reflected_value
-            continue
-
-        if reflected_value < values[second_worst]:
-            vertices[worst], values[worst] = reflected, reflected_value
-            continue
-
-        contraction = contracted_replacement(
-            ContractionContext(
-                centroid=centroid,
-                worst_vertex=vertices[worst],
-                worst_value=values[worst],
-                reflected=reflected,
-                reflected_value=reflected_value,
-            ),
-            evaluate,
-        )
-        if contraction is not None:
-            vertices[worst], values[worst] = contraction.coordinates, contraction.value
-            continue
-
-        anchor = list(vertices[best])
-        for index in range(len(vertices)):
-            if index == best:
-                continue
-            vertices[index] = combine(anchor, vertices[index], SHRINK_COEFFICIENT)
-            values[index] = evaluate(vertices[index])
-
-    order = simplex_vertex_order(vertices, values)
-    best = order[0]
-    return SimplexOutcome(vertices[best], values[best], MAXIMUM_SIMPLEX_ITERATIONS, False)
-
-
 def weighted_root_mean_square_residual(
     parameters: SviParameters, observations: list[SliceObservation]
 ) -> float:
@@ -293,7 +160,12 @@ def calibrate_svi_slice(
     best_outcome: SimplexOutcome | None = None
     total_iterations = 0
     for seed in seed_coordinates(observations):
-        outcome = minimise_by_simplex(seed, observations, lowest_log_moneyness, highest_log_moneyness)
+        outcome = minimise_by_simplex(
+            lambda coordinates: calibration_objective(
+                coordinates, observations, lowest_log_moneyness, highest_log_moneyness
+            ),
+            seed,
+        )
         total_iterations += outcome.iterations
         if best_outcome is None or outcome.value < best_outcome.value:
             best_outcome = outcome

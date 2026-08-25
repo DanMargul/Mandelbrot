@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "essvi_calibration_result/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "essvi_calibration_result/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "slice_count", "observation_count", "simplex_iterations",
+                     "objective", "weighted_root_mean_square_residual", "atm_total_variance",
+                     "curvature_scale", "power_law_exponent", "correlation_intercept",
+                     "correlation_slope", "slice_a", "slice_b", "slice_rho", "slice_m", "slice_sigma",
+                     "fitted_surface", "surface_minimum_durrleman_value",
+                     "surface_minimum_total_variance_time_slope"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["converged", "too_few_slices", "too_few_observations",
+                               "simplex_budget_exhausted", "arbitrage_not_eliminated"] },
+          "slice_count": { "type": "integer", "minimum": 0 },
+          "observation_count": { "type": "integer", "minimum": 0 },
+          "simplex_iterations": { "type": "integer", "minimum": 0 },
+          "objective": { "type": "number" },
+          "weighted_root_mean_square_residual": { "type": "number", "minimum": 0 },
+          "atm_total_variance": { "type": "array", "items": { "type": "number" } },
+          "curvature_scale": { "type": "number" },
+          "power_law_exponent": { "type": "number" },
+          "correlation_intercept": { "type": "number" },
+          "correlation_slope": { "type": "number" },
+          "slice_a": { "type": "array", "items": { "type": "number" } },
+          "slice_b": { "type": "array", "items": { "type": "number" } },
+          "slice_rho": { "type": "array", "items": { "type": "number" } },
+          "slice_m": { "type": "array", "items": { "type": "number" } },
+          "slice_sigma": { "type": "array", "items": { "type": "number" } },
+          "fitted_surface": { "type": "array", "items": { "type": "number" } },
+          "surface_minimum_durrleman_value": { "type": "number" },
+          "surface_minimum_total_variance_time_slope": { "type": "number" }
+        }
+      }
+    }
+  }
+}

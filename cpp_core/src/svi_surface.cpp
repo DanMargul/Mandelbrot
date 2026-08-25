@@ -174,6 +174,9 @@ void record_round_trip(SurfaceExtremes& extremes, const InterpolatedSlice& inter
         if (analytic < round_trip_local_variance_floor) {
             continue;
         }
+        if (price_space_curvature(interpolated, point) <= 0.0) {
+            continue;
+        }
         const double error = std::abs(local_variance_from_prices(interpolated, point) - analytic) / analytic;
         extremes.round_trip_points += 1;
         if (error > extremes.round_trip_error) {
@@ -344,14 +347,8 @@ double interpolated_local_variance(const InterpolatedSlice& interpolated, double
     return interpolated_time_slope(interpolated, log_moneyness) / denominator;
 }
 
-double local_variance_from_prices(const InterpolatedSlice& interpolated, double log_moneyness) {
+double price_space_curvature(const InterpolatedSlice& interpolated, double log_moneyness) {
     const bool use_put_branch = log_moneyness < 0.0;
-    const InterpolatedSlice later = shifted_in_time(interpolated, round_trip_time_step);
-    const InterpolatedSlice earlier = shifted_in_time(interpolated, -round_trip_time_step);
-    const double time_derivative = (out_of_the_money_price(later, log_moneyness, use_put_branch) -
-                                    out_of_the_money_price(earlier, log_moneyness, use_put_branch)) /
-                                   (2.0 * round_trip_time_step);
-
     const double centre = out_of_the_money_price(interpolated, log_moneyness, use_put_branch);
     const double above =
         out_of_the_money_price(interpolated, log_moneyness + round_trip_moneyness_step, use_put_branch);
@@ -360,7 +357,23 @@ double local_variance_from_prices(const InterpolatedSlice& interpolated, double 
     const double first = (above - below) / (2.0 * round_trip_moneyness_step);
     const double second =
         (above - 2.0 * centre + below) / (round_trip_moneyness_step * round_trip_moneyness_step);
-    return time_derivative / (0.5 * (second - first));
+    return 0.5 * (second - first);
+}
+
+double local_variance_from_prices(const InterpolatedSlice& interpolated, double log_moneyness) {
+    const double curvature = price_space_curvature(interpolated, log_moneyness);
+    if (curvature <= 0.0) {
+        throw InvalidSviSurfaceError("the price space density is not positive at " +
+                                     std::to_string(log_moneyness) + ", got " +
+                                     std::to_string(curvature));
+    }
+    const bool use_put_branch = log_moneyness < 0.0;
+    const InterpolatedSlice later = shifted_in_time(interpolated, round_trip_time_step);
+    const InterpolatedSlice earlier = shifted_in_time(interpolated, -round_trip_time_step);
+    const double time_derivative = (out_of_the_money_price(later, log_moneyness, use_put_branch) -
+                                    out_of_the_money_price(earlier, log_moneyness, use_put_branch)) /
+                                   (2.0 * round_trip_time_step);
+    return time_derivative / curvature;
 }
 
 SviSurfaceScan scan_svi_surface(const std::vector<SviSurfaceSlice>& slices, double lowest_log_moneyness,

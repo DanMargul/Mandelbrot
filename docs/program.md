@@ -103,9 +103,8 @@ contracts is ever fitted without stripping.
 
 ## 4. A surface that is arbitrage-free by construction, not by inspection
 
-*Extends Phase 3. **Slice calibration, its acceptance test, calendar monotonicity and the
-Dupire round-trip are done**, see `spec/interfaces/svi.md` and `spec/interfaces/svi_surface.md`.
-The eSSVI global fit remains.*
+*Extends Phase 3. **Done.** See `spec/interfaces/svi.md`, `spec/interfaces/svi_surface.md`
+and `spec/interfaces/essvi.md`.*
 
 SVI per slice, eSSVI globally with calendar-monotone total variance, calibrated under the
 Durrleman condition. That much is standard.
@@ -168,10 +167,44 @@ strike-minimised profile instead removes both grids from the answer: the reporte
 now identical to machine precision across every grid resolution tried, where the grid alone
 missed `28%` of it.
 
+The eSSVI global fit that ties the slices together was then built against that test, and the
+test immediately earned its keep. The first version enforced the butterfly condition with a
+penalty, as the slice calibrator does. Fed observations sampled from a badly arbitrageable
+surface, it reduced the violation from `-2.29` to `-0.022` and stopped: the data pull and the
+penalty balanced at a point that was still arbitrageable. **A penalty is a soft constraint and
+it loses when the data pulls hard enough.** The butterfly condition moved into the
+construction instead, as a bound on the curvature scale derived from the Gatheral-Jacquier
+sufficient conditions, so no reachable coordinate describes an arbitrageable slice. The price
+is that those conditions are sufficient and not necessary, so the reachable set is smaller
+than the arbitrage-free set.
+
+The calendar condition could not follow it, because eSSVI exists precisely to let the
+correlation vary and the constant-correlation argument does not survive that. What the
+penalty does there is worth recording, because it looks like a tuning problem and is not:
+pushed against inconsistent data it converges to the constraint **boundary**, where the sign
+is decided by rounding. At weight `1e6` the minimum time slope is `-9.4e-08`, at `1e8` it is
+`+1.0e-10`, at `1e10` it is `-1.0e-11`. Choosing `1e8` because it happened to pass would be
+tuning a test until it goes green.
+
+So the calibrator reports the verdict instead of assuming it. `calibrate_essvi_surface` runs
+the acceptance test on its own fitted slices and returns `arbitrage_not_eliminated` when it
+does not pass. **The fit either returns a surface that passes the acceptance test, or it says
+it could not**, and a caller cannot ship an arbitrageable surface by forgetting to check.
+On ordinary smiles, on 2% noise, and on data sampled from a calendar-violating surface, it
+converges and the fitted surface is arbitrage-free; the calendar case is repaired rather than
+reproduced.
+
+That also drew a line around what conformance can do. Every converged case agrees across
+tracks on the fitted surface to `1.3e-8`. The one fit that reports it could not eliminate
+arbitrage has two tracks landing on surfaces `98%` apart, because the objective there has
+many near-equal minima and the simplex picks one chaotically. Such cases are covered by unit
+tests in all three tracks rather than by the shared fixture. **Conformance compares the
+answer, and a fit that reports it could not eliminate arbitrage is telling you there is not
+one.**
+
 **Done when** dense-grid density non-negativity, calendar monotonicity, and a Dupire
 round-trip all hold as fixture assertions, so a refactor that reproduces the parameter
-values but breaks the constraint still fails. **These three now hold**; what remains for this
-step is the eSSVI global fit that ties the slices together, judged by this same test.
+values but breaks the constraint still fails. **Done.**
 
 ---
 

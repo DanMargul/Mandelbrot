@@ -204,7 +204,22 @@ def shifted_in_time(interpolated: InterpolatedSlice, years_offset: float) -> Int
     )
 
 
+def price_space_curvature(interpolated: InterpolatedSlice, log_moneyness: float) -> float:
+    use_put_branch = log_moneyness < 0.0
+    centre = out_of_the_money_price(interpolated, log_moneyness, use_put_branch)
+    above = out_of_the_money_price(interpolated, log_moneyness + ROUND_TRIP_MONEYNESS_STEP, use_put_branch)
+    below = out_of_the_money_price(interpolated, log_moneyness - ROUND_TRIP_MONEYNESS_STEP, use_put_branch)
+    first = (above - below) / (2.0 * ROUND_TRIP_MONEYNESS_STEP)
+    second = (above - 2.0 * centre + below) / (ROUND_TRIP_MONEYNESS_STEP * ROUND_TRIP_MONEYNESS_STEP)
+    return 0.5 * (second - first)
+
+
 def local_variance_from_prices(interpolated: InterpolatedSlice, log_moneyness: float) -> float:
+    curvature = price_space_curvature(interpolated, log_moneyness)
+    if curvature <= 0.0:
+        raise InvalidSviSurfaceError(
+            f"the price space density is not positive at {log_moneyness}, got {curvature}"
+        )
     use_put_branch = log_moneyness < 0.0
     later = shifted_in_time(interpolated, ROUND_TRIP_TIME_STEP)
     earlier = shifted_in_time(interpolated, -ROUND_TRIP_TIME_STEP)
@@ -212,13 +227,7 @@ def local_variance_from_prices(interpolated: InterpolatedSlice, log_moneyness: f
         out_of_the_money_price(later, log_moneyness, use_put_branch)
         - out_of_the_money_price(earlier, log_moneyness, use_put_branch)
     ) / (2.0 * ROUND_TRIP_TIME_STEP)
-
-    centre = out_of_the_money_price(interpolated, log_moneyness, use_put_branch)
-    above = out_of_the_money_price(interpolated, log_moneyness + ROUND_TRIP_MONEYNESS_STEP, use_put_branch)
-    below = out_of_the_money_price(interpolated, log_moneyness - ROUND_TRIP_MONEYNESS_STEP, use_put_branch)
-    first = (above - below) / (2.0 * ROUND_TRIP_MONEYNESS_STEP)
-    second = (above - 2.0 * centre + below) / (ROUND_TRIP_MONEYNESS_STEP * ROUND_TRIP_MONEYNESS_STEP)
-    return time_derivative / (0.5 * (second - first))
+    return time_derivative / curvature
 
 
 def moneyness_grid(lowest: float, highest: float, scan_steps: int) -> list[float]:
@@ -309,6 +318,8 @@ def record_round_trip(extremes: SurfaceExtremes, interpolated: InterpolatedSlice
     for point in grid:
         analytic = interpolated_local_variance(interpolated, point)
         if analytic < ROUND_TRIP_LOCAL_VARIANCE_FLOOR:
+            continue
+        if price_space_curvature(interpolated, point) <= 0.0:
             continue
         error = abs(local_variance_from_prices(interpolated, point) - analytic) / analytic
         extremes.round_trip_points += 1

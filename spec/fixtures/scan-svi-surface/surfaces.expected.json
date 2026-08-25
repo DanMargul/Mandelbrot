@@ -176,9 +176,9 @@
       "minimum_local_variance": -3639131539.526958,
       "log_moneyness_at_minimum_local_variance": -0.015547854900830998,
       "years_to_expiry_at_minimum_local_variance": 0.75,
-      "worst_local_variance_round_trip_error": 1.0000000006906464,
-      "log_moneyness_at_worst_round_trip_error": -0.31875,
-      "round_trip_point_count": 203,
+      "worst_local_variance_round_trip_error": 4.583528459887131e-05,
+      "log_moneyness_at_worst_round_trip_error": -0.028124999999999956,
+      "round_trip_point_count": 141,
       "status": "butterfly_arbitrage_found"
     },
     {
@@ -356,9 +356,9 @@
       "minimum_local_variance": -3639131539.5271835,
       "log_moneyness_at_minimum_local_variance": -0.015547854900830752,
       "years_to_expiry_at_minimum_local_variance": 0.75,
-      "worst_local_variance_round_trip_error": 1.0000000022724584,
-      "log_moneyness_at_worst_round_trip_error": -0.3203125,
-      "round_trip_point_count": 225,
+      "worst_local_variance_round_trip_error": 1.8619057123318322e-05,
+      "log_moneyness_at_worst_round_trip_error": -0.0234375,
+      "round_trip_point_count": 187,
       "status": "butterfly_arbitrage_found"
     },
     {
@@ -536,9 +536,9 @@
       "minimum_local_variance": -3639131539.5270348,
       "log_moneyness_at_minimum_local_variance": -0.015547854900830917,
       "years_to_expiry_at_minimum_local_variance": 0.75,
-      "worst_local_variance_round_trip_error": 1.0000000003361322,
-      "log_moneyness_at_worst_round_trip_error": -0.31640625,
-      "round_trip_point_count": 470,
+      "worst_local_variance_round_trip_error": 8.319176836163781e-05,
+      "log_moneyness_at_worst_round_trip_error": -0.029296875,
+      "round_trip_point_count": 421,
       "status": "butterfly_arbitrage_found"
     },
     {
@@ -716,9 +716,9 @@
       "minimum_local_variance": -0.03401594080944637,
       "log_moneyness_at_minimum_local_variance": 0.10927589226067821,
       "years_to_expiry_at_minimum_local_variance": 0.75,
-      "worst_local_variance_round_trip_error": 1.0000000000703915,
-      "log_moneyness_at_worst_round_trip_error": -0.3,
-      "round_trip_point_count": 13,
+      "worst_local_variance_round_trip_error": 4.7148714175309445e-07,
+      "log_moneyness_at_worst_round_trip_error": -0.375,
+      "round_trip_point_count": 9,
       "status": "butterfly_arbitrage_found"
     }
   ]

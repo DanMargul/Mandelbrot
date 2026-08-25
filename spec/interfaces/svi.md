@@ -210,6 +210,13 @@ suites read it directly. The Catch2 fixture test in `cpp_pure/tests/test_verbs.c
 the loose set by hand, because reading TOML from C++ would pull in a dependency for a
 redundant check. If a tolerance changes here, that list changes too.
 
+## The simplex is shared
+
+The Nelder-Mead itself now lives in a `simplex` module taking a callable and a seed of any
+length, because the eSSVI surface fit in `essvi.md` needs `n + 4` parameters rather than
+five. The extraction was verified arithmetically inert: this fixture regenerates byte for
+byte and the native track's output is byte-identical across the change.
+
 ## Constants
 
 ```

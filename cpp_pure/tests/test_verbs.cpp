@@ -36,6 +36,19 @@ const std::map<std::string, FieldTolerance> mirrored_tolerances = {
     {"weighted_root_mean_square_residual", {5e-2, 1e-10}},
     {"simplex_iterations", {5e-1, 1.0}},
     {"fitted_curve", {1e-6, 1e-14}},
+    {"atm_total_variance", {5e-2, 1e-12}},
+    {"curvature_scale", {5e-2, 1e-12}},
+    {"power_law_exponent", {5e-2, 1e-12}},
+    {"correlation_intercept", {5e-2, 1e-12}},
+    {"correlation_slope", {5e-2, 1e-9}},
+    {"slice_a", {5e-2, 1e-12}},
+    {"slice_b", {5e-2, 1e-12}},
+    {"slice_rho", {5e-2, 1e-12}},
+    {"slice_m", {5e-2, 1e-12}},
+    {"slice_sigma", {5e-2, 1e-12}},
+    {"fitted_surface", {1e-6, 1e-14}},
+    {"surface_minimum_durrleman_value", {1e-6, 1e-12}},
+    {"surface_minimum_total_variance_time_slope", {1e-6, 1e-12}},
 };
 
 FieldTolerance tolerance_for(const std::string& field) {

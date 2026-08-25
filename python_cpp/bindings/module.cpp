@@ -6,6 +6,7 @@
 #include "volarb/svi.hpp"
 #include "volarb/svi_calibration.hpp"
 #include "volarb/svi_surface.hpp"
+#include "volarb/essvi.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -59,7 +60,12 @@ using volarb::invert_american_implied_volatility;
 using volarb::name_of_american_inversion_status;
 using volarb::default_scan_steps;
 using volarb::InvalidSviParametersError;
+using volarb::calibrate_essvi_surface;
 using volarb::default_surface_scan_steps;
+using volarb::EssviCalibration;
+using volarb::EssviSliceQuotes;
+using volarb::InvalidEssviInputsError;
+using volarb::name_of_essvi_status;
 using volarb::default_time_steps_per_interval;
 using volarb::InvalidSviSurfaceError;
 using volarb::name_of_svi_status;
@@ -157,6 +163,48 @@ SviCalibration calibrate_svi_slice_from_values(const std::vector<double>& log_mo
             SliceObservation{log_moneyness[index], total_variances[index], weights[index]});
     }
     return calibrate_svi_slice(observations, lowest_log_moneyness, highest_log_moneyness);
+}
+
+std::vector<double> field_of(const EssviCalibration& calibration, int which) {
+    std::vector<double> values;
+    values.reserve(calibration.slices.size());
+    for (const SviParameters& slice : calibration.slices) {
+        const double picked = which == 0   ? slice.a
+                              : which == 1 ? slice.b
+                              : which == 2 ? slice.rho
+                              : which == 3 ? slice.m
+                                           : slice.sigma;
+        values.push_back(picked);
+    }
+    return values;
+}
+
+EssviCalibration calibrate_essvi_surface_from_values(
+    const std::vector<double>& years_to_expiry, const std::vector<std::vector<double>>& log_moneyness,
+    const std::vector<std::vector<double>>& total_variances,
+    const std::vector<std::vector<double>>& weights, double lowest_log_moneyness,
+    double highest_log_moneyness) {
+    if (years_to_expiry.size() != log_moneyness.size() ||
+        years_to_expiry.size() != total_variances.size() || years_to_expiry.size() != weights.size()) {
+        throw InvalidEssviInputsError("every slice column must have the same length");
+    }
+    std::vector<EssviSliceQuotes> quotes;
+    quotes.reserve(years_to_expiry.size());
+    for (std::size_t slice = 0; slice < years_to_expiry.size(); ++slice) {
+        if (log_moneyness[slice].size() != total_variances[slice].size() ||
+            log_moneyness[slice].size() != weights[slice].size()) {
+            throw InvalidEssviInputsError("every observation column must have the same length");
+        }
+        std::vector<SliceObservation> observations;
+        observations.reserve(log_moneyness[slice].size());
+        for (std::size_t index = 0; index < log_moneyness[slice].size(); ++index) {
+            observations.push_back(SliceObservation{log_moneyness[slice][index],
+                                                    total_variances[slice][index],
+                                                    weights[slice][index]});
+        }
+        quotes.push_back(EssviSliceQuotes{years_to_expiry[slice], observations});
+    }
+    return calibrate_essvi_surface(quotes, lowest_log_moneyness, highest_log_moneyness);
 }
 
 SviSurfaceScan scan_svi_surface_from_values(const std::vector<double>& years_to_expiry,
@@ -409,6 +457,47 @@ PYBIND11_MODULE(_volarb_core, module) {
                py::arg("a"), py::arg("b"), py::arg("rho"), py::arg("m"), py::arg("sigma"),
                py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"), py::arg("scan_steps"),
                py::arg("time_steps_per_interval"));
+
+    py::register_exception<InvalidEssviInputsError>(module, "InvalidEssviInputsError", PyExc_ValueError);
+
+    py::class_<EssviCalibration>(module, "EssviCalibration")
+        .def_readonly("objective", &EssviCalibration::objective)
+        .def_readonly("weighted_root_mean_square_residual",
+                      &EssviCalibration::weighted_root_mean_square_residual)
+        .def_readonly("simplex_iterations", &EssviCalibration::simplex_iterations)
+        .def_readonly("slice_count", &EssviCalibration::slice_count)
+        .def_readonly("observation_count", &EssviCalibration::observation_count)
+        .def_readonly("fitted_surface", &EssviCalibration::fitted_surface)
+        .def_readonly("surface_minimum_durrleman_value",
+                      &EssviCalibration::surface_minimum_durrleman_value)
+        .def_readonly("surface_minimum_total_variance_time_slope",
+                      &EssviCalibration::surface_minimum_total_variance_time_slope)
+        .def_property_readonly(
+            "atm_total_variance",
+            [](const EssviCalibration& c) { return c.parameters.atm_total_variance; })
+        .def_property_readonly("curvature_scale",
+                               [](const EssviCalibration& c) { return c.parameters.curvature_scale; })
+        .def_property_readonly(
+            "power_law_exponent",
+            [](const EssviCalibration& c) { return c.parameters.power_law_exponent; })
+        .def_property_readonly(
+            "correlation_intercept",
+            [](const EssviCalibration& c) { return c.parameters.correlation_intercept; })
+        .def_property_readonly(
+            "correlation_slope",
+            [](const EssviCalibration& c) { return c.parameters.correlation_slope; })
+        .def_property_readonly("slice_a", [](const EssviCalibration& c) { return field_of(c, 0); })
+        .def_property_readonly("slice_b", [](const EssviCalibration& c) { return field_of(c, 1); })
+        .def_property_readonly("slice_rho", [](const EssviCalibration& c) { return field_of(c, 2); })
+        .def_property_readonly("slice_m", [](const EssviCalibration& c) { return field_of(c, 3); })
+        .def_property_readonly("slice_sigma", [](const EssviCalibration& c) { return field_of(c, 4); })
+        .def_property_readonly("status", [](const EssviCalibration& c) {
+            return name_of_essvi_status(c.status);
+        });
+
+    module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
+               py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
+               py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
 
     py::class_<LatticeInputs>(module, "LatticeInputs")
         .def(py::init(&make_lattice_inputs), py::arg("spot_price"), py::arg("strike"),

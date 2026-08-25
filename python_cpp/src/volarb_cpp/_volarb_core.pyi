@@ -126,6 +126,47 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidEssviInputsError(ValueError): ...
+
+EssviStatus = Literal[
+    "converged",
+    "too_few_slices",
+    "too_few_observations",
+    "simplex_budget_exhausted",
+    "arbitrage_not_eliminated",
+]
+
+class EssviCalibration:
+    objective: float
+    weighted_root_mean_square_residual: float
+    simplex_iterations: int
+    slice_count: int
+    observation_count: int
+    atm_total_variance: list[float]
+    curvature_scale: float
+    power_law_exponent: float
+    correlation_intercept: float
+    correlation_slope: float
+    slice_a: list[float]
+    slice_b: list[float]
+    slice_rho: list[float]
+    slice_m: list[float]
+    slice_sigma: list[float]
+    fitted_surface: list[float]
+    surface_minimum_durrleman_value: float
+    surface_minimum_total_variance_time_slope: float
+    status: EssviStatus
+
+def calibrate_essvi_surface(
+    *,
+    years_to_expiry: list[float],
+    log_moneyness: list[list[float]],
+    total_variances: list[list[float]],
+    weights: list[list[float]],
+    lowest_log_moneyness: float,
+    highest_log_moneyness: float,
+) -> EssviCalibration: ...
+
 class InvalidSviSurfaceError(ValueError): ...
 
 SviSurfaceStatus = Literal[

@@ -4,6 +4,7 @@
 #include "volarb/svi.hpp"
 #include "volarb/svi_calibration.hpp"
 #include "volarb/svi_surface.hpp"
+#include "volarb/essvi.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -190,6 +191,79 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
     return slices;
 }
 
+std::vector<EssviSliceQuotes> essvi_slice_quotes_from(const nlohmann::json& record) {
+    const auto raw = record.find("slices");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'slices' must be an array");
+    }
+    std::vector<EssviSliceQuotes> quotes;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'slices' must be an object");
+        }
+        const auto raw_observations = entry.find("observations");
+        if (raw_observations == entry.end() || !raw_observations->is_array()) {
+            throw DocumentError("field 'observations' must be an array");
+        }
+        std::vector<SliceObservation> observations;
+        for (const nlohmann::json& item : *raw_observations) {
+            if (!item.is_object()) {
+                throw DocumentError("every observation must be an object");
+            }
+            observations.push_back(SliceObservation{
+                required_number(item, "log_moneyness"),
+                required_number(item, "total_variance"),
+                required_number(item, "weight"),
+            });
+        }
+        quotes.push_back(EssviSliceQuotes{required_number(entry, "years_to_expiry"), observations});
+    }
+    return quotes;
+}
+
+nlohmann::json calibrate_essvi_surface_record(const nlohmann::json& record) {
+    const EssviCalibration calibration = calibrate_essvi_surface(
+        essvi_slice_quotes_from(record), required_number(record, "lowest_log_moneyness"),
+        required_number(record, "highest_log_moneyness"));
+
+    std::vector<double> slice_a;
+    std::vector<double> slice_b;
+    std::vector<double> slice_rho;
+    std::vector<double> slice_m;
+    std::vector<double> slice_sigma;
+    for (const SviParameters& slice : calibration.slices) {
+        slice_a.push_back(slice.a);
+        slice_b.push_back(slice.b);
+        slice_rho.push_back(slice.rho);
+        slice_m.push_back(slice.m);
+        slice_sigma.push_back(slice.sigma);
+    }
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["status"] = name_of_essvi_status(calibration.status);
+    output["slice_count"] = calibration.slice_count;
+    output["observation_count"] = calibration.observation_count;
+    output["simplex_iterations"] = calibration.simplex_iterations;
+    output["objective"] = calibration.objective;
+    output["weighted_root_mean_square_residual"] = calibration.weighted_root_mean_square_residual;
+    output["atm_total_variance"] = calibration.parameters.atm_total_variance;
+    output["curvature_scale"] = calibration.parameters.curvature_scale;
+    output["power_law_exponent"] = calibration.parameters.power_law_exponent;
+    output["correlation_intercept"] = calibration.parameters.correlation_intercept;
+    output["correlation_slope"] = calibration.parameters.correlation_slope;
+    output["slice_a"] = slice_a;
+    output["slice_b"] = slice_b;
+    output["slice_rho"] = slice_rho;
+    output["slice_m"] = slice_m;
+    output["slice_sigma"] = slice_sigma;
+    output["fitted_surface"] = calibration.fitted_surface;
+    output["surface_minimum_durrleman_value"] = calibration.surface_minimum_durrleman_value;
+    output["surface_minimum_total_variance_time_slope"] =
+        calibration.surface_minimum_total_variance_time_slope;
+    return output;
+}
+
 nlohmann::json scan_svi_surface_record(const nlohmann::json& record) {
     const SviSurfaceScan scan = scan_svi_surface(
         surface_slices_from(record), required_number(record, "lowest_log_moneyness"),
@@ -355,6 +429,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"calibrate-essvi-surface",
+         Verb{"calibrate-essvi-surface", "essvi_calibration_request/v1",
+              "essvi_calibration_result/v1", mapped_over_records(calibrate_essvi_surface_record)}},
         {"scan-svi-surface",
          Verb{"scan-svi-surface", "svi_surface_scan_request/v1", "svi_surface_scan_result/v1",
               mapped_over_records(scan_svi_surface_record)}},

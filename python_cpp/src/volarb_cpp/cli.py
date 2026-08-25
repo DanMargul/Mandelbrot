@@ -6,7 +6,7 @@ import sys
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
 from volarb_cpp import _volarb_core
 from volarb_cpp.documents import (
@@ -129,6 +129,66 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
         "status": result.status,
         "iterations": result.iterations,
         "absolute_price_error": result.absolute_price_error,
+    }
+
+
+def essvi_slice_columns(record: JsonRecord) -> dict[str, list[Any]]:
+    raw = record.get("slices")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'slices' must be an array")
+    years: list[Any] = []
+    moneyness: list[Any] = []
+    variances: list[Any] = []
+    weights: list[Any] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'slices' must be an object")
+        years.append(required_float(entry, "years_to_expiry"))
+        observations = entry.get("observations")
+        if not isinstance(observations, list):
+            raise DocumentError("field 'observations' must be an array")
+        moneyness.append([required_float(item, "log_moneyness") for item in observations])
+        variances.append([required_float(item, "total_variance") for item in observations])
+        weights.append([required_float(item, "weight") for item in observations])
+    return {
+        "years_to_expiry": years,
+        "log_moneyness": moneyness,
+        "total_variances": variances,
+        "weights": weights,
+    }
+
+
+def calibrate_essvi_surface_record(record: JsonRecord) -> JsonRecord:
+    columns = essvi_slice_columns(record)
+    calibration = _volarb_core.calibrate_essvi_surface(
+        years_to_expiry=columns["years_to_expiry"],
+        log_moneyness=columns["log_moneyness"],
+        total_variances=columns["total_variances"],
+        weights=columns["weights"],
+        lowest_log_moneyness=required_float(record, "lowest_log_moneyness"),
+        highest_log_moneyness=required_float(record, "highest_log_moneyness"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "status": calibration.status,
+        "slice_count": calibration.slice_count,
+        "observation_count": calibration.observation_count,
+        "simplex_iterations": calibration.simplex_iterations,
+        "objective": calibration.objective,
+        "weighted_root_mean_square_residual": calibration.weighted_root_mean_square_residual,
+        "atm_total_variance": calibration.atm_total_variance,
+        "curvature_scale": calibration.curvature_scale,
+        "power_law_exponent": calibration.power_law_exponent,
+        "correlation_intercept": calibration.correlation_intercept,
+        "correlation_slope": calibration.correlation_slope,
+        "slice_a": calibration.slice_a,
+        "slice_b": calibration.slice_b,
+        "slice_rho": calibration.slice_rho,
+        "slice_m": calibration.slice_m,
+        "slice_sigma": calibration.slice_sigma,
+        "fitted_surface": calibration.fitted_surface,
+        "surface_minimum_durrleman_value": calibration.surface_minimum_durrleman_value,
+        "surface_minimum_total_variance_time_slope": (calibration.surface_minimum_total_variance_time_slope),
     }
 
 
@@ -378,6 +438,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "calibrate-essvi-surface": Verb(
+        name="calibrate-essvi-surface",
+        input_schema="essvi_calibration_request/v1",
+        output_schema="essvi_calibration_result/v1",
+        transform_records=mapped_over_records(calibrate_essvi_surface_record),
     ),
     "scan-svi-surface": Verb(
         name="scan-svi-surface",

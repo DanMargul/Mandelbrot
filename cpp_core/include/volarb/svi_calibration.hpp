@@ -1,5 +1,6 @@
 #pragma once
 
+#include "volarb/simplex.hpp"
 #include "volarb/svi.hpp"
 
 #include <stdexcept>
@@ -12,13 +13,6 @@ enum class SviCalibrationStatus { Converged, TooFewObservations, SimplexBudgetEx
 
 inline constexpr int parameter_count = 5;
 inline constexpr int minimum_observations = 5;
-inline constexpr int maximum_simplex_iterations = 4000;
-inline constexpr double simplex_spread_tolerance = 1e-12;
-inline constexpr double simplex_initial_step = 0.5;
-inline constexpr double reflection_coefficient = 1.0;
-inline constexpr double expansion_coefficient = 2.0;
-inline constexpr double contraction_coefficient = 0.5;
-inline constexpr double shrink_coefficient = 0.5;
 inline constexpr double butterfly_penalty_weight = 1e4;
 inline constexpr int penalty_grid_steps = 64;
 inline constexpr double maximum_log_parameter = 30.0;
@@ -50,6 +44,7 @@ struct SviCalibration {
 
 std::string name_of_svi_calibration_status(SviCalibrationStatus status);
 
+double bounded_exponential(double coordinate);
 SviParameters parameters_from_coordinates(const std::vector<double>& coordinates);
 std::vector<double> reference_log_moneyness();
 std::vector<double> fitted_curve(const SviParameters& parameters);

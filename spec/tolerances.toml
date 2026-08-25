@@ -307,3 +307,76 @@ absolute = 1e-14
 ["svi_surface_scan_result/v1".log_moneyness_at_worst_round_trip_error]
 relative = 1e-9
 absolute = 1e-12
+
+["essvi_calibration_result/v1".status]
+exact = true
+
+["essvi_calibration_result/v1".slice_count]
+exact = true
+
+["essvi_calibration_result/v1".observation_count]
+exact = true
+
+["essvi_calibration_result/v1".simplex_iterations]
+relative = 5e-1
+absolute = 1
+
+["essvi_calibration_result/v1".objective]
+relative = 1e-4
+absolute = 1e-10
+
+["essvi_calibration_result/v1".weighted_root_mean_square_residual]
+relative = 1e-4
+absolute = 1e-10
+
+["essvi_calibration_result/v1".atm_total_variance]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".curvature_scale]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".power_law_exponent]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".correlation_intercept]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".correlation_slope]
+relative = 5e-2
+absolute = 1e-9
+
+["essvi_calibration_result/v1".slice_a]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".slice_b]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".slice_rho]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".slice_m]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".slice_sigma]
+relative = 5e-2
+absolute = 1e-12
+
+["essvi_calibration_result/v1".fitted_surface]
+relative = 1e-6
+absolute = 1e-14
+
+["essvi_calibration_result/v1".surface_minimum_durrleman_value]
+relative = 1e-6
+absolute = 1e-12
+
+["essvi_calibration_result/v1".surface_minimum_total_variance_time_slope]
+relative = 1e-6
+absolute = 1e-12

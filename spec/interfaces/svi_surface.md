@@ -117,6 +117,15 @@ one. The branch is a property of the stencil centre.
 With those two decisions, and steps chosen from the truncation-versus-roundoff curve, the
 worst round-trip error across the arbitrage-free fixture cases is `2.4e-6`.
 
+The round trip is also skipped where the price-space density itself is not positive. That
+guard was added after the eSSVI calibrator produced slices extreme enough to drive the second
+difference to **exactly zero**, where Python raised `ZeroDivisionError` and C++ would have
+returned infinity: the same divergence family as the `log(0)` and `exp` overflow defects
+recorded elsewhere. `local_variance_from_prices` now raises a typed error rather than
+dividing, and the scan checks `price_space_curvature` before calling it. Across the fixture
+this changed nothing on any arbitrage-free surface; the 153 affected points all sat on
+butterfly-violating cases, where the reported error fell from a meaningless `1.0` to `4.6e-5`.
+
 The round trip is skipped where the analytic local variance is below
 `ROUND_TRIP_LOCAL_VARIANCE_FLOOR`, and `round_trip_point_count` reports how many points were
 actually checked. A flat term structure has `w_T = 0` everywhere and so checks zero points,

@@ -280,3 +280,58 @@ def test_a_surface_with_one_slice_raises_a_value_error() -> None:
     single = {name: [value[0]] for name, value in HEALTHY_SURFACE.items()}
     with pytest.raises(ValueError, match="at least"):
         svi_surface_scan(**single)
+
+
+ESSVI_EXPIRIES = [0.0833, 0.25, 0.5, 1.0]
+ESSVI_SLICES = [
+    (0.0015, 0.030, -0.70, 0.010, 0.10),
+    (0.0060, 0.055, -0.65, 0.015, 0.15),
+    (0.0140, 0.075, -0.60, 0.020, 0.22),
+    (0.0300, 0.100, -0.55, 0.030, 0.32),
+]
+
+
+def total_variance_of(slice_parameters: tuple[float, ...], point: float) -> float:
+    a, b, rho, m, sigma = slice_parameters
+    centred = point - m
+    return a + b * (rho * centred + math.sqrt(centred * centred + sigma * sigma))
+
+
+def essvi_columns(slices: list[tuple[float, ...]]) -> dict[str, object]:
+    points = [-0.4 + 0.8 * index / 20 for index in range(21)]
+    return {
+        "years_to_expiry": ESSVI_EXPIRIES,
+        "log_moneyness": [list(points) for _ in slices],
+        "total_variances": [[total_variance_of(entry, point) for point in points] for entry in slices],
+        "weights": [[1.0] * len(points) for _ in slices],
+    }
+
+
+def essvi_fit(slices: list[tuple[float, ...]]) -> object:
+    return core.calibrate_essvi_surface(
+        **essvi_columns(slices), lowest_log_moneyness=-0.6, highest_log_moneyness=0.6
+    )
+
+
+def test_an_essvi_surface_fits_clean_through_the_bindings() -> None:
+    fit = essvi_fit(ESSVI_SLICES)
+    assert fit.status == "converged"
+    assert fit.slice_count == len(ESSVI_EXPIRIES)
+    assert fit.surface_minimum_durrleman_value > 0.0
+    assert fit.surface_minimum_total_variance_time_slope > 0.0
+    assert len(fit.slice_a) == len(ESSVI_EXPIRIES)
+    assert len(fit.atm_total_variance) == len(ESSVI_EXPIRIES)
+
+
+def test_a_fit_that_cannot_eliminate_arbitrage_says_so_through_the_bindings() -> None:
+    slices = list(ESSVI_SLICES)
+    slices[2] = (0.0002, 0.350, -0.85, 0.000, 0.02)
+    fit = essvi_fit(slices)
+    assert fit.status == "arbitrage_not_eliminated"
+
+
+def test_ragged_essvi_columns_raise_a_value_error() -> None:
+    columns = essvi_columns(ESSVI_SLICES)
+    columns["weights"] = columns["weights"][:2]
+    with pytest.raises(ValueError, match="length"):
+        core.calibrate_essvi_surface(**columns, lowest_log_moneyness=-0.6, highest_log_moneyness=0.6)

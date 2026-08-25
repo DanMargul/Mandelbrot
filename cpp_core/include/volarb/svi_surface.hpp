@@ -82,6 +82,7 @@ double interpolated_time_slope(const InterpolatedSlice& interpolated, double log
 double interpolated_durrleman_value(const InterpolatedSlice& interpolated, double log_moneyness);
 double interpolated_risk_neutral_density(const InterpolatedSlice& interpolated, double log_moneyness);
 double interpolated_local_variance(const InterpolatedSlice& interpolated, double log_moneyness);
+double price_space_curvature(const InterpolatedSlice& interpolated, double log_moneyness);
 double local_variance_from_prices(const InterpolatedSlice& interpolated, double log_moneyness);
 
 SviSurfaceScan scan_svi_surface(const std::vector<SviSurfaceSlice>& slices, double lowest_log_moneyness,

@@ -29,6 +29,7 @@ from volarb_py.american import (  # noqa: E402
     richardson_extrapolated_price,
 )
 from volarb_py.cli import (  # noqa: E402
+    calibrate_essvi_surface_record,
     calibrate_svi_slice_record,
     invert_american_implied_volatility_record,
     invert_implied_volatility_record,
@@ -38,6 +39,7 @@ from volarb_py.cli import (  # noqa: E402
     scan_svi_surface_record,
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
+from volarb_py.essvi import EssviParameters, slices_from_parameters  # noqa: E402
 from volarb_py.svi import (  # noqa: E402
     SviParameters,
     durrleman_function,
@@ -45,6 +47,7 @@ from volarb_py.svi import (  # noqa: E402
     scan_svi_slice,
 )
 from volarb_py.svi import total_variance as svi_total_variance  # noqa: E402
+from volarb_py.svi_calibration import reference_log_moneyness  # noqa: E402
 from volarb_py.svi_surface import (  # noqa: E402
     DEFAULT_TIME_STEPS_PER_INTERVAL,
     SviSurfaceSlice,
@@ -66,6 +69,7 @@ SURFACE_FINE_SCAN_STEPS: Final[int] = 4096
 SURFACE_FINE_TIME_STEPS: Final[int] = 64
 SURFACE_SCAN_ORACLE_BUDGET: Final[float] = 1e-9
 SURFACE_ROUND_TRIP_BUDGET: Final[float] = 1e-5
+ESSVI_RECOVERY_BUDGET: Final[float] = 1e-8
 
 
 class OracleDisagreementError(AssertionError):
@@ -585,6 +589,134 @@ def build_svi_surface_fixture() -> None:
     )
 
 
+ESSVI_EXPIRIES: Final[tuple[float, ...]] = (0.0833, 0.25, 0.5, 1.0)
+
+ESSVI_TRUTHS: Final[tuple[tuple[str, tuple[float, ...], float, float, float, float], ...]] = (
+    ("index_term_structure", (0.0033, 0.0100, 0.0200, 0.0400), 0.35, 0.45, -0.85, 0.30),
+    ("flat_correlation", (0.0040, 0.0120, 0.0240, 0.0480), 0.50, 0.50, -0.60, 0.00),
+    ("shallow_skew", (0.0025, 0.0080, 0.0160, 0.0320), 0.25, 0.35, -0.30, 0.10),
+    ("steep_and_rotating", (0.0050, 0.0150, 0.0300, 0.0600), 0.60, 0.55, -0.90, 0.50),
+)
+
+ESSVI_SAMPLED_SURFACES: Final[tuple[tuple[str, tuple[SviParameters, ...]], ...]] = (
+    (
+        "ordinary_index_smiles",
+        (
+            SviParameters(0.0015, 0.030, -0.70, 0.010, 0.10),
+            SviParameters(0.0060, 0.055, -0.65, 0.015, 0.15),
+            SviParameters(0.0140, 0.075, -0.60, 0.020, 0.22),
+            SviParameters(0.0300, 0.100, -0.55, 0.030, 0.32),
+        ),
+    ),
+    (
+        "calendar_violating_data",
+        (
+            SviParameters(0.0015, 0.030, -0.70, 0.010, 0.10),
+            SviParameters(0.0060, 0.055, -0.65, 0.015, 0.15),
+            SviParameters(0.0040, 0.055, -0.60, 0.020, 0.22),
+            SviParameters(0.0300, 0.100, -0.55, 0.030, 0.32),
+        ),
+    ),
+)
+
+ESSVI_PENALTY_LOWEST: Final[float] = -0.6
+ESSVI_PENALTY_HIGHEST: Final[float] = 0.6
+ESSVI_SAMPLE_LOWEST: Final[float] = -0.4
+ESSVI_SAMPLE_HIGHEST: Final[float] = 0.4
+ESSVI_SAMPLE_COUNT: Final[int] = 21
+
+
+def essvi_request_from_slices(
+    name: str, slices: tuple[SviParameters, ...], noise: float, seed: int
+) -> dict[str, Any]:
+    generator = random.Random(seed)
+    span = ESSVI_SAMPLE_HIGHEST - ESSVI_SAMPLE_LOWEST
+    records = []
+    for years, parameters in zip(ESSVI_EXPIRIES, slices, strict=True):
+        observations = []
+        for index in range(ESSVI_SAMPLE_COUNT):
+            point = ESSVI_SAMPLE_LOWEST + span * index / (ESSVI_SAMPLE_COUNT - 1)
+            disturbance = 1.0 + noise * generator.uniform(-1.0, 1.0)
+            observations.append(
+                {
+                    "log_moneyness": point,
+                    "total_variance": svi_total_variance(parameters, point) * disturbance,
+                    "weight": 1.0,
+                }
+            )
+        records.append({"years_to_expiry": years, "observations": observations})
+    return {
+        "id": name,
+        "slices": records,
+        "lowest_log_moneyness": ESSVI_PENALTY_LOWEST,
+        "highest_log_moneyness": ESSVI_PENALTY_HIGHEST,
+    }
+
+
+def essvi_truth_slices(
+    truth: tuple[float, ...], scale: float, exponent: float, intercept: float, slope: float
+) -> tuple[SviParameters, ...]:
+    return tuple(slices_from_parameters(EssviParameters(list(truth), scale, exponent, intercept, slope)))
+
+
+def verify_essvi_fit(request: dict[str, Any], result: dict[str, Any]) -> None:
+    if result["status"] != "converged":
+        raise OracleDisagreementError(
+            f"{request['id']}: reported {result['status']} where a converged fit was expected"
+        )
+    if result["surface_minimum_durrleman_value"] < 0.0:
+        raise OracleDisagreementError(f"{request['id']}: reported a fit whose density is negative")
+    if result["surface_minimum_total_variance_time_slope"] < 0.0:
+        raise OracleDisagreementError(f"{request['id']}: reported a fit that falls in total variance")
+
+
+def verify_essvi_recovery(
+    request: dict[str, Any], result: dict[str, Any], truth: tuple[SviParameters, ...]
+) -> None:
+    points = reference_log_moneyness()
+    expected = [svi_total_variance(parameters, point) for parameters in truth for point in points]
+    worst = max(
+        abs(actual - target) / max(abs(target), 1e-300)
+        for actual, target in zip(result["fitted_surface"], expected, strict=True)
+    )
+    if worst > ESSVI_RECOVERY_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: refit departs from its own truth by {worst}")
+
+
+def build_essvi_fixture() -> None:
+    request_records = []
+    result_records = []
+
+    for name, levels, scale, exponent, intercept, slope in ESSVI_TRUTHS:
+        truth = essvi_truth_slices(levels, scale, exponent, intercept, slope)
+        request = essvi_request_from_slices(f"essvi_truth_{name}", truth, 0.0, 0)
+        result = calibrate_essvi_surface_record(request)
+        verify_essvi_fit(request, result)
+        verify_essvi_recovery(request, result, truth)
+        request_records.append(request)
+        result_records.append(result)
+
+    for index, (name, slices) in enumerate(ESSVI_SAMPLED_SURFACES):
+        for label, noise in (("clean", 0.0), ("noisy", 0.02)):
+            request = essvi_request_from_slices(f"{name}_{label}", slices, noise, 5000 + index)
+            result = calibrate_essvi_surface_record(request)
+            verify_essvi_fit(request, result)
+            request_records.append(request)
+            result_records.append(result)
+
+    directory = FIXTURE_ROOT / "calibrate-essvi-surface"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(
+        directory / "surfaces.input.json", Document("essvi_calibration_request/v1", request_records)
+    )
+    write_document(
+        directory / "surfaces.expected.json",
+        Document("essvi_calibration_result/v1", result_records),
+    )
+    statuses = sorted({str(record["status"]) for record in result_records})
+    print(f"calibrate-essvi-surface/surfaces: {len(result_records)} cases, statuses {statuses}")
+
+
 SVI_CALIBRATION_TRUTHS: Final[tuple[tuple[str, SviParameters], ...]] = (
     ("short_dated_index", SviParameters(0.0002, 0.018, -0.65, 0.01, 0.10)),
     ("long_dated_index", SviParameters(0.0100, 0.090, -0.55, 0.05, 0.35)),
@@ -711,6 +843,7 @@ def main() -> int:
             "invert-american-implied-volatility",
             "scan-svi-slice",
             "scan-svi-surface",
+            "calibrate-essvi-surface",
             "calibrate-svi-slice",
             "all",
         ],
@@ -735,6 +868,8 @@ def main() -> int:
         build_svi_scan_fixture()
     if arguments.verb in ("scan-svi-surface", "all"):
         build_svi_surface_fixture()
+    if arguments.verb in ("calibrate-essvi-surface", "all"):
+        build_essvi_fixture()
     if arguments.verb in ("calibrate-svi-slice", "all"):
         build_svi_calibration_fixture()
     return 0

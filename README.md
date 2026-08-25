@@ -34,15 +34,15 @@ tools/check_all.sh
 
 ## Status
 
-**Phase 1 complete; steps 1 to 3 of [`docs/program.md`](docs/program.md) complete, step 4
-under way.** Pricing, implied volatility, the point-in-time data spine, forwards implied
-from put-call parity, American exercise with premium stripping, SVI slice calibration, and
-the surface acceptance test covering butterfly arbitrage, calendar monotonicity and the
-Dupire round-trip are implemented in all three tracks and pass conformance: 75 comparisons
-over 2356 golden fixture records, each track against the golden documents and each against
-the others. The fixtures themselves are verified against independent oracles: an `mpmath`
-recomputation at 50 decimal digits for the closed-form results, and a far finer scan for the
-arbitrage diagnostics.
+**Phase 1 complete; steps 1 to 4 of [`docs/program.md`](docs/program.md) complete.** Pricing,
+implied volatility, the point-in-time data spine, forwards implied from put-call parity,
+American exercise with premium stripping, SVI slice calibration, the surface acceptance test
+covering butterfly arbitrage, calendar monotonicity and the Dupire round-trip, and the eSSVI
+global surface fit judged by that test are implemented in all three tracks and pass
+conformance: 80 comparisons over 2364 golden fixture records, each track against the golden
+documents and each against the others. The fixtures themselves are verified against
+independent oracles: an `mpmath` recomputation at 50 decimal digits for the closed-form
+results, and a far finer scan for the arbitrage diagnostics.
 
 Agreement is exact, not merely within tolerance. A one-year at-the-money option prices to
 `7.8672269492716005` in every track, inverts to `0.20000000000000026` in every track, and
@@ -51,10 +51,10 @@ three tracks on every field of all 36 fixture cases, argmin locations included.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2697 passed |
-| `python_cpp` tests | 387 passed |
-| C++ tests (Catch2) | 72 passed |
-| conformance | 75 comparisons, all tracks agree |
+| `python_pure` tests | 2711 passed |
+| `python_cpp` tests | 393 passed |
+| C++ tests (Catch2) | 81 passed |
+| conformance | 80 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |
