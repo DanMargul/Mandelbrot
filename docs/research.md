@@ -126,6 +126,95 @@ The reflection for probabilities above the median recursed on `1 - p`, which at 
 `p = 0.5` is `0.5` again: infinite recursion. That is not a corner nobody reaches. It is
 `N = 2`, the second trial anybody ever runs. The median is now handled before the reflection.
 
+## Backtest overfitting
+
+Combinatorially symmetric cross-validation, from Bailey, Borwein, Lopez de Prado and Zhu.
+Split the timeline into `S` equal blocks, take every way of choosing `S/2` of them as a
+training set with the complement as the test set, pick the configuration that looks best on
+training, and see where it ranks on testing. The probability of backtest overfitting is the
+fraction of splits where the in-sample winner lands in the bottom half out of sample.
+
+The relative rank is `rank / (N + 1)` rather than `rank / N`, which is not cosmetic: it keeps
+the value strictly inside `(0, 1)` so the logit is always finite. Ties break on index, the
+same deterministic rule the simplex uses.
+
+### It is calibrated, and it is noisy
+
+On pure noise, where no configuration has any edge, selection is random and the statistic
+should sit at exactly one half. Averaged over 40 independent datasets of 20 configurations
+and four years of daily returns:
+
+| blocks | splits | mean PBO |
+|---|---|---|
+| 8 | 70 | `0.548` |
+| 10 | 252 | `0.508` |
+| 12 | 924 | `0.528` |
+
+Calibrated. But the **spread across those datasets is about `0.20`**, and that is the number
+to remember. A single PBO of `0.35` is not meaningfully different from one of `0.5`; the
+statistic answers "is this selection procedure better than chance" and it answers it coarsely.
+Reading one estimate to two decimal places is a mistake the tests deliberately encode.
+
+It is coarser still when few configurations compete. With `N = 2` the rank can only be one or
+two, so the logit takes exactly two values, `±log 2`, and PBO becomes a count of coin flips.
+
+### What crowding does
+
+A genuine edge of 1.0 annualised Sharpe hidden among `N - 1` pure noise configurations, four
+years of daily data, selection by walk-forward across four folds, averaged over five datasets:
+
+| configurations | best in-sample Sharpe | walk-forward out of sample | folds that found the real one |
+|---|---|---|---|
+| 2 | `1.15` | `1.08` | 100% |
+| 5 | `1.24` | `1.13` | 80% |
+| 10 | `1.24` | `0.98` | 55% |
+| 25 | `1.24` | `0.63` | 45% |
+| 50 | `1.31` | `0.22` | 25% |
+| 100 | `1.34` | `0.52` | 15% |
+
+**The number you would have quoted barely moves. The number you would have got collapses.**
+The best in-sample Sharpe drifts up from `1.15` to `1.34` — it looks like the search is
+working — while out-of-sample performance falls by more than half and the selection finds the
+genuinely good configuration in fifteen percent of folds rather than all of them.
+
+An edge far enough above the noise is immune: at 4.0 annualised Sharpe, PBO is exactly zero
+at both 2 and 100 configurations. The trouble is entirely with edges of the size actually on
+offer.
+
+## Walk-forward selection
+
+Folds are ordered and selection for a fold uses only periods strictly before it. That is
+asserted structurally rather than by inspection, in the spirit of the as-of reader in
+`data.md`: the test adds `10.0` to every return after the last boundary and requires every
+earlier selection to be unchanged. A lookahead would show up immediately.
+
+The report carries what was chosen for each fold and how often the choice changed, because a
+selection that switches every fold is not a strategy, it is a random walk over strategies.
+
+## Combining blocks
+
+A union of `S/2` blocks is evaluated for every one of `C(S, S/2)` splits, so recomputing from
+the raw periods each time is wasted work. Each block instead carries a count, a mean and a
+sum of squared deviations, and unions merge those pairwise in block order.
+
+The obvious alternative is to carry sums and sums of squares and recover the variance as
+`q - n * mean^2`. Measured against a 60-digit reference, that shortcut is perfectly adequate
+at the magnitudes returns actually have, and it degrades as the mean grows relative to the
+spread:
+
+| mean / standard deviation | sums of squares | merged moments |
+|---|---|---|
+| `5e-02` (daily returns) | `2.1e-16` | `0.0` |
+| `1e+02` | `1.7e-13` | `0.0` |
+| `1e+04` | `8.0e-09` | `1.3e-14` |
+| `1e+06` | `2.0e-05` | `1.1e-12` |
+| `1e+08` | **negative variance** | `8.7e-11` |
+
+So the shortcut was not rejected because it is wrong for returns — it is not. It was rejected
+because the module takes an arbitrary series and the safe form costs nothing, and a caller who
+passes levels rather than returns should get an answer rather than a square root of a negative
+number.
+
 ## Layout
 
 ```
@@ -133,11 +222,16 @@ research/
   pins.py         ResultPins, configuration hashing, git and manifest interrogation
   registry.py     the hash-chained append-only trial log
   statistics.py   deflated Sharpe and the tail quantile it needs
+  overfitting.py  combinatorially symmetric cross-validation and walk-forward selection
   run.py          verify and summarise a registry from the command line
 ```
 
-## What is not here yet
+## The seam that is still open
 
-The probability of backtest overfitting via combinatorially symmetric cross-validation, and
-strictly out-of-sample walk-forward selection. Both consume the registry rather than
-changing it, so they are the next increment rather than a change to this one.
+The registry stores a configuration and an outcome per trial. Deflated Sharpe consumes the
+trial *count*, which the registry already gives. Cross-validation and walk-forward consume a
+per-trial *return series*, which is a larger artifact than an outcome record should carry, so
+they take performances as an argument today and nothing yet writes those series to a store the
+registry can point at. That store belongs with the backtester in step 6, and until it exists
+the link between a registry entry and the series that produced it is by convention rather than
+by construction. Saying so is better than implying the loop is closed.

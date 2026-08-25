@@ -24,7 +24,7 @@ tracks over the same fixtures and diffs the results.
 - [`docs/runbook.md`](docs/runbook.md) — how to build, test, and run everything
 - [`docs/benchmarks.md`](docs/benchmarks.md) — cross-track timings and how to read them
 - [`docs/data.md`](docs/data.md) — the bitemporal data spine and as-of query semantics
-- [`docs/research.md`](docs/research.md) — the trial registry, result pins, and deflated Sharpe
+- [`docs/research.md`](docs/research.md) — the trial registry, result pins, and the statistics that consume them
 
 ## Quick start
 
@@ -57,7 +57,7 @@ three tracks on every field of all 36 fixture cases, argmin locations included.
 | C++ tests (Catch2) | 81 passed |
 | conformance | 80 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
-| research tests | 40 passed |
+| research tests | 55 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |
 

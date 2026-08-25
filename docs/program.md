@@ -256,9 +256,8 @@ when every quoted result carries the pessimistic cost assumption explicitly.
 
 ## 7. Research integrity, before the search rather than after it
 
-*Extends Phase 6. **Land this out of order, before serious signal search.** The registry, the
-pins and the deflated Sharpe ratio are done; see `docs/research.md`. Backtest overfitting
-probability and walk-forward selection remain.*
+*Extends Phase 6. **Done**, and landed out of order as this section instructs. See
+`docs/research.md`.*
 
 Every result pinned to a git SHA, a data manifest hash, a config hash, and a seed, so any
 number in any document can be regenerated bit for bit. The determinism discipline from
@@ -289,9 +288,33 @@ moments: an annualised Sharpe of `1.5` is significant at 95% if it was the only 
 `0.95` to `1.86` to `2.41` as the count goes from one to ten to a hundred. Nobody recovers
 that count honestly after the fact, which is exactly why this step jumps the order.
 
+Cross-validation then measured what the count actually costs. A genuine edge of 1.0 annualised
+Sharpe hidden among `N - 1` noise configurations, four years of daily data, selected by
+walk-forward:
+
+| configurations | best in-sample Sharpe | walk-forward out of sample | folds that found it |
+|---|---|---|---|
+| 2 | `1.15` | `1.08` | 100% |
+| 10 | `1.24` | `0.98` | 55% |
+| 50 | `1.31` | `0.22` | 25% |
+| 100 | `1.34` | `0.52` | 15% |
+
+**The number you would have quoted barely moves while the number you would have got
+collapses.** The in-sample best drifts *up* as the search widens, which is exactly what makes
+a widening search feel like progress.
+
+One honest limit is recorded rather than smoothed over: the overfitting probability is
+calibrated — it averages `0.51` to `0.55` on pure noise across 40 datasets, against a theoretical
+`0.5` — but its spread across datasets is about `0.20`. A single estimate of `0.35` is not
+meaningfully different from `0.5`, and with only two configurations competing the statistic
+collapses to a count of coin flips. It answers whether selection beats chance, and it answers
+coarsely.
+
 **Done when** the registry exists, results are reproducible from their pins, and no strategy
-can be promoted without a deflated Sharpe above a threshold stated in advance. **The registry,
-the pins and the deflated Sharpe are done.**
+can be promoted without a deflated Sharpe above a threshold stated in advance. **Done**, with
+one seam left open and named: nothing yet writes per-trial return series to a store the
+registry can point at, so cross-validation takes them as an argument. That store belongs with
+the backtester in step 6.
 
 ---
 
