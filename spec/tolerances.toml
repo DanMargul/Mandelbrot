@@ -521,3 +521,17 @@ absolute = 1e-13
 ["factor_decomposition/v1".scored_naive_overstatement]
 relative = 1e-12
 absolute = 1e-14
+
+["random_sample/v1".count]
+exact = true
+
+["random_sample/v1".bits]
+exact = true
+
+["random_sample/v1".uniforms]
+relative = 0.0
+absolute = 0.0
+
+["random_sample/v1".standard_normals]
+relative = 1e-15
+absolute = 1e-300

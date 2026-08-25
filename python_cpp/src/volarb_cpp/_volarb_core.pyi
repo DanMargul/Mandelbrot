@@ -126,6 +126,15 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidRandomSourceError(ValueError): ...
+
+class RandomSample:
+    bits: list[str]
+    uniforms: list[float]
+    standard_normals: list[float]
+
+def draw_random_sample(*, initial_state: str, sequence: str, count: int) -> RandomSample: ...
+
 class InvalidFactorInputsError(ValueError): ...
 
 class FactorReport:

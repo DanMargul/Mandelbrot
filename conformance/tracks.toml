@@ -22,6 +22,10 @@ output_schema = "forward_curve/v1"
 input_schema = "svi_calibration_request/v1"
 output_schema = "svi_calibration_result/v1"
 
+[verbs.draw-random-sample]
+input_schema = "random_sample_request/v1"
+output_schema = "random_sample/v1"
+
 [verbs.decompose-surface-factors]
 input_schema = "factor_request/v1"
 output_schema = "factor_decomposition/v1"

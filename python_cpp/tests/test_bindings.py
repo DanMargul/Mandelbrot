@@ -470,3 +470,37 @@ def test_a_degenerate_residual_is_flagged_rather_than_scored() -> None:
 def test_a_grid_out_of_range_index_raises_through_the_bindings() -> None:
     with pytest.raises(ValueError, match="outside the grid"):
         core.decompose_surface_factors(**{**factor_arguments(), "scored_grid_index": 999})
+
+
+REFERENCE_STREAM = [
+    "9705778491962043240",
+    "1370407407632858425",
+    "11774395822783136600",
+]
+SAMPLE_DRAWS = 256
+
+
+def test_the_seeded_stream_matches_the_reference_through_the_bindings() -> None:
+    sample = core.draw_random_sample(initial_state="42", sequence="54", count=len(REFERENCE_STREAM))
+    assert sample.bits == REFERENCE_STREAM
+
+
+def test_uniforms_and_normals_come_back_through_the_bindings() -> None:
+    sample = core.draw_random_sample(initial_state="1", sequence="1", count=SAMPLE_DRAWS)
+    assert len(sample.uniforms) == SAMPLE_DRAWS
+    assert len(sample.standard_normals) == SAMPLE_DRAWS
+    assert all(0.0 <= value < 1.0 for value in sample.uniforms)
+
+
+def test_a_wide_seed_survives_the_string_round_trip() -> None:
+    widest = str((1 << 128) - 1)
+    sample = core.draw_random_sample(initial_state=widest, sequence="1", count=4)
+    other = core.draw_random_sample(initial_state="0", sequence="1", count=4)
+    assert sample.bits != other.bits
+
+
+def test_a_malformed_seed_raises_through_the_bindings() -> None:
+    with pytest.raises(ValueError, match="decimal"):
+        core.draw_random_sample(initial_state="not-a-number", sequence="1", count=1)
+    with pytest.raises(ValueError, match="negative"):
+        core.draw_random_sample(initial_state="1", sequence="1", count=-1)

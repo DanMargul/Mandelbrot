@@ -10,6 +10,7 @@
 #include "volarb/execution.hpp"
 #include "volarb/rate_curve.hpp"
 #include "volarb/factors.hpp"
+#include "volarb/random_source.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -66,6 +67,13 @@ using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
 using volarb::CurveNode;
 using volarb::decompose_surface_factors;
+using volarb::InvalidRandomSourceError;
+using volarb::next_bits;
+using volarb::PcgState;
+using volarb::seeded_source;
+using volarb::standard_normals;
+using volarb::uniforms;
+using volarb::UnsignedWide;
 using volarb::FactorDecomposition;
 using volarb::FactorLoadings;
 using volarb::InvalidFactorInputsError;
@@ -213,6 +221,48 @@ std::vector<double> leg_field_of(const PackageFill& fill, int which) {
         values.push_back(picked);
     }
     return values;
+}
+
+UnsignedWide wide_from_decimal(const std::string& text) {
+    if (text.empty()) {
+        throw InvalidRandomSourceError("a seed must be a decimal integer string");
+    }
+    UnsignedWide value = 0;
+    for (const char digit : text) {
+        if (digit < '0' || digit > '9') {
+            throw InvalidRandomSourceError("a seed must be a decimal integer string, got " + text);
+        }
+        value = value * 10 + static_cast<UnsignedWide>(digit - '0');
+    }
+    return value;
+}
+
+std::string decimal_from_word(std::uint64_t value) {
+    return std::to_string(value);
+}
+
+struct RandomSample {
+    std::vector<std::string> bits;
+    std::vector<double> uniform_values;
+    std::vector<double> normal_values;
+};
+
+RandomSample draw_random_sample_from_values(const std::string& initial_state,
+                                            const std::string& sequence, int count) {
+    if (count < 0) {
+        throw InvalidRandomSourceError("count must not be negative");
+    }
+    const PcgState source =
+        seeded_source(wide_from_decimal(initial_state), wide_from_decimal(sequence));
+    std::vector<std::string> words;
+    words.reserve(static_cast<std::size_t>(count));
+    PcgState current = source;
+    for (int index = 0; index < count; ++index) {
+        const auto drawn = next_bits(current);
+        current = drawn.state;
+        words.push_back(decimal_from_word(drawn.bits));
+    }
+    return RandomSample{words, uniforms(source, count), standard_normals(source, count)};
 }
 
 struct FactorReport {
@@ -649,6 +699,17 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
                py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
                py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
+
+    py::register_exception<InvalidRandomSourceError>(module, "InvalidRandomSourceError",
+                                                     PyExc_ValueError);
+
+    py::class_<RandomSample>(module, "RandomSample")
+        .def_readonly("bits", &RandomSample::bits)
+        .def_readonly("uniforms", &RandomSample::uniform_values)
+        .def_readonly("standard_normals", &RandomSample::normal_values);
+
+    module.def("draw_random_sample", &draw_random_sample_from_values, py::arg("initial_state"),
+               py::arg("sequence"), py::arg("count"));
 
     py::register_exception<InvalidFactorInputsError>(module, "InvalidFactorInputsError",
                                                      PyExc_ValueError);

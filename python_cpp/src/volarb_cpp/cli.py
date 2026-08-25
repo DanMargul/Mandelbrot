@@ -133,6 +133,28 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def required_wide_integer(record: JsonRecord, field: str) -> str:
+    value = record.get(field)
+    if not isinstance(value, str) or not value.isdigit():
+        raise DocumentError(f"field {field!r} must be a decimal integer string, found {value!r}")
+    return value
+
+
+def draw_random_sample_record(record: JsonRecord) -> JsonRecord:
+    sample = _volarb_core.draw_random_sample(
+        initial_state=required_wide_integer(record, "initial_state"),
+        sequence=required_wide_integer(record, "sequence"),
+        count=required_integer(record, "count"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "count": required_integer(record, "count"),
+        "bits": sample.bits,
+        "uniforms": sample.uniforms,
+        "standard_normals": sample.standard_normals,
+    }
+
+
 def surface_grid_columns(record: JsonRecord) -> dict[str, list[float]]:
     raw = record.get("grid")
     if not isinstance(raw, list):
@@ -577,6 +599,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "draw-random-sample": Verb(
+        name="draw-random-sample",
+        input_schema="random_sample_request/v1",
+        output_schema="random_sample/v1",
+        transform_records=mapped_over_records(draw_random_sample_record),
     ),
     "decompose-surface-factors": Verb(
         name="decompose-surface-factors",

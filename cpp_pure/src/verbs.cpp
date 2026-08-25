@@ -8,6 +8,7 @@
 #include "volarb/execution.hpp"
 #include "volarb/rate_curve.hpp"
 #include "volarb/factors.hpp"
+#include "volarb/random_source.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -192,6 +193,44 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
         });
     }
     return slices;
+}
+
+UnsignedWide wide_from_decimal(const std::string& text) {
+    if (text.empty()) {
+        throw DocumentError("a seed must be a decimal integer string");
+    }
+    UnsignedWide value = 0;
+    for (const char digit : text) {
+        if (digit < '0' || digit > '9') {
+            throw DocumentError("a seed must be a decimal integer string, got " + text);
+        }
+        value = value * 10 + static_cast<UnsignedWide>(digit - '0');
+    }
+    return value;
+}
+
+nlohmann::json draw_random_sample_record(const nlohmann::json& record) {
+    const auto count = static_cast<int>(required_integer(record, "count"));
+    if (count < 0) {
+        throw DocumentError("count must not be negative");
+    }
+    const PcgState source = seeded_source(wide_from_decimal(required_string(record, "initial_state")),
+                                          wide_from_decimal(required_string(record, "sequence")));
+    std::vector<std::string> words;
+    PcgState current = source;
+    for (int index = 0; index < count; ++index) {
+        const auto drawn = next_bits(current);
+        current = drawn.state;
+        words.push_back(std::to_string(drawn.bits));
+    }
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["count"] = count;
+    output["bits"] = words;
+    output["uniforms"] = uniforms(source, count);
+    output["standard_normals"] = standard_normals(source, count);
+    return output;
 }
 
 std::vector<SurfacePoint> surface_grid_from(const nlohmann::json& record) {
@@ -613,6 +652,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"draw-random-sample",
+         Verb{"draw-random-sample", "random_sample_request/v1", "random_sample/v1",
+              mapped_over_records(draw_random_sample_record)}},
         {"decompose-surface-factors",
          Verb{"decompose-surface-factors", "factor_request/v1", "factor_decomposition/v1",
               mapped_over_records(decompose_surface_factors_record)}},

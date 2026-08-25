@@ -291,6 +291,24 @@ term inside the difference, and at `k = 0` the round trip is then wrong by a fac
 
 ## Pseudo-random numbers
 
-Not used before Phase 5. When introduced, both languages use PCG64 with the seed sequence
-specified per run in the strategy configuration, so simulated paths are identical bit for
-bit and conformance stays exact rather than statistical.
+Both languages use PCG64 with the XSL-RR output function and the reference seeding procedure,
+with the seed sequence specified per run. The generator is verified against `numpy.random.PCG64`
+as an independent implementation, not merely against the other track. See
+`spec/interfaces/random_source.md`.
+
+This section used to claim that made simulated paths identical bit for bit. **That is true of
+two layers out of three and the difference is worth stating precisely.** The 64-bit words and
+the uniforms derived from them are exactly identical across tracks, because they are integer
+arithmetic and a single multiplication by `2^-53`, both exactly rounded under IEEE-754.
+Standard normals are not: Box-Muller needs `log`, `cos` and `sin`, which no standard requires
+to be correctly rounded, and the two libms disagree in the last bit on about one draw in six
+hundred — `4` of `2560` in the fixture, worst case `2.09e-16` relative.
+
+It does not amplify. Over 400 independent 252-step geometric paths, one terminal value differs
+between tracks, by `3.31e-16`. A path is a product of smooth factors, so a one-ulp perturbation
+stays one ulp; there is no branch for it to flip. That measurement is why the module does not
+carry its own arithmetic-only logarithm: the last bit is not costing anything.
+
+Conformance therefore compares the words and the uniforms exactly, and the normals at `1e-15`
+relative. Setting that last tolerance to exact makes conformance fail, so it is measured rather
+than assumed.

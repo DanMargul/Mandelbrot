@@ -429,7 +429,8 @@ the backtester in step 6.
 
 ## 8. Portfolio construction and hedging solved as one problem
 
-*Extends Phase 5 and 6.*
+*Extends Phase 5 and 6. **The deterministic random source the simulation needs is done**, see
+`spec/interfaces/random_source.md`. The optimizer and the hedging control problem remain.*
 
 Not signal ranking. A constrained optimization: maximize expected residual convergence net
 of modeled cost, subject to vega, gamma, and theta budgets, factor neutrality from step 5,

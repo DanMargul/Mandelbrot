@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "random_sample_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "random_sample_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "initial_state", "sequence", "count"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "initial_state": { "type": "string", "pattern": "^[0-9]+$" },
+          "sequence": { "type": "string", "pattern": "^[0-9]+$" },
+          "count": { "type": "integer", "minimum": 0, "maximum": 4096 }
+        }
+      }
+    }
+  }
+}

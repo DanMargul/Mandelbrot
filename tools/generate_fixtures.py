@@ -34,6 +34,7 @@ from volarb_py.cli import (  # noqa: E402
     calibrate_essvi_surface_record,
     calibrate_svi_slice_record,
     decompose_surface_factors_record,
+    draw_random_sample_record,
     evaluate_rate_curve_record,
     invert_american_implied_volatility_record,
     invert_implied_volatility_record,
@@ -45,6 +46,8 @@ from volarb_py.cli import (  # noqa: E402
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
 from volarb_py.essvi import EssviParameters, slices_from_parameters  # noqa: E402
+from volarb_py.random_source import MANTISSA_SCALE as RANDOM_MANTISSA_SCALE  # noqa: E402
+from volarb_py.random_source import MANTISSA_SHIFT as RANDOM_MANTISSA_SHIFT  # noqa: E402
 from volarb_py.svi import (  # noqa: E402
     SviParameters,
     durrleman_function,
@@ -594,6 +597,57 @@ def build_svi_surface_fixture() -> None:
     )
 
 
+RANDOM_SEEDS: Final[tuple[tuple[str, str, str], ...]] = (
+    ("reference_pair", "42", "54"),
+    ("zero_state", "0", "0"),
+    ("large_state", "340282366920938463463374607431768211455", "1"),
+    ("distinct_sequence", "42", "55"),
+    ("wide_sequence", "7", "170141183460469231731687303715884105727"),
+)
+RANDOM_SAMPLE_COUNT: Final[int] = 512
+
+
+def verify_random_sample(request: dict[str, Any], result: dict[str, Any]) -> None:
+    words = [int(value) for value in result["bits"]]
+    if len(set(words)) != len(words):
+        raise OracleDisagreementError(f"{request['id']}: the bit stream repeats within one draw")
+    for value in words:
+        if not 0 <= value < (1 << 64):
+            raise OracleDisagreementError(f"{request['id']}: {value} is not a 64 bit word")
+    for value in result["uniforms"]:
+        if not 0.0 <= float(value) < 1.0:
+            raise OracleDisagreementError(f"{request['id']}: {value} is outside the unit interval")
+    expected = [(word >> RANDOM_MANTISSA_SHIFT) * RANDOM_MANTISSA_SCALE for word in words]
+    for produced, target in zip(result["uniforms"], expected, strict=True):
+        if produced != target:
+            raise OracleDisagreementError(
+                f"{request['id']}: uniform {produced} does not come from its own bit word"
+            )
+
+
+def build_random_sample_fixture() -> None:
+    request_records = [
+        {
+            "id": name,
+            "initial_state": initial_state,
+            "sequence": sequence,
+            "count": RANDOM_SAMPLE_COUNT,
+        }
+        for name, initial_state, sequence in RANDOM_SEEDS
+    ]
+    result_records = []
+    for request in request_records:
+        result = draw_random_sample_record(request)
+        verify_random_sample(request, result)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "draw-random-sample"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "streams.input.json", Document("random_sample_request/v1", request_records))
+    write_document(directory / "streams.expected.json", Document("random_sample/v1", result_records))
+    print(f"draw-random-sample/streams: {len(result_records)} streams of {RANDOM_SAMPLE_COUNT} draws")
+
+
 FACTOR_TENORS: Final[tuple[float, ...]] = (0.0833, 0.25, 0.5, 1.0, 2.0)
 FACTOR_STRIKES: Final[tuple[float, ...]] = (-0.4, -0.2, -0.1, 0.0, 0.1, 0.2, 0.4)
 FACTOR_OBSERVATIONS: Final[int] = 180
@@ -1129,6 +1183,7 @@ FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
     "scan-svi-surface": build_svi_surface_fixture,
     "evaluate-rate-curve": build_rate_curve_fixture,
     "decompose-surface-factors": build_factor_fixture,
+    "draw-random-sample": build_random_sample_fixture,
     "simulate-fills": build_fill_fixture,
     "calibrate-essvi-surface": build_essvi_fixture,
     "calibrate-svi-slice": build_svi_calibration_fixture,

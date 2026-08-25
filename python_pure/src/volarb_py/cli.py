@@ -54,6 +54,12 @@ from volarb_py.market_data import (
     parse_canonical_timestamp,
 )
 from volarb_py.pricing import BlackScholesInputs, InvalidOptionInputsError, black_scholes_price_and_greeks
+from volarb_py.random_source import (
+    next_bits,
+    seeded_source,
+    standard_normals,
+    uniforms,
+)
 from volarb_py.rate_curve import (
     CurveNode,
     RateCurve,
@@ -213,6 +219,32 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
         "status": scan.status,
+    }
+
+
+def required_wide_integer(record: JsonRecord, field: str) -> int:
+    value = record.get(field)
+    if not isinstance(value, str) or not value.isdigit():
+        raise DocumentError(f"field {field!r} must be a decimal integer string, found {value!r}")
+    return int(value)
+
+
+def draw_random_sample_record(record: JsonRecord) -> JsonRecord:
+    count = required_integer(record, "count")
+    source = seeded_source(
+        required_wide_integer(record, "initial_state"), required_wide_integer(record, "sequence")
+    )
+    words: list[str] = []
+    current = source
+    for _ in range(count):
+        current, bits = next_bits(current)
+        words.append(str(bits))
+    return {
+        "id": required_string(record, "id"),
+        "count": count,
+        "bits": words,
+        "uniforms": uniforms(source, count)[1],
+        "standard_normals": standard_normals(source, count)[1],
     }
 
 
@@ -644,6 +676,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "draw-random-sample": Verb(
+        name="draw-random-sample",
+        input_schema="random_sample_request/v1",
+        output_schema="random_sample/v1",
+        transform_records=mapped_over_records(draw_random_sample_record),
     ),
     "decompose-surface-factors": Verb(
         name="decompose-surface-factors",

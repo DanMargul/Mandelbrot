@@ -1,0 +1,35 @@
+{
+  "schema": "random_sample_request/v1",
+  "records": [
+    {
+      "id": "reference_pair",
+      "initial_state": "42",
+      "sequence": "54",
+      "count": 512
+    },
+    {
+      "id": "zero_state",
+      "initial_state": "0",
+      "sequence": "0",
+      "count": 512
+    },
+    {
+      "id": "large_state",
+      "initial_state": "340282366920938463463374607431768211455",
+      "sequence": "1",
+      "count": 512
+    },
+    {
+      "id": "distinct_sequence",
+      "initial_state": "42",
+      "sequence": "55",
+      "count": 512
+    },
+    {
+      "id": "wide_sequence",
+      "initial_state": "7",
+      "sequence": "170141183460469231731687303715884105727",
+      "count": 512
+    }
+  ]
+}

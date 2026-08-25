@@ -20,6 +20,7 @@ add_library(volarb_core STATIC
     src/execution.cpp
     src/rate_curve.cpp
     src/factors.cpp
+    src/random_source.cpp
 )
 
 target_include_directories(volarb_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -47,6 +48,7 @@ if(VOLARB_CORE_BUILD_TESTS)
         tests/test_execution.cpp
         tests/test_rate_curve.cpp
         tests/test_factors.cpp
+        tests/test_random_source.cpp
     )
     target_link_libraries(volarb_core_tests PRIVATE volarb_core volarb_warnings Catch2::Catch2WithMain)
     target_compile_definitions(volarb_core_tests PRIVATE

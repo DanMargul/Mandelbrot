@@ -43,7 +43,7 @@ implied volatility, the point-in-time data spine, forwards implied from put-call
 American exercise with premium stripping, SVI slice calibration, the surface acceptance test
 covering butterfly arbitrage, calendar monotonicity and the Dupire round-trip, and the eSSVI
 global surface fit judged by that test are implemented in all three tracks and pass
-conformance: 95 comparisons over 2465 golden fixture records, each track against the golden
+conformance: 100 comparisons over 2470 golden fixture records, each track against the golden
 documents and each against the others. The fixtures themselves are verified against
 independent oracles: an `mpmath` recomputation at 50 decimal digits for the closed-form
 results, and a far finer scan for the arbitrage diagnostics.
@@ -55,10 +55,10 @@ three tracks on every field of all 36 fixture cases, argmin locations included.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2751 passed |
-| `python_cpp` tests | 414 passed |
-| C++ tests (Catch2) | 109 passed |
-| conformance | 95 comparisons, all tracks agree |
+| `python_pure` tests | 2762 passed |
+| `python_cpp` tests | 421 passed |
+| C++ tests (Catch2) | 117 passed |
+| conformance | 100 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
 | research tests | 55 passed |
 | reporting tests | 12 passed |
