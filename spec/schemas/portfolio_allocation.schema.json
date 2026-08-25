@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "portfolio_allocation/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "portfolio_allocation/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "weights", "expected_edge", "spread_cost", "hedging_cost", "objective",
+                     "net_vega", "net_gamma", "net_theta", "worst_factor_exposure",
+                     "charged_for_hedging"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "weights": { "type": "array", "items": { "type": "number" } },
+          "expected_edge": { "type": "number" },
+          "spread_cost": { "type": "number", "minimum": 0 },
+          "hedging_cost": { "type": "number", "minimum": 0 },
+          "objective": { "type": "number" },
+          "net_vega": { "type": "number" },
+          "net_gamma": { "type": "number" },
+          "net_theta": { "type": "number" },
+          "worst_factor_exposure": { "type": "number", "minimum": 0 },
+          "charged_for_hedging": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

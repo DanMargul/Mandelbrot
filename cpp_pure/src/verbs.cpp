@@ -10,6 +10,7 @@
 #include "volarb/factors.hpp"
 #include "volarb/random_source.hpp"
 #include "volarb/hedging.hpp"
+#include "volarb/portfolio.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -194,6 +195,59 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
         });
     }
     return slices;
+}
+
+std::vector<Candidate> portfolio_candidates_from(const nlohmann::json& record) {
+    const auto raw = record.find("candidates");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'candidates' must be an array");
+    }
+    std::vector<Candidate> candidates;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'candidates' must be an object");
+        }
+        const auto exposures = entry.find("factor_exposures");
+        if (exposures == entry.end() || !exposures->is_array()) {
+            throw DocumentError("field 'factor_exposures' must be an array");
+        }
+        candidates.push_back(Candidate{
+            required_number(entry, "expected_edge"),
+            required_number(entry, "vega"),
+            required_number(entry, "gamma"),
+            required_number(entry, "theta"),
+            exposures->get<std::vector<double>>(),
+            required_number(entry, "maximum_size"),
+            required_number(entry, "spread_cost"),
+        });
+    }
+    return candidates;
+}
+
+nlohmann::json allocate_portfolio_record(const nlohmann::json& record) {
+    const PortfolioLimits limits{
+        required_number(record, "vega_budget"),      required_number(record, "gamma_budget"),
+        required_number(record, "theta_budget"),     required_number(record, "factor_tolerance"),
+        required_number(record, "risk_aversion"),    required_number(record, "proportional_cost"),
+        required_number(record, "spot"),             required_number(record, "volatility"),
+        required_number(record, "years_to_expiry"),
+    };
+    const Allocation allocation = allocate(portfolio_candidates_from(record), limits,
+                                           optional_boolean(record, "charge_hedging", true));
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["weights"] = allocation.weights;
+    output["expected_edge"] = allocation.expected_edge;
+    output["spread_cost"] = allocation.spread_cost;
+    output["hedging_cost"] = allocation.hedging_cost;
+    output["objective"] = allocation.objective;
+    output["net_vega"] = allocation.net_vega;
+    output["net_gamma"] = allocation.net_gamma;
+    output["net_theta"] = allocation.net_theta;
+    output["worst_factor_exposure"] = allocation.worst_factor_exposure;
+    output["charged_for_hedging"] = allocation.charged_for_hedging;
+    return output;
 }
 
 nlohmann::json simulate_hedging_record(const nlohmann::json& record) {
@@ -681,6 +735,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"allocate-portfolio",
+         Verb{"allocate-portfolio", "portfolio_request/v1", "portfolio_allocation/v1",
+              mapped_over_records(allocate_portfolio_record)}},
         {"simulate-hedging",
          Verb{"simulate-hedging", "hedging_request/v1", "hedging_statistics/v1",
               mapped_over_records(simulate_hedging_record)}},

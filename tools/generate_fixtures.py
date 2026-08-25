@@ -31,6 +31,7 @@ from volarb_py.american import (  # noqa: E402
     richardson_extrapolated_price,
 )
 from volarb_py.cli import (  # noqa: E402
+    allocate_portfolio_record,
     calibrate_essvi_surface_record,
     calibrate_svi_slice_record,
     decompose_surface_factors_record,
@@ -595,6 +596,87 @@ def build_svi_surface_fixture() -> None:
     print(
         f"scan-svi-surface/surfaces: {len(result_records)} cases, statuses {statuses}, "
         f"worst round trip {worst:.3e}"
+    )
+
+
+PORTFOLIO_CANDIDATES: Final[tuple[tuple[float, float, float, float, float, float, float], ...]] = (
+    (1.00, 0.20, 0.010, -0.05, 0.9, 0.2, 0.10),
+    (1.05, 0.22, 0.070, -0.30, 0.8, -0.3, 0.12),
+    (0.95, 0.18, 0.008, -0.04, -0.7, 0.5, 0.09),
+    (1.10, 0.25, 0.090, -0.40, -0.9, -0.1, 0.15),
+    (0.90, 0.15, 0.006, -0.03, 0.4, 0.8, 0.08),
+    (1.02, 0.21, 0.055, -0.25, 0.1, -0.9, 0.11),
+    (0.98, 0.19, 0.012, -0.06, -0.2, 0.7, 0.10),
+    (1.08, 0.24, 0.080, -0.35, 0.6, 0.4, 0.14),
+)
+PORTFOLIO_TOLERANCE: Final[float] = 1e-9
+
+
+def portfolio_request(name: str, charge_hedging: bool, vega_budget: float) -> dict[str, Any]:
+    return {
+        "id": name,
+        "candidates": [
+            {
+                "expected_edge": edge,
+                "vega": vega,
+                "gamma": gamma,
+                "theta": theta,
+                "factor_exposures": [first, second],
+                "maximum_size": 10.0,
+                "spread_cost": spread,
+            }
+            for edge, vega, gamma, theta, first, second, spread in PORTFOLIO_CANDIDATES
+        ],
+        "vega_budget": vega_budget,
+        "gamma_budget": 0.50,
+        "theta_budget": 2.0,
+        "factor_tolerance": 0.5,
+        "risk_aversion": 0.10,
+        "proportional_cost": 0.0010,
+        "spot": 100.0,
+        "volatility": 0.20,
+        "years_to_expiry": 0.25,
+        "charge_hedging": charge_hedging,
+    }
+
+
+def verify_allocation(request: dict[str, Any], result: dict[str, Any]) -> None:
+    for name, reported in (
+        ("vega_budget", "net_vega"),
+        ("gamma_budget", "net_gamma"),
+        ("theta_budget", "net_theta"),
+    ):
+        if abs(float(result[reported])) > float(request[name]) + PORTFOLIO_TOLERANCE:
+            raise OracleDisagreementError(f"{request['id']}: {reported} breaks its budget")
+    if float(result["worst_factor_exposure"]) > float(request["factor_tolerance"]) + PORTFOLIO_TOLERANCE:
+        raise OracleDisagreementError(f"{request['id']}: a factor exposure breaks its tolerance")
+    for weight, candidate in zip(result["weights"], request["candidates"], strict=True):
+        if abs(float(weight)) > float(candidate["maximum_size"]) + PORTFOLIO_TOLERANCE:
+            raise OracleDisagreementError(f"{request['id']}: a weight breaks its concentration limit")
+    rebuilt = float(result["expected_edge"]) - float(result["spread_cost"]) - float(result["hedging_cost"])
+    if abs(rebuilt - float(result["objective"])) > PORTFOLIO_TOLERANCE:
+        raise OracleDisagreementError(f"{request['id']}: the objective does not follow from its parts")
+
+
+def build_portfolio_fixture() -> None:
+    request_records = [
+        portfolio_request("joint", True, 1.0),
+        portfolio_request("hedging_cost_ignored", False, 1.0),
+        portfolio_request("tight_vega_budget", True, 0.2),
+        portfolio_request("no_vega_budget", True, 0.0),
+    ]
+    result_records = []
+    for request in request_records:
+        result = allocate_portfolio_record(request)
+        verify_allocation(request, result)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "allocate-portfolio"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "books.input.json", Document("portfolio_request/v1", request_records))
+    write_document(directory / "books.expected.json", Document("portfolio_allocation/v1", result_records))
+    print(
+        f"allocate-portfolio/books: {len(result_records)} books over {len(PORTFOLIO_CANDIDATES)} candidates"
     )
 
 
@@ -1242,6 +1324,7 @@ FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
     "decompose-surface-factors": build_factor_fixture,
     "draw-random-sample": build_random_sample_fixture,
     "simulate-hedging": build_hedging_fixture,
+    "allocate-portfolio": build_portfolio_fixture,
     "simulate-fills": build_fill_fixture,
     "calibrate-essvi-surface": build_essvi_fixture,
     "calibrate-svi-slice": build_svi_calibration_fixture,

@@ -133,6 +133,57 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def portfolio_candidate_columns(record: JsonRecord) -> dict[str, list[Any]]:
+    raw = record.get("candidates")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'candidates' must be an array")
+    numeric = ("expected_edge", "vega", "gamma", "theta", "maximum_size", "spread_cost")
+    columns: dict[str, list[Any]] = {name: [] for name in numeric}
+    columns["factor_exposures"] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'candidates' must be an object")
+        for name in numeric:
+            columns[name].append(required_float(entry, name))
+        exposures = entry.get("factor_exposures")
+        if not isinstance(exposures, list):
+            raise DocumentError("field 'factor_exposures' must be an array")
+        columns["factor_exposures"].append([float(value) for value in exposures])
+    return columns
+
+
+def allocate_portfolio_record(record: JsonRecord) -> JsonRecord:
+    limits = _volarb_core.PortfolioLimits(
+        vega_budget=required_float(record, "vega_budget"),
+        gamma_budget=required_float(record, "gamma_budget"),
+        theta_budget=required_float(record, "theta_budget"),
+        factor_tolerance=required_float(record, "factor_tolerance"),
+        risk_aversion=required_float(record, "risk_aversion"),
+        proportional_cost=required_float(record, "proportional_cost"),
+        spot=required_float(record, "spot"),
+        volatility=required_float(record, "volatility"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+    )
+    allocation = _volarb_core.allocate_portfolio(
+        **portfolio_candidate_columns(record),
+        limits=limits,
+        charge_hedging=optional_boolean(record, "charge_hedging", True),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "weights": allocation.weights,
+        "expected_edge": allocation.expected_edge,
+        "spread_cost": allocation.spread_cost,
+        "hedging_cost": allocation.hedging_cost,
+        "objective": allocation.objective,
+        "net_vega": allocation.net_vega,
+        "net_gamma": allocation.net_gamma,
+        "net_theta": allocation.net_theta,
+        "worst_factor_exposure": allocation.worst_factor_exposure,
+        "charged_for_hedging": allocation.charged_for_hedging,
+    }
+
+
 def simulate_hedging_record(record: JsonRecord) -> JsonRecord:
     statistics = _volarb_core.simulate_hedging(
         spot=required_float(record, "spot"),
@@ -625,6 +676,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "allocate-portfolio": Verb(
+        name="allocate-portfolio",
+        input_schema="portfolio_request/v1",
+        output_schema="portfolio_allocation/v1",
+        transform_records=mapped_over_records(allocate_portfolio_record),
     ),
     "simulate-hedging": Verb(
         name="simulate-hedging",

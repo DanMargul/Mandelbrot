@@ -59,6 +59,11 @@ from volarb_py.market_data import (
     open_chain_dataset,
     parse_canonical_timestamp,
 )
+from volarb_py.portfolio import (
+    Candidate,
+    PortfolioLimits,
+    allocate,
+)
 from volarb_py.pricing import BlackScholesInputs, InvalidOptionInputsError, black_scholes_price_and_greeks
 from volarb_py.random_source import (
     next_bits,
@@ -225,6 +230,63 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
         "status": scan.status,
+    }
+
+
+def portfolio_candidates_from(record: JsonRecord) -> list[Candidate]:
+    raw = record.get("candidates")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'candidates' must be an array")
+    candidates: list[Candidate] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'candidates' must be an object")
+        exposures = entry.get("factor_exposures")
+        if not isinstance(exposures, list):
+            raise DocumentError("field 'factor_exposures' must be an array")
+        candidates.append(
+            Candidate(
+                expected_edge=required_float(entry, "expected_edge"),
+                vega=required_float(entry, "vega"),
+                gamma=required_float(entry, "gamma"),
+                theta=required_float(entry, "theta"),
+                factor_exposures=[float(value) for value in exposures],
+                maximum_size=required_float(entry, "maximum_size"),
+                spread_cost=required_float(entry, "spread_cost"),
+            )
+        )
+    return candidates
+
+
+def allocate_portfolio_record(record: JsonRecord) -> JsonRecord:
+    limits = PortfolioLimits(
+        vega_budget=required_float(record, "vega_budget"),
+        gamma_budget=required_float(record, "gamma_budget"),
+        theta_budget=required_float(record, "theta_budget"),
+        factor_tolerance=required_float(record, "factor_tolerance"),
+        risk_aversion=required_float(record, "risk_aversion"),
+        proportional_cost=required_float(record, "proportional_cost"),
+        spot=required_float(record, "spot"),
+        volatility=required_float(record, "volatility"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+    )
+    allocation = allocate(
+        portfolio_candidates_from(record),
+        limits,
+        optional_boolean(record, "charge_hedging", True),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "weights": allocation.weights,
+        "expected_edge": allocation.expected_edge,
+        "spread_cost": allocation.spread_cost,
+        "hedging_cost": allocation.hedging_cost,
+        "objective": allocation.objective,
+        "net_vega": allocation.net_vega,
+        "net_gamma": allocation.net_gamma,
+        "net_theta": allocation.net_theta,
+        "worst_factor_exposure": allocation.worst_factor_exposure,
+        "charged_for_hedging": allocation.charged_for_hedging,
     }
 
 
@@ -719,6 +781,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "allocate-portfolio": Verb(
+        name="allocate-portfolio",
+        input_schema="portfolio_request/v1",
+        output_schema="portfolio_allocation/v1",
+        transform_records=mapped_over_records(allocate_portfolio_record),
     ),
     "simulate-hedging": Verb(
         name="simulate-hedging",

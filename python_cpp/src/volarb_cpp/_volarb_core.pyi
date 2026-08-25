@@ -126,6 +126,48 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidPortfolioInputsError(ValueError): ...
+
+class PortfolioLimits:
+    def __init__(
+        self,
+        *,
+        vega_budget: float,
+        gamma_budget: float,
+        theta_budget: float,
+        factor_tolerance: float,
+        risk_aversion: float,
+        proportional_cost: float,
+        spot: float,
+        volatility: float,
+        years_to_expiry: float,
+    ) -> None: ...
+
+class Allocation:
+    weights: list[float]
+    expected_edge: float
+    spread_cost: float
+    hedging_cost: float
+    objective: float
+    net_vega: float
+    net_gamma: float
+    net_theta: float
+    worst_factor_exposure: float
+    charged_for_hedging: bool
+
+def allocate_portfolio(
+    *,
+    expected_edge: list[float],
+    vega: list[float],
+    gamma: list[float],
+    theta: list[float],
+    factor_exposures: list[list[float]],
+    maximum_size: list[float],
+    spread_cost: list[float],
+    limits: PortfolioLimits,
+    charge_hedging: bool,
+) -> Allocation: ...
+
 class InvalidHedgingInputsError(ValueError): ...
 
 class HedgingStatistics:

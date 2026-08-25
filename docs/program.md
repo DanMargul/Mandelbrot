@@ -429,9 +429,9 @@ the backtester in step 6.
 
 ## 8. Portfolio construction and hedging solved as one problem
 
-*Extends Phase 5 and 6. **The random source and the hedging control problem are done**, see
-`spec/interfaces/random_source.md` and `spec/interfaces/hedging.md`. The portfolio optimizer,
-and joining it to hedging, remain.*
+*Extends Phase 5 and 6. **Done**, see `spec/interfaces/random_source.md`,
+`spec/interfaces/hedging.md` and `spec/interfaces/portfolio.md`. What remains is running it on
+out-of-sample data, which waits with the dataset.*
 
 Not signal ranking. A constrained optimization: maximize expected residual convergence net
 of modeled cost, subject to vega, gamma, and theta budgets, factor neutrality from step 5,
@@ -465,9 +465,40 @@ separate them on one year of daily data.**
 Zakamouline is deliberately absent. Its constants would have been reproduced from memory rather
 than derivation, and an unverifiable formula in the repository is worse than a missing one.
 
+The allocator then answered the other half. Constraints are handled by projection rather than
+penalty, following what `essvi.md` learned about penalties, so every reported book satisfies
+every budget by construction. The hedging cost enters the objective through a closed form for
+running a Whalley-Wilmott band, **checked against the path simulation** across twenty-seven
+combinations of volatility, cost and risk aversion: derived over simulated runs `0.81` to
+`1.22`, inside `8%` for most, fraying where the band is widest, which is where an asymptotic
+result should.
+
+Eight candidates with similar edges and very different gammas, a 10bp market:
+
+| | edge | spread | hedging | objective | net gamma |
+|---|---|---|---|---|---|
+| solved separately, then charged | `5.335` | `0.530` | `0.635` | `4.170` | `0.1400` |
+| solved jointly | `5.929` | `1.208` | `0.003` | `4.718` | `0.0024` |
+
+**The joint solution is 13% better and it is not a trade-off along one axis.** It collects more
+gross edge, pays more than twice the spread, and pays almost no hedging cost, because it found
+a combination that keeps the edge while netting the gamma away. The sequential answer was not a
+worse point on the same frontier; it was on the wrong frontier.
+
+And one thing worth reading off the same table. The gamma budget was `0.50` and the sequential
+book's net gamma was `0.1400`, so **the budget never bound** — the exposure it failed to
+control cost `0.635`. Pricing a risk and capping it are different jobs, and a cap that is never
+reached does neither.
+
+A defect the obvious test caught. The spread term `|w| * cost` is not differentiable at zero,
+and taking its subgradient there as `-cost` makes the gradient at an empty book positive even
+when the edge is nothing, so the optimiser walked away from "hold nothing" to a **negative**
+objective. The test is the one nobody writes: give every candidate zero edge and check the book
+stays empty.
+
 **Done when** the jointly optimized portfolio beats naive ranking with fixed-band hedging on
-risk-adjusted terms, out of sample, after costs. **The hedging half is done**; the optimizer,
-and the fixed point between the two, remain.
+risk-adjusted terms, out of sample, after costs. **The optimizer, the hedging control and the
+join between them are done**; out of sample waits on a dataset with dates in it.
 
 ---
 

@@ -12,6 +12,7 @@
 #include "volarb/factors.hpp"
 #include "volarb/random_source.hpp"
 #include "volarb/hedging.hpp"
+#include "volarb/portfolio.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -68,7 +69,12 @@ using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
 using volarb::CurveNode;
 using volarb::decompose_surface_factors;
+using volarb::allocate;
+using volarb::Allocation;
 using volarb::band_rule_from_name;
+using volarb::Candidate;
+using volarb::InvalidPortfolioInputsError;
+using volarb::PortfolioLimits;
 using volarb::BandPolicy;
 using volarb::HedgingInputs;
 using volarb::hedging_statistics;
@@ -246,6 +252,28 @@ UnsignedWide wide_from_decimal(const std::string& text) {
 
 std::string decimal_from_word(std::uint64_t value) {
     return std::to_string(value);
+}
+
+Allocation allocate_portfolio_from_values(
+    const std::vector<double>& expected_edge, const std::vector<double>& vega,
+    const std::vector<double>& gamma, const std::vector<double>& theta,
+    const std::vector<std::vector<double>>& factor_exposures,
+    const std::vector<double>& maximum_size, const std::vector<double>& spread_cost,
+    const PortfolioLimits& limits, bool charge_hedging) {
+    const std::size_t count = expected_edge.size();
+    if (vega.size() != count || gamma.size() != count || theta.size() != count ||
+        factor_exposures.size() != count || maximum_size.size() != count ||
+        spread_cost.size() != count) {
+        throw InvalidPortfolioInputsError("every candidate column must have the same length");
+    }
+    std::vector<Candidate> candidates;
+    candidates.reserve(count);
+    for (std::size_t index = 0; index < count; ++index) {
+        candidates.push_back(Candidate{expected_edge[index], vega[index], gamma[index],
+                                       theta[index], factor_exposures[index], maximum_size[index],
+                                       spread_cost[index]});
+    }
+    return allocate(candidates, limits, charge_hedging);
 }
 
 HedgingStatistics simulate_hedging_from_values(double spot, double strike, double years_to_expiry,
@@ -718,6 +746,38 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
                py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
                py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
+
+    py::register_exception<InvalidPortfolioInputsError>(module, "InvalidPortfolioInputsError",
+                                                        PyExc_ValueError);
+
+    py::class_<PortfolioLimits>(module, "PortfolioLimits")
+        .def(py::init([](double vega_budget, double gamma_budget, double theta_budget,
+                         double factor_tolerance, double risk_aversion, double proportional_cost,
+                         double spot, double volatility, double years_to_expiry) {
+                 return PortfolioLimits{vega_budget,   gamma_budget,      theta_budget,
+                                        factor_tolerance, risk_aversion, proportional_cost,
+                                        spot,          volatility,        years_to_expiry};
+             }),
+             py::arg("vega_budget"), py::arg("gamma_budget"), py::arg("theta_budget"),
+             py::arg("factor_tolerance"), py::arg("risk_aversion"), py::arg("proportional_cost"),
+             py::arg("spot"), py::arg("volatility"), py::arg("years_to_expiry"));
+
+    py::class_<Allocation>(module, "Allocation")
+        .def_readonly("weights", &Allocation::weights)
+        .def_readonly("expected_edge", &Allocation::expected_edge)
+        .def_readonly("spread_cost", &Allocation::spread_cost)
+        .def_readonly("hedging_cost", &Allocation::hedging_cost)
+        .def_readonly("objective", &Allocation::objective)
+        .def_readonly("net_vega", &Allocation::net_vega)
+        .def_readonly("net_gamma", &Allocation::net_gamma)
+        .def_readonly("net_theta", &Allocation::net_theta)
+        .def_readonly("worst_factor_exposure", &Allocation::worst_factor_exposure)
+        .def_readonly("charged_for_hedging", &Allocation::charged_for_hedging);
+
+    module.def("allocate_portfolio", &allocate_portfolio_from_values, py::arg("expected_edge"),
+               py::arg("vega"), py::arg("gamma"), py::arg("theta"), py::arg("factor_exposures"),
+               py::arg("maximum_size"), py::arg("spread_cost"), py::arg("limits"),
+               py::arg("charge_hedging"));
 
     py::register_exception<InvalidHedgingInputsError>(module, "InvalidHedgingInputsError",
                                                       PyExc_ValueError);

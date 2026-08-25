@@ -558,3 +558,42 @@ absolute = 1e-14
 ["hedging_statistics/v1".certainty_equivalent]
 relative = 1e-12
 absolute = 1e-14
+
+["portfolio_allocation/v1".charged_for_hedging]
+exact = true
+
+["portfolio_allocation/v1".weights]
+relative = 1e-9
+absolute = 1e-11
+
+["portfolio_allocation/v1".expected_edge]
+relative = 1e-10
+absolute = 1e-12
+
+["portfolio_allocation/v1".spread_cost]
+relative = 1e-10
+absolute = 1e-12
+
+["portfolio_allocation/v1".hedging_cost]
+relative = 1e-9
+absolute = 1e-12
+
+["portfolio_allocation/v1".objective]
+relative = 1e-10
+absolute = 1e-12
+
+["portfolio_allocation/v1".net_vega]
+relative = 1e-10
+absolute = 1e-12
+
+["portfolio_allocation/v1".net_gamma]
+relative = 1e-9
+absolute = 1e-12
+
+["portfolio_allocation/v1".net_theta]
+relative = 1e-10
+absolute = 1e-12
+
+["portfolio_allocation/v1".worst_factor_exposure]
+relative = 1e-10
+absolute = 1e-12

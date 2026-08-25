@@ -29,6 +29,7 @@ nlohmann::json evaluate_rate_curve_record(const nlohmann::json& record);
 nlohmann::json decompose_surface_factors_record(const nlohmann::json& record);
 nlohmann::json draw_random_sample_record(const nlohmann::json& record);
 nlohmann::json simulate_hedging_record(const nlohmann::json& record);
+nlohmann::json allocate_portfolio_record(const nlohmann::json& record);
 nlohmann::json calibrate_svi_slice_record(const nlohmann::json& record);
 
 const std::map<std::string, Verb>& supported_verbs();

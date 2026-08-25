@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "portfolio_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "portfolio_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "candidates", "vega_budget", "gamma_budget", "theta_budget",
+                     "factor_tolerance", "risk_aversion", "proportional_cost", "spot",
+                     "volatility", "years_to_expiry", "charge_hedging"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "candidates": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["expected_edge", "vega", "gamma", "theta", "factor_exposures",
+                           "maximum_size", "spread_cost"],
+              "additionalProperties": false,
+              "properties": {
+                "expected_edge": { "type": "number" },
+                "vega": { "type": "number" },
+                "gamma": { "type": "number" },
+                "theta": { "type": "number" },
+                "factor_exposures": { "type": "array", "items": { "type": "number" } },
+                "maximum_size": { "type": "number", "minimum": 0 },
+                "spread_cost": { "type": "number", "minimum": 0 }
+              }
+            }
+          },
+          "vega_budget": { "type": "number", "minimum": 0 },
+          "gamma_budget": { "type": "number", "minimum": 0 },
+          "theta_budget": { "type": "number", "minimum": 0 },
+          "factor_tolerance": { "type": "number", "minimum": 0 },
+          "risk_aversion": { "type": "number", "exclusiveMinimum": 0 },
+          "proportional_cost": { "type": "number", "minimum": 0 },
+          "spot": { "type": "number", "exclusiveMinimum": 0 },
+          "volatility": { "type": "number", "exclusiveMinimum": 0 },
+          "years_to_expiry": { "type": "number", "exclusiveMinimum": 0 },
+          "charge_hedging": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

@@ -538,3 +538,51 @@ def test_the_derived_band_runs_through_the_bindings() -> None:
 def test_an_unknown_band_rule_raises_through_the_bindings() -> None:
     with pytest.raises(ValueError, match="whalley_wilmott"):
         core.simulate_hedging(**HEDGING_ARGUMENTS, rule="guesswork", fixed_width=0.0)
+
+
+PORTFOLIO_COLUMNS = {
+    "expected_edge": [1.00, 1.05, 0.95, 1.10],
+    "vega": [0.20, 0.22, 0.18, 0.25],
+    "gamma": [0.010, 0.070, 0.008, 0.090],
+    "theta": [-0.05, -0.30, -0.04, -0.40],
+    "factor_exposures": [[0.9, 0.2], [0.8, -0.3], [-0.7, 0.5], [-0.9, -0.1]],
+    "maximum_size": [10.0, 10.0, 10.0, 10.0],
+    "spread_cost": [0.10, 0.12, 0.09, 0.15],
+}
+PORTFOLIO_TOLERANCE = 1e-9
+VEGA_BUDGET = 1.0
+
+
+def portfolio_limits() -> object:
+    return core.PortfolioLimits(
+        vega_budget=VEGA_BUDGET,
+        gamma_budget=0.50,
+        theta_budget=2.0,
+        factor_tolerance=0.5,
+        risk_aversion=0.10,
+        proportional_cost=0.0010,
+        spot=100.0,
+        volatility=0.20,
+        years_to_expiry=0.25,
+    )
+
+
+def test_the_allocator_respects_its_budgets_through_the_bindings() -> None:
+    allocation = core.allocate_portfolio(**PORTFOLIO_COLUMNS, limits=portfolio_limits(), charge_hedging=True)
+    assert abs(allocation.net_vega) <= VEGA_BUDGET + PORTFOLIO_TOLERANCE
+    assert allocation.worst_factor_exposure <= 0.5 + PORTFOLIO_TOLERANCE
+    assert len(allocation.weights) == len(PORTFOLIO_COLUMNS["expected_edge"])
+    assert allocation.charged_for_hedging
+
+
+def test_charging_for_hedging_reduces_net_gamma_through_the_bindings() -> None:
+    joint = core.allocate_portfolio(**PORTFOLIO_COLUMNS, limits=portfolio_limits(), charge_hedging=True)
+    naive = core.allocate_portfolio(**PORTFOLIO_COLUMNS, limits=portfolio_limits(), charge_hedging=False)
+    assert abs(joint.net_gamma) < abs(naive.net_gamma)
+    assert not naive.charged_for_hedging
+
+
+def test_ragged_candidate_columns_raise_through_the_bindings() -> None:
+    ragged = {**PORTFOLIO_COLUMNS, "vega": [0.2, 0.2]}
+    with pytest.raises(ValueError, match="length"):
+        core.allocate_portfolio(**ragged, limits=portfolio_limits(), charge_hedging=True)
