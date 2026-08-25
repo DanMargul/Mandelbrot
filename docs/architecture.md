@@ -125,6 +125,8 @@ a defect in one of them, and conformance is what finds it.
 | result pinning (`research/pins.py`) | reads git and the Parquet manifest; I/O, once per trial |
 | research statistics (`research/statistics.py`) | deflated Sharpe and its quantile run once per result, not per backtest step |
 | `reporting` and attribution (`reporting/attribution.py`) | greeks come from the reference track; runs once per result, not on the inner loop |
+| synthetic history generator (`ingestion/history.py`) | builds a fixture once; every number in it comes from the tri-implemented pricer |
+| residual strategy (`backtest/residual_run.py`, `backtest/allocator_decision.py`) | a wiring layer over `implied_vol`, `factors`, `pricing`, `portfolio` and `execution`, all of which are below the line; it decides nothing arithmetically that they do not already decide |
 | plotting | presentation |
 
 Reimplementing any of these in C++ costs real effort and produces no comparison worth

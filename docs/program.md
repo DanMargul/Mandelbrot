@@ -430,8 +430,9 @@ the backtester in step 6.
 ## 8. Portfolio construction and hedging solved as one problem
 
 *Extends Phase 5 and 6. **Done**, see `spec/interfaces/random_source.md`,
-`spec/interfaces/hedging.md` and `spec/interfaces/portfolio.md`. What remains is running it on
-out-of-sample data, which waits with the dataset.*
+`spec/interfaces/hedging.md` and `spec/interfaces/portfolio.md`. Now run end to end on a dated
+dataset in `docs/history_run.md`, where the allocator turned the same signal from a loss of
+`156,179` into a profit of `45,098` and declined the single name outright.*
 
 Not signal ranking. A constrained optimization: maximize expected residual convergence net
 of modeled cost, subject to vega, gamma, and theta budgets, factor neutrality from step 5,
@@ -497,8 +498,11 @@ objective. The test is the one nobody writes: give every candidate zero edge and
 stays empty.
 
 **Done when** the jointly optimized portfolio beats naive ranking with fixed-band hedging on
-risk-adjusted terms, out of sample, after costs. **The optimizer, the hedging control and the
-join between them are done**; out of sample waits on a dataset with dates in it.
+risk-adjusted terms, out of sample, after costs. **The optimizer, the hedging control, the join
+between them, and the end-to-end run are done.** On 120 dated observations the allocator beat
+the threshold rule by `201,277` on the index while placing fewer contracts, and refused the
+single name whose 3% spread the signal could not pay — see `docs/history_run.md`. It is still
+in sample, on synthetic data, and the fill model it all rests on is still uncalibrated.
 
 ---
 

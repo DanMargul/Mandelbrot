@@ -27,6 +27,7 @@ tracks over the same fixtures and diffs the results.
 - [`docs/backtest.md`](docs/backtest.md) — the event loop, the lookahead guarantee, and the results store
 - [`docs/reporting.md`](docs/reporting.md) — P&L attribution into greeks, and into factors versus residual
 - [`docs/research.md`](docs/research.md) — the trial registry, result pins, and the statistics that consume them
+- [`docs/history_run.md`](docs/history_run.md) — the end-to-end run on dated data, and the go/no-go it produced
 
 ## Quick start
 

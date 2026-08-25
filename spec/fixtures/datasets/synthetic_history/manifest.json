@@ -1,0 +1,2409 @@
+{
+  "schema": "chain_dataset_manifest/v1",
+  "source": "synthetic_history",
+  "chain_schema": "option_chain_snapshot/v2",
+  "created_at": "2026-06-19T20:00:00.000000Z",
+  "dataset_digest": "42b9b288d9a86fb9cc863b93b55ddf33921e49a9d08eed3e0072140e1446e70a",
+  "partitions": [
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-05/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "12986475bbe83002e1fab92ed4ae529214d67b01d8eece65b5a317cc2e795f62",
+      "minimum_event_time": "2026-01-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-06/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "49c4b2200459d518dd208120bc3cffcd0ad1296177c5cab34dfa2598fe8fd4dd",
+      "minimum_event_time": "2026-01-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-07/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "93d67ba4632890faffbc46930eb4a7500a03ed9685040278fcddb6de4ec405a1",
+      "minimum_event_time": "2026-01-07T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-07T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-07T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-07T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-08/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "2b506766821ca8cda5409166557dd16b5b4522969cf0b5bb18e9cd43c2f8cf37",
+      "minimum_event_time": "2026-01-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-09/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "77655332c7f1e5a0684abc94b5c445a2b18c2381593f05d0e22123e2788bd7ad",
+      "minimum_event_time": "2026-01-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-12/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "48d9a4f8a08ebc0c475410681b5e39300901cbd2a64b29b41553ceb19af4536e",
+      "minimum_event_time": "2026-01-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-13/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "1f8642474699677c8bfe661c8eed26f258d8bf2e195661da2fce1f7bbbb40bba",
+      "minimum_event_time": "2026-01-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-14/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "caeee29141fa2e8f1bca5acb3c81512a47fa9f14848ba04b1b478127e6323963",
+      "minimum_event_time": "2026-01-14T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-14T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-14T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-14T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-15/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "c68ac43d020012dcc2739ac8a8e2ebf9cb6822d4f2679165bcd61297c369a4de",
+      "minimum_event_time": "2026-01-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-16/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "fe090412d27f442f32dacfd42bcbb5d7bb13c2f831a1539bbb59a9e67368a4ed",
+      "minimum_event_time": "2026-01-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-19/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "ecb2a9fdcb1c9d954c4689dd65ab8d320709dc5e02d918f1a1fb9d3045103852",
+      "minimum_event_time": "2026-01-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-20/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "b5c752eba7fd1f67cfbb7314da13a9e7b020e16f8c04a1472d22a127180278c1",
+      "minimum_event_time": "2026-01-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-21/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "820fc905884c9e4a8472622a8cdd78446cc66ef8d75edfca95bfdc0d720f017c",
+      "minimum_event_time": "2026-01-21T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-21T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-21T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-21T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-22/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "f8bc799176382bccc51cf2f65d0cdfd5b0e520d280d57c19de2c682657d5609b",
+      "minimum_event_time": "2026-01-22T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-22T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-22T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-22T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-23/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "98a866e69cf4d0d9dbf9ebe245d86e35c395d21153d6dfafcb81105f7a38bdb0",
+      "minimum_event_time": "2026-01-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-26/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "9c39111b950901d63deca98b5ad37055ba80e425307b0e004bf4fd6ac2b29227",
+      "minimum_event_time": "2026-01-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-27/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "5d7d5ff3261f5efd294312aecc1489ba1ff654680d0435f26c6985bb0979cdd5",
+      "minimum_event_time": "2026-01-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-28/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "05239a0fb68512c806f03264f723b88c55611e63150cc2247b9d1a74e9f52f04",
+      "minimum_event_time": "2026-01-28T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-28T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-28T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-28T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-29/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "16daf228d0992ea199970029dd0af35bcd17668f47b523bd7b6652817e6daae1",
+      "minimum_event_time": "2026-01-29T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-29T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-29T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-29T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-01-30/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "4afb4fe5a4c536906bab184c9d8a6ec0494c95b4117a7a0ae27716bfd630a3d9",
+      "minimum_event_time": "2026-01-30T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-30T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-30T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-30T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-02/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "12be6e24e4de661f3d51adbaac86fede4b57f5736c6d628e1a6397b5137335d2",
+      "minimum_event_time": "2026-02-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-03/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "12b2307bddcfcdbf2f4d485cdd6032f63667efc6fc2ccfe241ccc73a2f184f89",
+      "minimum_event_time": "2026-02-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-04/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "919789eceef06b5cedb5a0387b729ded001092603d4b4f0b67ba50bee5412bb7",
+      "minimum_event_time": "2026-02-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-05/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "8d0135526be84789f75e51269025cad55506e3e455d8bd0cdbfe23df668e02f2",
+      "minimum_event_time": "2026-02-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-06/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "53607c241cb852a99fcf22da7c57cf6835d1a911eb090baea4a89dd8f72b5eef",
+      "minimum_event_time": "2026-02-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-09/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "3163040ead00861348398405bf67e10b7bb50474c21e0e822b43702f93343f42",
+      "minimum_event_time": "2026-02-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-10/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "07aba7dc82be523ddef4e7e15449ef57d2ada445bad9e5c5d81e682834652dd5",
+      "minimum_event_time": "2026-02-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-11/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7380daadbd76f1e0244f0fed7ed198bc3e1566b3366fa01c29f465f8de9aabac",
+      "minimum_event_time": "2026-02-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-12/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "b891ec4f59688f503ae4f331d97a4eda7deb5b3f6fcb00c934b389ede04af1e3",
+      "minimum_event_time": "2026-02-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-13/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "445d8f2ff55bc9ec51f9a303961ee0c4e36a027b9d4d6abdc8bf57b77dc23aa8",
+      "minimum_event_time": "2026-02-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-16/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "72585df4fa6e0e492929e27f3623d675149c909f7a43ce4d1f0c75551a707936",
+      "minimum_event_time": "2026-02-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-17/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "6877798431d51960c6a0168b1efa31c0f45d9719ce3a8e6d14a79ed7a3beb6cc",
+      "minimum_event_time": "2026-02-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-18/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "791d10ef74d12e551a4299117faab7c3101e9960970943ed2c2bd7fa74a3f45e",
+      "minimum_event_time": "2026-02-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-19/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "39720fdb2d9bb73b720d720198adf1d9277af6c9c0a9001ab50f4cd13ecd8f38",
+      "minimum_event_time": "2026-02-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-20/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "fee12363b7083b6615b8e1268daa043f9b810b64d8a87e35a08b0d394182f349",
+      "minimum_event_time": "2026-02-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-23/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "acdbcfe9caf12592494d5681e9464afa7b765cea136271d8ae4d4a8e4870f91a",
+      "minimum_event_time": "2026-02-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-24/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "dc9bfd4f9ccc03c97fcf58301501b09a7fc7736c8b4d794ca41ecc36ec100a03",
+      "minimum_event_time": "2026-02-24T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-24T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-24T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-24T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-25/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "b7921cff079239daec161ed54f923b92d1cc72c7b3d1eb8d9373578e17fd88fd",
+      "minimum_event_time": "2026-02-25T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-25T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-25T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-25T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-26/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "029e1d0e26fad028534ae1265819bd66aeb4058069f7670d7d858fc0a5e8982b",
+      "minimum_event_time": "2026-02-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-02-27/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "8bbf612ef8d8a213e8da91c7549f085d564e1b05f4b5ea7be9128c88a67e9fce",
+      "minimum_event_time": "2026-02-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-02/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "c7a4f016988aa2e3d67f926511e12cc2a8b3385b3b1e9c9f1ce2cec326dc1f77",
+      "minimum_event_time": "2026-03-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-03/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "dd07b7b9f5df8915c5b29e3f1754896d1f20ab64f6e2a3088974862234447151",
+      "minimum_event_time": "2026-03-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-04/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "e8bc071e960a6f3ca1a28957d5fe5f057657d64534a214ad413c511eba67acfe",
+      "minimum_event_time": "2026-03-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-05/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "214b0cc47a7cbeadbdb7abe1a9ff2e353779f81ad9f328cec394cf8f3e766d4a",
+      "minimum_event_time": "2026-03-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-06/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "83ea39abda3e8970232180b7cd53cd57bc734f812ce5c63ca40b870b659e44c1",
+      "minimum_event_time": "2026-03-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-09/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "54f3c2822750cebc781d83a927a8da58771d937e654b992221661edcda219ad8",
+      "minimum_event_time": "2026-03-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-10/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "71533ea53fa7a849a8bea8c665e69860c515bca731f5f5af76214aa45eefceb5",
+      "minimum_event_time": "2026-03-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-11/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "9799d0795612170306a682c79450e96ae7958ba44acbbe64e55e5841fc5d24c2",
+      "minimum_event_time": "2026-03-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-12/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "b9ac5a8b746182f176c7132e49ef321a2b645bd141d60bfb51839eb01b880472",
+      "minimum_event_time": "2026-03-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-13/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "e30fb5dda0beb0ad208ccb4431ecc912b55f9bbfa232af2d8465cab1f0679333",
+      "minimum_event_time": "2026-03-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-16/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "b0043f41f83521db485e470e100a748ebc2e144535278e946257d1dbd2984ae1",
+      "minimum_event_time": "2026-03-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-17/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "24f240013e5203bf028662c930b25049a327d7c14462f70ce19c1335d6322374",
+      "minimum_event_time": "2026-03-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-18/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "1a1943c7b00e1c78d6f822bdc730c51519f035462d130ef891c84773afe4d728",
+      "minimum_event_time": "2026-03-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-19/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d01860a980ff37b879af06fea757fd2a14baeb0ce9a3b9da8b78a000a9a98e5a",
+      "minimum_event_time": "2026-03-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-20/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "6a2052a26d6473c5efc1521e344d66f09ef045fa66102b6060f7ded53d38836a",
+      "minimum_event_time": "2026-03-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-23/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "38bb8109362839383ea1edba575f3695f1aea4a2ca6049533f3542ebf25be168",
+      "minimum_event_time": "2026-03-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-24/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "a3c75f127672cfacc0f43f8b51163fac66973e97afb05b44f1f8f197c5feb049",
+      "minimum_event_time": "2026-03-24T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-24T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-24T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-24T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-25/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "425005402f5b94571e8f399369d12786fb9df6c1503483e723e3a2dc2cac1667",
+      "minimum_event_time": "2026-03-25T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-25T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-25T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-25T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-26/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "2cf90012333c64254aed2c92900ae548f4829e848c9274aea2c152dd623deabe",
+      "minimum_event_time": "2026-03-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-27/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "67000f6cce0fadcbbfc6dc37d390bda432bff4a6eef532e7df33c0cc523059c0",
+      "minimum_event_time": "2026-03-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-30/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "12f7d94bf1596d507960ef990748e0033aae0923d7fdabe5a568e5f1fac9a21b",
+      "minimum_event_time": "2026-03-30T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-30T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-30T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-30T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-03-31/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "6c6373c903e20ea3047cf0ca748e2ae523dc92bab7f2dc8fae218755b1ef8dd6",
+      "minimum_event_time": "2026-03-31T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-31T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-31T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-31T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-01/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "3edfaed9a9eeda6f83af71f8bf7659e371e020749bbaefa688eda64fe2504ff5",
+      "minimum_event_time": "2026-04-01T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-01T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-01T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-01T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-02/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "18c253f7dc9df515ae85a64d5e5a62c3686dbac5ece759838ce4c9303e5ece72",
+      "minimum_event_time": "2026-04-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-03/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "c7bed2f0499e44ff2ef247767dba005064b198be03d1739b7d22951fcf646743",
+      "minimum_event_time": "2026-04-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-06/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "33560602a380d34f1a172992a9649b9f8c98561dbef07ddd626e087c1c7432d0",
+      "minimum_event_time": "2026-04-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-07/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "c9916220362e1ca4a5ddae1cfb4b55621648846ab4d282410396a5020091a144",
+      "minimum_event_time": "2026-04-07T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-07T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-07T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-07T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-08/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "8fa2b1887fc169dc35fb2ef6556e0e5cebaf3f00f8285977c90fa95674e63494",
+      "minimum_event_time": "2026-04-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-09/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "e783756ee087084a3bde6f25fcc63018c65475fd4d728245d2dc1fd2f4938bef",
+      "minimum_event_time": "2026-04-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-10/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "cc9b428509449e77724e2cc4d735465146b4ae80a7a535b17fb25a67d021fec4",
+      "minimum_event_time": "2026-04-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-13/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "6822eb4206266fe5ba51543a4de88ab5a49f886b0d03126833b02393a131cdc1",
+      "minimum_event_time": "2026-04-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-14/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d263fcf3651399fcf66ae37fe53bf84b6eeb20cabe7b00d0475c2dbfafd1023d",
+      "minimum_event_time": "2026-04-14T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-14T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-14T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-14T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-15/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "2cdd088ec644646b4a85b7f56b843b6e89078c3e7bce840a93ad67dbb1b13e29",
+      "minimum_event_time": "2026-04-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-16/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "84503ab83e63a72adacaea7540cdebaa6324c14810fa3e08bb0a66dbda492beb",
+      "minimum_event_time": "2026-04-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-17/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "cbc9fc640b856b9dfbb81e8380f470b719437e2246f3640b5ddd663bed2a7a80",
+      "minimum_event_time": "2026-04-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-20/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "f79636a86ec5115e531b90c7bb44e2679ba485fa2705613e38121566ce812c5e",
+      "minimum_event_time": "2026-04-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-21/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d30a7634334233d144cf18530550a4a3eb3e2a275dc3e37352dbc0cbf1c40d4f",
+      "minimum_event_time": "2026-04-21T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-21T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-21T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-21T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-22/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "38cc3bd90e4f9b5409749b05ab6ab66be35b176d10e46c54ad3a6ecf673863c7",
+      "minimum_event_time": "2026-04-22T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-22T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-22T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-22T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-23/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d1de03a9fc4a31eb4f1b4d920b699a32e43e7a0d6a76305240a00be8c230d82c",
+      "minimum_event_time": "2026-04-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-24/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "09c8ea11c9a15a7a6921aade472599aa238d866bbf86ce95171225b95c47f54f",
+      "minimum_event_time": "2026-04-24T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-24T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-24T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-24T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-27/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "e197da27eb9ed144efddbbbad1f1ef38009dec313c2b4ef312f7a140e70d9bec",
+      "minimum_event_time": "2026-04-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-28/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "a8e5a5b7d4831e148dceac170666f9a26b7100bf5b55478fbc847434bfc957cd",
+      "minimum_event_time": "2026-04-28T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-28T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-28T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-28T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-29/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7d8ac9511160024b4d0dedfd3543898d026f452bfaaefc97a2fc682bf384af18",
+      "minimum_event_time": "2026-04-29T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-29T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-29T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-29T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-04-30/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "85c4a48f71a625bcac6a06c22a5a7e44cbec765b65be8a7dbcd0e11a8f83c128",
+      "minimum_event_time": "2026-04-30T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-30T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-30T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-30T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-01/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "92cb80197ca1cc64544ffd6e94ebe22c187ec277a816dcaad4005e6ed01effa8",
+      "minimum_event_time": "2026-05-01T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-01T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-01T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-01T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-04/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "147c4ffd311ee994695fe6cbdf723f35f273f70733806c5c33086894ac6c8a91",
+      "minimum_event_time": "2026-05-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-05/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "efb6661a66e3be24335b5b1fc1de4a7631fd6673251f38a03d7738aae574c740",
+      "minimum_event_time": "2026-05-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-06/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "25a2ed020d3ce2bb616346b94c44a86e8db096f8cc5ab06eb7ab913e14ae369b",
+      "minimum_event_time": "2026-05-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-07/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "f0edeb9d1064e843726d137aa0d61d1d7644a665893076b9e510b91bc8636318",
+      "minimum_event_time": "2026-05-07T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-07T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-07T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-07T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-08/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "fd83cebfee1d624a54b67423ed60903ed2d8264ff08c34e51f2df7e857c4757f",
+      "minimum_event_time": "2026-05-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-11/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "0a1043574aaf5f179dca0d2f29b05312d7a85557fd18bdc90d941f0488153415",
+      "minimum_event_time": "2026-05-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-12/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "5d4a02334c10c608a4b338cb7d0c9396adac81106a7810dd746979f2b7ffd476",
+      "minimum_event_time": "2026-05-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-13/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7e965a0964c4e5e7722bef65e1b060648748ed5c28d2839042f38c13172849a6",
+      "minimum_event_time": "2026-05-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-14/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7b3e1b9bf776bedfac7b23593b93a87967e14b76a542c58e6b1ce9426ab211b9",
+      "minimum_event_time": "2026-05-14T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-14T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-14T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-14T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-15/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7eade635597b46cdf92a9ba1fd8dd3475098cf5aff4b7d358574ea9ac2cf1c0e",
+      "minimum_event_time": "2026-05-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-18/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "dcba5e2d5de415c7ca5bff0787570fea7bd7076aa4366fb9dc56349dabf51df1",
+      "minimum_event_time": "2026-05-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-19/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "54b303e12d82e85ac4c625c3ff069ab141cf80a707066d9cb2b60633d1ad404d",
+      "minimum_event_time": "2026-05-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-20/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "f35509d09978aa4827b12d0b12685914c2bbbd599b6679f92f98816d3d90da33",
+      "minimum_event_time": "2026-05-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-21/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "9599a736a9df5f46687e82f4c81735ef7fbec8e403debbd49d9daf4f0295c734",
+      "minimum_event_time": "2026-05-21T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-21T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-21T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-21T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-22/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7b8aff25c0c97936ae3af5cdaa9cd78088d89b28034a251a00124dfa99d51fe8",
+      "minimum_event_time": "2026-05-22T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-22T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-22T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-22T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-25/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "16fbe576165ece8032d09569ef7a124f6f3087496234aa45d01eec951f635615",
+      "minimum_event_time": "2026-05-25T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-25T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-25T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-25T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-26/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d55258b39b7ef7d183824335804492302b8149130771bdf824c0eb1e5c85c465",
+      "minimum_event_time": "2026-05-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-27/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "f84e56b22a8469069f1c7c847392f4d21ac6a52ec12d1177b6e95495fbae732e",
+      "minimum_event_time": "2026-05-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-28/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "076f986b5fd7dbe9d2cfbd82ed2677620b873df1151a6ddc253d422406a47e5a",
+      "minimum_event_time": "2026-05-28T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-28T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-28T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-28T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-05-29/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "c4356bcecd65a951a64f46e9d684e864050670282b9003b97be9c8876359fdc5",
+      "minimum_event_time": "2026-05-29T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-29T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-29T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-29T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-01/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "faf6dfb3a16f906163a6f2cdfd8fb5be3eeb1b67d2b0a51e0c7a4d42908ae009",
+      "minimum_event_time": "2026-06-01T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-01T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-01T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-01T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-02/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "549d0c482ac64f235916e9afefef999e240a7a07ec54e0047abb0794c79c7f88",
+      "minimum_event_time": "2026-06-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-03/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "7c42f4c2d83a073916b0fda4dcdb2ab23a5bd12a3d5a74b3454ddc4303b8de7c",
+      "minimum_event_time": "2026-06-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-04/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "62f166b0d8394febd2a05daca1b4cb375fb1c4a50ffda95cca98c0aa77940dec",
+      "minimum_event_time": "2026-06-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-05/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "a575aa3df29a2ee74b2cfb06d0a89f5192350cb5cb78a4832e2fdcd903c6091c",
+      "minimum_event_time": "2026-06-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-08/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "9168a0aac261b932ddde7281b2c42174f51086210930860528b9d2f165b02e5a",
+      "minimum_event_time": "2026-06-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-09/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "f7e1c8c7c966232eda8c85883fd7061cc575879bad412dbc3daa167bce782ca7",
+      "minimum_event_time": "2026-06-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-10/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "01f8420e9ccb2dd322dd5ecefd9164e2ede6ea116c6f79f02a529d1af87b61ea",
+      "minimum_event_time": "2026-06-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-11/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "037f9e933faaeea497613c967462690ab48045ad44391c850d26a2afeea33802",
+      "minimum_event_time": "2026-06-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-12/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "274c8df59337d215c89efc1430e6e46705e70e76e8765e91e6f410759dc992fd",
+      "minimum_event_time": "2026-06-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-15/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "fc0637a49a2f835282fac64d6fa221f9f1af02e61a2cf53311719a40387837dd",
+      "minimum_event_time": "2026-06-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-16/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "9b7d44464520fc56a0d29fc9a47c5ac7833cd5ed542885b39a4f2fb4f8af6cae",
+      "minimum_event_time": "2026-06-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-17/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d2699bc57d9d1c797d1ad37ab91ea203a37764bd23bd5316ee9e0ec4657660c8",
+      "minimum_event_time": "2026-06-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-18/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "d74ee2e73631f08d4b874c3dc93853d771c835887232a565c4f40c3af12bbb68",
+      "minimum_event_time": "2026-06-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=IDXH/observation_date=2026-06-19/part-00000.parquet",
+      "underlying_symbol": "IDXH",
+      "row_count": 20,
+      "content_hash": "5aff14e2c43d7da12148f77de9bb99ca3e36232f261a78e2df958ea48741b050",
+      "minimum_event_time": "2026-06-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-05/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "c4a28464a7a48e890bd6af5d94f4a270146592583ed1cd50f99c30048a0a7cdd",
+      "minimum_event_time": "2026-01-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-06/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "d357f9fad79ff2d0c418a90747d8a974b833fde0b4b25e41b7d3c3a54b1d317e",
+      "minimum_event_time": "2026-01-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-07/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "7927b5cf43b8578aaec3c6c6010e1cdcbd2e751b93cc1a9ea9d9c2443e522efb",
+      "minimum_event_time": "2026-01-07T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-07T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-07T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-07T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-08/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "178a53cef33b98b471bdffb20bf2bb35c3b2506437bbcff9627cecf938fc1aa4",
+      "minimum_event_time": "2026-01-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-09/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "75b08c14e7de4d34fe47d80120f90aa710a1e606cc2bdf80847195b28911573d",
+      "minimum_event_time": "2026-01-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-12/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "23f5e5c3eaf2bb1721ab13e82102f6c91c3c42448b64c6e4548b9636759298bf",
+      "minimum_event_time": "2026-01-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-13/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "05b22337cdfaa1747ac6e4ef05e71bcb5aa6f5ae924c466873ad0787ea763a6c",
+      "minimum_event_time": "2026-01-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-14/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f02f386e5af032ed8fb84a973314683acbeec9412acad571cd7d5e8906319128",
+      "minimum_event_time": "2026-01-14T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-14T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-14T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-14T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-15/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "06bbc0177399582aacd1e98269ba470eb7fd6c6829529599d0caaaadb84d143d",
+      "minimum_event_time": "2026-01-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-16/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "656940a9f1e02d72861822e69fa4937607064261b8bd9a93395b05cf858f7ae8",
+      "minimum_event_time": "2026-01-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-19/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "dbb53d1aea9fa33cd85cd9453bd045280ec721fc9e5591a732a44270925e05a0",
+      "minimum_event_time": "2026-01-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-20/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "ef4bef3588f4b6eb65a69a52c3e4f8b9cd06daabca7cf819100c4e50e8a07d58",
+      "minimum_event_time": "2026-01-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-21/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "442f1160d896efb1add155a1d51b2f7233b68e5bd2515642b8a31f00e36f2e6f",
+      "minimum_event_time": "2026-01-21T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-21T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-21T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-21T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-22/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "1a80ab9ba8e43faa3c4d343cdeb1efe8dc7ee227cdef6a87323e7da61e9494ce",
+      "minimum_event_time": "2026-01-22T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-22T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-22T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-22T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-23/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "d3a7850425afdc812d7d4125511298609eb4e76646d4330e09412025f6558e06",
+      "minimum_event_time": "2026-01-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-26/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "ae3506f90f0023990bc7897f126ed9643fd5a52ecc8a5714f4584c5a5ab3338a",
+      "minimum_event_time": "2026-01-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-27/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "4be54e4c5aca0ea00ca859413dd5699083d2aed996d758c1403600e87d4c9063",
+      "minimum_event_time": "2026-01-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-28/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "46bd59e36ccf4f6d3ccf3ee217781036b8fea7feaa33b2f57a2c8bda4c8c9ba9",
+      "minimum_event_time": "2026-01-28T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-28T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-28T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-28T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-29/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "de82cd6560e8c42f27e4ee9848672edebee5b6bddc0351702d07bc7f19fc29ac",
+      "minimum_event_time": "2026-01-29T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-29T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-29T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-29T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-01-30/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f905c5ff77fd1730120a38643afb725d16d4841cec9d8cec5bd2522c4eec72d2",
+      "minimum_event_time": "2026-01-30T20:00:00.000000Z",
+      "maximum_event_time": "2026-01-30T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-01-30T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-01-30T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-02/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "35d7b8a24edcd367715924a89cd5fc33a53072425c315104f15755c3a6f285a2",
+      "minimum_event_time": "2026-02-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-03/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "734cd25a8b1bb6100d0e478d017b51af52259586398cd0402912bfc542e57e92",
+      "minimum_event_time": "2026-02-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-04/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "793b8d53f88d4f6ed5c67605195ba5f423c1073e7c4927ce292a5e17b31e9636",
+      "minimum_event_time": "2026-02-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-05/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "7b16ce40dc1658ecf29f27ba7589ac41b33c19d6544abb2eeb50e2f3392b0509",
+      "minimum_event_time": "2026-02-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-06/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "09c5c92c9f376168786ee0f6c1845140e9a3109a41356a0c44ef9cdc9d4bf896",
+      "minimum_event_time": "2026-02-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-09/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "34f23cd26d97a4ff4853c79dab1a1bc5fb33b7c97c2ba74554ca4d5452d05bb1",
+      "minimum_event_time": "2026-02-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-10/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "41da98cfcfbb086572a40f457ae756fe260dbe3d9b096e4053d57c9881fddc23",
+      "minimum_event_time": "2026-02-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-11/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "020171ead10e02e7e4e9388f0c318e1dfc82a85ed468e9eaee2644def2deab0a",
+      "minimum_event_time": "2026-02-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-12/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "688243d617501a9ced04f3317cf193e9e542a390c885cb1dc2c3182d04360aa3",
+      "minimum_event_time": "2026-02-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-13/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "c42570aa23f9586de0c8f28e6680ce5d3ce35be922ddc10b789c5c4cf3c46a3b",
+      "minimum_event_time": "2026-02-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-16/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "467ca66eca66b7b987f8f9c09c7f02e7764c05157cc0ed865b5fb7be4d66bd41",
+      "minimum_event_time": "2026-02-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-17/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f6d440b96e83aa0946d1f0cd54643fd702525c9f7372643b7b7f6b4def12c35a",
+      "minimum_event_time": "2026-02-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-18/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f181d393983dbcc796acf1cb1b426905468b23a6230e711cbfc2f2ff18a59f29",
+      "minimum_event_time": "2026-02-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-19/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "dc4ea7a44d36c1bdbea9c98e97bde232356b92758b8076a57180cb0fe1493bc3",
+      "minimum_event_time": "2026-02-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-20/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "e8144bfff0d422d964a3ef059c62f9237e6e5ba75b1a4f960c916b261483a4f7",
+      "minimum_event_time": "2026-02-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-23/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "22a399f8df14a01e2457867f6d6f0eebf6fa3d2f5590c3daf376855261d19f93",
+      "minimum_event_time": "2026-02-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-24/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f5f11f50900d8abdaeed57e5c169e013e61a3675a9a1bd307f5c11200859f083",
+      "minimum_event_time": "2026-02-24T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-24T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-24T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-24T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-25/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "8a5b929d422a44862f360423666cc770daf355f17d46b723eabff4e75eac73dd",
+      "minimum_event_time": "2026-02-25T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-25T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-25T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-25T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-26/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "ed50bb877a0b499d09c0b32b4af6b4876e3ee11effe577d4450a6390d6b680a9",
+      "minimum_event_time": "2026-02-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-02-27/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "5204f4a92b5546bd825d2de94517feb3304897dfa68886ca2590964c3d918b22",
+      "minimum_event_time": "2026-02-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-02-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-02-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-02-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-02/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "42f5901586481fb91928e411d9f453d9a9924f7ab3afab3d9122139b5dab5068",
+      "minimum_event_time": "2026-03-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-03/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "65e5f2ce585e19662211ab9b5116208db5e8af4a3b41face490f5dd1e7ecc821",
+      "minimum_event_time": "2026-03-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-04/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "77ff67ca41a58335b2179d0f30293ce17d686ab8330fefce6d5d11fd1b412873",
+      "minimum_event_time": "2026-03-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-05/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "90d6791484ea915002f9e93993a4b79b57fb8f53003628eb283e70800d3330ea",
+      "minimum_event_time": "2026-03-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-06/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "b2847e8725453b7ff2ca733995fcc978946e68cafaf4b712641a96c6345943a4",
+      "minimum_event_time": "2026-03-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-09/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "3b7c6717c7d1f1b5a787d1391d544084328cc02dcaade53a08818529f0c861eb",
+      "minimum_event_time": "2026-03-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-10/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "d1ce8c736a908362ec3d4cce668ded60185a0fbd56427ee64f00525c270c6ff3",
+      "minimum_event_time": "2026-03-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-11/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "e05bea5280f187f01ed6937959e956b9cedfb721bfc36a9618f2eb444f2f36c8",
+      "minimum_event_time": "2026-03-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-12/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "1912b919a98fcc81003d5faf8302b0cb937dfbca9b1d051cadb1a761f9c3ae62",
+      "minimum_event_time": "2026-03-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-13/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "2d5ca75fe15d93e5f996f0854f79f838875ef41edafb09fef6ed4612161a1007",
+      "minimum_event_time": "2026-03-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-16/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "8375119c5fe0969584eb9f148cba2b2964491d7e1b964eebf78f7d91a5045723",
+      "minimum_event_time": "2026-03-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-17/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f117f069d2f97740b4d57815911a6966b17f7bcc4efde1416cd2d489ca021338",
+      "minimum_event_time": "2026-03-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-18/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "96381c783c1743021d97d48c6fd85026eb82a306bcabab2490a7b43771bf7967",
+      "minimum_event_time": "2026-03-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-19/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "b38cdd333756bc0f21a9da1e001a890df4d1ea43245b4972d5da86540247982e",
+      "minimum_event_time": "2026-03-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-20/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "79bb78cb1f60512652df3eb9f423185f4028e5a1c02c21c8e2d6644bb53c7c33",
+      "minimum_event_time": "2026-03-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-23/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "51dad6a735b973166c0e71dbf18f53e54d45ce2d1e13116b16c3f9234c0af000",
+      "minimum_event_time": "2026-03-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-24/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f8747b985d829675ad622e7701e0d8c85a4c2e398dce1dc690f7f8fbf9b56dee",
+      "minimum_event_time": "2026-03-24T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-24T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-24T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-24T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-25/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "2883f450a7ace1d84cc9b4e8fce4b77623d1359312019c9c7fcbc46b47fb9d06",
+      "minimum_event_time": "2026-03-25T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-25T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-25T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-25T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-26/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "1ec20807bd99f45e9a5b7dc934ef6075bc087716e1e64759ab20c6ae9b915be9",
+      "minimum_event_time": "2026-03-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-27/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "41719fbc8fc78ab31cf714861378096ea1a186299067c51f4013ac60b420cf3b",
+      "minimum_event_time": "2026-03-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-30/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "c0de4420861dae46e00d0057e3391f6eef72aa828173d8d0857497b883013a45",
+      "minimum_event_time": "2026-03-30T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-30T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-30T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-30T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-03-31/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "e0555633baebe32f48769e2203ad70802a2128d0e98c96ee50280de76529d69a",
+      "minimum_event_time": "2026-03-31T20:00:00.000000Z",
+      "maximum_event_time": "2026-03-31T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-03-31T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-03-31T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-01/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "249a1529c171bd15a821e81b46c8deabdcb71ed79423a98a703750479d33a71f",
+      "minimum_event_time": "2026-04-01T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-01T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-01T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-01T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-02/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "4bb80e23ba2e3a7f909f05883b25f4e30bf15a9911ffde309dce40b61e4860ff",
+      "minimum_event_time": "2026-04-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-03/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "a43308fa842ab290c2f9857df695c04e40f80b8edb7049079c5227b49816ed47",
+      "minimum_event_time": "2026-04-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-06/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "59f04a4fee89b77b34fa21ae6dc7a16d70892c0c679f97a3f3e4978fc0d748f9",
+      "minimum_event_time": "2026-04-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-07/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "eb25c572435c6944eb25359bb938b93dcfe4073e4f736189d6e110078fd8b62b",
+      "minimum_event_time": "2026-04-07T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-07T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-07T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-07T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-08/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "df4622662b73528690211929928bc9e01b057aa4461d9a02b7df82e5043fdb9d",
+      "minimum_event_time": "2026-04-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-09/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "260ae9e8bc0bb266a5c0cbfb1187e1cd083f14cb1eb87194eb360cc071120075",
+      "minimum_event_time": "2026-04-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-10/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "ee818fa1118db26c273e1f12cfc0c08c0d1804457f600d0548c6257f1afea750",
+      "minimum_event_time": "2026-04-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-13/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "34a6c5a86c72987f8e934f9e8be81d764a4518c53a0ee856a8ef39a603455b26",
+      "minimum_event_time": "2026-04-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-14/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6f28bb2c819fcae668e7164abdf87901d7f0fc3a24e59e5995494ad42cabd9d8",
+      "minimum_event_time": "2026-04-14T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-14T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-14T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-14T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-15/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "791f13d7dabec76b64718779bc6d57ad1aa1401e2c232ed80b0750caaaaba1e1",
+      "minimum_event_time": "2026-04-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-16/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "5b40c5f00c40bc1f8d9925909256b540b131e5d14aa2d2813399c4e8a4ae14d9",
+      "minimum_event_time": "2026-04-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-17/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "4c07c0195d0ecc0d2476eb6096d33891b1c7c88c6150aa43090901330d7e6adc",
+      "minimum_event_time": "2026-04-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-20/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "3144ce38985fdf40d312cf33451d6a88a3401961b1d98cf69177bbe5b9d3f9ad",
+      "minimum_event_time": "2026-04-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-21/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "c755e359357c3e951376e1c953794010da32436d00e40ec8f905473e46953a13",
+      "minimum_event_time": "2026-04-21T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-21T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-21T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-21T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-22/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "e170202e52d392023a00ebb02c8520f3024d56d6426bf6be1efc913ea3bda7f2",
+      "minimum_event_time": "2026-04-22T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-22T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-22T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-22T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-23/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f1032e5f843bdd820470bf01cd5da1d24f2cbb6aca01cb24d82ff1883e99a231",
+      "minimum_event_time": "2026-04-23T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-23T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-23T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-23T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-24/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "f3887d70298136edf4ba4249fec71928a3527cb76f554caa340806902123796e",
+      "minimum_event_time": "2026-04-24T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-24T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-24T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-24T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-27/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "3464d8ba2b61b76f0ba868cec3f7e4249dd698f5f498a2a5f23b7da7c95260bc",
+      "minimum_event_time": "2026-04-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-28/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "14f9ab6d664769b5555df47a71e9bf76f08a05ed2a62571d361d2de326becb22",
+      "minimum_event_time": "2026-04-28T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-28T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-28T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-28T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-29/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "4278268d1c8810f6bead2a1fa7b59ef915afb73777a8ba526dd2a35d5750aca7",
+      "minimum_event_time": "2026-04-29T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-29T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-29T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-29T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-04-30/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "d2ce5baeca19a6769ac44d5f11c08d465da27ef076d704df86781d62624c7482",
+      "minimum_event_time": "2026-04-30T20:00:00.000000Z",
+      "maximum_event_time": "2026-04-30T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-04-30T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-04-30T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-01/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6b29de07d3dc5bece79332ea38a7438b22b26e5cbe1e2e6a46986297c00686d9",
+      "minimum_event_time": "2026-05-01T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-01T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-01T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-01T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-04/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6ea5f37d0eb5898359ef743d79474c79e6eec1b388f2e27e92df03ca109b8ed1",
+      "minimum_event_time": "2026-05-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-05/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "9c24bf6052ac4428c1bb98c240b43cbabedc7c9d234cc80c42ed13755391b0c6",
+      "minimum_event_time": "2026-05-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-06/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "5ea00c99f1eedf05d020e43cb8db0ca39283394ff9bb8b6770761f501609a68d",
+      "minimum_event_time": "2026-05-06T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-06T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-06T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-06T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-07/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6e4dce13d35fd3795a0202237d257ef1a355dafe223dbacd0c75aa60f119f34c",
+      "minimum_event_time": "2026-05-07T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-07T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-07T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-07T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-08/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "5cf7c6b380f106185fbc0dfece357eb45b42427d2bc5fd9628263043243c5ed9",
+      "minimum_event_time": "2026-05-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-11/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "d589ede76b6b8c1c36ec733fd1897d947f45d57612b2b0452c1bf1c3e5ec4fa3",
+      "minimum_event_time": "2026-05-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-12/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "36fffbe54ad7faaed90e12c80815cb203efac1b41c9035a0ad946ff099aae179",
+      "minimum_event_time": "2026-05-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-13/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "be1e367a65e6ddaf7c4866313bc0031721ae10b19e1b52a11233e6180c0a9e1a",
+      "minimum_event_time": "2026-05-13T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-13T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-13T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-13T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-14/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6d1c1f11d26cf56585b1a9ffa5601b11126368736769685e5f841418bd7d1f73",
+      "minimum_event_time": "2026-05-14T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-14T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-14T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-14T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-15/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "3650284101a4921e5cf4d1f163e9f333923a0bfa87b7f09271e5e64cf5bf6dec",
+      "minimum_event_time": "2026-05-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-18/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "5b46945e18030b99854aed3c14ae6249be23a262aab38644df7d42ba136af26c",
+      "minimum_event_time": "2026-05-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-19/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6553b20e231ec3edf3b96b8a5f975e00e4429908e06bd522dbc1edfdb448d4af",
+      "minimum_event_time": "2026-05-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-19T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-20/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "8940cfbd75eb59b0d8705d5c3e8a36771e84467645ca6f0a96848fa08420becb",
+      "minimum_event_time": "2026-05-20T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-20T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-20T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-20T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-21/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "c0b51a5bfb8e74937126c037872f1652e12939c8169e86a0a992a1cb493eb49b",
+      "minimum_event_time": "2026-05-21T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-21T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-21T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-21T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-22/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "635a023d3b2b734a937fbc199100a256240f46c03437e22d1a9c672bb3db5881",
+      "minimum_event_time": "2026-05-22T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-22T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-22T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-22T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-25/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "22640fda29554d0259569550eae807c6dd5eb72a8272bf7cdd5f5c652201b66a",
+      "minimum_event_time": "2026-05-25T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-25T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-25T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-25T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-26/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "18f4750a7dfda886d99f2c50ea08aaed9bb5cc51c6b6f5785345825bc7f14635",
+      "minimum_event_time": "2026-05-26T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-26T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-26T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-26T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-27/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6f3b9e3b12fe48898d69c686868158969d58f3b160ea3434ef82207ad3586afe",
+      "minimum_event_time": "2026-05-27T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-27T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-27T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-27T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-28/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "ab620c16ba9ce13f2b1dac88c51f812257a86df09dc2d95d5f20548b2379c07b",
+      "minimum_event_time": "2026-05-28T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-28T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-28T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-28T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-05-29/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "eff9be68e93d37e5238ac9df085b09a28bc21c82b89abe93c9746b042536d5fa",
+      "minimum_event_time": "2026-05-29T20:00:00.000000Z",
+      "maximum_event_time": "2026-05-29T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-05-29T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-05-29T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-01/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "30267d7d852f21c8e64f4a70a4bc79ea9e762dd9245d118d42613ad49bd2ab79",
+      "minimum_event_time": "2026-06-01T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-01T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-01T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-01T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-02/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "6dfc0c9767485005890afe80c8d51765cc0baceb75329e07cc0dfe03d752f85d",
+      "minimum_event_time": "2026-06-02T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-02T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-02T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-02T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-03/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "4264dbab5ac36f55f3d45ebf8070286549769be5924f20f2140e8c33cafb472b",
+      "minimum_event_time": "2026-06-03T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-03T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-03T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-03T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-04/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "12fd28ecf20777505ee7fe0bacd12f58d28733ec188b3216cb0e6bd8ae1bca37",
+      "minimum_event_time": "2026-06-04T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-04T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-04T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-04T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-05/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "a9cc41f4aed45c017b45e467ffda3179662e6d6febba5b8d8f8e738e0d089fb6",
+      "minimum_event_time": "2026-06-05T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-05T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-05T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-05T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-08/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "84c791b23fe436612a667dfda2740c582a6ce689382ed0c9c4ad5be0462cd593",
+      "minimum_event_time": "2026-06-08T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-08T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-08T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-08T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-09/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "24ab4dceafee4f87bf33c951aed4f021ddc3c0c1116927e18b609e77b0c5e8be",
+      "minimum_event_time": "2026-06-09T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-09T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-09T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-09T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-10/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "d211cb9bf087a580752a504aeae75237a84a10be5a318d02941d392297252ddb",
+      "minimum_event_time": "2026-06-10T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-10T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-10T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-10T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-11/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "11d59031b2fdb7e7d81c56b3d5e73c1d20a95a42b1901fe17d2421ee8e5c0056",
+      "minimum_event_time": "2026-06-11T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-11T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-11T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-11T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-12/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "4966ad18658c4c4dad4fd8d6ded83c1bd38aad80a599078508afab93e598de18",
+      "minimum_event_time": "2026-06-12T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-12T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-12T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-12T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-15/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "de98fadc604c92483a160be60b62bb292daf0ce513ca43b3614d4b7d016fce65",
+      "minimum_event_time": "2026-06-15T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-15T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-15T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-15T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-16/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "607734cfd703e7740a018d7c444273da30ea16bd7c45313b4ee1f1e31e87dc47",
+      "minimum_event_time": "2026-06-16T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-16T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-16T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-16T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-17/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "31f231d1cd04801d9fff35e81656ce2f412ebcfc55460d683e80a5ad39fe3292",
+      "minimum_event_time": "2026-06-17T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-17T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-17T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-17T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-18/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "859ff1ad0fd4755baa5161528e66b1fb75cbec7322191fa6c8349f9940403e53",
+      "minimum_event_time": "2026-06-18T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-18T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-18T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-18T20:00:00.000000Z"
+    },
+    {
+      "relative_path": "underlying=NAMEH/observation_date=2026-06-19/part-00000.parquet",
+      "underlying_symbol": "NAMEH",
+      "row_count": 20,
+      "content_hash": "3e9e96853c4e10e80c6f13dc1f1ffd9d596d1f8a01949188006f11194f275e54",
+      "minimum_event_time": "2026-06-19T20:00:00.000000Z",
+      "maximum_event_time": "2026-06-19T20:00:00.000000Z",
+      "minimum_knowledge_time": "2026-06-19T20:00:00.000000Z",
+      "maximum_knowledge_time": "2026-06-19T20:00:00.000000Z"
+    }
+  ]
+}
