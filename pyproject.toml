@@ -19,8 +19,8 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["ingestion/tests", "research/tests", "reporting/tests"]
-pythonpath = ["ingestion", "research", "reporting"]
+testpaths = ["ingestion/tests", "research/tests", "reporting/tests", "backtest/tests"]
+pythonpath = ["ingestion", "research", "reporting", "backtest"]
 
 [tool.ruff]
 line-length = 110
@@ -35,7 +35,7 @@ ignore = ["PLR0913"]
 python_version = "3.13"
 strict = true
 warn_unreachable = true
-mypy_path = "python_pure/src"
+mypy_path = "python_pure/src:research"
 
 [[tool.mypy.overrides]]
 module = ["mpmath.*", "jsonschema.*", "pyarrow.*"]

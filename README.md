@@ -24,6 +24,7 @@ tracks over the same fixtures and diffs the results.
 - [`docs/runbook.md`](docs/runbook.md) — how to build, test, and run everything
 - [`docs/benchmarks.md`](docs/benchmarks.md) — cross-track timings and how to read them
 - [`docs/data.md`](docs/data.md) — the bitemporal data spine and as-of query semantics
+- [`docs/backtest.md`](docs/backtest.md) — the event loop, the lookahead guarantee, and the results store
 - [`docs/reporting.md`](docs/reporting.md) — P&L attribution into greeks, and into factors versus residual
 - [`docs/research.md`](docs/research.md) — the trial registry, result pins, and the statistics that consume them
 
@@ -61,6 +62,7 @@ three tracks on every field of all 36 fixture cases, argmin locations included.
 | ingestion tests | 13 passed |
 | research tests | 55 passed |
 | reporting tests | 12 passed |
+| backtest tests | 17 passed |
 | `mypy --strict` | clean |
 | convention linter | clean |
 

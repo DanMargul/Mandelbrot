@@ -226,12 +226,14 @@ research/
   run.py          verify and summarise a registry from the command line
 ```
 
-## The seam that is still open
+## The seam, now closed
 
 The registry stores a configuration and an outcome per trial. Deflated Sharpe consumes the
-trial *count*, which the registry already gives. Cross-validation and walk-forward consume a
-per-trial *return series*, which is a larger artifact than an outcome record should carry, so
-they take performances as an argument today and nothing yet writes those series to a store the
-registry can point at. That store belongs with the backtester in step 6, and until it exists
-the link between a registry entry and the series that produced it is by convention rather than
-by construction. Saying so is better than implying the loop is closed.
+trial *count*, which the registry already gave. Cross-validation and walk-forward consume a
+per-trial *return series*, which is a larger artifact than an outcome record should carry.
+
+`backtest/results.py` is that store, and `docs/backtest.md` describes the sequence: register
+the trial before the run, write the returns under the SHA-256 of their own canonical payload,
+then record the outcome carrying that digest. Reading a series back re-derives the digest and
+refuses a file that does not hash to the name it is filed under, so the link runs both ways —
+the registry entry names a digest, and the series names the trial and the dataset it came from.

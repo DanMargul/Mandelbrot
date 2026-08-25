@@ -119,6 +119,8 @@ a defect in one of them, and conformance is what finds it.
 |---|---|
 | `ingestion` (Polygon HTTP client) | REST, auth, pagination, retry, rate limits; no hot path |
 | `manifest` writing | runs once per ingest, not once per backtest step |
+| `backtest` event loop (`backtest/engine.py`) | sequencing over components that are already tri-implemented; the numerics are all below the line |
+| results store (`backtest/results.py`) | content-addressed file writing, once per run |
 | `experiment` registry (`research/registry.py`) | append-only bookkeeping; the cost is a hash per trial, not arithmetic |
 | result pinning (`research/pins.py`) | reads git and the Parquet manifest; I/O, once per trial |
 | research statistics (`research/statistics.py`) | deflated Sharpe and its quantile run once per result, not per backtest step |

@@ -294,9 +294,9 @@ clause waits with step 6.
 
 ## 6. An execution simulator that models microstructure, not a mid-price fantasy
 
-*Extends Phase 5. **The pessimistic cost model is done**, see `spec/interfaces/execution.md`.
-Queue position, depth beyond the touch and adverse selection remain, and all three need
-observed fills to calibrate against.*
+*Extends Phase 5. **The pessimistic cost model and the event loop are done**, see
+`spec/interfaces/execution.md` and `docs/backtest.md`. Queue position, depth beyond the touch
+and adverse selection remain, and all three need observed fills to calibrate against.*
 
 Quote-level NBBO with size, queue position for resting orders, spread crossing for
 aggressive ones, and adverse selection, because the fills you get are disproportionately the
@@ -337,10 +337,29 @@ volatility points is a property of the package rather than its legs — a pair t
 vega has paid the spread on both legs and bought no exposure, so cost per unit of vega
 diverges. That is a real trade, so it is reported with a flag rather than rejected.
 
+The event loop then made the point-in-time guarantee from step 1 into something the loop can
+actually keep. The as-of reader refuses a query past its horizon, which protects one query; it
+does not protect a loop, because a reader opened once at the end of a run will answer every
+step in turn while only the observation time moves. So the engine opens a reader per step and a
+test asserts the horizons it asked for.
+
+The dataset carries late corrections, and at the 17:00 step **every one of the 37 SPX contracts
+has a revised quote that had not arrived yet**. Running the same strategy both ways gives a net
+of `-25,758` honestly and `-32,022` with one late reader: a difference of `24%`. Which
+direction it went is the part worth keeping. **Lookahead did not flatter the backtest, it made
+it worse**, because the revisions happened to move against the position — and a disappointing
+result is the case nobody goes looking for a bug in. Lookahead is an uncontrolled error of
+arbitrary sign, not a bias toward optimism.
+
+One number from that run belongs here rather than in the module doc. Opening a short straddle
+in eight contracts cost `26,820` against a gross profit of `1,062` from holding it: **the cost
+of crossing was twenty-five times the profit of the position**. It is a fixture and not a
+result, but it is the shape of the go/no-go this step is scheduled before.
+
 **Done when** simulated fill distributions reproduce observed paper fills, and until then,
 when every quoted result carries the pessimistic cost assumption explicitly. **The
-pessimistic model is in place**; reproducing observed fills waits on paper trading, exactly
-as the bootstrap problem above predicts.
+pessimistic model and the loop are in place**; reproducing observed fills waits on paper
+trading, exactly as the bootstrap problem above predicts.
 
 ---
 
