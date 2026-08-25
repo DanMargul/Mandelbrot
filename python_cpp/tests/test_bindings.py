@@ -335,3 +335,50 @@ def test_ragged_essvi_columns_raise_a_value_error() -> None:
     columns["weights"] = columns["weights"][:2]
     with pytest.raises(ValueError, match="length"):
         core.calibrate_essvi_surface(**columns, lowest_log_moneyness=-0.6, highest_log_moneyness=0.6)
+
+
+LIQUID_LEG = {
+    "bid_price": [10.00],
+    "ask_price": [10.20],
+    "bid_size": [50],
+    "ask_size": [40],
+    "side": ["buy"],
+    "quantity": [10],
+    "contract_multiplier": [100],
+    "vega_with_respect_to_volatility": [0.20],
+}
+EXPECTED_HALF_SPREAD = 0.10
+FILL_LOT = 10
+FILL_MULTIPLIER = 100
+
+
+def test_a_taker_pays_the_touch_through_the_bindings() -> None:
+    fill = core.fill_package(**LIQUID_LEG)
+    assert fill.status == "filled"
+    assert fill.filled_quantity == FILL_LOT
+    assert fill.total_cost_against_mid == pytest.approx(FILL_LOT * FILL_MULTIPLIER * EXPECTED_HALF_SPREAD)
+    assert fill.leg_touch_price == [10.20]
+    assert fill.leg_status == ["filled"]
+
+
+def test_size_beyond_the_touch_is_capped_through_the_bindings() -> None:
+    oversized = {**LIQUID_LEG, "quantity": [500]}
+    fill = core.fill_package(**oversized)
+    assert fill.status == "partially_filled"
+    assert fill.filled_quantity == LIQUID_LEG["ask_size"][0]
+
+
+def test_a_crossed_book_raises_through_the_bindings() -> None:
+    crossed = {**LIQUID_LEG, "bid_price": [10.30], "ask_price": [10.20]}
+    with pytest.raises(ValueError, match="crossed"):
+        core.fill_package(**crossed)
+
+
+def test_an_unknown_side_raises_through_the_bindings() -> None:
+    with pytest.raises(ValueError, match="buy"):
+        core.fill_package(**{**LIQUID_LEG, "side": ["hold"]})
+
+
+def test_ragged_leg_columns_raise_through_the_bindings() -> None:
+    with pytest.raises(ValueError, match="length"):
+        core.fill_package(**{**LIQUID_LEG, "quantity": [10, 10]})

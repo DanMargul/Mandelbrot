@@ -37,6 +37,7 @@ from volarb_py.cli import (  # noqa: E402
     price_option_record,
     scan_svi_slice_record,
     scan_svi_surface_record,
+    simulate_fills_record,
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
 from volarb_py.essvi import EssviParameters, slices_from_parameters  # noqa: E402
@@ -589,6 +590,111 @@ def build_svi_surface_fixture() -> None:
     )
 
 
+FILL_QUOTES: Final[tuple[tuple[str, float, float, int, int, float], ...]] = (
+    ("liquid_index", 10.00, 10.20, 250, 180, 0.2000),
+    ("liquid_single_name", 2.40, 2.50, 90, 75, 0.0850),
+    ("wide_single_name", 1.00, 1.40, 12, 9, 0.0500),
+    ("very_wide", 0.30, 0.55, 5, 4, 0.0180),
+    ("penny_wide", 0.05, 0.10, 400, 350, 0.0040),
+    ("locked", 3.15, 3.15, 20, 20, 0.1100),
+    ("no_offer", 4.00, 4.60, 30, 0, 0.1500),
+)
+
+FILL_QUANTITIES: Final[tuple[int, ...]] = (1, 10, 200)
+FILL_MULTIPLIER: Final[int] = 100
+FILL_SPREAD_BUDGET: Final[float] = 1e-12
+
+
+def fill_leg(name: str, side: str, quantity: int) -> dict[str, Any]:
+    for label, bid, ask, bid_size, ask_size, vega in FILL_QUOTES:
+        if label == name:
+            return {
+                "bid_price": bid,
+                "ask_price": ask,
+                "bid_size": bid_size,
+                "ask_size": ask_size,
+                "side": side,
+                "quantity": quantity,
+                "contract_multiplier": FILL_MULTIPLIER,
+                "vega_with_respect_to_volatility": vega,
+            }
+    raise KeyError(name)
+
+
+def single_leg_requests() -> list[dict[str, Any]]:
+    records = []
+    for label, _, _, _, _, _ in FILL_QUOTES:
+        for side in ("buy", "sell"):
+            for quantity in FILL_QUANTITIES:
+                records.append(
+                    {
+                        "id": f"{label}_{side}_{quantity}",
+                        "legs": [fill_leg(label, side, quantity)],
+                    }
+                )
+    return records
+
+
+def package_requests() -> list[dict[str, Any]]:
+    return [
+        {
+            "id": "vertical_spread",
+            "legs": [fill_leg("liquid_single_name", "buy", 10), fill_leg("wide_single_name", "sell", 10)],
+        },
+        {
+            "id": "vega_neutral_pair",
+            "legs": [fill_leg("liquid_index", "buy", 10), fill_leg("liquid_index", "sell", 10)],
+        },
+        {
+            "id": "four_leg_condor",
+            "legs": [
+                fill_leg("liquid_single_name", "buy", 5),
+                fill_leg("wide_single_name", "sell", 5),
+                fill_leg("very_wide", "sell", 5),
+                fill_leg("penny_wide", "buy", 5),
+            ],
+        },
+        {
+            "id": "package_with_a_missing_offer",
+            "legs": [fill_leg("liquid_index", "buy", 10), fill_leg("no_offer", "buy", 10)],
+        },
+        {
+            "id": "package_capped_by_displayed_size",
+            "legs": [fill_leg("very_wide", "buy", 200), fill_leg("liquid_index", "sell", 200)],
+        },
+    ]
+
+
+def verify_fill(request: dict[str, Any], result: dict[str, Any]) -> None:
+    for leg, half_spread, filled in zip(
+        request["legs"], result["leg_half_spread"], result["leg_filled_quantity"], strict=True
+    ):
+        expected = 0.5 * (leg["ask_price"] - leg["bid_price"])
+        if abs(half_spread - expected) > FILL_SPREAD_BUDGET:
+            raise OracleDisagreementError(f"{request['id']}: half spread {half_spread} against {expected}")
+        available = leg["ask_size"] if leg["side"] == "buy" else leg["bid_size"]
+        if filled != min(leg["quantity"], available):
+            raise OracleDisagreementError(f"{request['id']}: filled {filled} against available {available}")
+    if result["total_cost_against_mid"] < 0.0:
+        raise OracleDisagreementError(f"{request['id']}: a taker cannot be paid to cross the spread")
+
+
+def build_fill_fixture() -> None:
+    request_records = [*single_leg_requests(), *package_requests()]
+    result_records = []
+    for request in request_records:
+        result = simulate_fills_record(request)
+        verify_fill(request, result)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "simulate-fills"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "orders.input.json", Document("fill_request/v1", request_records))
+    write_document(directory / "orders.expected.json", Document("fill_result/v1", result_records))
+    statuses = sorted({str(record["status"]) for record in result_records})
+    print(f"simulate-fills/orders: {len(result_records)} cases, statuses {statuses}")
+
+
 ESSVI_EXPIRIES: Final[tuple[float, ...]] = (0.0833, 0.25, 0.5, 1.0)
 
 ESSVI_TRUTHS: Final[tuple[tuple[str, tuple[float, ...], float, float, float, float], ...]] = (
@@ -844,6 +950,7 @@ def main() -> int:
             "scan-svi-slice",
             "scan-svi-surface",
             "calibrate-essvi-surface",
+            "simulate-fills",
             "calibrate-svi-slice",
             "all",
         ],
@@ -868,6 +975,8 @@ def main() -> int:
         build_svi_scan_fixture()
     if arguments.verb in ("scan-svi-surface", "all"):
         build_svi_surface_fixture()
+    if arguments.verb in ("simulate-fills", "all"):
+        build_fill_fixture()
     if arguments.verb in ("calibrate-essvi-surface", "all"):
         build_essvi_fixture()
     if arguments.verb in ("calibrate-svi-slice", "all"):

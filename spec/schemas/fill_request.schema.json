@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fill_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "fill_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "legs"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "legs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["bid_price", "ask_price", "bid_size", "ask_size", "side", "quantity",
+                           "contract_multiplier", "vega_with_respect_to_volatility"],
+              "additionalProperties": false,
+              "properties": {
+                "bid_price": { "type": "number", "minimum": 0 },
+                "ask_price": { "type": "number", "minimum": 0 },
+                "bid_size": { "type": "integer", "minimum": 0 },
+                "ask_size": { "type": "integer", "minimum": 0 },
+                "side": { "enum": ["buy", "sell"] },
+                "quantity": { "type": "integer", "minimum": 1 },
+                "contract_multiplier": { "type": "integer", "minimum": 1 },
+                "vega_with_respect_to_volatility": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

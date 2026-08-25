@@ -24,6 +24,7 @@ nlohmann::json invert_american_implied_volatility_record(const nlohmann::json& r
 nlohmann::json scan_svi_slice_record(const nlohmann::json& record);
 nlohmann::json scan_svi_surface_record(const nlohmann::json& record);
 nlohmann::json calibrate_essvi_surface_record(const nlohmann::json& record);
+nlohmann::json simulate_fills_record(const nlohmann::json& record);
 nlohmann::json calibrate_svi_slice_record(const nlohmann::json& record);
 
 const std::map<std::string, Verb>& supported_verbs();

@@ -1,0 +1,1363 @@
+{
+  "schema": "fill_result/v1",
+  "records": [
+    {
+      "id": "liquid_index_buy_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 9.999999999999964,
+      "net_vega": 20.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        10.2
+      ],
+      "leg_mid_price": [
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        9.999999999999964
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_index_buy_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 99.99999999999964,
+      "net_vega": 200.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        10.2
+      ],
+      "leg_mid_price": [
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        99.99999999999964
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_index_buy_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 180,
+      "total_cost_against_mid": 1799.9999999999936,
+      "net_vega": 3600.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        180
+      ],
+      "leg_touch_price": [
+        10.2
+      ],
+      "leg_mid_price": [
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        1799.9999999999936
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "liquid_index_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 9.999999999999964,
+      "net_vega": -20.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        10.0
+      ],
+      "leg_mid_price": [
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        9.999999999999964
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_index_sell_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 99.99999999999964,
+      "net_vega": -200.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        10.0
+      ],
+      "leg_mid_price": [
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        99.99999999999964
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_index_sell_200",
+      "status": "filled",
+      "requested_quantity": 200,
+      "filled_quantity": 200,
+      "total_cost_against_mid": 1999.999999999993,
+      "net_vega": -4000.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        200
+      ],
+      "leg_touch_price": [
+        10.0
+      ],
+      "leg_mid_price": [
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        1999.999999999993
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_single_name_buy_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 5.000000000000004,
+      "net_vega": 8.5,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.1764705882352953,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        2.5
+      ],
+      "leg_mid_price": [
+        2.45
+      ],
+      "leg_half_spread": [
+        0.050000000000000044
+      ],
+      "leg_cost_against_mid": [
+        5.000000000000004
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_single_name_buy_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 50.00000000000004,
+      "net_vega": 85.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.176470588235295,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        2.5
+      ],
+      "leg_mid_price": [
+        2.45
+      ],
+      "leg_half_spread": [
+        0.050000000000000044
+      ],
+      "leg_cost_against_mid": [
+        50.00000000000004
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_single_name_buy_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 75,
+      "total_cost_against_mid": 375.00000000000034,
+      "net_vega": 637.5,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.1764705882352953,
+      "leg_filled_quantity": [
+        75
+      ],
+      "leg_touch_price": [
+        2.5
+      ],
+      "leg_mid_price": [
+        2.45
+      ],
+      "leg_half_spread": [
+        0.050000000000000044
+      ],
+      "leg_cost_against_mid": [
+        375.00000000000034
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "liquid_single_name_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 5.000000000000004,
+      "net_vega": -8.5,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.1764705882352953,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        2.4
+      ],
+      "leg_mid_price": [
+        2.45
+      ],
+      "leg_half_spread": [
+        0.050000000000000044
+      ],
+      "leg_cost_against_mid": [
+        5.000000000000004
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_single_name_sell_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 50.00000000000004,
+      "net_vega": -85.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.176470588235295,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        2.4
+      ],
+      "leg_mid_price": [
+        2.45
+      ],
+      "leg_half_spread": [
+        0.050000000000000044
+      ],
+      "leg_cost_against_mid": [
+        50.00000000000004
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "liquid_single_name_sell_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 90,
+      "total_cost_against_mid": 450.0000000000004,
+      "net_vega": -765.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.1764705882352953,
+      "leg_filled_quantity": [
+        90
+      ],
+      "leg_touch_price": [
+        2.4
+      ],
+      "leg_mid_price": [
+        2.45
+      ],
+      "leg_half_spread": [
+        0.050000000000000044
+      ],
+      "leg_cost_against_mid": [
+        450.0000000000004
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "wide_single_name_buy_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 19.999999999999996,
+      "net_vega": 5.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 7.999999999999998,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        1.4
+      ],
+      "leg_mid_price": [
+        1.2
+      ],
+      "leg_half_spread": [
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        19.999999999999996
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "wide_single_name_buy_10",
+      "status": "partially_filled",
+      "requested_quantity": 10,
+      "filled_quantity": 9,
+      "total_cost_against_mid": 179.99999999999997,
+      "net_vega": 45.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 7.999999999999999,
+      "leg_filled_quantity": [
+        9
+      ],
+      "leg_touch_price": [
+        1.4
+      ],
+      "leg_mid_price": [
+        1.2
+      ],
+      "leg_half_spread": [
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        179.99999999999997
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "wide_single_name_buy_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 9,
+      "total_cost_against_mid": 179.99999999999997,
+      "net_vega": 45.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 7.999999999999999,
+      "leg_filled_quantity": [
+        9
+      ],
+      "leg_touch_price": [
+        1.4
+      ],
+      "leg_mid_price": [
+        1.2
+      ],
+      "leg_half_spread": [
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        179.99999999999997
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "wide_single_name_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 19.999999999999996,
+      "net_vega": -5.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 7.999999999999998,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        1.0
+      ],
+      "leg_mid_price": [
+        1.2
+      ],
+      "leg_half_spread": [
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        19.999999999999996
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "wide_single_name_sell_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 199.99999999999994,
+      "net_vega": -50.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 7.999999999999997,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        1.0
+      ],
+      "leg_mid_price": [
+        1.2
+      ],
+      "leg_half_spread": [
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        199.99999999999994
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "wide_single_name_sell_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 12,
+      "total_cost_against_mid": 239.99999999999994,
+      "net_vega": -60.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 7.999999999999998,
+      "leg_filled_quantity": [
+        12
+      ],
+      "leg_touch_price": [
+        1.0
+      ],
+      "leg_mid_price": [
+        1.2
+      ],
+      "leg_half_spread": [
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        239.99999999999994
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "very_wide_buy_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 12.500000000000004,
+      "net_vega": 1.7999999999999998,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 13.888888888888895,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        0.55
+      ],
+      "leg_mid_price": [
+        0.42500000000000004
+      ],
+      "leg_half_spread": [
+        0.12500000000000003
+      ],
+      "leg_cost_against_mid": [
+        12.500000000000004
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "very_wide_buy_10",
+      "status": "partially_filled",
+      "requested_quantity": 10,
+      "filled_quantity": 4,
+      "total_cost_against_mid": 50.000000000000014,
+      "net_vega": 7.199999999999999,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 13.888888888888895,
+      "leg_filled_quantity": [
+        4
+      ],
+      "leg_touch_price": [
+        0.55
+      ],
+      "leg_mid_price": [
+        0.42500000000000004
+      ],
+      "leg_half_spread": [
+        0.12500000000000003
+      ],
+      "leg_cost_against_mid": [
+        50.000000000000014
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "very_wide_buy_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 4,
+      "total_cost_against_mid": 50.000000000000014,
+      "net_vega": 7.199999999999999,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 13.888888888888895,
+      "leg_filled_quantity": [
+        4
+      ],
+      "leg_touch_price": [
+        0.55
+      ],
+      "leg_mid_price": [
+        0.42500000000000004
+      ],
+      "leg_half_spread": [
+        0.12500000000000003
+      ],
+      "leg_cost_against_mid": [
+        50.000000000000014
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "very_wide_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 12.500000000000004,
+      "net_vega": -1.7999999999999998,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 13.888888888888895,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        0.3
+      ],
+      "leg_mid_price": [
+        0.42500000000000004
+      ],
+      "leg_half_spread": [
+        0.12500000000000003
+      ],
+      "leg_cost_against_mid": [
+        12.500000000000004
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "very_wide_sell_10",
+      "status": "partially_filled",
+      "requested_quantity": 10,
+      "filled_quantity": 5,
+      "total_cost_against_mid": 62.500000000000014,
+      "net_vega": -9.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 13.888888888888893,
+      "leg_filled_quantity": [
+        5
+      ],
+      "leg_touch_price": [
+        0.3
+      ],
+      "leg_mid_price": [
+        0.42500000000000004
+      ],
+      "leg_half_spread": [
+        0.12500000000000003
+      ],
+      "leg_cost_against_mid": [
+        62.500000000000014
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "very_wide_sell_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 5,
+      "total_cost_against_mid": 62.500000000000014,
+      "net_vega": -9.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 13.888888888888893,
+      "leg_filled_quantity": [
+        5
+      ],
+      "leg_touch_price": [
+        0.3
+      ],
+      "leg_mid_price": [
+        0.42500000000000004
+      ],
+      "leg_half_spread": [
+        0.12500000000000003
+      ],
+      "leg_cost_against_mid": [
+        62.500000000000014
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "penny_wide_buy_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 2.5,
+      "net_vega": 0.4,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 12.5,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        0.1
+      ],
+      "leg_mid_price": [
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        2.5
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "penny_wide_buy_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 25.0,
+      "net_vega": 4.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 12.5,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        0.1
+      ],
+      "leg_mid_price": [
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        25.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "penny_wide_buy_200",
+      "status": "filled",
+      "requested_quantity": 200,
+      "filled_quantity": 200,
+      "total_cost_against_mid": 500.0,
+      "net_vega": 80.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 12.5,
+      "leg_filled_quantity": [
+        200
+      ],
+      "leg_touch_price": [
+        0.1
+      ],
+      "leg_mid_price": [
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        500.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "penny_wide_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 2.5,
+      "net_vega": -0.4,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 12.5,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        0.05
+      ],
+      "leg_mid_price": [
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        2.5
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "penny_wide_sell_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 25.0,
+      "net_vega": -4.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 12.5,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        0.05
+      ],
+      "leg_mid_price": [
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        25.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "penny_wide_sell_200",
+      "status": "filled",
+      "requested_quantity": 200,
+      "filled_quantity": 200,
+      "total_cost_against_mid": 500.0,
+      "net_vega": -80.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 12.5,
+      "leg_filled_quantity": [
+        200
+      ],
+      "leg_touch_price": [
+        0.05
+      ],
+      "leg_mid_price": [
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        500.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "locked_buy_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 0.0,
+      "net_vega": 11.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        3.15
+      ],
+      "leg_mid_price": [
+        3.15
+      ],
+      "leg_half_spread": [
+        0.0
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "locked_buy_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 0.0,
+      "net_vega": 110.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        3.15
+      ],
+      "leg_mid_price": [
+        3.15
+      ],
+      "leg_half_spread": [
+        0.0
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "locked_buy_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 20,
+      "total_cost_against_mid": 0.0,
+      "net_vega": 220.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        20
+      ],
+      "leg_touch_price": [
+        3.15
+      ],
+      "leg_mid_price": [
+        3.15
+      ],
+      "leg_half_spread": [
+        0.0
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "locked_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 0.0,
+      "net_vega": -11.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        3.15
+      ],
+      "leg_mid_price": [
+        3.15
+      ],
+      "leg_half_spread": [
+        0.0
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "locked_sell_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 0.0,
+      "net_vega": -110.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        3.15
+      ],
+      "leg_mid_price": [
+        3.15
+      ],
+      "leg_half_spread": [
+        0.0
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "locked_sell_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 20,
+      "total_cost_against_mid": 0.0,
+      "net_vega": -220.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        20
+      ],
+      "leg_touch_price": [
+        3.15
+      ],
+      "leg_mid_price": [
+        3.15
+      ],
+      "leg_half_spread": [
+        0.0
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "no_offer_buy_1",
+      "status": "unfilled",
+      "requested_quantity": 1,
+      "filled_quantity": 0,
+      "total_cost_against_mid": 0.0,
+      "net_vega": 0.0,
+      "net_vega_is_negligible": true,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        0
+      ],
+      "leg_touch_price": [
+        4.6
+      ],
+      "leg_mid_price": [
+        4.3
+      ],
+      "leg_half_spread": [
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "unfilled"
+      ]
+    },
+    {
+      "id": "no_offer_buy_10",
+      "status": "unfilled",
+      "requested_quantity": 10,
+      "filled_quantity": 0,
+      "total_cost_against_mid": 0.0,
+      "net_vega": 0.0,
+      "net_vega_is_negligible": true,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        0
+      ],
+      "leg_touch_price": [
+        4.6
+      ],
+      "leg_mid_price": [
+        4.3
+      ],
+      "leg_half_spread": [
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "unfilled"
+      ]
+    },
+    {
+      "id": "no_offer_buy_200",
+      "status": "unfilled",
+      "requested_quantity": 200,
+      "filled_quantity": 0,
+      "total_cost_against_mid": 0.0,
+      "net_vega": 0.0,
+      "net_vega_is_negligible": true,
+      "round_trip_cost_in_volatility_points": 0.0,
+      "leg_filled_quantity": [
+        0
+      ],
+      "leg_touch_price": [
+        4.6
+      ],
+      "leg_mid_price": [
+        4.3
+      ],
+      "leg_half_spread": [
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        0.0
+      ],
+      "leg_status": [
+        "unfilled"
+      ]
+    },
+    {
+      "id": "no_offer_sell_1",
+      "status": "filled",
+      "requested_quantity": 1,
+      "filled_quantity": 1,
+      "total_cost_against_mid": 29.999999999999982,
+      "net_vega": -15.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 3.999999999999998,
+      "leg_filled_quantity": [
+        1
+      ],
+      "leg_touch_price": [
+        4.0
+      ],
+      "leg_mid_price": [
+        4.3
+      ],
+      "leg_half_spread": [
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        29.999999999999982
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "no_offer_sell_10",
+      "status": "filled",
+      "requested_quantity": 10,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 299.99999999999983,
+      "net_vega": -150.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 3.999999999999998,
+      "leg_filled_quantity": [
+        10
+      ],
+      "leg_touch_price": [
+        4.0
+      ],
+      "leg_mid_price": [
+        4.3
+      ],
+      "leg_half_spread": [
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        299.99999999999983
+      ],
+      "leg_status": [
+        "filled"
+      ]
+    },
+    {
+      "id": "no_offer_sell_200",
+      "status": "partially_filled",
+      "requested_quantity": 200,
+      "filled_quantity": 30,
+      "total_cost_against_mid": 899.9999999999994,
+      "net_vega": -450.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 3.9999999999999973,
+      "leg_filled_quantity": [
+        30
+      ],
+      "leg_touch_price": [
+        4.0
+      ],
+      "leg_mid_price": [
+        4.3
+      ],
+      "leg_half_spread": [
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        899.9999999999994
+      ],
+      "leg_status": [
+        "partially_filled"
+      ]
+    },
+    {
+      "id": "vertical_spread",
+      "status": "filled",
+      "requested_quantity": 20,
+      "filled_quantity": 20,
+      "total_cost_against_mid": 250.0,
+      "net_vega": 35.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 14.285714285714286,
+      "leg_filled_quantity": [
+        10,
+        10
+      ],
+      "leg_touch_price": [
+        2.5,
+        1.0
+      ],
+      "leg_mid_price": [
+        2.45,
+        1.2
+      ],
+      "leg_half_spread": [
+        0.050000000000000044,
+        0.19999999999999996
+      ],
+      "leg_cost_against_mid": [
+        50.00000000000004,
+        199.99999999999994
+      ],
+      "leg_status": [
+        "filled",
+        "filled"
+      ]
+    },
+    {
+      "id": "vega_neutral_pair",
+      "status": "filled",
+      "requested_quantity": 20,
+      "filled_quantity": 20,
+      "total_cost_against_mid": 199.9999999999993,
+      "net_vega": 0.0,
+      "net_vega_is_negligible": true,
+      "round_trip_cost_in_volatility_points": 399999999999998.56,
+      "leg_filled_quantity": [
+        10,
+        10
+      ],
+      "leg_touch_price": [
+        10.2,
+        10.0
+      ],
+      "leg_mid_price": [
+        10.1,
+        10.1
+      ],
+      "leg_half_spread": [
+        0.09999999999999964,
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        99.99999999999964,
+        99.99999999999964
+      ],
+      "leg_status": [
+        "filled",
+        "filled"
+      ]
+    },
+    {
+      "id": "four_leg_condor",
+      "status": "filled",
+      "requested_quantity": 20,
+      "filled_quantity": 20,
+      "total_cost_against_mid": 200.0,
+      "net_vega": 10.5,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 38.095238095238095,
+      "leg_filled_quantity": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "leg_touch_price": [
+        2.5,
+        1.0,
+        0.3,
+        0.1
+      ],
+      "leg_mid_price": [
+        2.45,
+        1.2,
+        0.42500000000000004,
+        0.07500000000000001
+      ],
+      "leg_half_spread": [
+        0.050000000000000044,
+        0.19999999999999996,
+        0.12500000000000003,
+        0.025
+      ],
+      "leg_cost_against_mid": [
+        25.00000000000002,
+        99.99999999999997,
+        62.500000000000014,
+        12.5
+      ],
+      "leg_status": [
+        "filled",
+        "filled",
+        "filled",
+        "filled"
+      ]
+    },
+    {
+      "id": "package_with_a_missing_offer",
+      "status": "partially_filled",
+      "requested_quantity": 20,
+      "filled_quantity": 10,
+      "total_cost_against_mid": 99.99999999999964,
+      "net_vega": 200.0,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 0.9999999999999964,
+      "leg_filled_quantity": [
+        10,
+        0
+      ],
+      "leg_touch_price": [
+        10.2,
+        4.6
+      ],
+      "leg_mid_price": [
+        10.1,
+        4.3
+      ],
+      "leg_half_spread": [
+        0.09999999999999964,
+        0.2999999999999998
+      ],
+      "leg_cost_against_mid": [
+        99.99999999999964,
+        0.0
+      ],
+      "leg_status": [
+        "filled",
+        "unfilled"
+      ]
+    },
+    {
+      "id": "package_capped_by_displayed_size",
+      "status": "partially_filled",
+      "requested_quantity": 400,
+      "filled_quantity": 204,
+      "total_cost_against_mid": 2049.999999999993,
+      "net_vega": -3992.8,
+      "net_vega_is_negligible": false,
+      "round_trip_cost_in_volatility_points": 1.026848326988576,
+      "leg_filled_quantity": [
+        4,
+        200
+      ],
+      "leg_touch_price": [
+        0.55,
+        10.0
+      ],
+      "leg_mid_price": [
+        0.42500000000000004,
+        10.1
+      ],
+      "leg_half_spread": [
+        0.12500000000000003,
+        0.09999999999999964
+      ],
+      "leg_cost_against_mid": [
+        50.000000000000014,
+        1999.999999999993
+      ],
+      "leg_status": [
+        "partially_filled",
+        "filled"
+      ]
+    }
+  ]
+}

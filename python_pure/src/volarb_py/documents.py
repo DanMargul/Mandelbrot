@@ -63,6 +63,13 @@ def required_float(record: JsonRecord, field: str) -> float:
     return float(value)
 
 
+def required_integer(record: JsonRecord, field: str) -> int:
+    value = record.get(field)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise DocumentError(f"field {field!r} must be an integer, found {value!r}")
+    return value
+
+
 def optional_boolean(record: JsonRecord, field: str, fallback: bool) -> bool:
     value = record.get(field, fallback)
     if not isinstance(value, bool):

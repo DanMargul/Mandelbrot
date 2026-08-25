@@ -65,6 +65,14 @@ double required_number(const nlohmann::json& record, const std::string& field) {
     return entry->get<double>();
 }
 
+long long required_integer(const nlohmann::json& record, const std::string& field) {
+    const auto entry = record.find(field);
+    if (entry == record.end() || !entry->is_number_integer()) {
+        throw DocumentError("field '" + field + "' must be an integer");
+    }
+    return entry->get<long long>();
+}
+
 bool optional_boolean(const nlohmann::json& record, const std::string& field, bool fallback) {
     const auto entry = record.find(field);
     if (entry == record.end()) {

@@ -5,6 +5,7 @@
 #include "volarb/svi_calibration.hpp"
 #include "volarb/svi_surface.hpp"
 #include "volarb/essvi.hpp"
+#include "volarb/execution.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -189,6 +190,68 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
         });
     }
     return slices;
+}
+
+std::vector<PackageLeg> package_legs_from(const nlohmann::json& record) {
+    const auto raw = record.find("legs");
+    if (raw == record.end() || !raw->is_array()) {
+        throw DocumentError("field 'legs' must be an array");
+    }
+    std::vector<PackageLeg> legs;
+    for (const nlohmann::json& entry : *raw) {
+        if (!entry.is_object()) {
+            throw DocumentError("every entry of 'legs' must be an object");
+        }
+        legs.push_back(PackageLeg{
+            Quote{
+                required_number(entry, "bid_price"),
+                required_number(entry, "ask_price"),
+                required_integer(entry, "bid_size"),
+                required_integer(entry, "ask_size"),
+            },
+            order_side_from_name(required_string(entry, "side")),
+            required_integer(entry, "quantity"),
+            static_cast<int>(required_integer(entry, "contract_multiplier")),
+            required_number(entry, "vega_with_respect_to_volatility"),
+        });
+    }
+    return legs;
+}
+
+nlohmann::json simulate_fills_record(const nlohmann::json& record) {
+    const PackageFill fill = fill_package(package_legs_from(record));
+
+    std::vector<long long> filled_quantity;
+    std::vector<double> touch_price;
+    std::vector<double> mid;
+    std::vector<double> spread;
+    std::vector<double> cost;
+    std::vector<std::string> statuses;
+    for (const LegFill& leg : fill.leg_fills) {
+        filled_quantity.push_back(leg.filled_quantity);
+        touch_price.push_back(leg.touch_price);
+        mid.push_back(leg.mid_price);
+        spread.push_back(leg.half_spread);
+        cost.push_back(leg.cost_against_mid);
+        statuses.push_back(name_of_fill_status(leg.status));
+    }
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["status"] = name_of_fill_status(fill.status);
+    output["requested_quantity"] = fill.requested_quantity;
+    output["filled_quantity"] = fill.filled_quantity;
+    output["total_cost_against_mid"] = fill.total_cost_against_mid;
+    output["net_vega"] = fill.net_vega;
+    output["net_vega_is_negligible"] = fill.net_vega_is_negligible;
+    output["round_trip_cost_in_volatility_points"] = fill.round_trip_cost_in_volatility_points;
+    output["leg_filled_quantity"] = filled_quantity;
+    output["leg_touch_price"] = touch_price;
+    output["leg_mid_price"] = mid;
+    output["leg_half_spread"] = spread;
+    output["leg_cost_against_mid"] = cost;
+    output["leg_status"] = statuses;
+    return output;
 }
 
 std::vector<EssviSliceQuotes> essvi_slice_quotes_from(const nlohmann::json& record) {
@@ -429,6 +492,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"simulate-fills",
+         Verb{"simulate-fills", "fill_request/v1", "fill_result/v1",
+              mapped_over_records(simulate_fills_record)}},
         {"calibrate-essvi-surface",
          Verb{"calibrate-essvi-surface", "essvi_calibration_request/v1",
               "essvi_calibration_result/v1", mapped_over_records(calibrate_essvi_surface_record)}},

@@ -126,6 +126,38 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidQuoteError(ValueError): ...
+class InvalidOrderError(ValueError): ...
+
+FillStatus = Literal["filled", "partially_filled", "unfilled"]
+
+class PackageFill:
+    requested_quantity: int
+    filled_quantity: int
+    total_cost_against_mid: float
+    net_vega: float
+    net_vega_is_negligible: bool
+    round_trip_cost_in_volatility_points: float
+    leg_filled_quantity: list[int]
+    leg_touch_price: list[float]
+    leg_mid_price: list[float]
+    leg_half_spread: list[float]
+    leg_cost_against_mid: list[float]
+    leg_status: list[FillStatus]
+    status: FillStatus
+
+def fill_package(
+    *,
+    bid_price: list[float],
+    ask_price: list[float],
+    bid_size: list[int],
+    ask_size: list[int],
+    side: list[str],
+    quantity: list[int],
+    contract_multiplier: list[int],
+    vega_with_respect_to_volatility: list[float],
+) -> PackageFill: ...
+
 class InvalidEssviInputsError(ValueError): ...
 
 EssviStatus = Literal[

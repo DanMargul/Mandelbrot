@@ -27,11 +27,13 @@ from volarb_py.documents import (
     optional_float,
     read_document,
     required_float,
+    required_integer,
     required_option_type,
     required_string,
     write_document,
 )
 from volarb_py.essvi import EssviSliceQuotes, calibrate_essvi_surface
+from volarb_py.execution import OrderSide, PackageLeg, Quote, fill_package
 from volarb_py.forward_curve import ForwardCurvePoint, imply_forward_curve
 from volarb_py.implied_vol import ImpliedVolatilityInputs, invert_black_implied_volatility
 from volarb_py.market_data import (
@@ -196,6 +198,60 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
         "status": scan.status,
+    }
+
+
+def required_order_side(record: JsonRecord, field: str) -> OrderSide:
+    value = record.get(field)
+    if value == "buy":
+        return "buy"
+    if value == "sell":
+        return "sell"
+    raise DocumentError(f"field {field!r} must be 'buy' or 'sell', found {value!r}")
+
+
+def package_legs_from(record: JsonRecord) -> list[PackageLeg]:
+    raw = record.get("legs")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'legs' must be an array")
+    legs: list[PackageLeg] = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'legs' must be an object")
+        legs.append(
+            PackageLeg(
+                quote=Quote(
+                    bid_price=required_float(entry, "bid_price"),
+                    ask_price=required_float(entry, "ask_price"),
+                    bid_size=required_integer(entry, "bid_size"),
+                    ask_size=required_integer(entry, "ask_size"),
+                ),
+                side=required_order_side(entry, "side"),
+                quantity=required_integer(entry, "quantity"),
+                contract_multiplier=required_integer(entry, "contract_multiplier"),
+                vega_with_respect_to_volatility=required_float(entry, "vega_with_respect_to_volatility"),
+            )
+        )
+    return legs
+
+
+def simulate_fills_record(record: JsonRecord) -> JsonRecord:
+    fill = fill_package(package_legs_from(record))
+    return {
+        "id": required_string(record, "id"),
+        "status": fill.status,
+        "requested_quantity": fill.requested_quantity,
+        "filled_quantity": fill.filled_quantity,
+        "total_cost_against_mid": fill.total_cost_against_mid,
+        "net_vega": fill.net_vega,
+        "net_vega_is_negligible": fill.net_vega_is_negligible,
+        "round_trip_cost_in_volatility_points": fill.round_trip_cost_in_volatility_points,
+        "leg_filled_quantity": [leg.filled_quantity for leg in fill.leg_fills],
+        "leg_touch_price": [leg.touch_price for leg in fill.leg_fills],
+        "leg_mid_price": [leg.mid_price for leg in fill.leg_fills],
+        "leg_half_spread": [leg.half_spread for leg in fill.leg_fills],
+        "leg_cost_against_mid": [leg.cost_against_mid for leg in fill.leg_fills],
+        "leg_status": [leg.status for leg in fill.leg_fills],
     }
 
 
@@ -476,6 +532,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "simulate-fills": Verb(
+        name="simulate-fills",
+        input_schema="fill_request/v1",
+        output_schema="fill_result/v1",
+        transform_records=mapped_over_records(simulate_fills_record),
     ),
     "calibrate-essvi-surface": Verb(
         name="calibrate-essvi-surface",

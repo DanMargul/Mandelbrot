@@ -35,12 +35,13 @@ tools/check_all.sh
 
 ## Status
 
-**Phase 1 complete; steps 1 to 4 of [`docs/program.md`](docs/program.md) complete.** Pricing,
+**Phase 1 complete; steps 1 to 4 and 7 of [`docs/program.md`](docs/program.md) complete, step 6
+under way.** Pricing,
 implied volatility, the point-in-time data spine, forwards implied from put-call parity,
 American exercise with premium stripping, SVI slice calibration, the surface acceptance test
 covering butterfly arbitrage, calendar monotonicity and the Dupire round-trip, and the eSSVI
 global surface fit judged by that test are implemented in all three tracks and pass
-conformance: 80 comparisons over 2364 golden fixture records, each track against the golden
+conformance: 85 comparisons over 2411 golden fixture records, each track against the golden
 documents and each against the others. The fixtures themselves are verified against
 independent oracles: an `mpmath` recomputation at 50 decimal digits for the closed-form
 results, and a far finer scan for the arbitrage diagnostics.
@@ -52,10 +53,10 @@ three tracks on every field of all 36 fixture cases, argmin locations included.
 
 | gate | result |
 |---|---|
-| `python_pure` tests | 2711 passed |
-| `python_cpp` tests | 393 passed |
-| C++ tests (Catch2) | 81 passed |
-| conformance | 80 comparisons, all tracks agree |
+| `python_pure` tests | 2724 passed |
+| `python_cpp` tests | 401 passed |
+| C++ tests (Catch2) | 91 passed |
+| conformance | 85 comparisons, all tracks agree |
 | ingestion tests | 13 passed |
 | research tests | 55 passed |
 | `mypy --strict` | clean |

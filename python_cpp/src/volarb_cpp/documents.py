@@ -78,6 +78,13 @@ def optional_float(record: JsonRecord, field: str) -> float | None:
     return float(value)
 
 
+def required_integer(record: JsonRecord, field: str) -> int:
+    value = record.get(field)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise DocumentError(f"field {field!r} must be an integer, found {value!r}")
+    return value
+
+
 def required_option_type(record: JsonRecord, field: str) -> OptionType:
     value = required_string(record, field)
     if value == "call":

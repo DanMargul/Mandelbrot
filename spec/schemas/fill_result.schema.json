@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fill_result/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "fill_result/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "requested_quantity", "filled_quantity",
+                     "total_cost_against_mid", "net_vega", "net_vega_is_negligible",
+                     "round_trip_cost_in_volatility_points", "leg_filled_quantity",
+                     "leg_touch_price", "leg_mid_price", "leg_half_spread", "leg_cost_against_mid",
+                     "leg_status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["filled", "partially_filled", "unfilled"] },
+          "requested_quantity": { "type": "integer", "minimum": 0 },
+          "filled_quantity": { "type": "integer", "minimum": 0 },
+          "total_cost_against_mid": { "type": "number" },
+          "net_vega": { "type": "number" },
+          "net_vega_is_negligible": { "type": "boolean" },
+          "round_trip_cost_in_volatility_points": { "type": "number" },
+          "leg_filled_quantity": { "type": "array", "items": { "type": "integer" } },
+          "leg_touch_price": { "type": "array", "items": { "type": "number" } },
+          "leg_mid_price": { "type": "array", "items": { "type": "number" } },
+          "leg_half_spread": { "type": "array", "items": { "type": "number" } },
+          "leg_cost_against_mid": { "type": "array", "items": { "type": "number" } },
+          "leg_status": { "type": "array", "items": { "enum": ["filled", "partially_filled", "unfilled"] } }
+        }
+      }
+    }
+  }
+}

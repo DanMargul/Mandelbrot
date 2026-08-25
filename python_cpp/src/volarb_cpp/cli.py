@@ -18,6 +18,7 @@ from volarb_cpp.documents import (
     optional_float,
     read_document,
     required_float,
+    required_integer,
     required_option_type,
     required_string,
     write_document,
@@ -129,6 +130,51 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
         "status": result.status,
         "iterations": result.iterations,
         "absolute_price_error": result.absolute_price_error,
+    }
+
+
+def required_order_side(record: JsonRecord, field: str) -> str:
+    value = record.get(field)
+    if value in ("buy", "sell"):
+        return str(value)
+    raise DocumentError(f"field {field!r} must be 'buy' or 'sell', found {value!r}")
+
+
+def package_leg_columns(record: JsonRecord) -> dict[str, list[Any]]:
+    raw = record.get("legs")
+    if not isinstance(raw, list):
+        raise DocumentError("field 'legs' must be an array")
+    numeric = ("bid_price", "ask_price", "vega_with_respect_to_volatility")
+    integral = ("bid_size", "ask_size", "quantity", "contract_multiplier")
+    columns: dict[str, list[Any]] = {name: [] for name in (*numeric, *integral, "side")}
+    for entry in raw:
+        if not isinstance(entry, dict):
+            raise DocumentError("every entry of 'legs' must be an object")
+        for name in numeric:
+            columns[name].append(required_float(entry, name))
+        for name in integral:
+            columns[name].append(required_integer(entry, name))
+        columns["side"].append(required_order_side(entry, "side"))
+    return columns
+
+
+def simulate_fills_record(record: JsonRecord) -> JsonRecord:
+    fill = _volarb_core.fill_package(**package_leg_columns(record))
+    return {
+        "id": required_string(record, "id"),
+        "status": fill.status,
+        "requested_quantity": fill.requested_quantity,
+        "filled_quantity": fill.filled_quantity,
+        "total_cost_against_mid": fill.total_cost_against_mid,
+        "net_vega": fill.net_vega,
+        "net_vega_is_negligible": fill.net_vega_is_negligible,
+        "round_trip_cost_in_volatility_points": fill.round_trip_cost_in_volatility_points,
+        "leg_filled_quantity": fill.leg_filled_quantity,
+        "leg_touch_price": fill.leg_touch_price,
+        "leg_mid_price": fill.leg_mid_price,
+        "leg_half_spread": fill.leg_half_spread,
+        "leg_cost_against_mid": fill.leg_cost_against_mid,
+        "leg_status": fill.leg_status,
     }
 
 
@@ -438,6 +484,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "simulate-fills": Verb(
+        name="simulate-fills",
+        input_schema="fill_request/v1",
+        output_schema="fill_result/v1",
+        transform_records=mapped_over_records(simulate_fills_record),
     ),
     "calibrate-essvi-surface": Verb(
         name="calibrate-essvi-surface",

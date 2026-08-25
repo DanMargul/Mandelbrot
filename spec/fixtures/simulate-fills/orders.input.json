@@ -1,0 +1,780 @@
+{
+  "schema": "fill_request/v1",
+  "records": [
+    {
+      "id": "liquid_index_buy_1",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "liquid_index_buy_10",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "liquid_index_buy_200",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "liquid_index_sell_1",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "liquid_index_sell_10",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "liquid_index_sell_200",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "liquid_single_name_buy_1",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        }
+      ]
+    },
+    {
+      "id": "liquid_single_name_buy_10",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        }
+      ]
+    },
+    {
+      "id": "liquid_single_name_buy_200",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        }
+      ]
+    },
+    {
+      "id": "liquid_single_name_sell_1",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        }
+      ]
+    },
+    {
+      "id": "liquid_single_name_sell_10",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        }
+      ]
+    },
+    {
+      "id": "liquid_single_name_sell_200",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        }
+      ]
+    },
+    {
+      "id": "wide_single_name_buy_1",
+      "legs": [
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "wide_single_name_buy_10",
+      "legs": [
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "wide_single_name_buy_200",
+      "legs": [
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "wide_single_name_sell_1",
+      "legs": [
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "wide_single_name_sell_10",
+      "legs": [
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "wide_single_name_sell_200",
+      "legs": [
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "very_wide_buy_1",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        }
+      ]
+    },
+    {
+      "id": "very_wide_buy_10",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        }
+      ]
+    },
+    {
+      "id": "very_wide_buy_200",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        }
+      ]
+    },
+    {
+      "id": "very_wide_sell_1",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        }
+      ]
+    },
+    {
+      "id": "very_wide_sell_10",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        }
+      ]
+    },
+    {
+      "id": "very_wide_sell_200",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        }
+      ]
+    },
+    {
+      "id": "penny_wide_buy_1",
+      "legs": [
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "penny_wide_buy_10",
+      "legs": [
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "penny_wide_buy_200",
+      "legs": [
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "penny_wide_sell_1",
+      "legs": [
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "penny_wide_sell_10",
+      "legs": [
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "penny_wide_sell_200",
+      "legs": [
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "locked_buy_1",
+      "legs": [
+        {
+          "bid_price": 3.15,
+          "ask_price": 3.15,
+          "bid_size": 20,
+          "ask_size": 20,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.11
+        }
+      ]
+    },
+    {
+      "id": "locked_buy_10",
+      "legs": [
+        {
+          "bid_price": 3.15,
+          "ask_price": 3.15,
+          "bid_size": 20,
+          "ask_size": 20,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.11
+        }
+      ]
+    },
+    {
+      "id": "locked_buy_200",
+      "legs": [
+        {
+          "bid_price": 3.15,
+          "ask_price": 3.15,
+          "bid_size": 20,
+          "ask_size": 20,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.11
+        }
+      ]
+    },
+    {
+      "id": "locked_sell_1",
+      "legs": [
+        {
+          "bid_price": 3.15,
+          "ask_price": 3.15,
+          "bid_size": 20,
+          "ask_size": 20,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.11
+        }
+      ]
+    },
+    {
+      "id": "locked_sell_10",
+      "legs": [
+        {
+          "bid_price": 3.15,
+          "ask_price": 3.15,
+          "bid_size": 20,
+          "ask_size": 20,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.11
+        }
+      ]
+    },
+    {
+      "id": "locked_sell_200",
+      "legs": [
+        {
+          "bid_price": 3.15,
+          "ask_price": 3.15,
+          "bid_size": 20,
+          "ask_size": 20,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.11
+        }
+      ]
+    },
+    {
+      "id": "no_offer_buy_1",
+      "legs": [
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "buy",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "no_offer_buy_10",
+      "legs": [
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "no_offer_buy_200",
+      "legs": [
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "no_offer_sell_1",
+      "legs": [
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "sell",
+          "quantity": 1,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "no_offer_sell_10",
+      "legs": [
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "no_offer_sell_200",
+      "legs": [
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "vertical_spread",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        },
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        }
+      ]
+    },
+    {
+      "id": "vega_neutral_pair",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        },
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "sell",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    },
+    {
+      "id": "four_leg_condor",
+      "legs": [
+        {
+          "bid_price": 2.4,
+          "ask_price": 2.5,
+          "bid_size": 90,
+          "ask_size": 75,
+          "side": "buy",
+          "quantity": 5,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.085
+        },
+        {
+          "bid_price": 1.0,
+          "ask_price": 1.4,
+          "bid_size": 12,
+          "ask_size": 9,
+          "side": "sell",
+          "quantity": 5,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.05
+        },
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "sell",
+          "quantity": 5,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        },
+        {
+          "bid_price": 0.05,
+          "ask_price": 0.1,
+          "bid_size": 400,
+          "ask_size": 350,
+          "side": "buy",
+          "quantity": 5,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.004
+        }
+      ]
+    },
+    {
+      "id": "package_with_a_missing_offer",
+      "legs": [
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        },
+        {
+          "bid_price": 4.0,
+          "ask_price": 4.6,
+          "bid_size": 30,
+          "ask_size": 0,
+          "side": "buy",
+          "quantity": 10,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.15
+        }
+      ]
+    },
+    {
+      "id": "package_capped_by_displayed_size",
+      "legs": [
+        {
+          "bid_price": 0.3,
+          "ask_price": 0.55,
+          "bid_size": 5,
+          "ask_size": 4,
+          "side": "buy",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.018
+        },
+        {
+          "bid_price": 10.0,
+          "ask_price": 10.2,
+          "bid_size": 250,
+          "ask_size": 180,
+          "side": "sell",
+          "quantity": 200,
+          "contract_multiplier": 100,
+          "vega_with_respect_to_volatility": 0.2
+        }
+      ]
+    }
+  ]
+}

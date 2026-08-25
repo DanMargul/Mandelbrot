@@ -7,6 +7,7 @@
 #include "volarb/svi_calibration.hpp"
 #include "volarb/svi_surface.hpp"
 #include "volarb/essvi.hpp"
+#include "volarb/execution.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -61,6 +62,14 @@ using volarb::name_of_american_inversion_status;
 using volarb::default_scan_steps;
 using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
+using volarb::fill_package;
+using volarb::InvalidOrderError;
+using volarb::InvalidQuoteError;
+using volarb::LegFill;
+using volarb::name_of_fill_status;
+using volarb::order_side_from_name;
+using volarb::PackageFill;
+using volarb::PackageLeg;
 using volarb::default_surface_scan_steps;
 using volarb::EssviCalibration;
 using volarb::EssviSliceQuotes;
@@ -177,6 +186,44 @@ std::vector<double> field_of(const EssviCalibration& calibration, int which) {
         values.push_back(picked);
     }
     return values;
+}
+
+std::vector<double> leg_field_of(const PackageFill& fill, int which) {
+    std::vector<double> values;
+    values.reserve(fill.leg_fills.size());
+    for (const LegFill& leg : fill.leg_fills) {
+        const double picked = which == 0   ? leg.touch_price
+                              : which == 1 ? leg.mid_price
+                              : which == 2 ? leg.half_spread
+                                           : leg.cost_against_mid;
+        values.push_back(picked);
+    }
+    return values;
+}
+
+PackageFill fill_package_from_values(const std::vector<double>& bid_price,
+                                     const std::vector<double>& ask_price,
+                                     const std::vector<long long>& bid_size,
+                                     const std::vector<long long>& ask_size,
+                                     const std::vector<std::string>& side,
+                                     const std::vector<long long>& quantity,
+                                     const std::vector<int>& contract_multiplier,
+                                     const std::vector<double>& vega) {
+    const std::size_t legs = bid_price.size();
+    if (ask_price.size() != legs || bid_size.size() != legs || ask_size.size() != legs ||
+        side.size() != legs || quantity.size() != legs || contract_multiplier.size() != legs ||
+        vega.size() != legs) {
+        throw InvalidOrderError("every leg column must have the same length");
+    }
+    std::vector<PackageLeg> package;
+    package.reserve(legs);
+    for (std::size_t index = 0; index < legs; ++index) {
+        package.push_back(PackageLeg{
+            volarb::Quote{bid_price[index], ask_price[index], bid_size[index], ask_size[index]},
+            order_side_from_name(side[index]), quantity[index], contract_multiplier[index],
+            vega[index]});
+    }
+    return fill_package(package);
 }
 
 EssviCalibration calibrate_essvi_surface_from_values(
@@ -498,6 +545,49 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
                py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
                py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
+
+    py::register_exception<InvalidQuoteError>(module, "InvalidQuoteError", PyExc_ValueError);
+    py::register_exception<InvalidOrderError>(module, "InvalidOrderError", PyExc_ValueError);
+
+    py::class_<PackageFill>(module, "PackageFill")
+        .def_readonly("requested_quantity", &PackageFill::requested_quantity)
+        .def_readonly("filled_quantity", &PackageFill::filled_quantity)
+        .def_readonly("total_cost_against_mid", &PackageFill::total_cost_against_mid)
+        .def_readonly("net_vega", &PackageFill::net_vega)
+        .def_readonly("net_vega_is_negligible", &PackageFill::net_vega_is_negligible)
+        .def_readonly("round_trip_cost_in_volatility_points",
+                      &PackageFill::round_trip_cost_in_volatility_points)
+        .def_property_readonly("leg_filled_quantity",
+                               [](const PackageFill& fill) {
+                                   std::vector<long long> values;
+                                   for (const LegFill& leg : fill.leg_fills) {
+                                       values.push_back(leg.filled_quantity);
+                                   }
+                                   return values;
+                               })
+        .def_property_readonly("leg_touch_price",
+                               [](const PackageFill& fill) { return leg_field_of(fill, 0); })
+        .def_property_readonly("leg_mid_price",
+                               [](const PackageFill& fill) { return leg_field_of(fill, 1); })
+        .def_property_readonly("leg_half_spread",
+                               [](const PackageFill& fill) { return leg_field_of(fill, 2); })
+        .def_property_readonly("leg_cost_against_mid",
+                               [](const PackageFill& fill) { return leg_field_of(fill, 3); })
+        .def_property_readonly("leg_status",
+                               [](const PackageFill& fill) {
+                                   std::vector<std::string> names;
+                                   for (const LegFill& leg : fill.leg_fills) {
+                                       names.push_back(name_of_fill_status(leg.status));
+                                   }
+                                   return names;
+                               })
+        .def_property_readonly("status", [](const PackageFill& fill) {
+            return name_of_fill_status(fill.status);
+        });
+
+    module.def("fill_package", &fill_package_from_values, py::arg("bid_price"), py::arg("ask_price"),
+               py::arg("bid_size"), py::arg("ask_size"), py::arg("side"), py::arg("quantity"),
+               py::arg("contract_multiplier"), py::arg("vega_with_respect_to_volatility"));
 
     py::class_<LatticeInputs>(module, "LatticeInputs")
         .def(py::init(&make_lattice_inputs), py::arg("spot_price"), py::arg("strike"),

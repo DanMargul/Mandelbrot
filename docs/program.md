@@ -232,7 +232,9 @@ than in factor exposure, on out-of-sample data.
 
 ## 6. An execution simulator that models microstructure, not a mid-price fantasy
 
-*Extends Phase 5.*
+*Extends Phase 5. **The pessimistic cost model is done**, see `spec/interfaces/execution.md`.
+Queue position, depth beyond the touch and adverse selection remain, and all three need
+observed fills to calibrate against.*
 
 Quote-level NBBO with size, queue position for resting orders, spread crossing for
 aggressive ones, and adverse selection, because the fills you get are disproportionately the
@@ -249,8 +251,34 @@ observed fills require paper trading, which requires a simulator to justify. Res
 starting deliberately pessimistic, paying the full spread on every trade, which is a lower
 bound rather than an estimate, then refining once paper fills exist.
 
+The pessimistic model landed first, as this section prescribes, and immediately produced the
+number the go/no-go turns on. Expressing the cost of crossing in the units the strategy
+actually trades — volatility points rather than dollars — and measuring it through the module
+on the synthetic chain, one contract per line:
+
+| underlying | median round trip | 75th | 90th |
+|---|---|---|---|
+| SPX | `0.36` | `0.98` | `2.82` |
+| AAPL | `0.65` | `2.98` | `5.23` |
+| THIN | `1.46` | `5.90` | `8.16` |
+
+**A round trip in the median SPX line costs a third of a volatility point, and one in the
+ninetieth percentile costs nearly three.** Surface relative value is measured in the same
+units and often in smaller numbers, which is the whole argument for scheduling a go/no-go
+here rather than after step 9.
+
+Two things the model made precise. The bound is on price per contract executed, not on
+quantity: an order larger than the displayed size is left partly unfilled here where reality
+would sweep deeper and fill more at worse prices, so on large orders it understates cost and
+fill together. The unfilled remainder is reported rather than assumed away. And the cost in
+volatility points is a property of the package rather than its legs — a pair that nets to no
+vega has paid the spread on both legs and bought no exposure, so cost per unit of vega
+diverges. That is a real trade, so it is reported with a flag rather than rejected.
+
 **Done when** simulated fill distributions reproduce observed paper fills, and until then,
-when every quoted result carries the pessimistic cost assumption explicitly.
+when every quoted result carries the pessimistic cost assumption explicitly. **The
+pessimistic model is in place**; reproducing observed fills waits on paper trading, exactly
+as the bootstrap problem above predicts.
 
 ---
 
