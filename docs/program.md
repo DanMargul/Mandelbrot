@@ -429,8 +429,9 @@ the backtester in step 6.
 
 ## 8. Portfolio construction and hedging solved as one problem
 
-*Extends Phase 5 and 6. **The deterministic random source the simulation needs is done**, see
-`spec/interfaces/random_source.md`. The optimizer and the hedging control problem remain.*
+*Extends Phase 5 and 6. **The random source and the hedging control problem are done**, see
+`spec/interfaces/random_source.md` and `spec/interfaces/hedging.md`. The portfolio optimizer,
+and joining it to hedging, remain.*
 
 Not signal ranking. A constrained optimization: maximize expected residual convergence net
 of modeled cost, subject to vega, gamma, and theta budgets, factor neutrality from step 5,
@@ -442,8 +443,31 @@ Zakamouline among them, and both beat a fixed band. But the hedging cost depends
 and gamma is exactly what the optimizer is allocating, so solving them separately leaves the
 optimizer allocating risk it has mispriced. Solve jointly, or iterate to a fixed point.
 
+The hedging half landed first and the measurement nearly went the wrong way. Scored on 4000
+paths, the best fixed band beat Whalley-Wilmott on certainty equivalent, `-0.2194` against
+`-0.2431`, which reads as a refutation of the sentence above. It is not. **That fixed band was
+chosen by searching eight widths on the very paths it was then scored on**, and
+Whalley-Wilmott used no paths at all. Scored on paths the tuning never saw, the fixed band
+falls to `-0.2701` while Whalley-Wilmott holds at `-0.2576`, and across eight held-out sets the
+derived band wins seven.
+
+So the claim survives, and the way it nearly failed is the useful part: the in-sample search
+was over **eight** configurations, in a place that does not look like a backtest at all, and it
+was still enough to invert the answer. Step 7 is not only about signal search.
+
+One limit is recorded rather than glossed. It took 4000 paths for the head-to-head to resolve;
+at 1000 it is a coin flip, four wins in eight. The tests therefore assert the mechanism — that
+a tuned band degrades on ten of ten held-out sets, and that its `+0.0602` in-sample edge becomes
+`-0.0002` out of sample — rather than the head-to-head, because asserting a coin flip is
+asserting noise. **A comparison that needs 4000 paths to separate two policies will not
+separate them on one year of daily data.**
+
+Zakamouline is deliberately absent. Its constants would have been reproduced from memory rather
+than derivation, and an unverifiable formula in the repository is worse than a missing one.
+
 **Done when** the jointly optimized portfolio beats naive ranking with fixed-band hedging on
-risk-adjusted terms, out of sample, after costs.
+risk-adjusted terms, out of sample, after costs. **The hedging half is done**; the optimizer,
+and the fixed point between the two, remain.
 
 ---
 

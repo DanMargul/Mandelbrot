@@ -43,6 +43,7 @@ from volarb_py.cli import (  # noqa: E402
     scan_svi_slice_record,
     scan_svi_surface_record,
     simulate_fills_record,
+    simulate_hedging_record,
 )
 from volarb_py.documents import Document, write_document  # noqa: E402
 from volarb_py.essvi import EssviParameters, slices_from_parameters  # noqa: E402
@@ -595,6 +596,62 @@ def build_svi_surface_fixture() -> None:
         f"scan-svi-surface/surfaces: {len(result_records)} cases, statuses {statuses}, "
         f"worst round trip {worst:.3e}"
     )
+
+
+HEDGING_WIDTHS: Final[tuple[float, ...]] = (0.0, 0.05, 0.15, 0.40)
+HEDGING_PATHS: Final[int] = 200
+HEDGING_STEPS: Final[int] = 63
+HEDGING_UTILITY_BUDGET: Final[float] = 1e-12
+
+
+def hedging_request(name: str, rule: str, width: float, cost: float) -> dict[str, Any]:
+    return {
+        "id": name,
+        "spot": 100.0,
+        "strike": 100.0,
+        "years_to_expiry": 0.25,
+        "volatility": 0.20,
+        "steps": HEDGING_STEPS,
+        "proportional_cost": cost,
+        "risk_aversion": 0.10,
+        "rule": rule,
+        "fixed_width": width,
+        "initial_state": "1",
+        "sequence": "1",
+        "path_count": HEDGING_PATHS,
+    }
+
+
+def verify_hedging(request: dict[str, Any], result: dict[str, Any]) -> None:
+    if float(result["mean_transaction_cost"]) < 0.0:
+        raise OracleDisagreementError(f"{request['id']}: a negative transaction cost")
+    if float(result["profit_standard_deviation"]) < 0.0:
+        raise OracleDisagreementError(f"{request['id']}: a negative standard deviation")
+    variance = float(result["profit_standard_deviation"]) ** 2
+    expected = float(result["mean_profit"]) - 0.5 * float(request["risk_aversion"]) * variance
+    if abs(expected - float(result["certainty_equivalent"])) > HEDGING_UTILITY_BUDGET:
+        raise OracleDisagreementError(f"{request['id']}: the certainty equivalent does not follow")
+    if float(request["proportional_cost"]) == 0.0 and float(result["mean_transaction_cost"]) != 0.0:
+        raise OracleDisagreementError(f"{request['id']}: a free market charged a fee")
+
+
+def build_hedging_fixture() -> None:
+    request_records = [
+        hedging_request(f"fixed_{width:.2f}", "fixed", width, 0.0010) for width in HEDGING_WIDTHS
+    ]
+    request_records.append(hedging_request("whalley_wilmott", "whalley_wilmott", 0.0, 0.0010))
+    request_records.append(hedging_request("free_market", "fixed", 0.10, 0.0))
+    result_records = []
+    for request in request_records:
+        result = simulate_hedging_record(request)
+        verify_hedging(request, result)
+        result_records.append(result)
+
+    directory = FIXTURE_ROOT / "simulate-hedging"
+    directory.mkdir(parents=True, exist_ok=True)
+    write_document(directory / "policies.input.json", Document("hedging_request/v1", request_records))
+    write_document(directory / "policies.expected.json", Document("hedging_statistics/v1", result_records))
+    print(f"simulate-hedging/policies: {len(result_records)} policies over {HEDGING_PATHS} paths")
 
 
 RANDOM_SEEDS: Final[tuple[tuple[str, str, str], ...]] = (
@@ -1184,6 +1241,7 @@ FIXTURE_BUILDERS: Final[dict[str, Callable[[], None]]] = {
     "evaluate-rate-curve": build_rate_curve_fixture,
     "decompose-surface-factors": build_factor_fixture,
     "draw-random-sample": build_random_sample_fixture,
+    "simulate-hedging": build_hedging_fixture,
     "simulate-fills": build_fill_fixture,
     "calibrate-essvi-surface": build_essvi_fixture,
     "calibrate-svi-slice": build_svi_calibration_fixture,

@@ -133,6 +133,32 @@ def invert_american_implied_volatility_record(record: JsonRecord) -> JsonRecord:
     }
 
 
+def simulate_hedging_record(record: JsonRecord) -> JsonRecord:
+    statistics = _volarb_core.simulate_hedging(
+        spot=required_float(record, "spot"),
+        strike=required_float(record, "strike"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+        volatility=required_float(record, "volatility"),
+        steps=required_integer(record, "steps"),
+        proportional_cost=required_float(record, "proportional_cost"),
+        risk_aversion=required_float(record, "risk_aversion"),
+        rule=required_string(record, "rule"),
+        fixed_width=required_float(record, "fixed_width"),
+        initial_state=required_wide_integer(record, "initial_state"),
+        sequence=required_wide_integer(record, "sequence"),
+        path_count=required_integer(record, "path_count"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "path_count": statistics.path_count,
+        "mean_profit": statistics.mean_profit,
+        "profit_standard_deviation": statistics.profit_standard_deviation,
+        "mean_transaction_cost": statistics.mean_transaction_cost,
+        "mean_rebalance_count": statistics.mean_rebalance_count,
+        "certainty_equivalent": statistics.certainty_equivalent,
+    }
+
+
 def required_wide_integer(record: JsonRecord, field: str) -> str:
     value = record.get(field)
     if not isinstance(value, str) or not value.isdigit():
@@ -599,6 +625,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "simulate-hedging": Verb(
+        name="simulate-hedging",
+        input_schema="hedging_request/v1",
+        output_schema="hedging_statistics/v1",
+        transform_records=mapped_over_records(simulate_hedging_record),
     ),
     "draw-random-sample": Verb(
         name="draw-random-sample",

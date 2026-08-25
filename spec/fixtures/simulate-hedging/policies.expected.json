@@ -1,0 +1,59 @@
+{
+  "schema": "hedging_statistics/v1",
+  "records": [
+    {
+      "id": "fixed_0.00",
+      "path_count": 200,
+      "mean_profit": -0.35709023279335916,
+      "profit_standard_deviation": 0.43217576735287583,
+      "mean_transaction_cost": 0.3562469921966383,
+      "mean_rebalance_count": 63.355,
+      "certainty_equivalent": -0.3664290274877115
+    },
+    {
+      "id": "fixed_0.05",
+      "path_count": 200,
+      "mean_profit": -0.32659528553013667,
+      "profit_standard_deviation": 0.49471698929529445,
+      "mean_transaction_cost": 0.2985405697880724,
+      "mean_rebalance_count": 23.095,
+      "certainty_equivalent": -0.33883253050500667
+    },
+    {
+      "id": "fixed_0.15",
+      "path_count": 200,
+      "mean_profit": -0.17288049613429834,
+      "profit_standard_deviation": 0.9059411284644556,
+      "mean_transaction_cost": 0.20368471340034433,
+      "mean_rebalance_count": 7.19,
+      "certainty_equivalent": -0.2139169625464709
+    },
+    {
+      "id": "fixed_0.40",
+      "path_count": 200,
+      "mean_profit": -0.2684204441535037,
+      "profit_standard_deviation": 1.8434631710358769,
+      "mean_transaction_cost": 0.15382343851284197,
+      "mean_rebalance_count": 3.14,
+      "certainty_equivalent": -0.4383382673017862
+    },
+    {
+      "id": "whalley_wilmott",
+      "path_count": 200,
+      "mean_profit": -0.18828542307542429,
+      "profit_standard_deviation": 0.703234892605754,
+      "mean_transaction_cost": 0.20557046026191503,
+      "mean_rebalance_count": 9.44,
+      "certainty_equivalent": -0.2130123887843356
+    },
+    {
+      "id": "free_market",
+      "path_count": 200,
+      "mean_profit": 0.021349516230228502,
+      "profit_standard_deviation": 0.6452199320664673,
+      "mean_transaction_cost": 0.0,
+      "mean_rebalance_count": 11.745,
+      "certainty_equivalent": 0.0005340781934356671
+    }
+  ]
+}

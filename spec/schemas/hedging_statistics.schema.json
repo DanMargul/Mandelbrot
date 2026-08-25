@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hedging_statistics/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "hedging_statistics/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path_count", "mean_profit", "profit_standard_deviation",
+                     "mean_transaction_cost", "mean_rebalance_count", "certainty_equivalent"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "path_count": { "type": "integer", "minimum": 2 },
+          "mean_profit": { "type": "number" },
+          "profit_standard_deviation": { "type": "number", "minimum": 0 },
+          "mean_transaction_cost": { "type": "number", "minimum": 0 },
+          "mean_rebalance_count": { "type": "number", "minimum": 0 },
+          "certainty_equivalent": { "type": "number" }
+        }
+      }
+    }
+  }
+}

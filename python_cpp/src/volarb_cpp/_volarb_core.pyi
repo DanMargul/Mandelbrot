@@ -126,6 +126,32 @@ def scan_svi_slice(
     scan_steps: int,
 ) -> SviSliceScan: ...
 
+class InvalidHedgingInputsError(ValueError): ...
+
+class HedgingStatistics:
+    path_count: int
+    mean_profit: float
+    profit_standard_deviation: float
+    mean_transaction_cost: float
+    mean_rebalance_count: float
+    certainty_equivalent: float
+
+def simulate_hedging(
+    *,
+    spot: float,
+    strike: float,
+    years_to_expiry: float,
+    volatility: float,
+    steps: int,
+    proportional_cost: float,
+    risk_aversion: float,
+    rule: str,
+    fixed_width: float,
+    initial_state: str,
+    sequence: str,
+    path_count: int,
+) -> HedgingStatistics: ...
+
 class InvalidRandomSourceError(ValueError): ...
 
 class RandomSample:

@@ -9,6 +9,7 @@
 #include "volarb/rate_curve.hpp"
 #include "volarb/factors.hpp"
 #include "volarb/random_source.hpp"
+#include "volarb/hedging.hpp"
 #include "volarb/forward_curve.hpp"
 #include "volarb/implied_vol.hpp"
 #include "volarb/market_data.hpp"
@@ -193,6 +194,34 @@ std::vector<SviSurfaceSlice> surface_slices_from(const nlohmann::json& record) {
         });
     }
     return slices;
+}
+
+nlohmann::json simulate_hedging_record(const nlohmann::json& record) {
+    const HedgingInputs inputs{
+        required_number(record, "spot"),
+        required_number(record, "strike"),
+        required_number(record, "years_to_expiry"),
+        required_number(record, "volatility"),
+        static_cast<int>(required_integer(record, "steps")),
+        required_number(record, "proportional_cost"),
+        required_number(record, "risk_aversion"),
+    };
+    const BandPolicy policy{band_rule_from_name(required_string(record, "rule")),
+                            required_number(record, "fixed_width")};
+    const HedgingStatistics statistics =
+        hedging_statistics(inputs, policy, required_string(record, "initial_state"),
+                           required_string(record, "sequence"),
+                           static_cast<int>(required_integer(record, "path_count")));
+
+    nlohmann::json output;
+    output["id"] = required_string(record, "id");
+    output["path_count"] = statistics.path_count;
+    output["mean_profit"] = statistics.mean_profit;
+    output["profit_standard_deviation"] = statistics.profit_standard_deviation;
+    output["mean_transaction_cost"] = statistics.mean_transaction_cost;
+    output["mean_rebalance_count"] = statistics.mean_rebalance_count;
+    output["certainty_equivalent"] = statistics.certainty_equivalent;
+    return output;
 }
 
 UnsignedWide wide_from_decimal(const std::string& text) {
@@ -652,6 +681,9 @@ const std::map<std::string, Verb>& supported_verbs() {
         {"calibrate-svi-slice",
          Verb{"calibrate-svi-slice", "svi_calibration_request/v1", "svi_calibration_result/v1",
               mapped_over_records(calibrate_svi_slice_record)}},
+        {"simulate-hedging",
+         Verb{"simulate-hedging", "hedging_request/v1", "hedging_statistics/v1",
+              mapped_over_records(simulate_hedging_record)}},
         {"draw-random-sample",
          Verb{"draw-random-sample", "random_sample_request/v1", "random_sample/v1",
               mapped_over_records(draw_random_sample_record)}},

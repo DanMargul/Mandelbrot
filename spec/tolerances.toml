@@ -535,3 +535,26 @@ absolute = 0.0
 ["random_sample/v1".standard_normals]
 relative = 1e-15
 absolute = 1e-300
+
+["hedging_statistics/v1".path_count]
+exact = true
+
+["hedging_statistics/v1".mean_profit]
+relative = 1e-12
+absolute = 1e-14
+
+["hedging_statistics/v1".profit_standard_deviation]
+relative = 1e-12
+absolute = 1e-14
+
+["hedging_statistics/v1".mean_transaction_cost]
+relative = 1e-12
+absolute = 1e-14
+
+["hedging_statistics/v1".mean_rebalance_count]
+relative = 1e-13
+absolute = 1e-14
+
+["hedging_statistics/v1".certainty_equivalent]
+relative = 1e-12
+absolute = 1e-14

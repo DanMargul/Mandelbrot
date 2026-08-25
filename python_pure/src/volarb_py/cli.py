@@ -41,6 +41,12 @@ from volarb_py.factors import (
     score_residual,
 )
 from volarb_py.forward_curve import ForwardCurvePoint, imply_forward_curve
+from volarb_py.hedging import (
+    BandPolicy,
+    BandRule,
+    HedgingInputs,
+    hedging_statistics,
+)
 from volarb_py.implied_vol import ImpliedVolatilityInputs, invert_black_implied_volatility
 from volarb_py.market_data import (
     AsOfChainReader,
@@ -219,6 +225,43 @@ def scan_svi_slice_record(record: JsonRecord) -> JsonRecord:
         "minimum_risk_neutral_density": scan.minimum_risk_neutral_density,
         "scan_steps": scan.scan_steps,
         "status": scan.status,
+    }
+
+
+def required_band_rule(record: JsonRecord, field: str) -> BandRule:
+    value = record.get(field)
+    if value == "fixed":
+        return "fixed"
+    if value == "whalley_wilmott":
+        return "whalley_wilmott"
+    raise DocumentError(f"field {field!r} must be a band rule, found {value!r}")
+
+
+def simulate_hedging_record(record: JsonRecord) -> JsonRecord:
+    inputs = HedgingInputs(
+        spot=required_float(record, "spot"),
+        strike=required_float(record, "strike"),
+        years_to_expiry=required_float(record, "years_to_expiry"),
+        volatility=required_float(record, "volatility"),
+        steps=required_integer(record, "steps"),
+        proportional_cost=required_float(record, "proportional_cost"),
+        risk_aversion=required_float(record, "risk_aversion"),
+    )
+    statistics = hedging_statistics(
+        inputs,
+        BandPolicy(required_band_rule(record, "rule"), required_float(record, "fixed_width")),
+        required_wide_integer(record, "initial_state"),
+        required_wide_integer(record, "sequence"),
+        required_integer(record, "path_count"),
+    )
+    return {
+        "id": required_string(record, "id"),
+        "path_count": statistics.path_count,
+        "mean_profit": statistics.mean_profit,
+        "profit_standard_deviation": statistics.profit_standard_deviation,
+        "mean_transaction_cost": statistics.mean_transaction_cost,
+        "mean_rebalance_count": statistics.mean_rebalance_count,
+        "certainty_equivalent": statistics.certainty_equivalent,
     }
 
 
@@ -676,6 +719,12 @@ VERBS: Final[dict[str, Verb]] = {
         input_schema="svi_calibration_request/v1",
         output_schema="svi_calibration_result/v1",
         transform_records=mapped_over_records(calibrate_svi_slice_record),
+    ),
+    "simulate-hedging": Verb(
+        name="simulate-hedging",
+        input_schema="hedging_request/v1",
+        output_schema="hedging_statistics/v1",
+        transform_records=mapped_over_records(simulate_hedging_record),
     ),
     "draw-random-sample": Verb(
         name="draw-random-sample",

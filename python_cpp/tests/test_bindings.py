@@ -504,3 +504,37 @@ def test_a_malformed_seed_raises_through_the_bindings() -> None:
         core.draw_random_sample(initial_state="not-a-number", sequence="1", count=1)
     with pytest.raises(ValueError, match="negative"):
         core.draw_random_sample(initial_state="1", sequence="1", count=-1)
+
+
+HEDGING_ARGUMENTS = {
+    "spot": 100.0,
+    "strike": 100.0,
+    "years_to_expiry": 0.25,
+    "volatility": 0.20,
+    "steps": 63,
+    "proportional_cost": 0.0010,
+    "risk_aversion": 0.10,
+    "initial_state": "1",
+    "sequence": "1",
+    "path_count": 200,
+}
+HEDGING_PATHS = 200
+
+
+def test_a_wider_band_pays_less_through_the_bindings() -> None:
+    narrow = core.simulate_hedging(**HEDGING_ARGUMENTS, rule="fixed", fixed_width=0.0)
+    wide = core.simulate_hedging(**HEDGING_ARGUMENTS, rule="fixed", fixed_width=0.40)
+    assert wide.mean_transaction_cost < narrow.mean_transaction_cost
+    assert wide.profit_standard_deviation > narrow.profit_standard_deviation
+    assert narrow.path_count == HEDGING_PATHS
+
+
+def test_the_derived_band_runs_through_the_bindings() -> None:
+    stats = core.simulate_hedging(**HEDGING_ARGUMENTS, rule="whalley_wilmott", fixed_width=0.0)
+    assert stats.mean_rebalance_count > 1.0
+    assert stats.certainty_equivalent < stats.mean_profit
+
+
+def test_an_unknown_band_rule_raises_through_the_bindings() -> None:
+    with pytest.raises(ValueError, match="whalley_wilmott"):
+        core.simulate_hedging(**HEDGING_ARGUMENTS, rule="guesswork", fixed_width=0.0)

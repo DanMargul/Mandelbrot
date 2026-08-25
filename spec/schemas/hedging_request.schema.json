@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hedging_request/v1",
+  "type": "object",
+  "required": ["schema", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "hedging_request/v1" },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "spot", "strike", "years_to_expiry", "volatility", "steps",
+                     "proportional_cost", "risk_aversion", "rule", "fixed_width",
+                     "initial_state", "sequence", "path_count"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "spot": { "type": "number", "exclusiveMinimum": 0 },
+          "strike": { "type": "number", "exclusiveMinimum": 0 },
+          "years_to_expiry": { "type": "number", "exclusiveMinimum": 0 },
+          "volatility": { "type": "number", "exclusiveMinimum": 0 },
+          "steps": { "type": "integer", "minimum": 1 },
+          "proportional_cost": { "type": "number", "minimum": 0 },
+          "risk_aversion": { "type": "number", "exclusiveMinimum": 0 },
+          "rule": { "enum": ["fixed", "whalley_wilmott"] },
+          "fixed_width": { "type": "number", "minimum": 0 },
+          "initial_state": { "type": "string", "pattern": "^[0-9]+$" },
+          "sequence": { "type": "string", "pattern": "^[0-9]+$" },
+          "path_count": { "type": "integer", "minimum": 2 }
+        }
+      }
+    }
+  }
+}

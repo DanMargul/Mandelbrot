@@ -11,6 +11,7 @@
 #include "volarb/rate_curve.hpp"
 #include "volarb/factors.hpp"
 #include "volarb/random_source.hpp"
+#include "volarb/hedging.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -67,6 +68,12 @@ using volarb::InvalidSviParametersError;
 using volarb::calibrate_essvi_surface;
 using volarb::CurveNode;
 using volarb::decompose_surface_factors;
+using volarb::band_rule_from_name;
+using volarb::BandPolicy;
+using volarb::HedgingInputs;
+using volarb::hedging_statistics;
+using volarb::HedgingStatistics;
+using volarb::InvalidHedgingInputsError;
 using volarb::InvalidRandomSourceError;
 using volarb::next_bits;
 using volarb::PcgState;
@@ -239,6 +246,18 @@ UnsignedWide wide_from_decimal(const std::string& text) {
 
 std::string decimal_from_word(std::uint64_t value) {
     return std::to_string(value);
+}
+
+HedgingStatistics simulate_hedging_from_values(double spot, double strike, double years_to_expiry,
+                                               double volatility, int steps,
+                                               double proportional_cost, double risk_aversion,
+                                               const std::string& rule, double fixed_width,
+                                               const std::string& initial_state,
+                                               const std::string& sequence, int path_count) {
+    const HedgingInputs inputs{spot,  strike,           years_to_expiry,
+                               volatility, steps, proportional_cost, risk_aversion};
+    return hedging_statistics(inputs, BandPolicy{band_rule_from_name(rule), fixed_width},
+                              initial_state, sequence, path_count);
 }
 
 struct RandomSample {
@@ -699,6 +718,23 @@ PYBIND11_MODULE(_volarb_core, module) {
     module.def("calibrate_essvi_surface", &calibrate_essvi_surface_from_values,
                py::arg("years_to_expiry"), py::arg("log_moneyness"), py::arg("total_variances"),
                py::arg("weights"), py::arg("lowest_log_moneyness"), py::arg("highest_log_moneyness"));
+
+    py::register_exception<InvalidHedgingInputsError>(module, "InvalidHedgingInputsError",
+                                                      PyExc_ValueError);
+
+    py::class_<HedgingStatistics>(module, "HedgingStatistics")
+        .def_readonly("path_count", &HedgingStatistics::path_count)
+        .def_readonly("mean_profit", &HedgingStatistics::mean_profit)
+        .def_readonly("profit_standard_deviation", &HedgingStatistics::profit_standard_deviation)
+        .def_readonly("mean_transaction_cost", &HedgingStatistics::mean_transaction_cost)
+        .def_readonly("mean_rebalance_count", &HedgingStatistics::mean_rebalance_count)
+        .def_readonly("certainty_equivalent", &HedgingStatistics::certainty_equivalent);
+
+    module.def("simulate_hedging", &simulate_hedging_from_values, py::arg("spot"), py::arg("strike"),
+               py::arg("years_to_expiry"), py::arg("volatility"), py::arg("steps"),
+               py::arg("proportional_cost"), py::arg("risk_aversion"), py::arg("rule"),
+               py::arg("fixed_width"), py::arg("initial_state"), py::arg("sequence"),
+               py::arg("path_count"));
 
     py::register_exception<InvalidRandomSourceError>(module, "InvalidRandomSourceError",
                                                      PyExc_ValueError);
