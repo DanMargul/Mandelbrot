@@ -13,11 +13,11 @@ announce "conventions"
 uv run --no-sync tools/check_no_comments.py .
 
 announce "ruff"
-uv run --no-sync ruff check python_pure python_cpp conformance ingestion tools benchmarks
-uv run --no-sync ruff format --check python_pure python_cpp conformance ingestion tools benchmarks
+uv run --no-sync ruff check python_pure python_cpp conformance ingestion research tools benchmarks
+uv run --no-sync ruff format --check python_pure python_cpp conformance ingestion research tools benchmarks
 
 announce "mypy"
-for directory in conformance benchmarks ingestion tools; do
+for directory in conformance benchmarks ingestion research tools; do
     uv run --no-sync mypy --strict "$directory"
 done
 uv run --no-sync --project python_pure mypy --strict python_pure/src
@@ -25,6 +25,9 @@ uv run --no-sync --project python_cpp mypy --strict python_cpp/src
 
 announce "pytest ingestion"
 uv run --no-sync pytest ingestion/tests -q
+
+announce "pytest research"
+uv run --no-sync pytest research/tests -q
 
 announce "pytest python_pure"
 uv run --no-sync --project python_pure pytest python_pure -q

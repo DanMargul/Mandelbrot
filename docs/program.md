@@ -256,7 +256,9 @@ when every quoted result carries the pessimistic cost assumption explicitly.
 
 ## 7. Research integrity, before the search rather than after it
 
-*Extends Phase 6. **Land this out of order, before serious signal search.***
+*Extends Phase 6. **Land this out of order, before serious signal search.** The registry, the
+pins and the deflated Sharpe ratio are done; see `docs/research.md`. Backtest overfitting
+probability and walk-forward selection remain.*
 
 Every result pinned to a git SHA, a data manifest hash, a config hash, and a seed, so any
 number in any document can be regenerated bit for bit. The determinism discipline from
@@ -272,8 +274,24 @@ fact; it is always larger than it feels. A registry that logs every configuratio
 moment it runs is the only way to get it right, and it has to exist before the search starts
 or the count is already lost. That is why this step jumps the dependency order.
 
+The registry's shape came from one question: what stops a count from being quietly wrong? Not
+falsification, which is obvious, but declining to write down a configuration whose result was
+disappointing. So a trial is recorded in two entries and the first is written **before the
+outcome exists**; `trial_count` counts trials started, never completed, and a trial abandoned
+halfway stays in the count. Entries are hash-chained, so an edit or a deletion in the middle
+is reported with the sequence where it starts. Truncation from the end is not detectable from
+the log alone and the documentation says so rather than implying otherwise; that is what
+carrying the tip hash on a published result is for.
+
+The measurement that justifies all of it, on three years of daily returns with realistic
+moments: an annualised Sharpe of `1.5` is significant at 95% if it was the only thing tried
+(`p = 0.994`), and **not significant by the tenth trial** (`p = 0.830`). The bar rises from
+`0.95` to `1.86` to `2.41` as the count goes from one to ten to a hundred. Nobody recovers
+that count honestly after the fact, which is exactly why this step jumps the order.
+
 **Done when** the registry exists, results are reproducible from their pins, and no strategy
-can be promoted without a deflated Sharpe above a threshold stated in advance.
+can be promoted without a deflated Sharpe above a threshold stated in advance. **The registry,
+the pins and the deflated Sharpe are done.**
 
 ---
 

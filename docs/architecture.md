@@ -119,7 +119,9 @@ a defect in one of them, and conformance is what finds it.
 |---|---|
 | `ingestion` (Polygon HTTP client) | REST, auth, pagination, retry, rate limits; no hot path |
 | `manifest` writing | runs once per ingest, not once per backtest step |
-| `experiment` registry | orchestration and bookkeeping |
+| `experiment` registry (`research/registry.py`) | append-only bookkeeping; the cost is a hash per trial, not arithmetic |
+| result pinning (`research/pins.py`) | reads git and the Parquet manifest; I/O, once per trial |
+| research statistics (`research/statistics.py`) | deflated Sharpe and its quantile run once per result, not per backtest step |
 | `reporting` and attribution | presentation, run once per result |
 | plotting | presentation |
 
