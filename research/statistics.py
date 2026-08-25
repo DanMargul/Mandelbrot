@@ -12,6 +12,8 @@ MINIMUM_TAIL_PROBABILITY: Final[float] = 1e-300
 MEDIAN_TAIL_PROBABILITY: Final[float] = 0.5
 MINIMUM_TRIALS: Final[int] = 1
 MINIMUM_SAMPLE_LENGTH: Final[int] = 2
+MINIMUM_RETURN_VARIANCE: Final[float] = 1e-300
+NORMAL_KURTOSIS: Final[float] = 3.0
 
 
 class InvalidStatisticsInputsError(ValueError):
@@ -117,3 +119,28 @@ def sharpe_ratio_needed_for(sample: SharpeSample, trial_count: int, threshold: f
     standard_error = sharpe_standard_error(sample)
     expected_maximum = expected_maximum_sharpe_ratio(trial_count, standard_error)
     return expected_maximum + standard_error * upper_tail_quantile(1.0 - threshold)
+
+
+def central_moment(deviations: list[float], order: int) -> float:
+    return math.fsum(deviation**order for deviation in deviations) / len(deviations)
+
+
+def sharpe_sample_of(returns: list[float]) -> SharpeSample:
+    if len(returns) < MINIMUM_SAMPLE_LENGTH:
+        raise InvalidStatisticsInputsError(
+            f"a sample needs at least {MINIMUM_SAMPLE_LENGTH} returns, got {len(returns)}"
+        )
+    mean = math.fsum(returns) / len(returns)
+    deviations = [value - mean for value in returns]
+    variance = math.fsum(deviation * deviation for deviation in deviations) / (len(returns) - 1)
+    if variance < MINIMUM_RETURN_VARIANCE:
+        raise InvalidStatisticsInputsError(
+            f"a constant return series has no Sharpe ratio, variance was {variance}"
+        )
+    deviation = math.sqrt(variance)
+    return SharpeSample(
+        sharpe_ratio=mean / deviation,
+        sample_length=len(returns),
+        skewness=central_moment(deviations, 3) / (deviation**3),
+        excess_kurtosis=central_moment(deviations, 4) / (deviation**4) - NORMAL_KURTOSIS,
+    )

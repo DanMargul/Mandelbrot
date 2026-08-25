@@ -501,8 +501,13 @@ stays empty.
 risk-adjusted terms, out of sample, after costs. **The optimizer, the hedging control, the join
 between them, and the end-to-end run are done.** On 120 dated observations the allocator beat
 the threshold rule by `201,277` on the index while placing fewer contracts, and refused the
-single name whose 3% spread the signal could not pay — see `docs/history_run.md`. It is still
-in sample, on synthetic data, and the fill model it all rests on is still uncalibrated.
+single name whose 3% spread the signal could not pay.
+
+**Out of sample it does not clear.** Across ten configurations the tuned threshold has a
+probability of backtest overfitting of `1.000`, and the best result of the search has a Sharpe
+of `0.049` against the `0.138` a search that wide is expected to produce from nothing. It would
+take about 3,970 days of observations to support the claim — see `docs/history_run.md`. The
+machinery works, the strategy on top of it is not established, and step 7 is what said so.
 
 ---
 

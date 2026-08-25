@@ -40,6 +40,7 @@ def settings_for(underlying: str, *, use_allocator: bool) -> StrategySettings:
         lot_size=LOTS,
         warmup_steps=WARMUP,
         use_allocator=use_allocator,
+        reversion_horizon_steps=REVERSION_HORIZON_STEPS,
     )
 
 

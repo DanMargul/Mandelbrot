@@ -163,14 +163,74 @@ The result to carry forward is not the profit. It is that the same signal is wor
 one instrument and not in another, that the difference is entirely the spread, and that the
 component which discovered this is the allocator rather than the forecaster.
 
+## The `45,098` does not survive the search that found it
+
+Everything above is in sample, and `research.md` exists precisely to say what that is worth. It
+was built before there was a dated dataset to point it at. There is one now, so instead of
+repeating the warning, here is the measurement.
+
+Ten configurations — seven entry thresholds and three reversion horizons — each run over all
+120 days, scored by `combinatorially_symmetric_cross_validation` on eight blocks and by
+`walk_forward_selection` on four folds.
+
+### Tuning the threshold is overfitting, and it measures as certain
+
+| | `IDXH` threshold family | `IDXH` allocator family |
+|---|---|---|
+| probability of backtest overfitting | **`1.000`** | `0.714` |
+| median in sample Sharpe | `-0.036` | `0.068` |
+| median out of sample Sharpe | `-0.242` | `0.021` |
+| median degradation | `-0.242` | `-0.046` |
+
+**PBO of `1.000`.** On every one of the seventy splits, the threshold chosen in sample landed in
+the bottom half out of sample. The earlier section declined to tune the threshold on the grounds
+that it would be an in-sample fit; that was a judgement, and this is the number.
+
+### A low PBO is not a good strategy
+
+The same grid on `NAMEH` reports a threshold-family PBO of `0.171` — far *better* than the
+index's `1.000` — while every one of its seven configurations loses money and the best Sharpe in
+the family is `-0.224`.
+
+PBO is a statement about the **stability of a ranking**, not about the level of anything. When
+every candidate is bad, the ranking is stable and PBO looks excellent. It has to be read next to
+the level or it inverts the conclusion, and here it would have preferred the instrument the rest
+of this page has just established is untradeable.
+
+### The deflation
+
+| `IDXH`, best of ten | |
+|---|---|
+| best configuration | `allocator-h20`, net `+87,976` |
+| its Sharpe | `0.049` |
+| expected maximum under the null | `0.138` |
+| deflated probability | `0.155` |
+| clears `0.95` | **`no`** |
+| Sharpe it would have needed | `0.283` |
+| days it would have needed | **`3,970`** |
+
+**Searching ten configurations over 120 days is expected to throw up a Sharpe of `0.138` from
+nothing at all, and the best real one was `0.049`.** The profit is real in the sense that the
+arithmetic is right and the fills are pessimistic. It is not evidence. Establishing an edge this
+size against a search this wide needs about **sixteen years** of daily observations.
+
+That is `hedging.md`'s lesson arriving from the other direction. There, separating two hedging
+policies took 4000 paths. Here, separating a strategy from its own search takes 3970 days. Both
+say the same thing: **the quantity of data needed to support a claim is usually much larger than
+the quantity needed to produce one.**
+
+On `NAMEH` the best of ten has a negative Sharpe, and no amount of data rescues that — the
+report says `never` rather than a number, because a longer sample tightens a confidence interval
+around a negative mean rather than moving it.
+
 ## What this run is not
 
-Every number above is in sample, on synthetic data, against a signal whose generating process
-is in this repository. It shows the pipeline can find a signal that is there and can decline
-one it cannot pay for. It says nothing about whether such a signal exists in a real market, and
-the registry, deflated Sharpe and PBO machinery of `research.md` is what a claim like that would
-have to pass. Step 6's fill model is still uncalibrated against real fills, so the cost side —
-the side that decided every result on this page — is the least trustworthy part of it.
+Every number above is on synthetic data, against a signal whose generating process is in this
+repository. It shows the pipeline can find a signal that is there, decline one it cannot pay
+for, and refuse to certify its own best result. It says nothing about whether such a signal
+exists in a real market. Step 6's fill model is still uncalibrated against real fills, so the
+cost side — the side that decided every result on this page — is the least trustworthy part of
+it.
 
 ## Invariants under test
 
@@ -180,3 +240,8 @@ the side that decided every result on this page — is the least trustworthy par
 - the threshold rule finds the planted signal and still loses money on it
 - pricing the spread turns the same signal profitable, with more gross from fewer contracts
 - the allocator declines the single name the threshold rule trades thirteen hundred times
+- tuning the entry threshold on this data has a probability of backtest overfitting of `1.000`
+- every threshold configuration loses money, so the selection among them is a choice of losses
+- the best configuration of the ten does not clear its own deflated Sharpe threshold
+- a negative Sharpe is never rescued by a longer sample, and is reported as such
+- a wider search needs a longer history to certify the same edge

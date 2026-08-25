@@ -237,3 +237,17 @@ the trial before the run, write the returns under the SHA-256 of their own canon
 then record the outcome carrying that digest. Reading a series back re-derives the digest and
 refuses a file that does not hash to the name it is filed under, so the link runs both ways —
 the registry entry names a digest, and the series names the trial and the dataset it came from.
+
+## Pointed at something real
+
+This module was built before there was a dated dataset to run it on. There is one now, and
+`docs/history_run.md` reports what it said about the strategy built on top of it: a probability
+of backtest overfitting of `1.000` for the tuned threshold, and a best-of-ten result whose
+Sharpe of `0.049` sits below the `0.138` the null expects from a search that wide. It declined
+to certify the only configuration in the program that makes money.
+
+Two things learned there belong here. **A low PBO is not a good strategy** — the single name
+scores a far better `0.171` while losing on every configuration, because PBO measures the
+stability of a ranking and a ranking of uniformly bad candidates is very stable. And the
+deflation's honest output is often a **sample length**: the run needed about 3,970 days of
+observations to support what 120 days produced.

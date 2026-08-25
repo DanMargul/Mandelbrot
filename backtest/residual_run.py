@@ -16,6 +16,7 @@ sys.path.insert(0, str(REPOSITORY_ROOT / "research"))
 sys.path.insert(0, str(REPOSITORY_ROOT / "python_pure" / "src"))
 
 from allocator_decision import (  # noqa: E402
+    REVERSION_HORIZON_STEPS,
     BookSettings,
     ContractState,
     allocated_book,
@@ -60,6 +61,7 @@ class StrategySettings:
     lot_size: int
     warmup_steps: int
     use_allocator: bool
+    reversion_horizon_steps: int
 
 
 def settings_payload(settings: StrategySettings) -> dict[str, Any]:
@@ -69,6 +71,7 @@ def settings_payload(settings: StrategySettings) -> dict[str, Any]:
         "lot_size": settings.lot_size,
         "warmup_steps": settings.warmup_steps,
         "use_allocator": settings.use_allocator,
+        "reversion_horizon_steps": settings.reversion_horizon_steps,
     }
 
 
@@ -216,7 +219,12 @@ def residual_strategy(settings: StrategySettings) -> DecisionFunction:
         book, _ = allocated_book(
             surface.states,
             histories,
-            BookSettings(settings.lot_size, spot, surface.factor_exposures),
+            BookSettings(
+                settings.lot_size,
+                spot,
+                surface.factor_exposures,
+                settings.reversion_horizon_steps,
+            ),
         )
         return book
 
@@ -241,6 +249,7 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--capital", type=float, default=1_000_000.0)
     parser.add_argument("--entry-z", type=float, default=ENTRY_Z_SCORE)
     parser.add_argument("--allocator", action="store_true")
+    parser.add_argument("--horizon", type=int, default=REVERSION_HORIZON_STEPS)
     parser.add_argument("--registry", type=Path)
     parser.add_argument("--results", type=Path)
     arguments = parser.parse_args(argv)
@@ -251,6 +260,7 @@ def main(argv: list[str]) -> int:
         lot_size=LOT_SIZE,
         warmup_steps=WARMUP_STEPS,
         use_allocator=arguments.allocator,
+        reversion_horizon_steps=arguments.horizon,
     )
     request = BacktestRequest(
         dataset_root=arguments.dataset,

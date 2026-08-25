@@ -51,10 +51,11 @@ class BookSettings:
     lot_size: int
     spot: float
     factor_exposures: dict[str, list[float]]
+    reversion_horizon_steps: int = REVERSION_HORIZON_STEPS
 
 
-def expected_log_variance_capture(score: ResidualScore) -> float:
-    decay = score.lag_one_autocorrelation**REVERSION_HORIZON_STEPS
+def expected_log_variance_capture(score: ResidualScore, horizon: int = REVERSION_HORIZON_STEPS) -> float:
+    decay = score.lag_one_autocorrelation**horizon
     deviation_now = score.naive_z_score * score.standard_deviation
     return -deviation_now * (1.0 - decay)
 
@@ -74,7 +75,7 @@ def greeks_of(state: ContractState) -> BlackScholesGreeks:
 
 def candidate_for(state: ContractState, score: ResidualScore, settings: BookSettings) -> Candidate:
     greeks = greeks_of(state)
-    capture = expected_log_variance_capture(score)
+    capture = expected_log_variance_capture(score, settings.reversion_horizon_steps)
     volatility_change = state.volatility * LOG_VARIANCE_TO_LOG_VOLATILITY * capture
     multiplier = float(state.contract_multiplier)
     return Candidate(
@@ -145,7 +146,7 @@ def allocated_book(
     candidates: list[Candidate] = []
     for state in states:
         series = histories.get(state.contract_symbol, [])
-        if len(series) < REVERSION_HORIZON_STEPS:
+        if len(series) < settings.reversion_horizon_steps:
             continue
         score = score_residual(series)
         if score.residual_is_degenerate:
