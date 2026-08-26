@@ -10,6 +10,11 @@ from typing import Any, Final
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from basket import (
+    BASKET_SOURCE,
+    basket_rows,
+    write_correlation_truth,
+)
 from history import (
     HISTORY_SOURCE,
     history_rows,
@@ -40,7 +45,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(prog="ingest")
     parser.add_argument(
         "--source",
-        choices=[SYNTHETIC_SOURCE, HISTORY_SOURCE, "recorded", POLYGON_SOURCE],
+        choices=[SYNTHETIC_SOURCE, HISTORY_SOURCE, BASKET_SOURCE, "recorded", POLYGON_SOURCE],
         required=True,
     )
     parser.add_argument("--richness-amplitude", type=float, default=1.0)
@@ -72,7 +77,7 @@ def rows_from_polygon(underlyings: list[str], record_to: Path | None) -> list[di
 
 
 def creation_time_for(source: str, rows: list[dict[str, Any]]) -> datetime:
-    if source not in (SYNTHETIC_SOURCE, HISTORY_SOURCE):
+    if source not in (SYNTHETIC_SOURCE, HISTORY_SOURCE, BASKET_SOURCE):
         return datetime.now(tz=UTC)
     latest: datetime = max(row["knowledge_time"] for row in rows)
     return latest
@@ -85,6 +90,10 @@ def collect_rows(arguments: argparse.Namespace) -> tuple[list[dict[str, Any]], s
         rows, truth = history_rows(arguments.richness_amplitude)
         arguments.signal_truth = truth
         return rows, HISTORY_SOURCE
+    if arguments.source == BASKET_SOURCE:
+        rows, truth = basket_rows()
+        arguments.signal_truth = truth
+        return rows, BASKET_SOURCE
     if not arguments.underlying:
         raise SystemExit("error: --underlying is required unless --source synthetic")
     if arguments.source == "recorded":
@@ -113,6 +122,8 @@ def main() -> int:
     partitions = write_dataset(arguments.dataset_root, rows, source, creation_time_for(source, rows))
     if source == SYNTHETIC_SOURCE:
         write_ground_truth(arguments.dataset_root)
+    if source == BASKET_SOURCE:
+        write_correlation_truth(arguments.dataset_root, arguments.signal_truth)
     if source == HISTORY_SOURCE:
         write_signal_truth(arguments.dataset_root, arguments.signal_truth, arguments.richness_amplitude)
     total_rows = sum(partition.row_count for partition in partitions)

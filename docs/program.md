@@ -534,6 +534,16 @@ check, because it is the one number in this program that can be checked against 
 else's independent implementation. **It has not been done**, and no remembered benchmark
 value has been written down in its place.
 
+The arithmetic has now been run end to end on a market built to contain a known answer:
+`docs/dispersion_data.md` plants a mean-reverting correlation in an index and eight
+constituents, quotes them all as option chains, and recovers it through pricing, spreads,
+Parquet, inversion and a cross-sectional fit to an **rms error of `7e-6`** — the error budget is
+quote rounding and nothing else. The same run shows the diagonal-dropping formula off by `0.107`
+on that basket, and produces a **correlation skew of `+0.52` per unit of `-k` that was never
+planted**, as a consequence of quoting the index with a steeper skew than its constituents.
+Agreeing with a correlation this repository planted is not the external validation the step
+asks for.
+
 What is done is the arithmetic underneath it, tri-implemented and bit-identical: the implied
 correlation itself, the exact closed form for the error in the widely used formula that drops
 the diagonal — `concentration * (1 - rho)`, which is `0.0013` for five hundred equally
