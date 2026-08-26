@@ -25,7 +25,7 @@ UNDERLYING = "SPX"
 STRADDLE_LEGS = 8
 LOTS = 5
 EXPECTED_STEPS = 3
-REQUEST = BacktestRequest(DATASET, UNDERLYING, STEPS, CAPITAL)
+REQUEST = BacktestRequest(DATASET, [UNDERLYING], STEPS, CAPITAL)
 DIGEST_LENGTH = 64
 
 
@@ -121,11 +121,11 @@ def test_trading_to_the_same_target_is_free() -> None:
 
 def test_malformed_runs_are_rejected() -> None:
     with pytest.raises(InvalidBacktestError):
-        run_backtest(BacktestRequest(DATASET, UNDERLYING, [], CAPITAL), hold_nothing)
+        run_backtest(BacktestRequest(DATASET, [UNDERLYING], [], CAPITAL), hold_nothing)
     with pytest.raises(InvalidBacktestError):
-        run_backtest(BacktestRequest(DATASET, UNDERLYING, STEPS, 0.0), hold_nothing)
+        run_backtest(BacktestRequest(DATASET, [UNDERLYING], STEPS, 0.0), hold_nothing)
     with pytest.raises(InvalidBacktestError):
-        run_backtest(BacktestRequest(DATASET, UNDERLYING, list(reversed(STEPS)), CAPITAL), hold_nothing)
+        run_backtest(BacktestRequest(DATASET, [UNDERLYING], list(reversed(STEPS)), CAPITAL), hold_nothing)
 
 
 def test_quotes_are_indexed_by_contract_symbol() -> None:
@@ -135,5 +135,5 @@ def test_quotes_are_indexed_by_contract_symbol() -> None:
         seen.extend(context.quotes)
         return {}
 
-    run_backtest(BacktestRequest(DATASET, UNDERLYING, STEPS[:1], CAPITAL), capture)
+    run_backtest(BacktestRequest(DATASET, [UNDERLYING], STEPS[:1], CAPITAL), capture)
     assert len(quotes_by_symbol(seen)) == len(seen)

@@ -7,6 +7,8 @@
   "observation_hour_utc": 20,
   "expiry_settlement_hour_utc": 21,
   "index_skew_excess": -0.35,
+  "index_half_spread": 0.006,
+  "constituent_half_spread": 0.02,
   "expiry_dates": [
     "2026-06-19",
     "2026-09-18"

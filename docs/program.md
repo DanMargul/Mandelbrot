@@ -544,6 +544,12 @@ planted**, as a consequence of quoting the index with a steeper skew than its co
 Agreeing with a correlation this repository planted is not the external validation the step
 asks for.
 
+**The trade built on it loses.** Held over the same sixty days, selling the index straddle
+against straddles in all eight names, it earns `42,023` gross and pays `69,637` in spread. Three
+quarters of that cost is the eight replicating legs, because expressing a ten-straddle view on
+the index takes ninety-three straddles. Break-even needs a constituent half-spread of `0.94%`
+against the `2.0%` quoted, and even with the eight legs free the trade clears only `24,746`.
+
 What is done is the arithmetic underneath it, tri-implemented and bit-identical: the implied
 correlation itself, the exact closed form for the error in the widely used formula that drops
 the diagonal — `concentration * (1 - rho)`, which is `0.0013` for five hundred equally

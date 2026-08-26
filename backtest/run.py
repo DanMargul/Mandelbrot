@@ -64,7 +64,7 @@ def step_times_from(text: str) -> list[datetime]:
 
 
 def report(outcome: BacktestOutcome, digest: str, trial_id: str) -> None:
-    print(f"underlying:        {outcome.underlying_symbol}")
+    print(f"underlying:        {', '.join(outcome.underlying_symbols)}")
     print(f"dataset digest:    {outcome.dataset_digest[:16]}...")
     print(f"steps:             {len(outcome.steps)}")
     print(f"gross profit:      {outcome.gross_profit:,.2f}")
@@ -97,7 +97,7 @@ def main(argv: list[str]) -> int:
     outcome = run_backtest(
         BacktestRequest(
             dataset_root=arguments.dataset,
-            underlying_symbol=configuration.underlying_symbol,
+            underlying_symbols=[configuration.underlying_symbol],
             step_times=step_times_from(arguments.steps),
             capital=configuration.capital,
         ),

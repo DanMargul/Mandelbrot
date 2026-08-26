@@ -30,7 +30,7 @@ class InvalidBacktestError(ValueError):
 @dataclass(frozen=True)
 class BacktestRequest:
     dataset_root: Path
-    underlying_symbol: str
+    underlying_symbols: list[str]
     step_times: list[datetime]
     capital: float
 
@@ -41,6 +41,7 @@ class StepContext:
     observation_time: datetime
     quotes: list[ContractQuote]
     positions: dict[str, int]
+    quotes_by_underlying: dict[str, list[ContractQuote]]
 
 
 @dataclass(frozen=True)
@@ -58,7 +59,7 @@ class BacktestStep:
 
 @dataclass(frozen=True)
 class BacktestOutcome:
-    underlying_symbol: str
+    underlying_symbols: list[str]
     dataset_digest: str
     capital: float
     steps: list[BacktestStep]
@@ -74,6 +75,11 @@ ReaderFactory = Callable[[Path, datetime], AsOfChainReader]
 
 def reader_at_step(dataset_root: Path, moment: datetime) -> AsOfChainReader:
     return open_chain_dataset(dataset_root, KnowledgeHorizon(as_of=moment))
+
+
+def validate_underlyings(symbols: list[str]) -> None:
+    if not symbols:
+        raise InvalidBacktestError("a run needs at least one underlying")
 
 
 def validate_run(step_times: list[datetime], capital: float) -> None:
@@ -177,6 +183,7 @@ def run_backtest(
     decide: DecisionFunction,
     open_reader: ReaderFactory = reader_at_step,
 ) -> BacktestOutcome:
+    validate_underlyings(request.underlying_symbols)
     validate_run(request.step_times, request.capital)
 
     positions: dict[str, int] = {}
@@ -191,9 +198,12 @@ def run_backtest(
     for index, moment in enumerate(request.step_times):
         reader = open_reader(request.dataset_root, moment)
         dataset_digest = reader.dataset_digest
-        quotes = reader.chain_as_of(
-            ChainQuery(underlying_symbol=request.underlying_symbol, observation_time=moment)
-        )
+        grouped: dict[str, list[ContractQuote]] = {}
+        quotes: list[ContractQuote] = []
+        for symbol in request.underlying_symbols:
+            found = reader.chain_as_of(ChainQuery(underlying_symbol=symbol, observation_time=moment))
+            grouped[symbol] = found
+            quotes.extend(found)
         available = quotes_by_symbol(quotes)
 
         opening = mark_positions(positions, available, previous_marks)
@@ -205,6 +215,7 @@ def run_backtest(
                 observation_time=moment,
                 quotes=quotes,
                 positions=dict(positions),
+                quotes_by_underlying=grouped,
             )
         )
         trade = trade_towards(positions, target, available)
@@ -233,7 +244,7 @@ def run_backtest(
         previous_value = closing.value
 
     return BacktestOutcome(
-        underlying_symbol=request.underlying_symbol,
+        underlying_symbols=list(request.underlying_symbols),
         dataset_digest=dataset_digest,
         capital=request.capital,
         steps=steps,

@@ -78,7 +78,7 @@ def run_grid(dataset_root: Path, underlying: str) -> list[Trial]:
     steps = business_days(STEPS)
     trials: list[Trial] = []
     for trial_id, family, settings in grid_for(underlying):
-        request = BacktestRequest(dataset_root, underlying, steps, CAPITAL)
+        request = BacktestRequest(dataset_root, [underlying], steps, CAPITAL)
         outcome = run_backtest(request, residual_strategy(settings))
         trials.append(Trial(trial_id, family, settings, outcome.returns, outcome.net_profit))
     return trials

@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from basket import (
     BASKET_SOURCE,
+    CONSTITUENT_HALF_SPREAD,
     basket_rows,
     write_correlation_truth,
 )
@@ -49,6 +50,7 @@ def parse_arguments() -> argparse.Namespace:
         required=True,
     )
     parser.add_argument("--richness-amplitude", type=float, default=1.0)
+    parser.add_argument("--constituent-half-spread", type=float, default=CONSTITUENT_HALF_SPREAD)
     parser.add_argument("--dataset-root", type=Path, required=True)
     parser.add_argument("--underlying", action="append", default=[])
     parser.add_argument("--recorded-directory", type=Path, default=DEFAULT_RECORDED_DIRECTORY)
@@ -91,7 +93,7 @@ def collect_rows(arguments: argparse.Namespace) -> tuple[list[dict[str, Any]], s
         arguments.signal_truth = truth
         return rows, HISTORY_SOURCE
     if arguments.source == BASKET_SOURCE:
-        rows, truth = basket_rows()
+        rows, truth = basket_rows(arguments.constituent_half_spread)
         arguments.signal_truth = truth
         return rows, BASKET_SOURCE
     if not arguments.underlying:
@@ -123,7 +125,9 @@ def main() -> int:
     if source == SYNTHETIC_SOURCE:
         write_ground_truth(arguments.dataset_root)
     if source == BASKET_SOURCE:
-        write_correlation_truth(arguments.dataset_root, arguments.signal_truth)
+        write_correlation_truth(
+            arguments.dataset_root, arguments.signal_truth, arguments.constituent_half_spread
+        )
     if source == HISTORY_SOURCE:
         write_signal_truth(arguments.dataset_root, arguments.signal_truth, arguments.richness_amplitude)
     total_rows = sum(partition.row_count for partition in partitions)

@@ -46,7 +46,7 @@ def settings_for(underlying: str, *, use_allocator: bool) -> StrategySettings:
 
 def outcome_for(underlying: str, *, use_allocator: bool) -> tuple[float, float, int]:
     settings = settings_for(underlying, use_allocator=use_allocator)
-    request = BacktestRequest(DATASET, underlying, business_days(STEPS), CAPITAL)
+    request = BacktestRequest(DATASET, [underlying], business_days(STEPS), CAPITAL)
     result = run_backtest(request, residual_strategy(settings))
     traded = sum(step.filled_quantity for step in result.steps)
     return result.gross_profit, result.net_profit, traded

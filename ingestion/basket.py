@@ -295,7 +295,9 @@ def rows_for_underlying(
     return rows, sequence
 
 
-def basket_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def basket_rows(
+    constituent_half_spread: float = CONSTITUENT_HALF_SPREAD,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     names = constituent_names()
     states = day_states()
     index_ladder = strike_ladder(INDEX_INITIAL_LEVEL)
@@ -316,7 +318,7 @@ def basket_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         )
         rows.extend(produced)
         for name, price, level in zip(names, state.prices, state.levels, strict=True):
-            market = QuoteMarket(price, level, name.half_spread, SKEW_SLOPE)
+            market = QuoteMarket(price, level, constituent_half_spread, SKEW_SLOPE)
             produced, sequence = rows_for_underlying(
                 name.symbol, name_ladders[name.symbol], market, state.moment, sequence
             )
@@ -335,7 +337,9 @@ def basket_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     return rows, truth
 
 
-def write_correlation_truth(dataset_root: Path, truth: list[dict[str, Any]]) -> None:
+def write_correlation_truth(
+    dataset_root: Path, truth: list[dict[str, Any]], constituent_half_spread: float
+) -> None:
     payload = {
         "schema": CORRELATION_TRUTH_SCHEMA,
         "index_symbol": INDEX_SYMBOL,
@@ -345,6 +349,8 @@ def write_correlation_truth(dataset_root: Path, truth: list[dict[str, Any]]) -> 
         "observation_hour_utc": OBSERVATION_HOUR_UTC,
         "expiry_settlement_hour_utc": EXPIRY_SETTLEMENT_HOUR_UTC,
         "index_skew_excess": INDEX_SKEW_EXCESS,
+        "index_half_spread": INDEX_HALF_SPREAD,
+        "constituent_half_spread": constituent_half_spread,
         "expiry_dates": [f"{expiry:%Y-%m-%d}" for expiry in EXPIRIES],
         "weights": {name.symbol: name.weight for name in constituent_names()},
         "observations": truth,

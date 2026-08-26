@@ -116,6 +116,104 @@ right and the only noise is price rounding — and extrapolation still amplifies
 quotes whose true shape is not a quadratic, the amplification would land on model error rather
 than on rounding. The coverage count is reported on every run for that reason.
 
+## Holding it
+
+`backtest/dispersion_run.py` trades the correlation rather than just measuring it. When the
+implied correlation is high against its own history it sells the index straddle and buys a
+straddle in every name, sized by the vega weights of `implied_correlation.md`, and reverses when
+it is low. Straddles rather than calls, so the book is roughly delta flat without a hedger.
+
+Running the engine over nine underlyings at once needed the engine to stop assuming one.
+`BacktestRequest` now carries `underlying_symbols`, and because `ContractQuote` does not know its
+own underlying — the partition knew — `StepContext` carries `quotes_by_underlying` so a strategy
+does not have to parse contract symbols to find out.
+
+### The signal is there and the trade still loses
+
+Sixty days, ten index straddles, entry at one standard deviation:
+
+| | |
+|---|---|
+| steps that traded | `26` of `60` |
+| gross profit | `42,023` |
+| transaction cost | `69,637` |
+| **net profit** | **`-27,614`** |
+| contracts traded | `2,616` |
+
+**Cost is 1.66 times gross.** The correlation signal is real — the same signal that was recovered
+to seven parts in a million above — and it does not survive being traded.
+
+### Where the cost is
+
+Establishing one full book, at a correlation of `0.617`:
+
+| | weight | straddles | crossing cost | share |
+|---|---|---|---|---|
+| `IDXB` | | `10` | `1,176` | `23.1%` |
+| eight constituents | | `83` | `3,914` | **`76.9%`** |
+
+**Expressing a ten-straddle view on the index takes ninety-three straddles**, and the eight
+replicating legs carry three quarters of the cost while quoting a `2.0%` half-spread against the
+index's `0.6%`. That is the trade: you buy one instrument by rebuilding it out of eight more
+expensive ones, and the arithmetic of that is not a detail of the signal.
+
+### What market it would need
+
+Because the mid price does not move when the spread changes, the implied volatilities and
+therefore every trading decision are identical across the sweep — gross and contracts traded are
+the same number at every spread, and only the cost moves:
+
+| constituent half-spread | gross | cost | net |
+|---|---|---|---|
+| `2.0%` | `42,023` | `69,637` | `-27,614` |
+| `1.5%` | `42,023` | `56,428` | `-14,405` |
+| `1.0%` | `42,023` | `43,218` | `-1,196` |
+| `0.5%` | `42,023` | `30,016` | `+12,007` |
+| `0.2%` | `42,023` | `22,513` | `+19,509` |
+
+so the break-even is exact: **a constituent half-spread of `0.94%`**, less than half what the
+names quote. And the intercept matters as much as the slope — the index leg costs `17,277`
+whatever the constituents charge, so **even with the eight legs free the trade clears only
+`24,746`**.
+
+### A dispersion book has a minimum size
+
+The vega weights are real numbers and contracts are integers, and with eight legs that rounding
+is not a rounding:
+
+| index straddles | worst leg error | rms leg error |
+|---|---|---|
+| `5` | `18.56%` | `10.27%` |
+| `10` | `8.67%` | `4.27%` |
+| `20` | `-2.61%` | `1.63%` |
+| `50` | `-1.38%` | `0.73%` |
+| `200` | `0.24%` | `0.14%` |
+
+**At five index straddles the book misses its own hedge by ten percent**, which is single-name
+volatility exposure it did not mean to take and is not being paid for. It shows up in the
+results: going from ten to twenty index straddles multiplies gross by `2.21`, not by `2`, because
+the larger book is the better hedged one. A dispersion trade has a minimum viable size and it is
+set by contract granularity, not by capital.
+
+### The threshold that appears to work
+
+Sweeping the entry threshold produces one positive number:
+
+| entry z | net | steps that traded |
+|---|---|---|
+| `0.50` | `-24,372` | `37` |
+| `0.75` | `-45,000` | `33` |
+| `1.00` | `-27,614` | `26` |
+| `1.25` | `-24,470` | `22` |
+| `1.50` | `-21,884` | `8` |
+| `2.00` | **`+15,222`** | **`2`** |
+
+**Two trades.** One threshold out of six, on two of sixty days, and every other threshold loses.
+`docs/history_run.md` measured a probability of backtest overfitting of `1.000` for exactly this
+shape of search, and this one does not even need the machinery — a result standing on two
+observations is not a result. It is recorded here because it is the number a threshold sweep
+would have reported, and reporting the sweep without it would be the dishonest version.
+
 ## What this is not
 
 The correlation here is recovered from a market that was built to contain it. That establishes
@@ -126,8 +224,10 @@ nothing about a real index.
 agreement with a *published* correlation series, and agreeing with a number this repository
 planted is the opposite of external validation. See `spec/interfaces/implied_correlation.md`.
 
-Nor is there a dispersion trade here yet. The vega weights that would carry one exist and are
-tested, but nothing has been held, financed or charged a spread.
+The trade above is held and charged, but it is held against a market whose spreads were chosen
+by this repository as surely as its correlation was. The break-even of `0.94%` is a statement
+about those numbers. Whether real single-name options quote inside it is the question step 6's
+uncalibrated fill model was always going to decide, and it is still uncalibrated.
 
 ## Invariants under test
 
@@ -139,3 +239,9 @@ tested, but nothing has been held, financed or charged a spread.
 - dropping the diagonal overstates by more than `0.05` on every day of this basket
 - a steeper index skew implies correlation rising monotonically into the downside
 - extrapolating the slice costs accuracy even where the functional form is exact
+- the engine reaches every underlying in the basket and groups the quotes by it
+- a rich correlation is sold short the index and long every name, and a cheap one reverses
+- a straddle with no vega is not sized
+- contract granularity, not capital, is what limits the hedge
+- the correlation signal is found and still does not pay for the spread
+- the one profitable threshold trades on at most five of sixty days

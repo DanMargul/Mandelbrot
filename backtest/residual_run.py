@@ -264,7 +264,7 @@ def main(argv: list[str]) -> int:
     )
     request = BacktestRequest(
         dataset_root=arguments.dataset,
-        underlying_symbol=settings.underlying_symbol,
+        underlying_symbols=[settings.underlying_symbol],
         step_times=business_days(arguments.steps),
         capital=arguments.capital,
     )
