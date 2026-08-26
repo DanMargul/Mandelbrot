@@ -13,11 +13,11 @@ announce "conventions"
 uv run --no-sync tools/check_no_comments.py .
 
 announce "ruff"
-uv run --no-sync ruff check python_pure python_cpp backtest conformance ingestion research reporting tools benchmarks
-uv run --no-sync ruff format --check python_pure python_cpp backtest conformance ingestion research reporting tools benchmarks
+uv run --no-sync ruff check python_pure python_cpp backtest conformance ingestion research reporting risk tools benchmarks
+uv run --no-sync ruff format --check python_pure python_cpp backtest conformance ingestion research reporting risk tools benchmarks
 
 announce "mypy"
-for directory in backtest conformance benchmarks ingestion research reporting tools; do
+for directory in backtest conformance benchmarks ingestion research reporting risk tools; do
     uv run --no-sync mypy --strict "$directory"
 done
 uv run --no-sync --project python_pure mypy --strict python_pure/src
@@ -34,6 +34,12 @@ uv run --no-sync pytest reporting/tests -q
 
 announce "pytest backtest"
 uv run --no-sync pytest backtest/tests -q
+
+announce "pytest risk"
+uv run --no-sync pytest risk/tests -q
+
+announce "fault injection"
+uv run --no-sync risk/fault_injection.py
 
 announce "pytest python_pure"
 uv run --no-sync --project python_pure pytest python_pure -q

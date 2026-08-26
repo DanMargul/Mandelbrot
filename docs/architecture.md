@@ -82,7 +82,7 @@ three tracks.
 | `portfolio` | Positions, aggregated greeks, delta-band hedging |
 | `backtest` | Snapshot event loop, fill model, transaction costs |
 | `execution` | `PaperBroker` behind a broker interface; live adapter stubbed |
-| `risk` | Position and greek limits, kill switches |
+| `risk` | Position and greek limits, rate and fat-finger bounds, kill switches, reconciliation with break detection |
 | `reporting` | P&L attribution into delta, gamma, vega, theta and residual |
 
 ## The parity boundary
@@ -128,6 +128,7 @@ a defect in one of them, and conformance is what finds it.
 | synthetic history generator (`ingestion/history.py`) | builds a fixture once; every number in it comes from the tri-implemented pricer |
 | synthetic basket generator (`ingestion/basket.py`) | builds a fixture once; the index volatility comes from the tri-implemented `basket_volatility` |
 | correlation report (`backtest/correlation_run.py`) | a wiring layer over `implied_vol` and `implied_correlation`; the least-squares slice fit is three unknowns on five points, once per name per day |
+| risk gate (`risk/`) | policy and I/O around the venue, once per order rather than once per surface point; the fill arithmetic it charges comes from the tri-implemented `execution` |
 | residual strategy (`backtest/residual_run.py`, `backtest/allocator_decision.py`) | a wiring layer over `implied_vol`, `factors`, `pricing`, `portfolio` and `execution`, all of which are below the line; it decides nothing arithmetically that they do not already decide |
 | plotting | presentation |
 

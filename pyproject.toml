@@ -20,8 +20,8 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["ingestion/tests", "research/tests", "reporting/tests", "backtest/tests"]
-pythonpath = ["ingestion", "research", "reporting", "backtest"]
+testpaths = ["ingestion/tests", "research/tests", "reporting/tests", "backtest/tests", "risk/tests"]
+pythonpath = ["ingestion", "research", "reporting", "backtest", "risk"]
 
 [tool.ruff]
 line-length = 110

@@ -564,7 +564,8 @@ pipeline that finishes overnight and one that does not.
 
 ## 10. Paper-to-live promotion, gated by a risk system that has been broken on purpose
 
-*Extends Phase 7.*
+*Extends Phase 7. **The risk gate and its fault injection are done**, see `docs/risk.md`. One of
+the four conditions is met; the other three need paper trading and cannot be written.*
 
 The live adapter sits behind the same interface as `PaperBroker`, so promotion changes an
 adapter and nothing else. Around it: pre-trade position and greek limits, order rate limits,
@@ -579,6 +580,14 @@ purpose, and confirming the system does what it claims.
 date: a full quarter of paper trading, attribution showing edge in vega rather than unhedged
 delta, modeled costs validated against observed fills, and the risk system exercised under
 fault injection.
+
+**The fourth is done.** Seven faults are injected and every one that should halt the gate does.
+Firing them found three defects that reasoning about the design had not: reconciliation existed
+and nothing ever called it, so every break was detectable and none was detected; a holding with
+no greeks was treated as riskless and consumed no budget; and `resume` cleared a break halt
+without requiring the break to be gone. A fourth suspicion was refuted, then confirmed on
+re-measurement when the first measurement turned out to have been masked by the staleness check
+firing. The other three conditions cannot be produced by writing code.
 
 ---
 
