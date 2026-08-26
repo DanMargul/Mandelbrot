@@ -31,6 +31,7 @@ tracks over the same fixtures and diffs the results.
 - [`spec/interfaces/implied_correlation.md`](spec/interfaces/implied_correlation.md) — implied correlation, the diagonal everyone drops, and dispersion weights
 - [`docs/dispersion_data.md`](docs/dispersion_data.md) — planting a correlation in an option market and recovering it from the prices
 - [`docs/risk.md`](docs/risk.md) — the pre-trade gate, and the three defects that firing it found
+- [`docs/live_data.md`](docs/live_data.md) — everything between this repository and a real option chain
 
 ## Quick start
 
