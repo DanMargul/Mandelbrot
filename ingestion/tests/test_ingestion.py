@@ -3,10 +3,28 @@ from __future__ import annotations
 import json
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 import pytest
 from manifest import dataset_digest, sha256_of_file
-from polygon import MissingApiKeyError, api_key_from_environment, replay_pages, rows_from_snapshot_pages
+from polygon import (
+    AMERICAN_STYLE,
+    CROSSED_QUOTE,
+    EUROPEAN_STYLE,
+    INCOMPLETE_QUOTE,
+    MISSING_QUOTE,
+    MISSING_UNDERLYING_PRICE,
+    NON_POSITIVE_ASK,
+    MissingApiKeyError,
+    api_key_from_environment,
+    contract_row_from_snapshot,
+    exercise_style_for,
+    mapped_snapshot_pages,
+    quote_rejection,
+    rejection_reason,
+    replay_pages,
+    rows_from_snapshot_pages,
+)
 from synthetic import synthetic_rows
 from writer import IngestionError, validate_rows, write_dataset
 
@@ -114,3 +132,108 @@ def test_the_committed_fixture_dataset_matches_its_manifest() -> None:
     manifest = json.loads((dataset_root / "manifest.json").read_text(encoding="utf-8"))
     for partition in manifest["partitions"]:
         assert sha256_of_file(dataset_root / partition["relative_path"]) == partition["content_hash"]
+
+
+def index_pages(underlying_ticker: str) -> list[dict[str, Any]]:
+    pages: list[dict[str, Any]] = json.loads(json.dumps(replay_pages(RECORDED_DIRECTORY, "SPXTEST")))
+    for page in pages:
+        for entry in page["results"]:
+            if "details" in entry:
+                entry["details"]["underlying_ticker"] = underlying_ticker
+    return pages
+
+
+def test_recorded_rows_write_through_to_a_dataset(tmp_path: Path) -> None:
+    rows = recorded_rows()
+    partitions = write_dataset(tmp_path / "recorded", rows, "recorded", RECEIVED_AT)
+    assert sum(partition.row_count for partition in partitions) == len(rows)
+
+
+def test_every_row_carries_an_exercise_style() -> None:
+    for row in recorded_rows():
+        assert row["exercise_style"] in {EUROPEAN_STYLE, AMERICAN_STYLE}
+
+
+@pytest.mark.parametrize(
+    ("underlying_ticker", "expected"),
+    [
+        ("I:SPX", EUROPEAN_STYLE),
+        ("SPX", EUROPEAN_STYLE),
+        ("SPXW", EUROPEAN_STYLE),
+        ("XSP", EUROPEAN_STYLE),
+        ("VIX", EUROPEAN_STYLE),
+        ("I:SOMETHINGNEW", EUROPEAN_STYLE),
+        ("OEX", AMERICAN_STYLE),
+        ("I:OEX", AMERICAN_STYLE),
+        ("AAPL", AMERICAN_STYLE),
+        ("SPY", AMERICAN_STYLE),
+        ("QQQ", AMERICAN_STYLE),
+    ],
+)
+def test_the_exercise_style_follows_the_underlying(underlying_ticker: str, expected: str) -> None:
+    assert exercise_style_for(underlying_ticker) == expected
+
+
+def test_the_american_index_exception_beats_the_index_prefix() -> None:
+    assert exercise_style_for("I:OEX") == AMERICAN_STYLE
+    assert exercise_style_for("I:XEO") == EUROPEAN_STYLE
+
+
+def test_an_index_underlying_loses_its_feed_prefix() -> None:
+    rows = rows_from_snapshot_pages(index_pages("I:SPX"), RECEIVED_AT)
+    assert rows
+    for row in rows:
+        assert row["underlying_symbol"] == "SPX"
+        assert row["exercise_style"] == EUROPEAN_STYLE
+
+
+def test_an_index_chain_writes_through_to_a_dataset(tmp_path: Path) -> None:
+    rows = rows_from_snapshot_pages(index_pages("I:SPX"), RECEIVED_AT)
+    partitions = write_dataset(tmp_path / "index", rows, "recorded", RECEIVED_AT)
+    assert partitions[0].underlying_symbol == "SPX"
+
+
+def test_a_rejected_contract_is_counted_with_its_reason() -> None:
+    mapped = mapped_snapshot_pages(replay_pages(RECORDED_DIRECTORY, "SPXTEST"), RECEIVED_AT)
+    assert mapped.rejected[MISSING_QUOTE] == 1
+    assert len(mapped.rows) == QUOTED_CONTRACT_COUNT
+
+
+@pytest.mark.parametrize(
+    ("quote", "expected"),
+    [
+        ({"bid": 1.0, "ask": 1.2}, None),
+        ({"bid": 0.0, "ask": 0.05}, None),
+        ({"ask": 1.2}, INCOMPLETE_QUOTE),
+        ({"bid": 1.0}, INCOMPLETE_QUOTE),
+        ({"bid": 0.0, "ask": 0.0}, NON_POSITIVE_ASK),
+        ({"bid": 1.5, "ask": 1.2}, CROSSED_QUOTE),
+    ],
+)
+def test_a_quote_is_judged_before_it_becomes_a_row(quote: dict[str, float], expected: str | None) -> None:
+    assert quote_rejection(quote) == expected
+
+
+def test_a_zero_bid_is_a_market_and_not_a_defect() -> None:
+    entry = {
+        "details": {
+            "ticker": "O:AAPL260918C00200000",
+            "underlying_ticker": "AAPL",
+            "expiration_date": "2026-09-18",
+            "strike_price": 200,
+            "contract_type": "call",
+            "shares_per_contract": 100,
+        },
+        "last_quote": {"bid": 0.0, "ask": 0.05, "bid_size": 0, "ask_size": 40},
+        "underlying_asset": {"price": 190.0},
+    }
+    row = contract_row_from_snapshot(entry, RECEIVED_AT, 0)
+    assert row is not None
+    assert row["bid_price"] == 0.0
+    assert row["exercise_style"] == AMERICAN_STYLE
+
+
+def test_a_missing_underlying_price_is_rejected_rather_than_defaulted() -> None:
+    entry = {"details": {"ticker": "O:X"}, "last_quote": {"bid": 1.0, "ask": 1.2}}
+    assert rejection_reason(entry) == MISSING_UNDERLYING_PRICE
+    assert contract_row_from_snapshot(entry, RECEIVED_AT, 0) is None

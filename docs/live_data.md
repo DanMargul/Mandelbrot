@@ -26,15 +26,13 @@ writer rejects a row knowable before it happened, and the as-of reader filters o
 
 ---
 
-## 1. The real-data path is broken today
+## 1. The real-data path was broken, and is now fixed
 
-**This is the first thing to fix and it is not optional.**
+**Fixed in this repository.** Recorded here because the shape of the failure is worth keeping,
+and because the exercise-style table needs your review.
 
 ```
 uv run ingestion/run.py --source recorded --underlying SPXTEST --dataset-root /tmp/x
-```
-
-```
 KeyError: 'exercise_style'
 ```
 
@@ -47,10 +45,10 @@ it: `ingestion/tests/test_ingestion.py` exercises `rows_from_snapshot_pages` aga
 fixture, and separately exercises `write_dataset` against **synthetic** rows. It never writes
 recorded rows. The mapper is tested, the writer is tested, and the seam between them is not.
 
-### What the fix has to decide
+### What the fix decides, and what you should check
 
-Adding `"exercise_style": "european"` makes the error go away and is wrong for most of the
-universe. Polygon's snapshot has no exercise-style field, so the value has to be decided from the
+Adding `"exercise_style": "european"` would make the error go away and be wrong for most of the
+universe. Polygon's snapshot has no exercise-style field, so the value is decided from the
 underlying:
 
 - **Cash-settled index options are European** — SPX, XSP, NDX, RUT, VIX.
@@ -61,8 +59,21 @@ This is not cosmetic. `spec/interfaces/american.md` prices the early-exercise pr
 and the parity fit absorbs the premium into the forward, which shifts every implied volatility in
 the slice and appears downstream as mispricing that is not there.
 
-Practically: an explicit table of cash-settled index roots, defaulting to `american`, and a test
-that writes recorded rows through `write_dataset` so this seam cannot silently break again.
+`exercise_style_for` in `ingestion/polygon.py` now resolves it three ways, in order: an explicit
+American-index exception (`OEX`, which is the trap — an index option that is American-style);
+then Polygon's own `I:` index marker on `underlying_ticker`, which covers anything it labels an
+index; then a fallback list of cash-settled roots for feeds that do not mark them. Anything else
+is `american`, which is right for every listed equity and ETF.
+
+**Two things for you to check.** The `I:` prefix carries most of the weight and it is asserted
+from Polygon's documented shape rather than from a response this repository has seen — confirm it
+against your first real pull. And `EUROPEAN_INDEX_ROOTS` is a fallback list, not an authority;
+adding a root is one line, and a wrong entry there is silent.
+
+The prefix is also stripped from `underlying_symbol`, so an `I:SPX` chain partitions under `SPX`.
+
+`write_dataset` is now exercised against recorded rows in `ingestion/tests/test_ingestion.py`, so
+this seam cannot silently break again.
 
 ---
 
@@ -100,7 +111,7 @@ quarter, this is the route, and it should be a separate adapter rather than a fl
 existing one — the snapshot shape and the flat-file shape have little in common.
 
 **Note the sizing consequence.** `docs/history_run.md` measured that establishing an edge against
-a ten-configuration search needed about **3,970 observations**. Accumulating forward gets there
+a ten-configuration search needed about **3,990 observations**. Accumulating forward gets there
 in sixteen years.
 
 ---
@@ -134,21 +145,39 @@ the command line or in config. Keep it that way.
 Every downstream module assumes quotes that already make sense. Synthetic data always did.
 Real data does not, and there is nothing in between.
 
-**Zero and missing prices.** `contract_row_from_snapshot` does
-`float(quote.get("bid", 0.0))`. A contract quoted `0.00 / 0.05`, or one with an absent bid,
-becomes a row with `bid_price = 0.0` that flows straight into `invert_black_implied_volatility`.
+**Zero, missing and crossed prices are now rejected at ingest, not defaulted.** This used to do
+`float(quote.get("bid", 0.0))`, so a contract with no bid became a row quoting zero. A contract is
+now dropped when it has no details, no quote, no underlying price, only one side of a market, an
+ask of zero, or a crossed book. A bid of zero against a positive ask is kept, because
+`0.00 / 0.05` is a real market for a deep out-of-the-money contract and dropping it would discard
+data rather than defects.
 
-**Crossed and locked markets.** Nothing checks `bid_price <= ask_price`.
+Every rejection is counted by reason and printed on every ingest, together with the exercise style
+assigned per underlying:
+
+```
+  exercise style  SPXTEST      american        2 contracts
+  rejected        no quote                     1 contracts
+```
+
+Watch that second block. A jump in it means something changed at the source, and an exercise style
+you did not expect is the failure mode §1 warns about, visible immediately rather than three
+modules downstream.
 
 **Stale quotes.** `event_time` comes from `last_quote.last_updated`. An illiquid contract may not
-have printed in days. Two consequences: it will be inverted as though current, and — because
-`writer.partition_key` uses `event_time.date()` — **it lands in a previous day's partition**,
-which is not what you want from a pull you thought was one day.
+have printed in days, and it will be inverted as though it were current — nothing between the
+reader and the strategy carries a staleness horizon, though `risk/` has one for its own marks.
+There is a second effect that matters only once you start accumulating: `writer.partition_key`
+uses `event_time.date()`, so a single pull scatters across several date partitions, and a later
+pull writes into the same ones. The reader itself copes — `_readable_partitions` takes every
+partition with `minimum_event_time` at or before the query and resolves to the latest quote per
+contract — so nothing goes missing. The problem is layout and collision, not correctness.
 
-**Non-standard deliverables.** `is_standard_deliverable` is computed and written, and **nothing
-downstream ever filters on it**. Post-split and post-merger contracts have adjusted multipliers
-and deliverables that are not 100 shares of the underlying; their implied volatilities are
-meaningless and they will sit in the surface fit distorting it.
+**Non-standard deliverables are already handled**, which is worth knowing so you do not build it
+twice. `ChainQuery.include_adjusted_contracts` defaults to `False` and `chain_as_of` filters on
+`is_standard_deliverable`, so post-split and post-merger contracts are excluded unless you ask
+for them. Verify it holds for your data rather than assuming: Polygon's
+`shares_per_contract` is what the flag is derived from.
 
 **Static arbitrage.** `docs/architecture.md` lists an `arbitrage` module for "static bound
 violations". It does not exist. There is no check for a price below intrinsic, a negative vertical
@@ -163,19 +192,32 @@ that decides whether any downstream result means anything.
 
 ## 5. Hard-coded rates in the strategy layer
 
-```
-backtest/residual_run.py:44:  RISK_FREE_RATE: Final[float] = 0.0425
-```
+**Fixed, and the fix found two other things.**
 
-used in three places to build a discount factor and a forward. That constant matches what
-`ingestion/synthetic.py` planted, which is why it never mattered.
+`backtest/residual_run.py` built its discount factor from a hard-coded `0.0425` in three places.
+That constant is exactly what the generator planted, so it was right by construction and would
+have been silently wrong on any real chain — nothing fails, it just biases every implied
+volatility. It now takes the forward and discount factor per expiry from `imply_forward_curve`,
+which is what `forward_curve.md` exists for. On the index the backtest is bit-identical, because
+implied parity recovers the planted forward exactly.
 
-On real data it should come from `imply_forward_curve`, which is what that module is for. This is
-a small change and it is easy to forget, because nothing fails — it just quietly biases every
-implied volatility in the run.
+**It exposed a generator defect.** `ingestion/history.py` labelled `NAMEH` `american` while
+pricing it with Black-Scholes. `synthetic.py` does this correctly — European to Black-Scholes,
+American to the Richardson lattice — and `history.py` did not. The forward curve then tried to
+strip an early-exercise premium that was not in the data. The prices are European, so the label
+was corrected; genuine American contracts live in `synthetic_chain`.
 
-`backtest/correlation_run.py` reads its rate from `correlation_truth.json`, a file only the
-synthetic generator writes, so a real basket needs that path reworked too.
+**And it exposed a cost you will hit.** Stripping American premia took the same backtest from
+four seconds to **5m43s**, about `2.9` seconds per observation date for a *forty-contract* chain,
+in the Python track. Every listed single name is American. A real universe is thousands of
+contracts across hundreds of names, and this sits on the inner loop of every backtest. Two things
+follow: budget for it, and note that `forward_curve` is below the parity boundary and tri-
+implemented, while `backtest/` is Python-only and therefore calls the slow track. That is the
+first place the boundary costs something rather than buying something.
+
+One rate remains. `backtest/correlation_run.py` reads its rate from `correlation_truth.json`, a
+file only the synthetic generator writes, so a real basket needs that path reworked. It is not
+fixed because there is nothing real to point it at yet.
 
 ---
 
@@ -228,7 +270,7 @@ contain it.
 **Step 6's fill model stays uncalibrated.** `execution` charges the full spread on every crossing
 because that is the pessimistic assumption, and it has never been checked against a fill anybody
 actually got. This is not a detail: it decided the outcome of `history_run.md` (−156,179 became
-+45,098 once cost was priced properly), the go/no-go threshold there, and the entire dispersion
++47,668 once cost was priced properly), the go/no-go threshold there, and the entire dispersion
 result (break-even at a 0.94% constituent half-spread). Real quotes do not fix it — only real
 fills do, which means paper trading.
 
@@ -244,15 +286,25 @@ quarter, not a substitute for it.
 
 ## Summary of code that has to change
 
+### Done in this repository
+
 | file | change |
 |---|---|
-| `ingestion/polygon.py` | emit `exercise_style` from a cash-settled index root table |
+| `ingestion/polygon.py` | emit `exercise_style`; strip the `I:` prefix from `underlying_symbol` |
+| `ingestion/polygon.py` | reject zero, one-sided and crossed quotes rather than defaulting them |
+| `ingestion/run.py` | report rejections by reason and exercise style by underlying, every ingest |
 | `ingestion/tests/test_ingestion.py` | write recorded rows through `write_dataset` |
-| `ingestion/writer.py` or a new merger | accumulate dates instead of replacing the dataset |
-| new `ingestion/` adapter | flat-file backfill, if you go that route |
-| new `arbitrage` module | static bound violations, before any fitting |
-| `ingestion/polygon.py` | reject zero, crossed and stale quotes rather than defaulting them |
-| downstream consumers | filter on `is_standard_deliverable` |
-| `backtest/residual_run.py` | take the discount from `imply_forward_curve` |
-| `backtest/correlation_run.py` | source the basket definition from something real |
-| `docs/data.md` | says `option_chain_snapshot/v1`; the schema is `v2` |
+| `ingestion/history.py` | stop labelling Black-Scholes prices `american` |
+| `backtest/residual_run.py` | take the forward and discount from `imply_forward_curve` |
+| `docs/data.md` | said `option_chain_snapshot/v1`; the schema is `v2` |
+
+### Still yours
+
+| file | change | why it was not done here |
+|---|---|---|
+| `ingestion/writer.py` or a new merger | accumulate dates instead of replacing the dataset | §2 is a fork, and picking it for you would foreclose the other route |
+| new `ingestion/` adapter | flat-file backfill | same fork |
+| new `arbitrage` module | static bound violations, before any fitting | a module to build, not a defect to repair; §7 stage two should specify it from measurement |
+| strategy and backtest layers | a staleness horizon on quotes | needs a policy number that only real data can justify |
+| `backtest/correlation_run.py` | source the basket definition from something real | nothing real to point it at yet |
+| `EUROPEAN_INDEX_ROOTS` | review against the universe you actually trade | it is a fallback list, not an authority |

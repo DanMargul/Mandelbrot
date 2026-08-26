@@ -63,6 +63,27 @@ before a `rho` of `0.85` residual can trade, which a stationary process will nev
 Persistence does belong in the decision, but it belongs in **how much edge the trade is worth**,
 not in whether the dislocation is real. It enters below as `1 - rho^h`.
 
+## Where the discount comes from
+
+The first version of this run built its discount factor from a hard-coded `0.0425`, which is
+exactly what the generator planted, so it was right by construction and would have been quietly
+wrong on any real chain. It now takes the forward and the discount factor for each expiry from
+`imply_forward_curve`, per `forward_curve.md`.
+
+**On the index the results are bit-identical** — implied parity recovers the planted forward
+exactly. The one number that moved is the allocator's, because its greeks are now computed
+against an implied discount rather than an assumed one: `45,098` became `47,668`.
+
+Doing this exposed a defect in the generator. `NAMEH` was labelled `american` while being priced
+with Black-Scholes, so the forward curve tried to strip an early-exercise premium that was not
+there — and took **85 times longer** doing it, `5m43s` against four seconds. The prices are
+European and the label was wrong, so the label was corrected. Genuine American contracts, priced
+with the lattice, live in `synthetic_chain`.
+
+That timing is worth carrying forward on its own: **stripping American premia costs about `2.9`
+seconds per observation date for a forty-contract chain in the Python track.** A real single-name
+universe is American, far larger, and this sits on the inner loop of every backtest.
+
 ## The measurement the whole program was for
 
 Entry on the naive score at `1.5`, five lots, 40 days of warm-up, filled by crossing the spread
@@ -132,15 +153,15 @@ through `1 - rho^h`, which is where it belonged.
 | amplitude | underlying | rule | gross | cost | net | contracts | gross/contract |
 |---|---|---|---|---|---|---|---|
 | `1.0` | `IDXH` | threshold | `218,835` | `375,014` | `-156,179` | `1,400` | `156` |
-| `1.0` | `IDXH` | allocator | `232,124` | `187,026` | **`+45,098`** | `1,140` | `204` |
+| `1.0` | `IDXH` | allocator | `235,024` | `187,356` | **`+47,668`** | `1,144` | `205` |
 | `1.0` | `NAMEH` | threshold | `11,075` | `78,509` | `-67,434` | `1,300` | `8.5` |
 | `1.0` | `NAMEH` | allocator | `2,086` | `3,272` | **`-1,186`** | `94` | `22.2` |
 | `2.0` | `IDXH` | allocator | `487,343` | `265,817` | `+221,526` | `1,437` | `339` |
 | `3.0` | `IDXH` | allocator | `581,964` | `265,249` | `+316,715` | `1,377` | `423` |
 
-**Same data, same signal, same fills: a loss of `156,179` becomes a profit of `45,098`.** And
+**Same data, same signal, same fills: a loss of `156,179` becomes a profit of `47,668`.** And
 it is again not a trade-off along one axis — the allocator collects *more* gross while placing
-*fewer* contracts, because `204` per contract against `156` means it is choosing better trades,
+*fewer* contracts, because `205` per contract against `156` means it is choosing better trades,
 not merely fewer of them. This is the sequential-versus-joint result of `portfolio.md`
 reappearing on real dates: the threshold rule was not at a worse point on the same frontier.
 
@@ -163,7 +184,7 @@ The result to carry forward is not the profit. It is that the same signal is wor
 one instrument and not in another, that the difference is entirely the spread, and that the
 component which discovered this is the allocator rather than the forecaster.
 
-## The `45,098` does not survive the search that found it
+## The `47,668` does not survive the search that found it
 
 Everything above is in sample, and `research.md` exists precisely to say what that is worth. It
 was built before there was a dated dataset to point it at. There is one now, so instead of
@@ -201,13 +222,13 @@ of this page has just established is untradeable.
 
 | `IDXH`, best of ten | |
 |---|---|
-| best configuration | `allocator-h20`, net `+87,976` |
+| best configuration | `allocator-h20`, net `+87,827` |
 | its Sharpe | `0.049` |
 | expected maximum under the null | `0.138` |
-| deflated probability | `0.155` |
+| deflated probability | `0.154` |
 | clears `0.95` | **`no`** |
 | Sharpe it would have needed | `0.283` |
-| days it would have needed | **`3,970`** |
+| days it would have needed | **`3,990`** |
 
 **Searching ten configurations over 120 days is expected to throw up a Sharpe of `0.138` from
 nothing at all, and the best real one was `0.049`.** The profit is real in the sense that the
@@ -215,7 +236,7 @@ arithmetic is right and the fills are pessimistic. It is not evidence. Establish
 size against a search this wide needs about **sixteen years** of daily observations.
 
 That is `hedging.md`'s lesson arriving from the other direction. There, separating two hedging
-policies took 4000 paths. Here, separating a strategy from its own search takes 3970 days. Both
+policies took 4000 paths. Here, separating a strategy from its own search takes 3,990 days. Both
 say the same thing: **the quantity of data needed to support a claim is usually much larger than
 the quantity needed to produce one.**
 

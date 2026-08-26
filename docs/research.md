@@ -249,5 +249,5 @@ to certify the only configuration in the program that makes money.
 Two things learned there belong here. **A low PBO is not a good strategy** — the single name
 scores a far better `0.171` while losing on every configuration, because PBO measures the
 stability of a ranking and a ranking of uniformly bad candidates is very stable. And the
-deflation's honest output is often a **sample length**: the run needed about 3,970 days of
+deflation's honest output is often a **sample length**: the run needed about 3,990 days of
 observations to support what 120 days produced.

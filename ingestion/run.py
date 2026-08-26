@@ -24,9 +24,9 @@ from history import (
 from polygon import (
     POLYGON_SOURCE,
     api_key_from_environment,
+    mapped_snapshot_pages,
     record_pages,
     replay_pages,
-    rows_from_snapshot_pages,
     snapshot_pages,
 )
 from synthetic import (
@@ -37,6 +37,8 @@ from synthetic import (
     synthetic_rows,
 )
 from writer import write_dataset
+
+Rejections = dict[str, int]
 
 REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
 DEFAULT_RECORDED_DIRECTORY: Final[Path] = REPOSITORY_ROOT / "spec" / "fixtures" / "recorded"
@@ -58,24 +60,38 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def rows_from_recorded(directory: Path, underlyings: list[str]) -> list[dict[str, Any]]:
+def merged_rejections(into: dict[str, int], extra: dict[str, int]) -> dict[str, int]:
+    for reason, count in extra.items():
+        into[reason] = into.get(reason, 0) + count
+    return into
+
+
+def rows_from_recorded(directory: Path, underlyings: list[str]) -> tuple[list[dict[str, Any]], Rejections]:
     received_at = datetime.now(tz=UTC)
     rows: list[dict[str, Any]] = []
+    rejected: dict[str, int] = {}
     for symbol in underlyings:
-        rows.extend(rows_from_snapshot_pages(replay_pages(directory, symbol), received_at, len(rows)))
-    return rows
+        mapped = mapped_snapshot_pages(replay_pages(directory, symbol), received_at, len(rows))
+        rows.extend(mapped.rows)
+        merged_rejections(rejected, mapped.rejected)
+    return rows, rejected
 
 
-def rows_from_polygon(underlyings: list[str], record_to: Path | None) -> list[dict[str, Any]]:
+def rows_from_polygon(
+    underlyings: list[str], record_to: Path | None
+) -> tuple[list[dict[str, Any]], Rejections]:
     api_key = api_key_from_environment()
     rows: list[dict[str, Any]] = []
+    rejected: dict[str, int] = {}
     for symbol in underlyings:
         received_at = datetime.now(tz=UTC)
         pages = snapshot_pages(symbol, api_key)
         if record_to is not None:
             record_pages(record_to, symbol, pages)
-        rows.extend(rows_from_snapshot_pages(pages, received_at, len(rows)))
-    return rows
+        mapped = mapped_snapshot_pages(pages, received_at, len(rows))
+        rows.extend(mapped.rows)
+        merged_rejections(rejected, mapped.rejected)
+    return rows, rejected
 
 
 def creation_time_for(source: str, rows: list[dict[str, Any]]) -> datetime:
@@ -86,6 +102,7 @@ def creation_time_for(source: str, rows: list[dict[str, Any]]) -> datetime:
 
 
 def collect_rows(arguments: argparse.Namespace) -> tuple[list[dict[str, Any]], str]:
+    arguments.rejected = {}
     if arguments.source == SYNTHETIC_SOURCE:
         return synthetic_rows(), SYNTHETIC_SOURCE
     if arguments.source == HISTORY_SOURCE:
@@ -99,8 +116,10 @@ def collect_rows(arguments: argparse.Namespace) -> tuple[list[dict[str, Any]], s
     if not arguments.underlying:
         raise SystemExit("error: --underlying is required unless --source synthetic")
     if arguments.source == "recorded":
-        return rows_from_recorded(arguments.recorded_directory, arguments.underlying), "recorded"
-    return rows_from_polygon(arguments.underlying, arguments.record_to), POLYGON_SOURCE
+        rows, arguments.rejected = rows_from_recorded(arguments.recorded_directory, arguments.underlying)
+        return rows, "recorded"
+    rows, arguments.rejected = rows_from_polygon(arguments.underlying, arguments.record_to)
+    return rows, POLYGON_SOURCE
 
 
 def write_ground_truth(dataset_root: Path) -> None:
@@ -113,6 +132,17 @@ def write_ground_truth(dataset_root: Path) -> None:
         },
     }
     (dataset_root / "ground_truth.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def report_quality(rows: list[dict[str, Any]], rejected: Rejections) -> None:
+    styles: dict[tuple[str, str], int] = {}
+    for row in rows:
+        key = (str(row["underlying_symbol"]), str(row["exercise_style"]))
+        styles[key] = styles.get(key, 0) + 1
+    for (underlying_symbol, style), count in sorted(styles.items()):
+        print(f"  exercise style  {underlying_symbol:<12} {style:<10} {count:>6} contracts")
+    for reason, count in sorted(rejected.items()):
+        print(f"  rejected        {reason:<23} {count:>6} contracts")
 
 
 def main() -> int:
@@ -132,6 +162,7 @@ def main() -> int:
         write_signal_truth(arguments.dataset_root, arguments.signal_truth, arguments.richness_amplitude)
     total_rows = sum(partition.row_count for partition in partitions)
     print(f"{arguments.dataset_root}: {total_rows} rows across {len(partitions)} partitions")
+    report_quality(rows, arguments.rejected)
     for partition in partitions:
         print(f"  {partition.relative_path}  {partition.row_count:>6} rows  {partition.content_hash[:12]}")
     return 0

@@ -432,7 +432,7 @@ the backtester in step 6.
 *Extends Phase 5 and 6. **Done**, see `spec/interfaces/random_source.md`,
 `spec/interfaces/hedging.md` and `spec/interfaces/portfolio.md`. Now run end to end on a dated
 dataset in `docs/history_run.md`, where the allocator turned the same signal from a loss of
-`156,179` into a profit of `45,098` and declined the single name outright.*
+`156,179` into a profit of `47,668` and declined the single name outright.*
 
 Not signal ranking. A constrained optimization: maximize expected residual convergence net
 of modeled cost, subject to vega, gamma, and theta budgets, factor neutrality from step 5,
@@ -506,7 +506,7 @@ single name whose 3% spread the signal could not pay.
 **Out of sample it does not clear.** Across ten configurations the tuned threshold has a
 probability of backtest overfitting of `1.000`, and the best result of the search has a Sharpe
 of `0.049` against the `0.138` a search that wide is expected to produce from nothing. It would
-take about 3,970 days of observations to support the claim — see `docs/history_run.md`. The
+take about 3,990 days of observations to support the claim — see `docs/history_run.md`. The
 machinery works, the strategy on top of it is not established, and step 7 is what said so.
 
 ---

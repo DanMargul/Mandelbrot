@@ -6,7 +6,7 @@ import math
 import sys
 from collections.abc import Callable
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Final
 
@@ -33,6 +33,7 @@ from volarb_py.factors import (  # noqa: E402
     reconstruct_from,
     score_residual,
 )
+from volarb_py.forward_curve import ForwardCurvePoint, imply_forward_curve  # noqa: E402
 from volarb_py.implied_vol import (  # noqa: E402
     ImpliedVolatilityInputs,
     invert_black_implied_volatility,
@@ -41,9 +42,7 @@ from volarb_py.market_data import ContractQuote  # noqa: E402
 
 STRATEGY_NAME: Final[str] = "residual_convergence"
 OBSERVATION_HOUR_UTC: Final[int] = 20
-RISK_FREE_RATE: Final[float] = 0.0425
-DAYS_PER_YEAR: Final[float] = 365.0
-SETTLEMENT_HOUR_UTC: Final[int] = 21
+STRIPPING_SEED_ZERO_RATE: Final[float] = 0.0425
 WARMUP_STEPS: Final[int] = 40
 ENTRY_Z_SCORE: Final[float] = 1.5
 LOT_SIZE: Final[int] = 5
@@ -75,57 +74,34 @@ def settings_payload(settings: StrategySettings) -> dict[str, Any]:
     }
 
 
-def years_to_expiry(moment: datetime, quote: ContractQuote) -> float:
-    settlement = datetime(
-        quote.expiry_date.year,
-        quote.expiry_date.month,
-        quote.expiry_date.day,
-        SETTLEMENT_HOUR_UTC,
-        tzinfo=UTC,
-    )
-    return (settlement - moment).total_seconds() / (DAYS_PER_YEAR * 24.0 * 3600.0)
+@dataclass(frozen=True)
+class ExpiryFrame:
+    forward: float
+    discount_factor: float
+    years_to_expiry: float
 
 
-def implied_volatility_of(moment: datetime, quote: ContractQuote) -> float | None:
-    years = years_to_expiry(moment, quote)
-    if years <= 0.0:
-        return None
-    discount = math.exp(-RISK_FREE_RATE * years)
-    mid = 0.5 * (quote.bid_price + quote.ask_price)
+def expiry_frames(moment: datetime, quotes: list[ContractQuote]) -> dict[date, ExpiryFrame]:
+    points: list[ForwardCurvePoint] = imply_forward_curve(quotes, moment, STRIPPING_SEED_ZERO_RATE)
+    return {
+        point.expiry_date: ExpiryFrame(point.forward, point.discount_factor, point.years_to_expiry)
+        for point in points
+        if point.status == "converged" and point.discount_factor > 0.0
+    }
+
+
+def implied_volatility_of(quote: ContractQuote, frame: ExpiryFrame) -> float | None:
     inverted = invert_black_implied_volatility(
         ImpliedVolatilityInputs(
-            forward=quote.underlying_price / discount,
+            forward=frame.forward,
             strike=quote.strike,
-            years_to_expiry=years,
-            discount_factor=discount,
-            option_price=mid,
+            years_to_expiry=frame.years_to_expiry,
+            discount_factor=frame.discount_factor,
+            option_price=0.5 * (quote.bid_price + quote.ask_price),
             option_type=quote.option_type,
         )
     )
     return inverted.volatility if inverted.status == "converged" else None
-
-
-def surface_observation(
-    moment: datetime, quotes: list[ContractQuote]
-) -> tuple[list[str], list[SurfacePoint], list[float]]:
-    symbols: list[str] = []
-    grid: list[SurfacePoint] = []
-    values: list[float] = []
-    for quote in quotes:
-        volatility = implied_volatility_of(moment, quote)
-        years = years_to_expiry(moment, quote)
-        if volatility is None or volatility <= 0.0 or years <= 0.0:
-            continue
-        discount = math.exp(-RISK_FREE_RATE * years)
-        forward = quote.underlying_price / discount
-        symbols.append(quote.contract_symbol)
-        grid.append(SurfacePoint(log_moneyness=math.log(quote.strike / forward), years_to_expiry=years))
-        values.append(math.log(volatility * volatility * years))
-    return symbols, grid, values
-
-
-def surface_residuals(moment: datetime, quotes: list[ContractQuote]) -> dict[str, float]:
-    return observed_surface(moment, quotes).residuals
 
 
 @dataclass(frozen=True)
@@ -135,10 +111,10 @@ class ObservedSurface:
     factor_exposures: dict[str, list[float]]
 
 
-def contract_state(moment: datetime, quote: ContractQuote, volatility: float) -> ContractState:
-    years = years_to_expiry(moment, quote)
-    discount = math.exp(-RISK_FREE_RATE * years)
-    forward = quote.underlying_price / discount
+def contract_state(quote: ContractQuote, frame: ExpiryFrame, volatility: float) -> ContractState:
+    years = frame.years_to_expiry
+    discount = frame.discount_factor
+    forward = frame.forward
     return ContractState(
         contract_symbol=quote.contract_symbol,
         grid_point=SurfacePoint(log_moneyness=math.log(quote.strike / forward), years_to_expiry=years),
@@ -153,15 +129,19 @@ def contract_state(moment: datetime, quote: ContractQuote, volatility: float) ->
 
 
 def observed_surface(moment: datetime, quotes: list[ContractQuote]) -> ObservedSurface:
+    frames = expiry_frames(moment, quotes)
     states: list[ContractState] = []
     values: list[float] = []
     for quote in quotes:
-        volatility = implied_volatility_of(moment, quote)
-        if volatility is None or volatility <= 0.0 or years_to_expiry(moment, quote) <= 0.0:
+        frame = frames.get(quote.expiry_date)
+        if frame is None:
             continue
-        state = contract_state(moment, quote, volatility)
+        volatility = implied_volatility_of(quote, frame)
+        if volatility is None or volatility <= 0.0:
+            continue
+        state = contract_state(quote, frame, volatility)
         states.append(state)
-        values.append(math.log(volatility * volatility * state.grid_point.years_to_expiry))
+        values.append(math.log(volatility * volatility * frame.years_to_expiry))
     grid = [state.grid_point for state in states]
     if len(grid) < MINIMUM_SURFACE_POINTS:
         return ObservedSurface({}, [], {})

@@ -69,7 +69,7 @@ C++ the horizon is carried in the reader's type. The claim being made is precise
 API returns a row past the horizon, and attempting to query past it raises rather than
 returning a filtered-but-plausible answer.
 
-## Canonical schema: `option_chain_snapshot/v1`
+## Canonical schema: `option_chain_snapshot/v2`
 
 Parquet, one row per contract per observation.
 
@@ -82,6 +82,7 @@ Parquet, one row per contract per observation.
 | `option_type` | string | `call` or `put` |
 | `contract_multiplier` | int32 | 100 for standard, otherwise adjusted |
 | `is_standard_deliverable` | bool | false for adjusted contracts |
+| `exercise_style` | string | `european` or `american`; see `docs/live_data.md` §1 for how a feed without the field is resolved |
 | `event_time` | timestamp[us, UTC] | |
 | `knowledge_time` | timestamp[us, UTC] | |
 | `ingest_sequence` | int64 | monotonic, tiebreak only |
@@ -93,7 +94,7 @@ Parquet, one row per contract per observation.
 | `last_trade_price` | double, nullable | |
 | `volume` | int64, nullable | |
 | `open_interest` | int64, nullable | published next morning; set `knowledge_time` accordingly |
-| `source` | string | `polygon`, `synthetic` |
+| `source` | string | `polygon`, `synthetic`, `synthetic_history`, `synthetic_basket` |
 
 ### Adjusted contracts
 

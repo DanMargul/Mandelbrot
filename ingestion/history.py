@@ -183,7 +183,7 @@ def quoted_row(request: QuoteRequest, sequence: int) -> dict[str, Any]:
         "option_type": request.option_type,
         "contract_multiplier": STANDARD_MULTIPLIER,
         "is_standard_deliverable": True,
-        "exercise_style": "european" if underlying.symbol == "IDXH" else "american",
+        "exercise_style": "european",
         "event_time": request.moment,
         "knowledge_time": request.moment,
         "ingest_sequence": sequence,
